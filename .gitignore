@@ -1,0 +1,5 @@
+node_modules/
+public/wp-content/
+
+*.min.css
+*.min.js
