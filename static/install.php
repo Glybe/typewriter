@@ -87,6 +87,9 @@ function wp_install_defaults(int $userId): void
 {
 	global $wpdb;
 
+	if (is_blog_installed())
+		return;
+
 	updateOptions();
 	truncatePosts($wpdb);
 	createHomepage();

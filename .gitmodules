@@ -4,3 +4,6 @@
 [submodule "vendor/Cappuccino"]
 	path = vendor/Cappuccino
 	url = https://github.com/basmilius/Cappuccino
+[submodule "vendor/latte-ui"]
+	path = vendor/latte-ui
+	url = https://github.com/basmilius/latte-ui
