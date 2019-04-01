@@ -11,4 +11,14 @@
 
 declare(strict_types=1);
 
-require ABSPATH . '/../src/TypeWriter/boot.php';
+/*
+ * WordPress db drop-in.
+ * Custom database class.
+ */
+
+use TypeWriter\Database\Database;
+use function TypeWriter\tw;
+
+tw()->onWordPressLoaded();
+
+$wpdb = new Database(DB_USER, DB_PASSWORD, DB_NAME, DB_HOST);

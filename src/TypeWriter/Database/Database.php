@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace TypeWriter\Database;
 
+use wpdb;
+
 /**
  * Class Database
  *
@@ -22,5 +24,7 @@ namespace TypeWriter\Database;
  */
 final class Database extends wpdb
 {
+
+	// TODO(Bas): Create a shim for Columba Database stuff that works as a replacement for wpdb.
 
 }

@@ -20,6 +20,7 @@ use Columba\Util\ArrayUtil;
 require_once __DIR__ . '/../../vendor/Columba/src/Columba/Autoloader.php';
 
 define('ROOT', __DIR__ . '/../..');
+define('PUBLIC_DIR', ROOT . '/public');
 define('SRC_DIR', ROOT . '/src');
 define('VENDOR_DIR', ROOT . '/vendor');
 

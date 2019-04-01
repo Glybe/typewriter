@@ -1,0 +1,21 @@
+{
+	"db": {
+		"host": "127.0.0.1",
+		"user": "dev",
+		"pass": "",
+		"name": "dev_typewriter",
+		"prefix": "tw_"
+	},
+	"key": {
+		"auth": "P[(VTkDhG%P^rG_`)?cv2%Hq}:AC2+7_Xe]s8InkdTq+zrBnod}qXM9(sn98jXuA",
+		"auth_secure": "|mv-%wMPnBC+_6On!cW6HZ%Wt|TmL@KpC:Fv|K6s;a<XQ1G5^;TseSsQsV*sOA2T",
+		"logged_in": "RrNVI8xl/=mwDXVgL?J1w;334(^^MpEttFvTmKzn>fm^%*EGqRV99jTeT_Y-aLPC",
+		"nonce": "eVA)T0-#+|+8NI3,9mqa<,S)^x/VP/]Q_e?c:{eFsprGp!+JyLPB|;n[#Vkd95fe"
+	},
+	"salt": {
+		"auth": "l>Ou2<AU4LGlVUPZPk.Wl:EgFvijr29g#-f&iP|gAfV_@|^`&!]_,$ak$(3&EWl9",
+		"auth_secure": "ac,qU)%|Gi6k($-`_*TeR3c+[b!dgrv0_qkjm)kf!&8@woNu%K4vEsp|la%v{;C&",
+		"logged_in": "}d2s}X3{Yh5|BkAE=2.gN-wU7fAZL<eq17|LM9qaBTPDVxt|%?(/-._WBiIYO4a>",
+		"nonce": "hP<9KHHP`upS$ax?f:cadi;:OV0#XbL)dj#m[(6R%((1h^#:Cxzrgm#2d&P?8[@0"
+	}
+}

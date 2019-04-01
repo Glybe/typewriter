@@ -15,10 +15,9 @@ namespace TypeWriter;
 
 use Cappuccino\Cappuccino;
 use Columba\Columba;
-use Columba\Util\ExecutionTime;
-use TypeWriter\Screen\App\App;
-use TypeWriter\Screen\Installer\Installer;
-use TypeWriter\Screen\Screen;
+use Columba\Preferences;
+use Columba\Util\Stopwatch;
+use TypeWriter\Facade\Hooks;
 
 /**
  * Class TypeWriter
@@ -33,9 +32,9 @@ final class TypeWriter
 	public const VERSION = '1.0.0';
 
 	/**
-	 * @var Screen
+	 * @var Preferences
 	 */
-	private $screen;
+	private $preferences;
 
 	/**
 	 * TypeWriter constructor.
@@ -45,7 +44,9 @@ final class TypeWriter
 	 */
 	public function __construct()
 	{
-		ExecutionTime::start(self::class);
+		Stopwatch::start(self::class);
+
+		$this->preferences = Preferences::loadFromJson(ROOT . '/config/config.json');
 	}
 
 	/**
@@ -56,10 +57,28 @@ final class TypeWriter
 	 */
 	public final function initialize(): void
 	{
-		if ($this->isInstalling())
-			$this->screen = new Installer();
-		else
-			$this->screen = new App();
+	}
+
+	/**
+	 * Executed when WordPress is loaded.
+	 *
+	 * @author Bas Milius <bas@ideemedia.nl>
+	 * @since 1.0.0
+	 */
+	public final function onWordPressLoaded(): void
+	{
+	}
+
+	/**
+	 * Gets the loaded preferences.
+	 *
+	 * @return Preferences
+	 * @author Bas Milius <bas@ideemedia.nl>
+	 * @since 1.0.0
+	 */
+	public final function getPreferences(): Preferences
+	{
+		return $this->preferences;
 	}
 
 	/**
