@@ -11,11 +11,18 @@
 
 declare(strict_types=1);
 
-/*
- * WordPress db drop-in.
- * Custom database class.
+namespace TypeWriter\Cappuccino;
+
+use Columba\Router\Renderer\CappuccinoRenderer as ColumbaCappuccinoRenderer;
+
+/**
+ * Class CappuccinoRenderer
+ *
+ * @author Bas Milius <bas@ideemedia.nl>
+ * @package TypeWriter\Cappuccino
+ * @since 1.0.0
  */
+class CappuccinoRenderer extends ColumbaCappuccinoRenderer
+{
 
-use TypeWriter\Database\Database;
-
-$wpdb = new Database(DB_USER, DB_PASSWORD, DB_NAME, DB_HOST);
+}

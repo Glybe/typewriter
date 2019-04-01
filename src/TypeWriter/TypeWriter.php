@@ -16,8 +16,9 @@ namespace TypeWriter;
 use Cappuccino\Cappuccino;
 use Columba\Columba;
 use Columba\Preferences;
+use Columba\Router\RouterException;
 use Columba\Util\Stopwatch;
-use TypeWriter\Facade\Hooks;
+use TypeWriter\Router\Router;
 
 /**
  * Class TypeWriter
@@ -37,6 +38,11 @@ final class TypeWriter
 	private $preferences;
 
 	/**
+	 * @var Router
+	 */
+	private $router;
+
+	/**
 	 * TypeWriter constructor.
 	 *
 	 * @author Bas Milius <bas@ideemedia.nl>
@@ -47,6 +53,7 @@ final class TypeWriter
 		Stopwatch::start(self::class);
 
 		$this->preferences = Preferences::loadFromJson(ROOT . '/config/config.json');
+		$this->router = new Router();
 	}
 
 	/**
@@ -60,13 +67,28 @@ final class TypeWriter
 	}
 
 	/**
-	 * Executed when WordPress is loaded.
+	 * Runs everything. First checks if we can use router instead of WP stuff.
 	 *
 	 * @author Bas Milius <bas@ideemedia.nl>
 	 * @since 1.0.0
 	 */
-	public final function onWordPressLoaded(): void
+	public final function run(): void
 	{
+		require_once(PUBLIC_DIR . '/wp/wp-load.php');
+
+		wp();
+
+		try
+		{
+			$this->router->execute($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
+		}
+		catch (RouterException $err)
+		{
+			if ($err->getCode() !== RouterException::ERR_NOT_FOUND)
+				throw $err;
+
+			require_once(PUBLIC_DIR . '/wp/wp-includes/template-loader.php');
+		}
 	}
 
 	/**
@@ -79,6 +101,18 @@ final class TypeWriter
 	public final function getPreferences(): Preferences
 	{
 		return $this->preferences;
+	}
+
+	/**
+	 * Gets the router.
+	 *
+	 * @return Router
+	 * @author Bas Milius <bas@ideemedia.nl>
+	 * @since 1.0.0
+	 */
+	public final function getRouter(): Router
+	{
+		return $this->router;
 	}
 
 	/**
