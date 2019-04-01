@@ -4,3 +4,5 @@ public/wp-content/
 
 *.min.css
 *.min.js
+
+config/config.json
