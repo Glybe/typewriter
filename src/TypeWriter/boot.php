@@ -16,12 +16,13 @@ use Columba\Autoloader;
 use Columba\Error\ExceptionHandler;
 use Columba\Util\ArrayUtil;
 
-require_once __DIR__ . '/../../vendor/Columba/src/Columba/Autoloader.php';
+const ROOT = __DIR__ . '/../..';
+const PUBLIC_DIR = ROOT . '/public';
+const SRC_DIR = ROOT . '/src';
+const VENDOR_DIR = ROOT . '/vendor';
+const WP_DIR = PUBLIC_DIR . '/wp';
 
-define('ROOT', __DIR__ . '/../..');
-define('PUBLIC_DIR', ROOT . '/public');
-define('SRC_DIR', ROOT . '/src');
-define('VENDOR_DIR', ROOT . '/vendor');
+require_once ROOT . '/vendor/Columba/src/Columba/Autoloader.php';
 
 /**
  * Gets the Autoloader.

@@ -15,6 +15,7 @@ namespace TypeWriter\Router;
 use Columba\Router\Response\HtmlResponse;
 use Columba\Router\Router as ColumbaRouter;
 use TypeWriter\Cappuccino\CappuccinoRenderer;
+use function TypeWriter\tw;
 
 /**
  * Class Router
@@ -34,7 +35,7 @@ class Router extends ColumbaRouter
 	 */
 	public function __construct()
 	{
-		parent::__construct(new HtmlResponse(), new CappuccinoRenderer());
+		parent::__construct(new HtmlResponse(), tw()->getCappuccino());
 	}
 
 }

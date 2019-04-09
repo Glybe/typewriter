@@ -13,6 +13,11 @@ declare(strict_types=1);
 /*
  * WordPress db drop-in.
  * Custom database class.
+ *
+ * The Database class extends the wpdb class and overrides the
+ * essential methods to use Columba MySQLDatabaseDriver. Inside
+ * the class the driver will also be assigned to the TypeWriter
+ * instance.
  */
 
 use TypeWriter\Database\Database;

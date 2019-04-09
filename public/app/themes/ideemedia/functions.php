@@ -15,7 +15,7 @@ use function TypeWriter\tw;
 
 tw()->getRouter()->get('/test', function (): string
 {
-	return 'Hi from router!';
+	return tw()->getRouter()->render('test.cappy');
 });
 
 Hooks::filter('style_loader_tag', function (string $tag, string $handle, string $href, string $media): string

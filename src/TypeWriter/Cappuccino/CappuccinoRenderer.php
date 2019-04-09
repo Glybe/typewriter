@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace TypeWriter\Cappuccino;
 
 use Columba\Router\Renderer\CappuccinoRenderer as ColumbaCappuccinoRenderer;
+use function TypeWriter\tw;
 
 /**
  * Class CappuccinoRenderer
@@ -21,7 +22,27 @@ use Columba\Router\Renderer\CappuccinoRenderer as ColumbaCappuccinoRenderer;
  * @package TypeWriter\Cappuccino
  * @since 1.0.0
  */
-class CappuccinoRenderer extends ColumbaCappuccinoRenderer
+final class CappuccinoRenderer extends ColumbaCappuccinoRenderer
 {
+
+	/**
+	 * CappuccinoRenderer constructor.
+	 *
+	 * @param array $options
+	 *
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public function __construct(array $options = [])
+	{
+		$defaultOptions = [
+			'auto_reload' => true,
+			'cache' => new CappuccinoCache()
+		];
+
+		parent::__construct(array_merge($defaultOptions, $options), new CappuccinoLoader());
+
+		$this->addGlobal('tw', tw());
+	}
 
 }

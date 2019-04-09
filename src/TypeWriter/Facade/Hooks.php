@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace TypeWriter\Facade;
 
+use function add_action;
+use function add_filter;
 use ReflectionException;
 use ReflectionFunction;
 use ReflectionMethod;

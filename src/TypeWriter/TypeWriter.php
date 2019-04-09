@@ -14,10 +14,15 @@ namespace TypeWriter;
 
 use Cappuccino\Cappuccino;
 use Columba\Columba;
+use Columba\Database\MySQLDatabaseDriver;
 use Columba\Preferences;
 use Columba\Router\RouterException;
 use Columba\Util\Stopwatch;
+use TypeWriter\Cappuccino\CappuccinoRenderer;
+use TypeWriter\Module\Module;
+use TypeWriter\Module\WP\PostTemplatesLoaderModule;
 use TypeWriter\Router\Router;
+use TypeWriter\Storage\KeyValueStorage;
 
 /**
  * Class TypeWriter
@@ -32,6 +37,21 @@ final class TypeWriter
 	public const VERSION = '1.0.0';
 
 	/**
+	 * @var CappuccinoRenderer
+	 */
+	private $cappuccino;
+
+	/**
+	 * @var MySQLDatabaseDriver
+	 */
+	private $database;
+
+	/**
+	 * @var Module[]
+	 */
+	private $modules;
+
+	/**
 	 * @var Preferences
 	 */
 	private $preferences;
@@ -40,6 +60,11 @@ final class TypeWriter
 	 * @var Router
 	 */
 	private $router;
+
+	/**
+	 * @var KeyValueStorage
+	 */
+	private $state;
 
 	/**
 	 * TypeWriter constructor.
@@ -51,8 +76,9 @@ final class TypeWriter
 	{
 		Stopwatch::start(self::class);
 
+		$this->modules = [];
 		$this->preferences = Preferences::loadFromJson(ROOT . '/config/config.json');
-		$this->router = new Router();
+		$this->state = new KeyValueStorage();
 	}
 
 	/**
@@ -63,6 +89,12 @@ final class TypeWriter
 	 */
 	public final function initialize(): void
 	{
+		$this->cappuccino = new CappuccinoRenderer();
+		$this->router = new Router();
+
+		$this->loadModule(PostTemplatesLoaderModule::class);
+
+		$this->state['tw.is-initialized'] = true;
 	}
 
 	/**
@@ -73,9 +105,15 @@ final class TypeWriter
 	 */
 	public final function run(): void
 	{
-		require_once(PUBLIC_DIR . '/wp/wp-load.php');
+		require_once(WP_DIR . '/wp-load.php');
 
 		wp();
+
+		$this->state['tw.is-wp-initialized'] = true;
+		$this->state['tw.is-wp-used'] = false;
+
+		foreach ($this->modules as $module)
+			$module->onRun();
 
 		try
 		{
@@ -86,8 +124,64 @@ final class TypeWriter
 			if ($err->getCode() !== RouterException::ERR_NOT_FOUND)
 				throw $err;
 
-			require_once(PUBLIC_DIR . '/wp/wp-includes/template-loader.php');
+			$this->state['tw.is-wp-used'] = true;
+
+			require_once(WP_DIR . '/wp-includes/template-loader.php');
 		}
+	}
+
+	/**
+	 * Gets the Cappuccino renderer.
+	 *
+	 * @return CappuccinoRenderer
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public final function getCappuccino(): CappuccinoRenderer
+	{
+		return $this->cappuccino;
+	}
+
+	/**
+	 * Gets the database connection instance.
+	 *
+	 * @return MySQLDatabaseDriver|null
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public final function getDatabase(): ?MySQLDatabaseDriver
+	{
+		return $this->database;
+	}
+
+	/**
+	 * Gets a module by class name.
+	 *
+	 * @param string $className
+	 *
+	 * @return Module|null
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public final function getModule(string $className): ?Module
+	{
+		foreach ($this->modules as $module)
+			if ($module instanceof $className)
+				return $module;
+
+		return null;
+	}
+
+	/**
+	 * Gets all registered modules.
+	 *
+	 * @return Module[]
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public final function getModules(): array
+	{
+		return $this->modules;
 	}
 
 	/**
@@ -112,6 +206,18 @@ final class TypeWriter
 	public final function getRouter(): Router
 	{
 		return $this->router;
+	}
+
+	/**
+	 * Gets the state storage.
+	 *
+	 * @return KeyValueStorage
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public final function getState(): KeyValueStorage
+	{
+		return $this->state;
 	}
 
 	/**
@@ -194,6 +300,46 @@ final class TypeWriter
 		global $pagenow;
 
 		return $pagenow === 'wp-login.php';
+	}
+
+	/**
+	 * Loads a module.
+	 *
+	 * @param string $className
+	 * @param mixed  ...$args
+	 *
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public final function loadModule(string $className, ...$args): void
+	{
+		$this->modules[] = new $className(...$args);
+	}
+
+	/**
+	 * Invoked when WordPress is ready to do it's stuff.
+	 *
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public final function onWordPressLoaded(): void
+	{
+		foreach ($this->modules as $module)
+			$module->onInitialize();
+	}
+
+	/**
+	 * Sets the database connection instance.
+	 *
+	 * @param MySQLDatabaseDriver $database
+	 *
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 * @internal
+	 */
+	public final function setDatabase(MySQLDatabaseDriver $database): void
+	{
+		$this->database = $database;
 	}
 
 }

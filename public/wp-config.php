@@ -10,6 +10,7 @@
 
 declare(strict_types=1);
 
+use const TypeWriter\PUBLIC_DIR;
 use function TypeWriter\tw;
 
 require_once __DIR__ . '/../src/TypeWriter/boot.php';
@@ -46,3 +47,5 @@ define('DISABLE_WP_CRON', true);
 define('DISALLOW_FILE_EDIT', true);
 
 require_once __DIR__ . '/wp/wp-settings.php';
+
+tw()->onWordPressLoaded();
