@@ -1,5 +1,4 @@
 /*
- * Copyright (c) 2019 - IdeeMedia <info@ideemedia.nl>
  * Copyright (c) 2019 - Bas Milius <bas@mili.us>
  *
  * This file is part of TypeWriter, a base framework for WordPress.

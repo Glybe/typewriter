@@ -5,8 +5,8 @@
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 	<meta name="robots" content="noindex,nofollow"/>
 	<title>Maintenance</title>
-	<link defer rel="stylesheet" href="//cdn.mili.us/font/proxima-nova/proxima-nova.min.css"/>
-	<link defer rel="stylesheet" href="//unpkg.com/@bybas/latte-ui@1.5.0-beta.5/dist/latte.css"/>
+	<link rel="stylesheet" href="//cdn.mili.us/font/proxima-nova/proxima-nova.min.css"/>
+	<link rel="stylesheet" href="//unpkg.com/@bybas/latte-ui@1.5.0-beta.5/dist/latte.css"/>
 	<style type="text/css">
 		html
 		{
