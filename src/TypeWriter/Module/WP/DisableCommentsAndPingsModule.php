@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace TypeWriter\Module\WP;
 
+use TypeWriter\Facade\AdminMenu;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
 
@@ -70,7 +71,8 @@ final class DisableCommentsAndPingsModule extends Module
 	 */
 	public final function onAdminMenu(): void
 	{
-		remove_menu_page('edit-comments.php');
+		AdminMenu::removePage('edit-comments.php');
+		AdminMenu::removeSubPage('options-general.php', 'options-discussion.php');
 	}
 
 	/**

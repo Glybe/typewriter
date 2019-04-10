@@ -17,6 +17,7 @@
 
 declare(strict_types=1);
 
+use TypeWriter\Module\TW\TypeWriterAdminMenuModule;
 use TypeWriter\Module\WP\AdminDesignModule;
 use TypeWriter\Module\WP\APIModule;
 use TypeWriter\Module\WP\DisableCommentsAndPingsModule;
@@ -30,8 +31,9 @@ tw()->loadModule(DisableCommentsAndPingsModule::class);
 
 if (tw()->isAdmin())
 {
-	tw()->loadModule(AdminDesignModule::class);
+//	tw()->loadModule(AdminDesignModule::class);
 	tw()->loadModule(PostTemplatesLoaderModule::class);
+	tw()->loadModule(TypeWriterAdminMenuModule::class);
 }
 
 if (tw()->isFront())

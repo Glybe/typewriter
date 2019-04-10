@@ -1,0 +1,104 @@
+<main id="app" style="position: fixed; display: contents; top: 0;left: 0;right: 0;bottom: 0"></main>
+
+{% import _self as adminBar %}
+
+{% macro render_item(item) %}
+
+	{% if item.id == "user-info" %}
+
+		<latte-ripple as="a" href="{{ item.href }}" class="nav-link">{{ item.title|raw }}</latte-ripple>
+
+	{% else %}
+
+		<latte-ripple as="a" href="{{ item.href }}" class="nav-link"><span>{{ item.title|raw }}</span></latte-ripple>
+
+	{% endif %}
+
+{% endmacro %}
+
+{% macro render_nav(item) %}
+
+	{% import _self as adminBar %}
+
+	<nav class="nav nav-list">
+
+		{% for index, child in item.children %}
+
+			{% if child.type == "group" %}
+
+				{% if index > 0 %}
+					<div class="divider divider-horizontal"></div>
+				{% endif %}
+
+				{% for sub in child.children %}
+					{{ adminBar.render_item(sub) }}
+				{% endfor %}
+
+			{% elseif child.type == "item" %}
+
+				{{ adminBar.render_item(child) }}
+
+			{% endif %}
+
+		{% endfor %}
+
+	</nav>
+
+{% endmacro %}
+
+<div class="app-bar app-bar-main" style="position: fixed; top: 0; width: 100%">
+	<div class="app-bar-row">
+		{% for group in children %}
+
+			{% if group.id == "root-default" %}
+
+			{% else %}
+
+				<div class="divider divider-vertical ml-auto"></div>
+
+			{% endif %}
+
+			{% for item in group.children if item.id != "menu-toggle" %}
+
+				{% if item.id == "wp-logo" %}
+
+					<latte-button-dropdown button-class="btn btn-icon btn-text btn-primary" icon="wordpress" v-cloak>
+						{{ adminBar.render_nav(item) }}
+					</latte-button-dropdown>
+
+					<div class="divider divider-vertical"></div>
+
+				{% elseif item.id == "site-name" %}
+
+					<latte-button-dropdown button-class="btn btn-contained btn-primary" icon="home-outline" label="{{ site_name }}" v-cloak>
+						{{ adminBar.render_nav(item) }}
+					</latte-button-dropdown>
+
+				{% elseif item.id == "new-content" %}
+
+					<latte-button-dropdown button-class="btn btn-icon btn-text btn-dark" icon="plus" v-cloak>
+						{{ adminBar.render_nav(item) }}
+					</latte-button-dropdown>
+
+				{% else %}
+
+					<latte-button-dropdown button-class="btn btn-icon btn-text btn-dark" icon="dots-vertical" v-cloak>
+						{{ adminBar.render_nav(item) }}
+					</latte-button-dropdown>
+
+				{% endif %}
+
+			{% endfor %}
+
+		{% endfor %}
+	</div>
+</div>
+
+<script type="text/javascript">
+	window.addEventListener("load", () =>
+	{
+		new Vue({
+			el: ".app-bar-main"
+		});
+	});
+</script>
