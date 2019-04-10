@@ -1,1 +1,6 @@
-Hello from view/test.cappy!!
+{% extends "@tw/skel" %}
+
+{% block body %}
+	Hello from test.cappy!
+{% endblock %}
+

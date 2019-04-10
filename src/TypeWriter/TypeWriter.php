@@ -20,7 +20,6 @@ use Columba\Router\RouterException;
 use Columba\Util\Stopwatch;
 use TypeWriter\Cappuccino\CappuccinoRenderer;
 use TypeWriter\Module\Module;
-use TypeWriter\Module\WP\PostTemplatesLoaderModule;
 use TypeWriter\Router\Router;
 use TypeWriter\Storage\KeyValueStorage;
 
@@ -91,8 +90,6 @@ final class TypeWriter
 	{
 		$this->cappuccino = new CappuccinoRenderer();
 		$this->router = new Router();
-
-		$this->loadModule(PostTemplatesLoaderModule::class);
 
 		$this->state['tw.is-initialized'] = true;
 	}
@@ -313,7 +310,13 @@ final class TypeWriter
 	 */
 	public final function loadModule(string $className, ...$args): void
 	{
-		$this->modules[] = new $className(...$args);
+		/** @var Module $module */
+		$module = new $className(...$args);
+
+		if ($this->state['tw.is-initialized'])
+			$module->onInitialize();
+
+		$this->modules[] = $module;
 	}
 
 	/**

@@ -45,10 +45,20 @@ final class Database extends wpdb
 	 */
 	public function __construct(string $user, string $password, string $database, string $host)
 	{
-		$this->driver = new MySQLDatabaseDriver($database, $host, 3306, $user, $password, [], false);
+		$this->dbh = $this->driver = new MySQLDatabaseDriver($database, $host, 3306, $user, $password, [], false);
 		tw()->setDatabase($this->driver);
 
 		parent::__construct($user, $password, $database, $host);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public final function _real_escape($string)
+	{
+		return $this->add_placeholder_escape($string); // Figure out if we should escape with slashes.
 	}
 
 	/**
@@ -179,13 +189,10 @@ final class Database extends wpdb
 		if (!isset($collate))
 			$collate = $this->collate;
 
-		if (!$this->has_cap('collation') || empty($charset))
-			return;
-
 		if (!empty($collate))
-			$this->driver->query('SET NAMES ' . $charset . ' COLLATE ' . $collate)->execute();
+			$this->driver->query(sprintf('SET NAMES \'%s\' COLLATE \'%s\'', $charset, $collate))->execute();
 		else
-			$this->driver->query('SET NAMES ' . $charset)->execute();
+			$this->driver->query(sprintf('SET NAMES \'%s\'', $charset))->execute();
 	}
 
 	/**

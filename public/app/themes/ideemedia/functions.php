@@ -10,15 +10,16 @@
 
 declare(strict_types=1);
 
+use TypeWriter\Facade\Dependencies;
 use TypeWriter\Facade\Hooks;
 use function TypeWriter\tw;
+
+Hooks::action('wp_enqueue_scripts', function(): void
+{
+	Dependencies::enqueueStyle('latte', 'https://unpkg.com/@bybas/latte-ui/dist/latte.css');
+});
 
 tw()->getRouter()->get('/test', function (): string
 {
 	return tw()->getRouter()->render('test.cappy');
-});
-
-Hooks::filter('style_loader_tag', function (string $tag, string $handle, string $href, string $media): string
-{
-	return sprintf('<link rel="stylesheet" href="%s" id="%s-id" media="%s" type="text/css" />', $href, $handle, $media);
 });

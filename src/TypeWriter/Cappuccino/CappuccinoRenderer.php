@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace TypeWriter\Cappuccino;
 
 use Columba\Router\Renderer\CappuccinoRenderer as ColumbaCappuccinoRenderer;
+use const TypeWriter\SRC_DIR;
 use function TypeWriter\tw;
 
 /**
@@ -43,6 +44,10 @@ final class CappuccinoRenderer extends ColumbaCappuccinoRenderer
 		parent::__construct(array_merge($defaultOptions, $options), new CappuccinoLoader());
 
 		$this->addGlobal('tw', tw());
+
+		$this->addExtension(new CappuccinoFunctions());
+
+		$this->addPath(SRC_DIR . '/view', 'tw');
 	}
 
 }

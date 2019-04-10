@@ -57,6 +57,22 @@ final class Hooks
 	}
 
 	/**
+	 * Applies filters to $value.
+	 *
+	 * @param string $filter
+	 * @param mixed  $value
+	 * @param mixed  $more
+	 *
+	 * @return mixed
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public static function applyFilters(string $filter, $value, ...$more)
+	{
+		return apply_filters($filter, $value, ...$more);
+	}
+
+	/**
 	 * Adds a filter hook.
 	 *
 	 * @param string   $filter
@@ -82,6 +98,36 @@ final class Hooks
 		{
 			throw new HookException('Reflection failed on $fn', HookException::ERR_REFLECTION_FAILED, $err);
 		}
+	}
+
+	/**
+	 * Removes an action callback.
+	 *
+	 * @param string   $action
+	 * @param callable $fn
+	 * @param int      $priority
+	 *
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public static function removeAction(string $action, callable $fn, int $priority = 10): void
+	{
+		remove_action($action, $fn, $priority);
+	}
+
+	/**
+	 * Removes a filter callback.
+	 *
+	 * @param string   $filter
+	 * @param callable $fn
+	 * @param int      $priority
+	 *
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public static function removeFilter(string $filter, callable $fn, int $priority = 10): void
+	{
+		remove_filter($filter, $fn, $priority);
 	}
 
 }

@@ -46,6 +46,9 @@ define('AUTOMATIC_UPDATER_DISABLED', true);
 define('DISABLE_WP_CRON', true);
 define('DISALLOW_FILE_EDIT', true);
 
+define('WP_DEBUG', true);
+define('WP_DEBUG_DISPLAY', WP_DEBUG);
+
 require_once __DIR__ . '/wp/wp-settings.php';
 
 tw()->onWordPressLoaded();
