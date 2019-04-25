@@ -1,7 +1,16 @@
 <?php
+/**
+ * Copyright (c) 2019 - Bas Milius <bas@mili.us>
+ *
+ * This file is part of TypeWriter, a base framework for WordPress.
+ *
+ * For the full copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
-namespace TypeWriter\Module\WP;
+namespace TypeWriter\Module\TW;
 
 use TypeWriter\Facade\Dependencies;
 use TypeWriter\Facade\Hooks;
@@ -14,7 +23,7 @@ use TypeWriter\TypeWriter;
  * Class AdminDesignModule
  *
  * @author Bas Milius <bas@mili.us>
- * @package TypeWriter\Module\WP
+ * @package TypeWriter\Module\TW
  * @since 1.0.0
  */
 final class AdminDesignModule extends Module
@@ -41,8 +50,6 @@ final class AdminDesignModule extends Module
 		Hooks::action('admin_enqueue_scripts', [$this, 'onAdminEnqueueScripts']);
 		Hooks::action('admin_footer', 'wp_admin_bar_render');
 
-		Hooks::filter('admin_footer_text', [$this, 'onAdminFooterText']);
-		Hooks::filter('update_footer', [$this, 'onUpdateFooter'], 11);
 		Hooks::filter('wp_admin_bar_class', [$this, 'onWordPressAdminBarClass']);
 
 		Hooks::removeAction('in_admin_header', 'wp_admin_bar_render', 0);
@@ -85,34 +92,6 @@ final class AdminDesignModule extends Module
 		Dependencies::enqueueStyle('latte-ui', '//unpkg.com/@bybas/latte-ui/dist/latte.css');
 		Dependencies::enqueueScript('vue', '//unpkg.com/vue');
 		Dependencies::enqueueScript('latte-ui', '//unpkg.com/@bybas/latte-ui/dist/latte.js');
-	}
-
-	/**
-	 * Invoked on admin_footer_text filter hook.
-	 * Returns custom footer text with the TypeWriter version etc.
-	 *
-	 * @return string
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 * @internal
-	 */
-	public final function onAdminFooterText(): string
-	{
-		return 'Copyright &copy; Bas Milius &mdash; All rights reserved.';
-	}
-
-	/**
-	 * Invoked on update_footer filter hook.
-	 * Returns the current TypeWriter and WordPress versions.
-	 *
-	 * @return string
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 * @internal
-	 */
-	public final function onUpdateFooter(): string
-	{
-		return sprintf('TypeWriter %s | WordPress %s', TypeWriter::VERSION, tw()->getVersions()['wordpress']);
 	}
 
 	/**

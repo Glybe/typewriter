@@ -17,8 +17,8 @@
 
 declare(strict_types=1);
 
+use TypeWriter\Module\TW\BrandingModule;
 use TypeWriter\Module\TW\TypeWriterAdminMenuModule;
-use TypeWriter\Module\WP\AdminDesignModule;
 use TypeWriter\Module\WP\APIModule;
 use TypeWriter\Module\WP\DisableCommentsAndPingsModule;
 use TypeWriter\Module\WP\DisableWPFeaturesModule;
@@ -27,11 +27,11 @@ use TypeWriter\Module\WP\PostTemplatesLoaderModule;
 use function TypeWriter\tw;
 
 tw()->loadModule(APIModule::class);
+tw()->loadModule(BrandingModule::class);
 tw()->loadModule(DisableCommentsAndPingsModule::class);
 
 if (tw()->isAdmin())
 {
-//	tw()->loadModule(AdminDesignModule::class);
 	tw()->loadModule(PostTemplatesLoaderModule::class);
 	tw()->loadModule(TypeWriterAdminMenuModule::class);
 }
