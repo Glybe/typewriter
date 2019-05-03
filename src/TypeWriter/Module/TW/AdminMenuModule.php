@@ -8,17 +8,17 @@ use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
 
 /**
- * Class TypeWriterAdminMenuModule
+ * Class AdminMenuModule
  *
  * @author Bas Milius <bas@mili.us>
  * @package TypeWriter\Module\TW
  * @since 1.0.0
  */
-final class TypeWriterAdminMenuModule extends Module
+final class AdminMenuModule extends Module
 {
 
 	/**
-	 * TypeWriterAdminMenuModule constructor.
+	 * AdminMenuModule constructor.
 	 *
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0

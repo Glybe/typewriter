@@ -18,8 +18,9 @@
 declare(strict_types=1);
 
 use TypeWriter\Module\TW\BrandingModule;
-use TypeWriter\Module\TW\TypeWriterAdminMenuModule;
+use TypeWriter\Module\TW\AdminMenuModule;
 use TypeWriter\Module\WP\APIModule;
+use TypeWriter\Module\WP\DisableAdminFeaturesModule;
 use TypeWriter\Module\WP\DisableCommentsAndPingsModule;
 use TypeWriter\Module\WP\DisableWPFeaturesModule;
 use TypeWriter\Module\WP\ImproveOutputModule;
@@ -32,8 +33,9 @@ tw()->loadModule(DisableCommentsAndPingsModule::class);
 
 if (tw()->isAdmin())
 {
+	tw()->loadModule(AdminMenuModule::class);
+	tw()->loadModule(DisableAdminFeaturesModule::class);
 	tw()->loadModule(PostTemplatesLoaderModule::class);
-	tw()->loadModule(TypeWriterAdminMenuModule::class);
 }
 
 if (tw()->isFront())
