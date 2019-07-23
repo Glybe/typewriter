@@ -1,6 +1,8 @@
 .idea/
 node_modules/
 
+.cache/
+
 public/app/languages/
 public/app/upgrade/
 public/app/uploads/
