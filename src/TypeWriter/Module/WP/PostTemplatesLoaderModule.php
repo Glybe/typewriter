@@ -91,7 +91,7 @@ final class PostTemplatesLoaderModule extends Module
 				if (substr($file, -4) !== '.php')
 					continue;
 
-				if ($file === 'default.php')
+				if ($file === 'archive.php' || $file === 'default.php' || $file === 'single.php')
 					continue;
 
 				$path = 'template/' . $postType . '/' . $file;

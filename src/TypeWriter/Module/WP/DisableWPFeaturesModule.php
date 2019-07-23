@@ -6,7 +6,6 @@ namespace TypeWriter\Module\WP;
 use TypeWriter\Facade\Dependencies;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
-use function TypeWriter\preDie;
 
 /**
  * Class DisableWPFeaturesModule

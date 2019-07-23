@@ -10,8 +10,14 @@
 
 declare(strict_types=1);
 
+/**
+ * @author Bas Milius <bas@mili.us>
+ */
+
+the_post();
 get_header();
 
-echo 'index';
+the_title('<small>', '</small>');
+the_content();
 
 get_footer();

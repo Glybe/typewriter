@@ -58,7 +58,10 @@ final class Database extends wpdb
 	 */
 	public final function _real_escape($string)
 	{
-		return $this->add_placeholder_escape($string); // Figure out if we should escape with slashes.
+		if (is_string($string))
+			$string = addslashes($string);
+
+		return $this->add_placeholder_escape($string);
 	}
 
 	/**

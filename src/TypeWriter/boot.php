@@ -14,7 +14,6 @@ namespace TypeWriter;
 
 use Columba\Autoloader;
 use Columba\Error\ExceptionHandler;
-use Columba\Util\ArrayUtil;
 
 const ROOT = __DIR__ . '/../..';
 const PUBLIC_DIR = ROOT . '/public';
@@ -36,36 +35,6 @@ function autoloader(): Autoloader
 	static $autoloader = null;
 
 	return $autoloader ?? $autoloader = new Autoloader();
-}
-
-/**
- * print_r wrapped with <pre>.
- *
- * @param mixed ...$data
- *
- * @author Bas Milius <bas@ideemedia.nl>
- * @since 1.0.0
- */
-function pre(...$data): void
-{
-	if (count($data) === 1 && is_array($data[0]) && ArrayUtil::isSequentialArray($data[0]))
-		$data = $data[0];
-
-	echo sprintf('<pre>%s</pre>', print_r($data, true));
-}
-
-/**
- * print_r wrapped with <pre> and dies after.
- *
- * @param mixed ...$data
- *
- * @author Bas Milius <bas@ideemedia.nl>
- * @since 1.0.0
- */
-function preDie(...$data): void
-{
-	pre(...$data);
-	die;
 }
 
 /**

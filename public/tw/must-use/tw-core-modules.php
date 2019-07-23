@@ -17,14 +17,15 @@
 
 declare(strict_types=1);
 
-use TypeWriter\Module\TW\BrandingModule;
 use TypeWriter\Module\TW\AdminMenuModule;
+use TypeWriter\Module\TW\BrandingModule;
 use TypeWriter\Module\WP\APIModule;
 use TypeWriter\Module\WP\DisableAdminFeaturesModule;
 use TypeWriter\Module\WP\DisableCommentsAndPingsModule;
 use TypeWriter\Module\WP\DisableWPFeaturesModule;
 use TypeWriter\Module\WP\ImproveOutputModule;
 use TypeWriter\Module\WP\PostTemplatesLoaderModule;
+use TypeWriter\Module\WP\PostTemplatesResolverModule;
 use function TypeWriter\tw;
 
 tw()->loadModule(APIModule::class);
@@ -42,4 +43,5 @@ if (tw()->isFront())
 {
 	tw()->loadModule(DisableWPFeaturesModule::class);
 	tw()->loadModule(ImproveOutputModule::class);
+	tw()->loadModule(PostTemplatesResolverModule::class);
 }
