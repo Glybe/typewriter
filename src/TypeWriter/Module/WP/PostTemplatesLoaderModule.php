@@ -86,9 +86,12 @@ final class PostTemplatesLoaderModule extends Module
 
 			$themeTemplates = [];
 
-			foreach ($files as &$file)
+			foreach ($files as $file)
 			{
 				if (substr($file, -4) !== '.php')
+					continue;
+
+				if ($file === 'default.php')
 					continue;
 
 				$path = 'template/' . $postType . '/' . $file;

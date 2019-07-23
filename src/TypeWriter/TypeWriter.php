@@ -15,7 +15,7 @@ namespace TypeWriter;
 use Cappuccino\Cappuccino;
 use Columba\Columba;
 use Columba\Database\MySQLDatabaseDriver;
-use Columba\Preferences;
+use Columba\Foundation\Preferences\Preferences;
 use Columba\Router\RouterException;
 use Columba\Util\Stopwatch;
 use TypeWriter\Cappuccino\CappuccinoRenderer;

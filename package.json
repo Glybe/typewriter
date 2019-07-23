@@ -1,14 +1,13 @@
 {
 	"name": "@idee/typewriter",
-	"version": "1.0.0",
 	"description": "A WordPress framework by IdeeMedia.",
-	"main": "public/index.php",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/basmilius/typewriter.git"
+	"homepage": "https://github.com/basmilius/typewriter#readme",
+	"version": "1.0.0",
+	"license": "MIT",
+	"author": {
+		"name": "Bas Milius",
+		"email": "bas@mili.us",
+		"url": "https://bas.dev"
 	},
 	"keywords": [
 		"WordPress",
@@ -17,10 +16,17 @@
 		"Identity",
 		"IdeeMedia"
 	],
-	"author": "Bas Milius",
-	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/basmilius/typewriter.git"
+	},
 	"bugs": {
 		"url": "https://github.com/basmilius/typewriter/issues"
 	},
-	"homepage": "https://github.com/basmilius/typewriter#readme"
+	"main": "public/index.php",
+	"scripts": {
+		"serve": "php -S 0.0.0.0:8000 -t public/ src/TypeWriter/dev-server.php"
+	},
+	"dependencies": {},
+	"devDependencies": {}
 }

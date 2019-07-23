@@ -14,8 +14,8 @@ namespace TypeWriter\Database;
 
 use Columba\Database\MySQLDatabaseDriver;
 use PDO;
-use function TypeWriter\tw;
 use wpdb;
+use function TypeWriter\tw;
 
 /**
  * Class Database
@@ -45,7 +45,7 @@ final class Database extends wpdb
 	 */
 	public function __construct(string $user, string $password, string $database, string $host)
 	{
-		$this->dbh = $this->driver = new MySQLDatabaseDriver($database, $host, 3306, $user, $password, [], false);
+		$this->dbh = $this->driver = new MySQLDatabaseDriver($host, $database, $user, $password, 3306, [], false);
 		tw()->setDatabase($this->driver);
 
 		parent::__construct($user, $password, $database, $host);

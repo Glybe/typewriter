@@ -10,8 +10,8 @@
 
 declare(strict_types=1);
 
-use const TypeWriter\PUBLIC_DIR;
 use function TypeWriter\tw;
+use const TypeWriter\PUBLIC_DIR;
 
 require_once __DIR__ . '/../src/TypeWriter/boot.php';
 
@@ -46,8 +46,25 @@ define('AUTOMATIC_UPDATER_DISABLED', true);
 define('DISABLE_WP_CRON', true);
 define('DISALLOW_FILE_EDIT', true);
 
-define('WP_DEBUG', true);
+define('WP_DEBUG', $prefs['developer']['debugMode']);
 define('WP_DEBUG_DISPLAY', WP_DEBUG);
+
+//define('WP_LANG_DIR', '');
+//define('WP_PLUGIN_DIR', '');
+//define('WP_PLUGIN_URL', '');
+define('WPMU_PLUGIN_DIR', PUBLIC_DIR . '/tw/must-use');
+define('WPMU_PLUGIN_URL', '/tw/must-use');
+
+/*
+ * Change WordPress cookie names to something else.
+ */
+define('USER_COOKIE', 'tw_u');
+define('PASS_COOKIE', 'tw_p');
+define('AUTH_COOKIE', 'tw_a');
+define('SECURE_AUTH_COOKIE', 'tw_sa');
+define('LOGGED_IN_COOKIE', 'tw_l');
+define('TEST_COOKIE', 'tw_t');
+define('RECOVERY_MODE_COOKIE', 'tw_r');
 
 require_once __DIR__ . '/wp/wp-settings.php';
 
