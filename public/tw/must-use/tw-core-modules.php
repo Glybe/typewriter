@@ -17,22 +17,22 @@
 
 declare(strict_types=1);
 
-use TypeWriter\Module\TW\AdminMenuModule;
-use TypeWriter\Module\TW\BrandingModule;
-use TypeWriter\Module\WP\APIModule;
-use TypeWriter\Module\WP\DisableAdminFeaturesModule;
-use TypeWriter\Module\WP\DisableCommentsAndPingsModule;
-use TypeWriter\Module\WP\DisableWPFeaturesModule;
-use TypeWriter\Module\WP\ImproveOutputModule;
-use TypeWriter\Module\WP\PostTemplatesLoaderModule;
-use TypeWriter\Module\WP\PostTemplatesResolverModule;
+use TypeWriter\Module\Core\AdminMenuModule;
+use TypeWriter\Module\Core\BrandingModule;
+use TypeWriter\Module\Core\APIModule;
+use TypeWriter\Module\Core\DisableAdminFeaturesModule;
+use TypeWriter\Module\Core\DisableCommentsAndPingsModule;
+use TypeWriter\Module\Core\DisableWPFeaturesModule;
+use TypeWriter\Module\Core\ImproveOutputModule;
+use TypeWriter\Module\Core\PostTemplatesLoaderModule;
+use TypeWriter\Module\Core\PostTemplatesResolverModule;
 use function TypeWriter\tw;
 
 tw()->loadModule(APIModule::class);
 tw()->loadModule(BrandingModule::class);
 tw()->loadModule(DisableCommentsAndPingsModule::class);
 
-if (tw()->isAdmin())
+if (tw()->isAdmin() || tw()->isApi())
 {
 	tw()->loadModule(AdminMenuModule::class);
 	tw()->loadModule(DisableAdminFeaturesModule::class);

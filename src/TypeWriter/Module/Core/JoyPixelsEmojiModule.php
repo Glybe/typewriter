@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace TypeWriter\Module\WP;
+namespace TypeWriter\Module\Core;
 
 use TypeWriter\Module\Module;
 
@@ -9,7 +9,7 @@ use TypeWriter\Module\Module;
  * Class JoyPixelsEmojiModule
  *
  * @author Bas Milius <bas@mili.us>
- * @package TypeWriter\Module\WP
+ * @package TypeWriter\Module\Core
  * @since 1.0.0
  */
 final class JoyPixelsEmojiModule extends Module

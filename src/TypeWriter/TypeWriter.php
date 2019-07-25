@@ -258,7 +258,7 @@ final class TypeWriter
 	 */
 	public final function isApi(): bool
 	{
-		return false;
+		return strpos($_SERVER['REQUEST_URI'], '/api/wp/') !== false;
 	}
 
 	/**

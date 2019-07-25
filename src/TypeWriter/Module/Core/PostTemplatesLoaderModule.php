@@ -10,7 +10,7 @@
 
 declare(strict_types=1);
 
-namespace TypeWriter\Module\WP;
+namespace TypeWriter\Module\Core;
 
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
@@ -22,7 +22,7 @@ use WP_Theme;
  * Class PostTemplatesLoaderModule
  *
  * @author Bas Milius <bas@mili.us>
- * @package TypeWriter\Module\WP
+ * @package TypeWriter\Module\Core
  * @since 1.0.0
  */
 final class PostTemplatesLoaderModule extends Module
@@ -53,21 +53,18 @@ final class PostTemplatesLoaderModule extends Module
 	 * Invoked on theme_templates filter hook.
 	 * Adds templates from a theme's template directory to the template selector.
 	 *
-	 * @param array    $templates
-	 * @param WP_Theme $theme
-	 * @param WP_Post  $post
-	 * @param string   $postType
+	 * @param array        $templates
+	 * @param WP_Theme     $theme
+	 * @param WP_Post|null $post
+	 * @param string       $postType
 	 *
 	 * @return string[]
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
 	 * @internal
 	 */
-	public final function onThemeTemplates(array $templates, WP_Theme $theme, WP_Post $post, string $postType): array
+	public final function onThemeTemplates(array $templates, WP_Theme $theme, ?WP_Post $post, string $postType): array
 	{
-		if ($post === null)
-			return $templates;
-
 		$themeDirectories = array_unique([
 			$theme->get_stylesheet_directory(),
 			$theme->get_template_directory()
@@ -88,7 +85,7 @@ final class PostTemplatesLoaderModule extends Module
 
 			foreach ($files as $file)
 			{
-				if (substr($file, -4) !== '.php')
+				if (substr($file, -4) !== '.php' && substr($file, -6) !== '.cappy')
 					continue;
 
 				if ($file === 'archive.php' || $file === 'default.php' || $file === 'single.php')

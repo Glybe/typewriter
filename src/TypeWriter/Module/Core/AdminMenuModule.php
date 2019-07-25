@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace TypeWriter\Module\TW;
+namespace TypeWriter\Module\Core;
 
 use TypeWriter\Facade\AdminMenu;
 use TypeWriter\Facade\Hooks;
@@ -11,7 +11,7 @@ use TypeWriter\Module\Module;
  * Class AdminMenuModule
  *
  * @author Bas Milius <bas@mili.us>
- * @package TypeWriter\Module\TW
+ * @package TypeWriter\Module\Core
  * @since 1.0.0
  */
 final class AdminMenuModule extends Module

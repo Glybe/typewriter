@@ -1,0 +1,13 @@
+{#!
+ # @author Bas Milius <bas@ideemedia.nl>
+ # @template Front Page (Cappuccino)
+ #}
+
+{% controller "\\TypeWriter\\Cappuccino\\Controller\\PostController" %}
+
+{{ get_header() }}
+
+<h1>Cappuccino template: {{ post.title }}</h1>
+{{ applyFilters("the_content", post.content) }}
+
+{{ get_footer() }}

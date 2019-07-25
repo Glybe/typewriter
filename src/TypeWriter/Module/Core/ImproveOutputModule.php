@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace TypeWriter\Module\WP;
+namespace TypeWriter\Module\Core;
 
 use Columba\Util\StringUtil;
 use TypeWriter\Facade\Hooks;
@@ -11,7 +11,7 @@ use TypeWriter\Module\Module;
  * Class ImproveOutputModule
  *
  * @author Bas Milius <bas@mili.us>
- * @package TypeWriter\Module\WP
+ * @package TypeWriter\Module\Core
  * @since 1.0.0
  */
 final class ImproveOutputModule extends Module

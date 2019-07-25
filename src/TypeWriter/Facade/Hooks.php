@@ -73,6 +73,20 @@ final class Hooks
 	}
 
 	/**
+	 * Applies filters to $value.
+	 *
+	 * @param string $action
+	 * @param mixed  $more
+	 *
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public static function doAction(string $action, ...$more): void
+	{
+		do_action($action, ...$more);
+	}
+
+	/**
 	 * Adds a filter hook.
 	 *
 	 * @param string   $filter

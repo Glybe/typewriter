@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace TypeWriter\Module\WP;
+namespace TypeWriter\Module\Core;
 
 use TypeWriter\Facade\Dependencies;
 use TypeWriter\Facade\Hooks;
@@ -11,7 +11,7 @@ use TypeWriter\Module\Module;
  * Class DisableWPFeaturesModule
  *
  * @author Bas Milius <bas@mili.us>
- * @package TypeWriter\Module\WP
+ * @package TypeWriter\Module\Core
  * @since 1.0.0
  */
 final class DisableWPFeaturesModule extends Module
