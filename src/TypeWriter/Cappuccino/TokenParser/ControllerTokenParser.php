@@ -24,7 +24,7 @@ final class ControllerTokenParser extends AbstractTokenParser
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
 	 */
-	public final function parse(Token $token): ?Node
+	public final function parse(Token $token): Node
 	{
 		$stream = $this->parser->getStream();
 

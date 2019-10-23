@@ -21,7 +21,7 @@ final class CappuccinoLoader extends FilesystemLoader
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
 	 */
-	protected function findTemplate(string $name, bool $throw = true)
+	protected function findTemplate(string $name, bool $throw = true): ?string
 	{
 		if (substr($name, 0, 1) !== '@' && tw()->getState()['tw.is-wp-initialized'])
 		{
