@@ -12,8 +12,10 @@ declare(strict_types=1);
 
 namespace TypeWriter\Database;
 
+use Columba\Database\DatabaseException;
 use Columba\Database\MySQLDatabaseDriver;
 use PDO;
+use PDOException;
 use wpdb;
 use function TypeWriter\tw;
 
@@ -131,6 +133,7 @@ final class Database extends wpdb
 		$errorCode = $this->driver->errorInfo()[1] ?? 0;
 
 		if ($errorCode === 2006)
+		{
 			if ($this->check_connection())
 			{
 				$this->doQuery($query);
@@ -140,6 +143,7 @@ final class Database extends wpdb
 				$this->insert_id = 0;
 				return false;
 			}
+		}
 
 		$this->last_error = $this->driver->errorInfo()[2] ?? null;
 
@@ -242,8 +246,14 @@ final class Database extends wpdb
 		if (defined('SAVEQUERIES') && SAVEQUERIES)
 			$this->timer_start();
 
-		$this->result = $this->driver->query($query);
-		$this->result->execute();
+		try
+		{
+			$this->result = $this->driver->query($query);
+			$this->result->execute();
+		}
+		catch (PDOException $err)
+		{
+		}
 
 		$this->num_queries++;
 
