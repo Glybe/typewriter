@@ -26,11 +26,13 @@ use TypeWriter\Module\Core\DisableWPFeaturesModule;
 use TypeWriter\Module\Core\ImproveOutputModule;
 use TypeWriter\Module\Core\PostTemplatesLoaderModule;
 use TypeWriter\Module\Core\PostTemplatesResolverModule;
+use TypeWriter\Module\Core\ThemeBaseModule;
 use function TypeWriter\tw;
 
 tw()->loadModule(APIModule::class);
 tw()->loadModule(BrandingModule::class);
 tw()->loadModule(DisableCommentsAndPingsModule::class);
+tw()->loadModule(ThemeBaseModule::class);
 
 if (tw()->isAdmin() || tw()->isApi())
 {
