@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace TypeWriter\Storage;
 
-use Columba\Database\Dao\AbstractModel;
+use Columba\Database\Model\Base;
 
 /**
  * Class KeyValueStorage
@@ -12,7 +12,7 @@ use Columba\Database\Dao\AbstractModel;
  * @package TypeWriter\Storage
  * @since 1.0.0
  */
-class KeyValueStorage extends AbstractModel
+class KeyValueStorage extends Base
 {
 
 	/**
@@ -24,6 +24,26 @@ class KeyValueStorage extends AbstractModel
 	public function __construct()
 	{
 		parent::__construct([]);
+
+		static::$columns[static::class] = [];
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	protected function prepare(array &$data): void
+	{
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	protected function publish(array &$data): void
+	{
 	}
 
 }

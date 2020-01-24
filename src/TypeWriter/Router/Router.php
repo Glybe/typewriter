@@ -14,7 +14,6 @@ namespace TypeWriter\Router;
 
 use Columba\Router\Response\HtmlResponse;
 use Columba\Router\Router as ColumbaRouter;
-use TypeWriter\Cappuccino\CappuccinoRenderer;
 use function TypeWriter\tw;
 
 /**

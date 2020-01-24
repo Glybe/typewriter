@@ -12,8 +12,11 @@ declare(strict_types=1);
 
 namespace TypeWriter\Database;
 
-use Columba\Database\DatabaseException;
-use Columba\Database\MySQLDatabaseDriver;
+use Columba\Database\Connection\Connection;
+use Columba\Database\Connection\MySqlConnection;
+use Columba\Database\Connector\Connector;
+use Columba\Database\Connector\MySqlConnector;
+use Columba\Database\Db;
 use PDO;
 use PDOException;
 use wpdb;
@@ -29,10 +32,8 @@ use function TypeWriter\tw;
 final class Database extends wpdb
 {
 
-	/**
-	 * @var MySQLDatabaseDriver;
-	 */
-	private $driver;
+	private Connection $connection;
+	private Connector $connector;
 
 	/**
 	 * Database constructor.
@@ -47,8 +48,10 @@ final class Database extends wpdb
 	 */
 	public function __construct(string $user, string $password, string $database, string $host)
 	{
-		$this->dbh = $this->driver = new MySQLDatabaseDriver($host, $database, $user, $password, 3306, [], false);
-		tw()->setDatabase($this->driver);
+		$this->connector = new MySqlConnector($host, $database, $user, $password);
+		$this->connection = $this->dbh = Db::create(MySqlConnection::class, $this->connector, 'default', false);
+
+		tw()->setDatabase($this->connection);
 
 		parent::__construct($user, $password, $database, $host);
 	}
@@ -73,7 +76,7 @@ final class Database extends wpdb
 	 */
 	public final function db_connect($allow_bail = true): bool
 	{
-		$this->driver->connect();
+		$this->connection->connect();
 
 		$this->init_charset();
 		$this->set_charset(null);
@@ -91,7 +94,7 @@ final class Database extends wpdb
 	 */
 	public final function db_version(): string
 	{
-		return preg_replace('/[^0-9.].*/', '', $this->driver->getAttribute(PDO::ATTR_CLIENT_VERSION));
+		return preg_replace('/[^0-9.].*/', '', $this->connection->getPdo()->getAttribute(PDO::ATTR_SERVER_VERSION));
 	}
 
 	/**
@@ -130,7 +133,7 @@ final class Database extends wpdb
 
 		$this->doQuery($query);
 
-		$errorCode = $this->driver->errorInfo()[1] ?? 0;
+		$errorCode = $this->connection->getPdo()->errorInfo()[1] ?? 0;
 
 		if ($errorCode === 2006)
 		{
@@ -145,7 +148,7 @@ final class Database extends wpdb
 			}
 		}
 
-		$this->last_error = $this->driver->errorInfo()[2] ?? null;
+		$this->last_error = $this->connection->getPdo()->errorInfo()[2] ?? null;
 
 		if ($this->last_error)
 		{
@@ -163,7 +166,7 @@ final class Database extends wpdb
 		else if (preg_match('/^\s*(insert|delete|update|replace)\s/i', $query))
 		{
 			$this->rows_affected = $this->result->rowCount();
-			$this->insert_id = $this->driver->lastInsertIdInteger();
+			$this->insert_id = $this->connection->lastInsertIdInteger();
 
 			return $this->rows_affected;
 		}
@@ -171,7 +174,7 @@ final class Database extends wpdb
 		{
 			$numRows = 0;
 
-			while ($row = $this->result->fetch(PDO::FETCH_OBJ))
+			while ($row = $this->result->getPdoStatement()->fetch(PDO::FETCH_OBJ))
 			{
 				$this->last_result[$numRows] = $row;
 				$numRows++;
@@ -197,9 +200,9 @@ final class Database extends wpdb
 			$collate = $this->collate;
 
 		if (!empty($collate))
-			$this->driver->query(sprintf('SET NAMES \'%s\' COLLATE \'%s\'', $charset, $collate))->execute();
+			$this->connection->prepare(sprintf('SET NAMES \'%s\' COLLATE \'%s\'', $charset, $collate))->run();
 		else
-			$this->driver->query(sprintf('SET NAMES \'%s\'', $charset))->execute();
+			$this->connection->prepare(sprintf('SET NAMES \'%s\'', $charset))->run();
 	}
 
 	/**
@@ -211,14 +214,11 @@ final class Database extends wpdb
 	{
 		if (empty($modes))
 		{
-			$smt = $this->driver->query('SELECT @@SESSION.sql_mode');
-			$smt->execute();
-			$res = $smt->fetch(PDO::FETCH_NUM);
+			$smt = $this->connection->prepare('SELECT @@SESSION.sql_mode');
+			$smt->run();
+			$res = $smt->getPdoStatement()->fetch(PDO::FETCH_NUM);
 
-			$modes = array_filter(explode(',', $res[0]), function ($val): bool
-			{
-				return !empty($val);
-			});
+			$modes = array_filter(explode(',', $res[0]), fn($val) => !empty($val));
 		}
 
 		$modes = array_change_key_case($modes, CASE_UPPER);
@@ -230,7 +230,7 @@ final class Database extends wpdb
 
 		$modesStr = implode(',', $modes);
 
-		$this->driver->exec("SET SESSION sql_mode = '$modesStr'");
+		$this->connection->prepare("SET SESSION sql_mode = '$modesStr'")->run();
 	}
 
 	/**
@@ -248,8 +248,8 @@ final class Database extends wpdb
 
 		try
 		{
-			$this->result = $this->driver->query($query);
-			$this->result->execute();
+			$this->result = $this->connection->prepare($query);
+			$this->result->run();
 		}
 		catch (PDOException $err)
 		{

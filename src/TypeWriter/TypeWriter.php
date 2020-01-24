@@ -14,7 +14,7 @@ namespace TypeWriter;
 
 use Cappuccino\Cappuccino;
 use Columba\Columba;
-use Columba\Database\MySQLDatabaseDriver;
+use Columba\Database\Connection\Connection;
 use Columba\Foundation\Preferences\Preferences;
 use Columba\Router\RouterException;
 use Columba\Util\Stopwatch;
@@ -35,35 +35,14 @@ final class TypeWriter
 
 	public const VERSION = '1.0.0';
 
-	/**
-	 * @var CappuccinoRenderer
-	 */
-	private $cappuccino;
+	private CappuccinoRenderer $cappuccino;
+	private Connection $database;
+	private Preferences $preferences;
+	private Router $router;
+	private KeyValueStorage $state;
 
-	/**
-	 * @var MySQLDatabaseDriver
-	 */
-	private $database;
-
-	/**
-	 * @var Module[]
-	 */
-	private $modules;
-
-	/**
-	 * @var Preferences
-	 */
-	private $preferences;
-
-	/**
-	 * @var Router
-	 */
-	private $router;
-
-	/**
-	 * @var KeyValueStorage
-	 */
-	private $state;
+	/** @var Module[] */
+	private array $modules = [];
 
 	/**
 	 * TypeWriter constructor.
@@ -142,11 +121,11 @@ final class TypeWriter
 	/**
 	 * Gets the database connection instance.
 	 *
-	 * @return MySQLDatabaseDriver|null
+	 * @return Connection|null
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
 	 */
-	public final function getDatabase(): ?MySQLDatabaseDriver
+	public final function getDatabase(): ?Connection
 	{
 		return $this->database;
 	}
@@ -334,15 +313,15 @@ final class TypeWriter
 	/**
 	 * Sets the database connection instance.
 	 *
-	 * @param MySQLDatabaseDriver $database
+	 * @param Connection $databaseConnection
 	 *
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
 	 * @internal
 	 */
-	public final function setDatabase(MySQLDatabaseDriver $database): void
+	public final function setDatabase(Connection $databaseConnection): void
 	{
-		$this->database = $database;
+		$this->database = $databaseConnection;
 	}
 
 }
