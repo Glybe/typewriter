@@ -1,7 +1,7 @@
 .idea/
 node_modules/
 
-.cache/
+cache/
 
 public/app/languages/
 public/app/upgrade/
