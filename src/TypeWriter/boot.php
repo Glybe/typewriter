@@ -15,7 +15,9 @@ namespace TypeWriter;
 use Columba\Autoloader;
 use Columba\Error\ExceptionHandler;
 
-const ROOT = __DIR__ . '/../..';
+define('TW_ROOT', realpath(__DIR__ . '/../..'));
+
+const ROOT = TW_ROOT;
 const PUBLIC_DIR = ROOT . '/public';
 const SRC_DIR = ROOT . '/src';
 const VENDOR_DIR = ROOT . '/vendor';
@@ -34,7 +36,7 @@ function autoloader(): Autoloader
 {
 	static $autoloader = null;
 
-	return $autoloader ?? $autoloader = new Autoloader();
+	return $autoloader ??= new Autoloader();
 }
 
 /**
