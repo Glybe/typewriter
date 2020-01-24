@@ -18,7 +18,7 @@
 
 	<div class="panel m-auto py-3" style="max-width: 390px">
 		<div class="panel-body text-center pb-0">
-			<img src="https://cdn.mili.us/assets/emojione/svg/1f6e0.svg" alt="🛠" height="96" width="96" />
+			<img src="https://g.s3.bmcdn.nl/assets/joypixels/v5/svg/1f6e0.svg" alt="🛠" height="96" width="96" />
 		</div>
 		<div class="panel-body border-top-0 text-center">
 			<h4>Maintenance</h4>
