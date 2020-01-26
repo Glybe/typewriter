@@ -18,6 +18,7 @@
 declare(strict_types=1);
 
 use TypeWriter\Module\Core\AdminMenuModule;
+use TypeWriter\Module\Core\AdminModule;
 use TypeWriter\Module\Core\BrandingModule;
 use TypeWriter\Module\Core\APIModule;
 use TypeWriter\Module\Core\DisableAdminFeaturesModule;
@@ -36,6 +37,7 @@ tw()->loadModule(ThemeBaseModule::class);
 
 if (tw()->isAdmin() || tw()->isApi())
 {
+	tw()->loadModule(AdminModule::class);
 	tw()->loadModule(AdminMenuModule::class);
 	tw()->loadModule(DisableAdminFeaturesModule::class);
 	tw()->loadModule(PostTemplatesLoaderModule::class);

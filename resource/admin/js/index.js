@@ -1,3 +1,5 @@
+import "../css/index.scss";
+
 import { PostThumbnail } from "./feature";
 import { MediaModal } from "./media";
 
