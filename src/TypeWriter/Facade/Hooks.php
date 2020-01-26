@@ -17,6 +17,12 @@ use function add_filter;
 use ReflectionException;
 use ReflectionFunction;
 use ReflectionMethod;
+use function apply_filters;
+use function do_action;
+use function is_array;
+use function is_callable;
+use function remove_action;
+use function remove_filter;
 
 /**
  * Class Hooks

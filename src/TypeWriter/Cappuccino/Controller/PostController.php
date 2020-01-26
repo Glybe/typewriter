@@ -3,6 +3,12 @@ declare(strict_types=1);
 
 namespace TypeWriter\Cappuccino\Controller;
 
+use TypeWriter\Facade\Post;
+use function get_the_content;
+use function get_the_ID;
+use function get_the_title;
+use function the_post;
+
 /**
  * Class PostController
  *
@@ -14,18 +20,27 @@ final class PostController extends Controller
 {
 
 	/**
+	 * PostController constructor.
+	 *
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public function __construct()
+	{
+		the_post();
+	}
+
+	/**
 	 * {@inheritdoc}
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
 	 */
 	public function getContext(): array
 	{
-		the_post();
-
 		return [
 			'post' => [
-				'id' => get_the_ID(),
-				'title' => get_the_title(),
+				'id' => Post::id(),
+				'title' => Post::title(),
 				'content' => get_the_content()
 			]
 		];

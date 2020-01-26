@@ -6,6 +6,29 @@ namespace TypeWriter\Module\Core;
 use Columba\Util\StringUtil;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
+use function array_filter;
+use function esc_attr;
+use function esc_url;
+use function get_oembed_endpoint_url;
+use function get_page_template_slug;
+use function get_permalink;
+use function get_queried_object_id;
+use function in_array;
+use function is_array;
+use function is_numeric;
+use function is_page_template;
+use function is_scalar;
+use function is_singular;
+use function is_string;
+use function sprintf;
+use function strpos;
+use function substr;
+use function trim;
+use function wp_dependencies_unique_hosts;
+use function wp_get_canonical_url;
+use function wp_get_shortlink;
+use function wp_parse_url;
+use const PHP_EOL;
 
 /**
  * Class ImproveOutputModule

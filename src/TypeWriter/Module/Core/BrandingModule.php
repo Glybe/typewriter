@@ -14,6 +14,7 @@ namespace TypeWriter\Module\Core;
 
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
+use function sprintf;
 use function TypeWriter\tw;
 use TypeWriter\TypeWriter;
 

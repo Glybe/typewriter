@@ -4,6 +4,10 @@ declare(strict_types=1);
 namespace TypeWriter\Facade;
 
 use Columba\Util\StringUtil;
+use function add_menu_page;
+use function add_submenu_page;
+use function remove_menu_page;
+use function remove_submenu_page;
 use function TypeWriter\tw;
 
 /**
@@ -90,7 +94,9 @@ final class AdminMenu
 	{
 		return function () use ($template, $contextGenerator): void
 		{
-			echo tw()->getCappuccino()->render($template, $contextGenerator !== null ? $contextGenerator() : []);
+			$context = $contextGenerator !== null ? $contextGenerator() : [];
+
+			echo tw()->getCappuccino()->render($template, $context);
 		};
 	}
 

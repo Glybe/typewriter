@@ -17,6 +17,14 @@ use TypeWriter\Module\Module;
 use TypeWriter\Util\DocUtil;
 use WP_Post;
 use WP_Theme;
+use function array_merge;
+use function array_shift;
+use function array_unique;
+use function get_theme_file_path;
+use function implode;
+use function is_dir;
+use function scandir;
+use function substr;
 
 /**
  * Class PostTemplatesLoaderModule

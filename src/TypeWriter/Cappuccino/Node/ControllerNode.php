@@ -5,6 +5,7 @@ namespace TypeWriter\Cappuccino\Node;
 
 use Cappuccino\Compiler;
 use Cappuccino\Node\Node;
+use const PHP_EOL;
 
 /**
  * Class ControllerNode
@@ -20,14 +21,14 @@ final class ControllerNode extends Node
 	 * ControllerNode constructor.
 	 *
 	 * @param string $controller
-	 * @param int    $lineno
+	 * @param int    $lineNumber
 	 *
 	 * @author Bas Milius <bas@ideemedia.nl>
 	 * @since 1.0.0
 	 */
-	public function __construct(string $controller, int $lineno = 0)
+	public function __construct(string $controller, int $lineNumber = 0)
 	{
-		parent::__construct([], [], $lineno, 'controller');
+		parent::__construct([], [], $lineNumber, 'controller');
 
 		$this->setAttribute('controller', $controller);
 	}

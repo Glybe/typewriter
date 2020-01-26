@@ -15,6 +15,20 @@ namespace TypeWriter\Module\Core;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
 use WP_Post;
+use function array_unique;
+use function array_unshift;
+use function basename;
+use function dirname;
+use function get_post_type;
+use function get_stylesheet_directory;
+use function get_template_directory;
+use function is_author;
+use function is_date;
+use function is_day;
+use function is_file;
+use function is_month;
+use function is_year;
+use function substr;
 use function TypeWriter\tw;
 
 /**

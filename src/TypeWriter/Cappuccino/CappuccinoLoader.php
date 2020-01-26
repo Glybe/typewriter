@@ -4,6 +4,11 @@ declare(strict_types=1);
 namespace TypeWriter\Cappuccino;
 
 use Cappuccino\Loader\FilesystemLoader;
+use function array_unique;
+use function get_stylesheet_directory;
+use function get_template_directory;
+use function is_file;
+use function substr;
 use function TypeWriter\tw;
 
 /**
@@ -31,7 +36,7 @@ final class CappuccinoLoader extends FilesystemLoader
 			]);
 
 			foreach ($themeDirectories as $directory)
-				if (is_file($templateFile = $directory . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . $name))
+				if (is_file($templateFile = $directory . '/view/' . $name))
 					return $templateFile;
 		}
 

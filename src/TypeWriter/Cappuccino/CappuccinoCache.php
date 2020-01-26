@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace TypeWriter\Cappuccino;
 
 use Cappuccino\Cache\FilesystemCache;
+use function str_replace;
 use const TypeWriter\ROOT;
 
 /**

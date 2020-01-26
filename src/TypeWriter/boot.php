@@ -50,7 +50,7 @@ function tw(): TypeWriter
 {
 	static $tw = null;
 
-	return $tw ?? $tw = new TypeWriter();
+	return $tw ??= new TypeWriter();
 }
 
 autoloader()->addDirectory(VENDOR_DIR . '/Cappuccino/src', 'Cappuccino\\');

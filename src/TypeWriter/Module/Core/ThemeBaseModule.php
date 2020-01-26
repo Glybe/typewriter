@@ -5,6 +5,7 @@ namespace TypeWriter\Module\Core;
 
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
+use function add_theme_support;
 
 /**
  * Class ThemeBaseModule

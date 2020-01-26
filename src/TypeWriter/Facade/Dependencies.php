@@ -3,6 +3,15 @@ declare(strict_types=1);
 
 namespace TypeWriter\Facade;
 
+use function wp_dequeue_script;
+use function wp_dequeue_style;
+use function wp_deregister_script;
+use function wp_deregister_style;
+use function wp_enqueue_script;
+use function wp_enqueue_style;
+use function wp_register_script;
+use function wp_register_style;
+
 /**
  * Class Dependencies
  *

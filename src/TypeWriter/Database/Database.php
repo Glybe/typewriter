@@ -19,7 +19,19 @@ use Columba\Database\Connector\MySqlConnector;
 use Columba\Database\Db;
 use PDO;
 use PDOException;
+use TypeWriter\Facade\Hooks;
 use wpdb;
+use function addslashes;
+use function array_change_key_case;
+use function array_filter;
+use function defined;
+use function explode;
+use function implode;
+use function in_array;
+use function is_string;
+use function preg_match;
+use function preg_replace;
+use function sprintf;
 use function TypeWriter\tw;
 
 /**
@@ -110,7 +122,7 @@ final class Database extends wpdb
 			return false;
 		}
 
-		$query = (string)apply_filters('query', $query);
+		$query = (string)Hooks::applyFilters('query', $query);
 
 		$this->flush();
 
@@ -200,9 +212,9 @@ final class Database extends wpdb
 			$collate = $this->collate;
 
 		if (!empty($collate))
-			$this->connection->prepare(sprintf('SET NAMES \'%s\' COLLATE \'%s\'', $charset, $collate))->run();
+			$this->connection->prepare(sprintf("SET NAMES '%s' COLLATE '%s'", $charset, $collate))->run();
 		else
-			$this->connection->prepare(sprintf('SET NAMES \'%s\'', $charset))->run();
+			$this->connection->prepare(sprintf("SET NAMES '%s'", $charset))->run();
 	}
 
 	/**
@@ -222,7 +234,7 @@ final class Database extends wpdb
 		}
 
 		$modes = array_change_key_case($modes, CASE_UPPER);
-		$incompatibleModes = (array)apply_filters('incompatible_sql_modes', $this->incompatible_modes);
+		$incompatibleModes = (array)Hooks::applyFilters('incompatible_sql_modes', $this->incompatible_modes);
 
 		foreach ($modes as $i => $mode)
 			if (in_array($mode, $incompatibleModes))

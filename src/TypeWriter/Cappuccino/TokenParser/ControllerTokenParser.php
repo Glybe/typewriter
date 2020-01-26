@@ -8,6 +8,7 @@ use Cappuccino\Node\Node;
 use Cappuccino\Token;
 use Cappuccino\TokenParser\AbstractTokenParser;
 use TypeWriter\Cappuccino\Node\ControllerNode;
+use function class_exists;
 
 /**
  * Class ControllerTokenParser

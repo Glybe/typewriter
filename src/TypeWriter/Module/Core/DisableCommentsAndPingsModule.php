@@ -6,6 +6,8 @@ namespace TypeWriter\Module\Core;
 use TypeWriter\Facade\AdminMenu;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
+use function admin_url;
+use function wp_redirect;
 
 /**
  * Class DisableCommentsAndPingsModule

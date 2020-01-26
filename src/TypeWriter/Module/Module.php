@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace TypeWriter\Module;
 
+use function get_called_class;
+
 /**
  * Class Module
  *
@@ -13,15 +15,8 @@ namespace TypeWriter\Module;
 abstract class Module
 {
 
-	/**
-	 * @var string
-	 */
-	private $className;
-
-	/**
-	 * @var string
-	 */
-	private $description;
+	private string $className;
+	private string $description;
 
 	/**
 	 * Module constructor.

@@ -9,5 +9,6 @@
 
 <h1>Cappuccino template: {{ post.title }}</h1>
 {{ applyFilters("the_content", post.content) }}
+{{ dump(post) }}
 
 {{ get_footer() }}

@@ -22,6 +22,12 @@ use TypeWriter\Cappuccino\CappuccinoRenderer;
 use TypeWriter\Module\Module;
 use TypeWriter\Router\Router;
 use TypeWriter\Storage\KeyValueStorage;
+use function defined;
+use function is_admin;
+use function phpversion;
+use function strpos;
+use function wp;
+use const WP_INSTALLING;
 
 /**
  * Class TypeWriter
@@ -93,7 +99,7 @@ final class TypeWriter
 
 		try
 		{
-			$this->router->execute($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
+			$this->router->execute($_SERVER['REQUEST_URI'] ?? '/', $_SERVER['REQUEST_METHOD'] ?? 'GET');
 		}
 		catch (RouterException $err)
 		{
