@@ -1,5 +1,8 @@
 <?php
 declare(strict_types=1);
+
+use TypeWriter\Facade\Menus;
+use function Columba\Util\dump;
 ?>
 <!DOCTYPE html>
 <html <?= get_language_attributes() ?>>
@@ -14,3 +17,12 @@ declare(strict_types=1);
 	?>
 </head>
 <body class="<?= implode(' ', get_body_class()) ?>">
+
+	<?php
+	dump(
+		Menus::hasLocation('main-menu'),
+		Menus::hasMenuAtLocation('main-menu'),
+		Menus::getMenu('main-menu')->getName(),
+		Menus::getMenu('main-menu')->getItems()
+	);
+	?>
