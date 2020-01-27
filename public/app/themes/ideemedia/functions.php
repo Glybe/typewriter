@@ -21,7 +21,6 @@ Hooks::action('init', function (): void
 	tw()->loadFeature(IntroTextMetaFields::class);
 
 	PostThumbnail::add('page', 'overview', 'Overzichtsfoto');
-	PostThumbnail::add('page', 'background', 'Achtergrondfoto');
 });
 
 Hooks::action('wp_enqueue_scripts', function (): void

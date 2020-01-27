@@ -1,3 +1,13 @@
+import { MediaUpload, MediaUploadCheck } from "@wordpress/block-editor";
+import { Button, ResponsiveWrapper, Spinner } from "@wordpress/components";
+import {compose} from "@wordpress/compose";
+import {withDispatch, withSelect} from "@wordpress/data";
+import { PostFeaturedImageCheck } from "@wordpress/editor";
+import { PluginDocumentSettingPanel } from "@wordpress/edit-post";
+import { applyFilters } from "@wordpress/hooks";
+import { __ } from "@wordpress/i18n";
+import { registerPlugin } from "@wordpress/plugins";
+
 // noinspection JSUnusedLocalSymbols
 const __mock = {
 	media_details: {
@@ -7,12 +17,6 @@ const __mock = {
 
 function PostThumbnailComponent(props)
 {
-	const {Button, ResponsiveWrapper, Spinner} = wp.components;
-	const {MediaUpload, MediaUploadCheck} = wp.blockEditor;
-	const {PostFeaturedImageCheck} = wp.editor;
-	const {PluginDocumentSettingPanel} = wp.editPost;
-	const {applyFilters} = wp.hooks;
-	const {__} = wp.i18n;
 	const {has} = _;
 
 	const instructions = <p>{__("To edit the featured image, you need permission to upload media.")}</p>;
@@ -118,8 +122,6 @@ export class PostThumbnail
 
 	constructor(id, label, metaKey)
 	{
-		const {registerPlugin} = wp.plugins;
-
 		this.#id = id;
 		this.#label = label;
 		this.#metaKey = metaKey;
@@ -133,9 +135,6 @@ export class PostThumbnail
 
 	compose()
 	{
-		const {compose} = wp.compose;
-		const {withDispatch, withSelect} = wp.data;
-
 		const metaKey = this.#metaKey;
 
 		const applyWithDispatch = withDispatch((dispatch, {meta}) =>
@@ -180,7 +179,9 @@ export class PostThumbnail
 
 	render(ComposedComponent)
 	{
-		return <ComposedComponent id={this.#id} label={this.#label}/>;
+		return <ComposedComponent
+			id={this.#id}
+			label={this.#label}/>;
 	}
 
 }

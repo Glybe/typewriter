@@ -45,7 +45,7 @@ class PostThumbnail extends Feature
 		$this->id = $id;
 		$this->label = $label;
 		$this->metaId = "{$postType}_{$id}";
-		$this->metaKey = "{$this->metaId}_thumbnail_id";
+		$this->metaKey = "tw_{$this->metaId}_thumbnail_id";
 		$this->postType = $postType;
 
 		register_meta('post', $this->metaKey, [

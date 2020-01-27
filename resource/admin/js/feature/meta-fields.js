@@ -1,9 +1,19 @@
+import {TextControl, TextareaControl} from "@wordpress/components";
+import {compose} from "@wordpress/compose";
+import {withDispatch, withSelect} from "@wordpress/data";
+import {PluginDocumentSettingPanel} from "@wordpress/edit-post";
+import {registerPlugin} from "@wordpress/plugins";
+
+// noinspection JSUnusedLocalSymbols
+const __mock = {
+	control_type: "",
+	meta_key: ""
+};
+
 const fieldRenderers = {
 
 	TextControl: (field, onUpdate, metaFields) =>
 	{
-		const {TextControl} = wp.components;
-
 		return (
 			<TextControl
 				value={metaFields[field.meta_key]}
@@ -15,8 +25,6 @@ const fieldRenderers = {
 
 	TextareaControl: (field, onUpdate, metaFields) =>
 	{
-		const {TextareaControl} = wp.components;
-
 		return (
 			<TextareaControl
 				value={metaFields[field.meta_key]}
@@ -30,8 +38,6 @@ const fieldRenderers = {
 
 function MetaFieldsComponent(props)
 {
-	const {PluginDocumentSettingPanel} = wp.editPost;
-
 	const fields = props.fields.map(field => fieldRenderers[field.control_type](field, props.onUpdate, props.metaFields));
 
 	return (
@@ -55,8 +61,6 @@ export class MetaFields
 
 	constructor(id, metaKey, label, description, fields)
 	{
-		const {registerPlugin} = wp.plugins;
-
 		this.#id = id;
 		this.#description = description;
 		this.#label = label;
@@ -72,9 +76,6 @@ export class MetaFields
 
 	compose()
 	{
-		const {compose} = wp.compose;
-		const {withDispatch, withSelect} = wp.data;
-
 		const metaKey = this.#metaKey;
 
 		const applyWithDispatch = withDispatch((dispatch, {meta}) =>

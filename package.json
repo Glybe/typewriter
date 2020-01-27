@@ -33,7 +33,20 @@
 		"typewriter:build:watch": "cross-env NODE_ENV=development webpack --config dev/webpack/typewriter-core-files.js --progress --colors --hide-modules --watch",
 		"typewriter:clean": "rimraf public/tw/dist"
 	},
-	"dependencies": {},
+	"dependencies": {
+		"@wordpress/blocks": "latest",
+		"@wordpress/block-editor": "latest",
+		"@wordpress/components": "latest",
+		"@wordpress/compose": "latest",
+		"@wordpress/data": "latest",
+		"@wordpress/date": "latest",
+		"@wordpress/editor": "latest",
+		"@wordpress/edit-post": "latest",
+		"@wordpress/element": "latest",
+		"@wordpress/hooks": "latest",
+		"@wordpress/i18n": "latest",
+		"@wordpress/plugins": "latest"
+	},
 	"devDependencies": {
 		"@babel/core": "^7.8.3",
 		"@babel/plugin-proposal-class-properties": "^7.8.3",
