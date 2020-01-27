@@ -1,11 +1,12 @@
 import "../css/index.scss";
 
-import { PostThumbnail } from "./feature";
+import { MetaFields, PostThumbnail } from "./feature";
 
 function init()
 {
 	window.tw = {
 		feature: {
+			MetaFields,
 			PostThumbnail
 		}
 	};

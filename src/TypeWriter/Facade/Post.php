@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace TypeWriter\Facade;
 
+use TypeWriter\Feature\PostThumbnail;
 use WP_Post;
 
 /**
@@ -27,6 +28,26 @@ class Post
 		return self::post()->ID ?? null;
 	}
 
+	public static function meta(string $metaKey, $defaultValue = null, bool $isSingle = true)
+	{
+		$metaValue = \get_post_meta(self::id(), $metaKey, $isSingle);
+
+		if (empty($metaValue))
+			return $defaultValue;
+
+		return $metaValue;
+	}
+
+	public static function metaText(string $metaKey, array $filters = []): ?string
+	{
+		$metaValue = self::meta($metaKey, self::id());
+
+		if ($metaValue === null)
+			return null;
+
+		return self::applyMultipleFilters($metaValue, $filters);
+	}
+
 	public static function next(): bool
 	{
 		if (!\have_posts())
@@ -39,7 +60,22 @@ class Post
 
 	public static function post(): \WP_Post
 	{
-		return \get_post($post->ID ?? null);
+		return self::$post ?? get_post();
+	}
+
+	public static function thumbnail(string $thumbnailId): ?int
+	{
+		return PostThumbnail::get(self::type(), $thumbnailId, self::id());
+	}
+
+	public static function thumbnailData(string $thumbnailId, string $size = 'large'): ?array
+	{
+		return PostThumbnail::getData(self::type(), $thumbnailId, self::id(), $size);
+	}
+
+	public static function thumbnailUrl(string $thumbnailId, string $size = 'large'): ?string
+	{
+		return PostThumbnail::getUrl(self::type(), $thumbnailId, self::id(), $size);
 	}
 
 	public static function time(): ?int

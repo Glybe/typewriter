@@ -36,6 +36,7 @@ final class AdminModule extends Module
 	public final function onInitialize(): void
 	{
 		Hooks::action('admin_enqueue_scripts', [$this, 'onAdminEnqueueScripts']);
+		Hooks::action('in_admin_footer', [$this, 'onInAdminFooter']);
 	}
 
 	/**
@@ -50,6 +51,30 @@ final class AdminModule extends Module
 	{
 		Dependencies::enqueueStyle('tw', home_url('/tw/dist/admin.css'));
 		Dependencies::enqueueScript('tw', home_url('/tw/dist/admin.js'));
+	}
+
+	/**
+	 * Invoked on in_admin_footer action hook.
+	 * Adds the TypeWriter feature scripts.
+	 *
+	 * @author Bas Milius <bas@ideemedia.nl>
+	 * @since 1.0.0
+	 * @internal
+	 */
+	public final function onInAdminFooter(): void
+	{
+		$fetchScripts = function(): string
+		{
+			return implode(PHP_EOL, Hooks::applyFilters('tw.admin-scripts.body', []));
+		};
+
+		echo <<<CODE
+		<script type="text/javascript">
+		window.addEventListener("load", function () { 
+		{$fetchScripts()}
+		});
+		</script>
+		CODE;
 	}
 
 }

@@ -15,5 +15,7 @@ class ViolationException extends TypeWriterException
 
 	public const ERR_TOO_LATE = 1;
 	public const ERR_INVALID_PARAMETER = 2;
+	public const ERR_NOT_A_FEATURE = 4;
+	public const ERR_NOT_A_MODULE = 8;
 
 }

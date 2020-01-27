@@ -12,11 +12,14 @@ declare(strict_types=1);
 
 use TypeWriter\Facade\Dependencies;
 use TypeWriter\Facade\Hooks;
+use TypeWriter\Feature\IntroTextMetaFields;
 use TypeWriter\Feature\PostThumbnail;
 use function TypeWriter\tw;
 
 Hooks::action('init', function (): void
 {
+	tw()->loadFeature(IntroTextMetaFields::class);
+
 	PostThumbnail::add('page', 'overview', 'Overzichtsfoto');
 	PostThumbnail::add('page', 'background', 'Achtergrondfoto');
 });

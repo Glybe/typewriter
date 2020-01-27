@@ -133,7 +133,6 @@ export class PostThumbnail
 
 	compose()
 	{
-		const {withNotices} = wp.components;
 		const {compose} = wp.compose;
 		const {withDispatch, withSelect} = wp.data;
 
@@ -174,7 +173,6 @@ export class PostThumbnail
 		});
 
 		return compose(
-			withNotices,
 			applyWithDispatch,
 			applyWithSelect
 		)(PostThumbnailComponent);

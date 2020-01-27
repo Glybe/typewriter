@@ -4,8 +4,13 @@ declare(strict_types=1);
 namespace TypeWriter\Feature;
 
 use TypeWriter\Facade\Hooks;
+use TypeWriter\Util\AdminUtil;
+use function get_post_meta;
+use function get_post_thumbnail_id;
 use function register_meta;
 use function TypeWriter\tw;
+use function wp_get_attachment_image_src;
+use function wp_get_attachment_image_url;
 
 /**
  * Class PostThumbnail
@@ -14,7 +19,7 @@ use function TypeWriter\tw;
  * @package TypeWriter\Feature
  * @since 1.0.0
  */
-class PostThumbnail
+class PostThumbnail extends Feature
 {
 
 	protected string $id;
@@ -35,6 +40,8 @@ class PostThumbnail
 	 */
 	public function __construct(string $postType, string $id, string $label)
 	{
+		parent::__construct(static::class);
+
 		$this->id = $id;
 		$this->label = $label;
 		$this->metaId = "{$postType}_{$id}";
@@ -49,44 +56,31 @@ class PostThumbnail
 			'type' => 'integer'
 		]);
 
-		Hooks::action('admin_enqueue_scripts', [$this, 'onAdminEnqueueScripts']);
+		Hooks::action('tw.admin-scripts.body', [$this, 'onAdminScriptsBody']);
 		Hooks::action('delete_attachment', [$this, 'onDeleteAttachment']);
 	}
 
 	/**
-	 * {@inheritDoc}
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	protected function getSupportedPostTypes(): array
-	{
-		return [$this->postType];
-	}
-
-	/**
-	 * Invoked on admin_enqueue_scripts action hook.
+	 * Invoked on tw.admin-scripts.body filter hook.
 	 * Loads the JS part of our post thumbnail editor.
 	 *
-	 * @param string $view
+	 * @param string[] $scripts
 	 *
+	 * @return string[]
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
 	 * @internal
 	 */
-	public final function onAdminEnqueueScripts(string $view): void
+	public final function onAdminScriptsBody(array $scripts): array
 	{
-		if (!in_array($view, ['post-new.php', 'post.php', 'media-upload-popup']))
-			return;
+		if (!AdminUtil::isGutenbergView())
+			return $scripts;
 
-		echo <<<CODE
-<script type="text/javascript">
-	window.addEventListener("load", function ()
-	{
-		new tw.feature.PostThumbnail("{$this->id}", "{$this->label}", "{$this->metaKey}");
-	});
-</script>
-CODE;
+		$scripts[] = <<<CODE
+			new tw.feature.PostThumbnail("{$this->id}", "{$this->label}", "{$this->metaKey}"); 
+		CODE;
 
+		return $scripts;
 	}
 
 	/**
@@ -123,6 +117,71 @@ CODE;
 	public static function add(string $postType, string $id, string $label): self
 	{
 		return new self($postType, $id, $label);
+	}
+
+	/**
+	 * Gets the id of the used post thumbnail or zero if there isn't one.
+	 *
+	 * @param string $postType
+	 * @param string $id
+	 * @param int    $postId
+	 *
+	 * @return int|null
+	 * @author Bas Milius <bas@ideemedia.nl>
+	 * @since 1.0.0
+	 */
+	public static function get(string $postType, string $id, int $postId): ?int
+	{
+		$thumbnailId = intval($id === 'featured-image' ? get_post_thumbnail_id($postId) : get_post_meta($postId, "{$postType}_{$id}_thumbnail_id", true));
+
+		if ($thumbnailId === 0)
+			return null;
+
+		return $thumbnailId;
+	}
+
+	/**
+	 * Gets the data of the used post thumbnail or NULL of there isn't one.
+	 *
+	 * @param string $postType
+	 * @param string $id
+	 * @param int    $postId
+	 * @param string $size
+	 *
+	 * @return array|null
+	 * @author Bas Milius <bas@ideemedia.nl>
+	 * @since 1.0.0
+	 */
+	public static function getData(string $postType, string $id, int $postId, string $size = 'large'): ?array
+	{
+		$thumbnailId = self::get($postType, $id, $postId);
+
+		if ($thumbnailId > 0 && get_post($thumbnailId))
+			return wp_get_attachment_image_src($thumbnailId, $size);
+
+		return null;
+	}
+
+	/**
+	 * Gets the URL of the used post thumbnail or NULL if there isn't one.
+	 *
+	 * @param string $postType
+	 * @param string $id
+	 * @param int    $postId
+	 * @param string $size
+	 *
+	 * @return string|null
+	 * @author Bas Milius <bas@ideemedia.nl>
+	 * @since 1.0.0
+	 */
+	public static function getUrl(string $postType, string $id, int $postId, string $size = 'large'): ?string
+	{
+		$thumbnailId = self::get($postType, $id, $postId);
+
+		if ($thumbnailId > 0 && get_post($thumbnailId))
+			return wp_get_attachment_image_url($thumbnailId, $size)[0];
+
+		return null;
 	}
 
 }

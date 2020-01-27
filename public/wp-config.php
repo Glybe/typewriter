@@ -43,8 +43,10 @@ define('LOGGED_IN_SALT', $prefs['salt']['logged_in']);
 define('NONCE_SALT', $prefs['salt']['nonce']);
 
 define('AUTOMATIC_UPDATER_DISABLED', true);
+define('AUTOSAVE_INTERVAL', 300);
 define('DISABLE_WP_CRON', true);
 define('DISALLOW_FILE_EDIT', true);
+define('WP_POST_REVISIONS', false);
 
 define('WP_DEBUG', $prefs['developer']['debugMode']);
 define('WP_DEBUG_DISPLAY', WP_DEBUG);

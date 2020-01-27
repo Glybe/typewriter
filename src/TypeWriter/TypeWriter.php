@@ -19,6 +19,8 @@ use Columba\Foundation\Preferences\Preferences;
 use Columba\Router\RouterException;
 use Columba\Util\Stopwatch;
 use TypeWriter\Cappuccino\CappuccinoRenderer;
+use TypeWriter\Error\ViolationException;
+use TypeWriter\Feature\Feature;
 use TypeWriter\Module\Module;
 use TypeWriter\Router\Router;
 use TypeWriter\Storage\KeyValueStorage;
@@ -47,6 +49,9 @@ final class TypeWriter
 	private Router $router;
 	private KeyValueStorage $state;
 
+	/** @var Feature[] */
+	private array $features = [];
+
 	/** @var Module[] */
 	private array $modules = [];
 
@@ -60,7 +65,6 @@ final class TypeWriter
 	{
 		Stopwatch::start(self::class);
 
-		$this->modules = [];
 		$this->preferences = Preferences::loadFromJson(ROOT . '/config/config.json');
 		$this->state = new KeyValueStorage();
 	}
@@ -285,16 +289,43 @@ final class TypeWriter
 	}
 
 	/**
-	 * Loads a module.
+	 * Loads a {@see Feature}.
 	 *
 	 * @param string $className
 	 * @param mixed  ...$args
 	 *
+	 * @return Feature
+	 * @author Bas Milius <bas@ideemedia.nl>
+	 * @since 1.0.0
+	 */
+	public final function loadFeature(string $className, ...$args): Feature
+	{
+		if (!is_subclass_of($className, Feature::class))
+			throw new ViolationException(sprintf('%s is not a %s.', $className, Feature::class), ViolationException::ERR_NOT_A_FEATURE);
+
+		/** @var Feature $feature */
+		$feature = new $className(...$args);
+
+		$this->features[] = $feature;
+
+		return $feature;
+	}
+
+	/**
+	 * Loads a {@see Module}.
+	 *
+	 * @param string $className
+	 * @param mixed  ...$args
+	 *
+	 * @return Module
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
 	 */
-	public final function loadModule(string $className, ...$args): void
+	public final function loadModule(string $className, ...$args): Module
 	{
+		if (!is_subclass_of($className, Module::class))
+			throw new ViolationException(sprintf('%s is not a %s.', $className, Module::class), ViolationException::ERR_NOT_A_MODULE);
+
 		/** @var Module $module */
 		$module = new $className(...$args);
 
@@ -302,6 +333,8 @@ final class TypeWriter
 			$module->onInitialize();
 
 		$this->modules[] = $module;
+
+		return $module;
 	}
 
 	/**
