@@ -132,7 +132,7 @@ class PostThumbnail extends Feature
 	 */
 	public static function get(string $postType, string $id, int $postId): ?int
 	{
-		$thumbnailId = intval($id === 'featured-image' ? get_post_thumbnail_id($postId) : get_post_meta($postId, "{$postType}_{$id}_thumbnail_id", true));
+		$thumbnailId = intval($id === 'featured-image' ? get_post_thumbnail_id($postId) : get_post_meta($postId, "tw_{$postType}_{$id}_thumbnail_id", true));
 
 		if ($thumbnailId === 0)
 			return null;
