@@ -76,8 +76,7 @@ function PostThumbnailComponent(props)
 									{!props.mediaId && `Update Image`}
 								</Button>
 							)}
-							value={props.mediaId}
-						/>
+							value={props.mediaId}/>
 					</MediaUploadCheck>
 
 					{!!props.mediaId && props.media && !props.media.isLoading &&
@@ -91,8 +90,7 @@ function PostThumbnailComponent(props)
 								<Button onClick={open} isButton isLarge>
 									{__("Replace Image")}
 								</Button>
-							)}
-						/>
+							)}/>
 					</MediaUploadCheck>
 					}
 
