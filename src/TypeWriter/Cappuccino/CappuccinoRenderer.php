@@ -14,8 +14,8 @@ namespace TypeWriter\Cappuccino;
 
 use Columba\Router\Renderer\CappuccinoRenderer as ColumbaCappuccinoRenderer;
 use function array_merge;
-use const TypeWriter\PUBLIC_DIR;
 use function TypeWriter\tw;
+use const TypeWriter\PUBLIC_DIR;
 
 /**
  * Class CappuccinoRenderer
@@ -45,6 +45,7 @@ final class CappuccinoRenderer extends ColumbaCappuccinoRenderer
 		parent::__construct(array_merge($defaultOptions, $options), new CappuccinoLoader());
 
 		$this->addGlobal('tw', tw());
+
 		$this->addExtension(new CappuccinoFunctions());
 		$this->addPath(PUBLIC_DIR . '/tw/view', 'tw');
 	}

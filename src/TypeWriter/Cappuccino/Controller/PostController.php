@@ -38,11 +38,7 @@ final class PostController extends Controller
 	public function getContext(): array
 	{
 		return [
-			'post' => [
-				'id' => Post::id(),
-				'title' => Post::title(),
-				'content' => get_the_content()
-			]
+			'post' => new Post()
 		];
 	}
 

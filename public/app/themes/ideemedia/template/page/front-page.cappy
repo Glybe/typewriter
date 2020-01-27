@@ -7,8 +7,53 @@
 
 {{ get_header() }}
 
-<h1>Cappuccino template: {{ post.title }}</h1>
-{{ applyFilters("the_content", post.content) }}
-{{ dump(post) }}
+<div class="app-bar app-bar-primary">
+	<div class="app-bar-row">
+		<span class="app-bar-title mx-auto">{{ post.title }}</span>
+	</div>
+</div>
+
+<div class="container my-5">
+	<div class="row">
+		<div class="col-12">
+
+			<div class="panel mb-panel-gutter">
+				<div class="panel-body">
+					<h1>{{ post.introHeading }}</h1>
+					<p class="lead">{{ post.introLeading }}</p>
+				</div>
+			</div>
+
+			<div class="panel mb-panel-gutter">
+				<div class="panel-body">
+					{{ post.content(["the_content"]) | raw }}
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12 col-lg-6">
+
+			<div class="panel">
+				<div class="panel-media embed-responsive embed-responsive-16by9" style="background-image: url({{ post.thumbnailUrl("featured-image", "medium") }})"></div>
+				<div class="panel-header">
+					<span class="panel-title">Featured image</span>
+				</div>
+			</div>
+
+		</div>
+		<div class="col-12 col-lg-6">
+
+			<div class="panel">
+				<div class="panel-media embed-responsive embed-responsive-16by9" style="background-image: url({{ post.thumbnailUrl("overview", "medium") }})"></div>
+				<div class="panel-header">
+					<span class="panel-title">Overview image</span>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
 
 {{ get_footer() }}

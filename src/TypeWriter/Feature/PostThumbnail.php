@@ -5,6 +5,7 @@ namespace TypeWriter\Feature;
 
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Util\AdminUtil;
+use function Columba\Util\dump;
 use function get_post_meta;
 use function get_post_thumbnail_id;
 use function register_meta;
@@ -179,7 +180,7 @@ class PostThumbnail extends Feature
 		$thumbnailId = self::get($postType, $id, $postId);
 
 		if ($thumbnailId > 0 && get_post($thumbnailId))
-			return wp_get_attachment_image_url($thumbnailId, $size)[0];
+			return wp_get_attachment_image_url($thumbnailId, $size);
 
 		return null;
 	}

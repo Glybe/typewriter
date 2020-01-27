@@ -25,6 +25,7 @@ Hooks::action('init', function (): void
 
 Hooks::action('wp_enqueue_scripts', function (): void
 {
+	Dependencies::enqueueStyle('proxima-nova', 'https://font.mili.us/css?family=proxima-nova');
 	Dependencies::enqueueStyle('latte', 'https://unpkg.com/@bybas/latte-ui@1.9.0-beta.18/dist/latte-ui.css');
 });
 

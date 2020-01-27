@@ -16,6 +16,7 @@ namespace TypeWriter\Feature;
 use TypeWriter\Feature\MetaFields\MetaFields;
 use TypeWriter\Feature\MetaFields\TextareaControlMetaField;
 use TypeWriter\Feature\MetaFields\TextControlMetaField;
+use function get_post_meta;
 
 /**
  * Class IntroTextMetaFields
@@ -47,6 +48,25 @@ class IntroTextMetaFields extends MetaFields
 	{
 		$this->register(new TextControlMetaField('heading', 'Heading', 'Welcome!'));
 		$this->register(new TextareaControlMetaField('leading', 'Leading', 'We create websites, apps and more!'));
+	}
+
+	/**
+	 * Gets the intro text for the given post.
+	 *
+	 * @param int $postId
+	 *
+	 * @return string[]
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public static function get(int $postId): array
+	{
+		$metaValue = get_post_meta($postId, 'tw_intro_text', true);
+
+		return [
+			'heading' => $metaValue['heading'] ?? '',
+			'leading' => $metaValue['leading'] ?? ''
+		];
 	}
 
 }

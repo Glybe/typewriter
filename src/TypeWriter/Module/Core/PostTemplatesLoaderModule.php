@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace TypeWriter\Module\Core;
 
+use TypeWriter\Facade\Dependencies;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
 use TypeWriter\Util\DocUtil;
@@ -20,7 +21,6 @@ use WP_Theme;
 use function array_merge;
 use function array_shift;
 use function array_unique;
-use function get_theme_file_path;
 use function implode;
 use function is_dir;
 use function scandir;
@@ -70,6 +70,7 @@ final class PostTemplatesLoaderModule extends Module
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
 	 * @internal
+	 * @noinspection PhpUnusedParameterInspection
 	 */
 	public final function onThemeTemplates(array $templates, WP_Theme $theme, ?WP_Post $post, string $postType): array
 	{
@@ -100,7 +101,7 @@ final class PostTemplatesLoaderModule extends Module
 					continue;
 
 				$path = 'template/' . $postType . '/' . $file;
-				$props = DocUtil::getProperties(get_theme_file_path($path));
+				$props = DocUtil::getProperties(Dependencies::themeFilePath($path));
 
 				$themeTemplates[$path] = $props['template'] ?? $file;
 			}

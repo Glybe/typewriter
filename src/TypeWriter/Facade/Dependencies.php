@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace TypeWriter\Facade;
 
+use function get_theme_file_path;
+use function get_theme_file_uri;
 use function wp_dequeue_script;
 use function wp_dequeue_style;
 use function wp_deregister_script;
@@ -140,6 +142,34 @@ final class Dependencies
 	public static function registerStyle(string $handle, string $src, array $dependencies = [], ?string $version = null, string $media = 'all'): void
 	{
 		wp_register_style($handle, $src, $dependencies, $version ?? false, $media);
+	}
+
+	/**
+	 * Gets the path of the given path in one of the active themes.
+	 *
+	 * @param string $path
+	 *
+	 * @return string
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public static function themeFilePath(string $path): string
+	{
+		return get_theme_file_path($path);
+	}
+
+	/**
+	 * Gets the URL of the given path in one of the active themes.
+	 *
+	 * @param string $path
+	 *
+	 * @return string
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public static function themeFileUri(string $path): string
+	{
+		return get_theme_file_uri($path);
 	}
 
 }
