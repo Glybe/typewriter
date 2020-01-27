@@ -30,7 +30,7 @@
 		"dev": "concurrently \"yarn run serve\" \"yarn run typewriter:build:watch\"",
 		"serve": "php -S 0.0.0.0:8000 -t public/ src/TypeWriter/dev-server.php",
 		"typewriter:build": "cross-env NODE_ENV=production webpack --config dev/webpack/typewriter-core-files.js --progress --colors --hide-modules",
-		"typewriter:build:watch": "cross-env NODE_ENV=production webpack --config dev/webpack/typewriter-core-files.js --progress --colors --hide-modules --watch",
+		"typewriter:build:watch": "cross-env NODE_ENV=development webpack --config dev/webpack/typewriter-core-files.js --progress --colors --hide-modules --watch",
 		"typewriter:clean": "rimraf public/tw/dist"
 	},
 	"dependencies": {},
@@ -41,6 +41,7 @@
 		"@babel/plugin-proposal-json-strings": "^7.8.3",
 		"@babel/plugin-syntax-dynamic-import": "^7.8.3",
 		"@babel/plugin-syntax-import-meta": "^7.8.3",
+		"@babel/plugin-transform-react-jsx": "^7.8.3",
 		"@babel/preset-env": "^7.8.3",
 		"babel-loader": "^8.0.6",
 		"concurrently": "^5.0.2",

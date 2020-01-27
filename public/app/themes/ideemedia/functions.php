@@ -12,9 +12,16 @@ declare(strict_types=1);
 
 use TypeWriter\Facade\Dependencies;
 use TypeWriter\Facade\Hooks;
+use TypeWriter\Feature\PostThumbnail;
 use function TypeWriter\tw;
 
-Hooks::action('wp_enqueue_scripts', function(): void
+Hooks::action('init', function (): void
+{
+	PostThumbnail::add('page', 'overview', 'Overzichtsfoto');
+	PostThumbnail::add('page', 'background', 'Achtergrondfoto');
+});
+
+Hooks::action('wp_enqueue_scripts', function (): void
 {
 	Dependencies::enqueueStyle('latte', 'https://unpkg.com/@bybas/latte-ui@1.9.0-beta.18/dist/latte-ui.css');
 });

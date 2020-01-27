@@ -1,18 +1,14 @@
 import "../css/index.scss";
 
 import { PostThumbnail } from "./feature";
-import { MediaModal } from "./media";
 
-function init(g)
+function init()
 {
-	g.tw = {
+	window.tw = {
 		feature: {
 			PostThumbnail
-		},
-		media: {
-			MediaModal
 		}
 	};
 }
 
-init(window);
+init();

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace TypeWriter\Facade;
 
 use TypeWriter\Error\ViolationException;
+use WP_Post;
 use function add_meta_box;
 use function basename;
 use function defined;
@@ -99,10 +100,12 @@ abstract class MetaBox
 	/**
 	 * Invoked when the meta box is printed to the interface.
 	 *
+	 * @param WP_Post $post
+	 *
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
 	 */
-	public function onPrintMetaBox(): void
+	public function onPrintMetaBox(WP_Post $post): void
 	{
 	}
 

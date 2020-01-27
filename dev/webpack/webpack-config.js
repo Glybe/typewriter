@@ -51,7 +51,10 @@ module.exports = {
 				loader: "babel-loader",
 				options: {
 					presets: [["@babel/preset-env", {targets: "defaults"}]],
-					plugins: [["@babel/plugin-proposal-class-properties", {loose: false}]]
+					plugins: [
+						["@babel/plugin-proposal-class-properties", {loose: false}],
+						["@babel/plugin-transform-react-jsx", {pragma: "wp.element.createElement"}]
+					]
 				}
 			},
 			{

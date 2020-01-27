@@ -1,1 +1,0 @@
-export { MediaModal } from "./modal";
