@@ -5,7 +5,7 @@ namespace TypeWriter\Feature;
 
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Util\AdminUtil;
-use function Columba\Util\dump;
+use function get_current_screen;
 use function get_post_meta;
 use function get_post_thumbnail_id;
 use function register_meta;
@@ -74,7 +74,9 @@ class PostThumbnail extends Feature
 	 */
 	public final function onAdminScriptsBody(array $scripts): array
 	{
-		if (!AdminUtil::isGutenbergView())
+		$screen = get_current_screen();
+
+		if (!AdminUtil::isGutenbergView() || !$this->isPostTypeSupported($screen->post_type))
 			return $scripts;
 
 		$scripts[] = <<<CODE
@@ -102,6 +104,16 @@ class PostThumbnail extends Feature
 			->deleteFrom($wpdb->postmeta)
 			->where('meta_key', $this->metaKey)
 			->and('meta_value', $postId);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	protected function getSupportedPostTypes(): ?array
+	{
+		return [$this->postType];
 	}
 
 	/**

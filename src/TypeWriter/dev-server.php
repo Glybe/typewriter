@@ -17,7 +17,12 @@ $requestFile = realpath($_SERVER['DOCUMENT_ROOT'] . $requestPath);
 $isPhpFile = substr($requestFile ?: '', -4) === '.php';
 
 if ($requestFile && !$isPhpFile && is_file($requestFile))
-	return false;
+{
+	header('Cache-Control: public, max-age=31536000');
+
+	readfile($requestFile);
+	return true;
+}
 
 if ($requestFile && is_dir($requestFile) && is_file($requestFile . '/index.php'))
 	require_once $requestFile . '/index.php';

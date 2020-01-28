@@ -50,4 +50,32 @@ abstract class Feature
 		return $this->name;
 	}
 
+	/**
+	 * Returns the supported post types or NULL when everything is supported.
+	 *
+	 * @return string[]|null
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	protected function getSupportedPostTypes(): ?array
+	{
+		return null;
+	}
+
+	/**
+	 * Returns TRUE when the given post type is supported.
+	 *
+	 * @param string $postType
+	 *
+	 * @return bool
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	protected function isPostTypeSupported(string $postType): bool
+	{
+		$supportedPostTypes = $this->getSupportedPostTypes();
+
+		return $supportedPostTypes === null || in_array($postType, $supportedPostTypes);
+	}
+
 }

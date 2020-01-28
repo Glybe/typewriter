@@ -16,6 +16,7 @@ namespace TypeWriter\Feature\MetaFields;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Feature\Feature;
 use TypeWriter\Util\AdminUtil;
+use function get_current_screen;
 
 /**
  * Class MetaFields
@@ -73,7 +74,9 @@ abstract class MetaFields extends Feature
 	 */
 	public final function onAdminScriptsBody(array $scripts): array
 	{
-		if (!AdminUtil::isGutenbergView())
+		$screen = get_current_screen();
+
+		if (!AdminUtil::isGutenbergView() || !$this->isPostTypeSupported($screen->post_type))
 			return $scripts;
 
 		$fieldsJson = json_encode($this->fields);

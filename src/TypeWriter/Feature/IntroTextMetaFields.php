@@ -40,6 +40,16 @@ class IntroTextMetaFields extends MetaFields
 	}
 
 	/**
+	 * {@inheritDoc}
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	protected function getSupportedPostTypes(): ?array
+	{
+		return ['page'];
+	}
+
+	/**
 	 * {@inheritdoc}
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
