@@ -101,7 +101,7 @@ final class PostTemplatesLoaderModule extends Module
 					continue;
 
 				$path = 'template/' . $postType . '/' . $file;
-				$props = DocUtil::getProperties(Dependencies::themeFilePath($path));
+				$props = DocUtil::getProperties(Dependencies::themePath($path));
 
 				$themeTemplates[$path] = $props['template'] ?? $file;
 			}

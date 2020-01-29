@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace TypeWriter\Facade;
+namespace TypeWriter\Structure\Menu;
 
 use TypeWriter\Error\ViolationException;
-use TypeWriter\Structure\Menu\Menu;
-use TypeWriter\Structure\Menu\MenuItem;
+use TypeWriter\Facade\Hooks;
+use TypeWriter\Facade\Post;
 use WP_Term;
 use function get_nav_menu_locations;
 use function get_registered_nav_menus;
@@ -18,7 +18,7 @@ use function wp_get_nav_menu_items;
  * Class Menus
  *
  * @author Bas Milius <bas@mili.us>
- * @package TypeWriter\Facade
+ * @package TypeWriter\Structure\Menu
  * @since 1.0.0
  */
 class Menus

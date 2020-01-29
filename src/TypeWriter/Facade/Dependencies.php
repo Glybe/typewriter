@@ -24,6 +24,8 @@ use function wp_register_style;
 final class Dependencies
 {
 
+	public const ALL_FONT_STYLES = ['100', '100i', '200', '200i', '300', '300i', '400', '400i', '500', '500i', '600', '600i', '700', '700i', '800', '800i', '900', '900i'];
+
 	/**
 	 * Dequeues a script dependency.
 	 *
@@ -145,6 +147,54 @@ final class Dependencies
 	}
 
 	/**
+	 * Generates a Bm Fonts url.
+	 *
+	 * @param string $fontName
+	 * @param array  $fontStyles
+	 * @param string $fontDisplay
+	 *
+	 * @return string
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public static function bmFontsUrl(string $fontName, array $fontStyles = self::ALL_FONT_STYLES, string $fontDisplay = 'swap'): string
+	{
+		return sprintf('https://font.mili.us/css?display=%s&family=%s:%s', $fontDisplay, urlencode($fontName), urlencode(implode(',', $fontStyles)));
+	}
+
+	/**
+	 * Generates a Google Fonts url.
+	 *
+	 * @param string $fontName
+	 * @param array  $fontStyles
+	 * @param string $fontDisplay
+	 *
+	 * @return string
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public static function googleFontsUrl(string $fontName, array $fontStyles = self::ALL_FONT_STYLES, string $fontDisplay = 'swap'): string
+	{
+		return sprintf('https://fonts.googleapis.com/css?display=%s&family=%s:%s', $fontDisplay, urlencode($fontName), urlencode(implode(',', $fontStyles)));
+	}
+
+	/**
+	 * Generates an IdeeMedia Fonts url.
+	 *
+	 * @param string $fontName
+	 * @param array  $fontStyles
+	 * @param string $fontDisplay
+	 *
+	 * @return string
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public static function ideemediaFontsUrl(string $fontName, array $fontStyles = self::ALL_FONT_STYLES, string $fontDisplay = 'swap'): string
+	{
+		return sprintf('https://font.ideemedia.cloud/css?display=%s&family=%s:%s', $fontDisplay, urlencode($fontName), urlencode(implode(',', $fontStyles)));
+	}
+
+	/**
 	 * Gets the path of the given path in one of the active themes.
 	 *
 	 * @param string $path
@@ -153,7 +203,7 @@ final class Dependencies
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
 	 */
-	public static function themeFilePath(string $path): string
+	public static function themePath(string $path): string
 	{
 		return get_theme_file_path($path);
 	}
@@ -167,7 +217,7 @@ final class Dependencies
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
 	 */
-	public static function themeFileUri(string $path): string
+	public static function themeUri(string $path): string
 	{
 		return get_theme_file_uri($path);
 	}

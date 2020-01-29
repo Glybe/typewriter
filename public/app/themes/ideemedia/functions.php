@@ -12,9 +12,9 @@ declare(strict_types=1);
 
 use TypeWriter\Facade\Dependencies;
 use TypeWriter\Facade\Hooks;
-use TypeWriter\Facade\Menus;
 use TypeWriter\Feature\IntroTextMetaFields;
 use TypeWriter\Feature\PostThumbnail;
+use TypeWriter\Structure\Menu\Menus;
 use function TypeWriter\tw;
 
 Hooks::action('init', function (): void

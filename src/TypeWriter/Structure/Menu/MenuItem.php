@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace TypeWriter\Structure\Menu;
 
-use TypeWriter\Facade\Menus;
 use WP_Post;
 use function intval;
 

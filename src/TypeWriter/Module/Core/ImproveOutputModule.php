@@ -29,6 +29,7 @@ use function wp_get_canonical_url;
 use function wp_get_shortlink;
 use function wp_parse_url;
 use const PHP_EOL;
+use const WP_DEBUG;
 
 /**
  * Class ImproveOutputModule
@@ -67,6 +68,7 @@ final class ImproveOutputModule extends Module
 		Hooks::action('wp_head', [$this, 'addShortlink']);
 
 		Hooks::filter('body_class', [$this, 'onBodyClass']);
+		Hooks::filter('script_loader_tag', [$this, 'onScriptLoaderTag']);
 		Hooks::filter('style_loader_tag', [$this, 'onStyleLoaderTag']);
 
 		Hooks::removeAction('embed_head', 'rel_canonical');
@@ -277,6 +279,30 @@ final class ImproveOutputModule extends Module
 	}
 
 	/**
+	 * Invoked on script_loader_tag filter hook.
+	 * Replaces that ugly single quoted script tag with a proper one.
+	 *
+	 * @param string $tag
+	 * @param string $handle
+	 * @param string $src
+	 *
+	 * @return string
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 * @internal
+	 */
+	public final function onScriptLoaderTag(string $tag, string $handle, string $src): string
+	{
+		if (empty($tag))
+			return $tag;
+
+		if (WP_DEBUG)
+			return sprintf('<script defer data-id="%s" type="text/javascript" src="%s"></script>', $handle, $src);
+
+		return sprintf('<script defer type="text/javascript" src="%s"></script>', $src);
+	}
+
+	/**
 	 * Invoked on style_loader_tag filter hook.
 	 * Replaces that ugly single quoted link tag with a proper one.
 	 *
@@ -293,9 +319,12 @@ final class ImproveOutputModule extends Module
 	public final function onStyleLoaderTag(string $tag, string $handle, string $href, string $media): string
 	{
 		if (empty($tag))
-			return '';
+			return $tag;
 
-		return sprintf('	<link rel="stylesheet" href="%s" id="%s-id" media="%s" type="text/css"/>', $href, $handle, $media) . PHP_EOL;
+		if (WP_DEBUG)
+			return sprintf('<link rel="stylesheet" href="%s" data-id="%s" media="%s" type="text/css"/>', $href, $handle, $media);
+
+		return sprintf('<link rel="stylesheet" href="%s" media="%s" type="text/css"/>', $href, $media);
 	}
 
 }

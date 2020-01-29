@@ -49,6 +49,65 @@ class Post
 	}
 
 	/**
+	 * Resets to the main post.
+	 *
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public static function reset(): void
+	{
+		static::$post = null;
+	}
+
+	/**
+	 * Uses the given post for further calls.
+	 *
+	 * @param WP_Post $post
+	 *
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public static function use(WP_Post $post): void
+	{
+		static::$post = $post;
+	}
+
+	/**
+	 * Uses the given post for the given call.
+	 *
+	 * @param WP_Post  $post
+	 * @param callable $fn
+	 *
+	 * @return mixed
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public static function useWith(WP_Post $post, callable $fn)
+	{
+		self::use($post);
+
+		$result = $fn();
+
+		self::reset();
+
+		return $result;
+	}
+
+	/**
+	 * Returns a new {@see PostWith} instance.
+	 *
+	 * @param WP_Post $post
+	 *
+	 * @return PostWith
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public static function with(WP_Post $post): PostWith
+	{
+		return new PostWith($post);
+	}
+
+	/**
 	 * Gets the ID of the current post.
 	 *
 	 * @return int|null
