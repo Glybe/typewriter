@@ -50,4 +50,18 @@ final class CappuccinoRenderer extends ColumbaCappuccinoRenderer
 		$this->addPath(PUBLIC_DIR . '/tw/view', 'tw');
 	}
 
+	/**
+	 * Returns TRUE if the given template exists.
+	 *
+	 * @param string $template
+	 *
+	 * @return bool
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public function exists(string $template): bool
+	{
+		return $this->cappuccino->getLoader()->exists($template);
+	}
+
 }

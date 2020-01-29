@@ -9,4 +9,5 @@ public/app/uploads/
 public/tw/dist/
 public/wp/wp-content/
 
+.DS_Store
 config/config.json
