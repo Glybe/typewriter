@@ -18,10 +18,41 @@ $isPhpFile = substr($requestFile ?: '', -4) === '.php';
 
 if ($requestFile && !$isPhpFile && is_file($requestFile))
 {
-	header('Cache-Control: public, max-age=31536000');
+	$extension = pathinfo($requestFile, PATHINFO_EXTENSION);
 
-	readfile($requestFile);
-	return true;
+	switch ($extension)
+	{
+		case 'gif':
+		case 'jpg':
+		case 'jpeg':
+		case 'webp':
+		case 'png':
+			header('Cache-Control: public, max-age=31536000');
+			header('Content-Type: ' . mime_content_type($requestFile));
+			readfile($requestFile);
+			return;
+
+		case 'css':
+			header('Cache-Control: public, max-age=31536000');
+			header('Content-Type: text/css');
+			readfile($requestFile);
+			return;
+
+		case 'js':
+			header('Cache-Control: public, max-age=31536000');
+			header('Content-Type: application/javascript');
+			readfile($requestFile);
+			return;
+
+		case 'json':
+			header('Cache-Control: public, max-age=31536000');
+			header('Content-Type: application/json');
+			readfile($requestFile);
+			return;
+
+		default:
+			return false;
+	}
 }
 
 if ($requestFile && is_dir($requestFile) && is_file($requestFile . '/index.php'))
