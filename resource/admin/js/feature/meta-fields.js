@@ -70,6 +70,7 @@ export class MetaFields
 		const ComposedComponent = this.compose();
 
 		registerPlugin(`meta-fields-${this.#id}`, {
+			icon: "editor-quote",
 			render: () => this.render(ComposedComponent)
 		});
 	}

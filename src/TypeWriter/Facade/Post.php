@@ -5,6 +5,7 @@ namespace TypeWriter\Facade;
 
 use Columba\Util\StringUtil;
 use TypeWriter\Error\ViolationException;
+use TypeWriter\Feature\Gallery;
 use TypeWriter\Feature\IntroTextMetaFields;
 use TypeWriter\Feature\PostThumbnail;
 use WP_Post;
@@ -190,6 +191,20 @@ class Post
 			return null;
 
 		return self::applyMultipleFilters($excerpt, $filters);
+	}
+
+	/**
+	 * Gets the gallery with the given id of the current post.
+	 *
+	 * @param string $id
+	 *
+	 * @return int[]
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public static function gallery(string $id): array
+	{
+		return Gallery::get(self::id(), $id);
 	}
 
 	/**

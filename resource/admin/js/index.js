@@ -1,14 +1,14 @@
 import "../css/index.scss";
 
-import { MetaFields, PostThumbnail } from "./feature";
+import { name, version } from "../../../package";
+import { Gallery, MetaFields, PostThumbnail } from "./feature";
 
 function init()
 {
 	window.tw = {
-		feature: {
-			MetaFields,
-			PostThumbnail
-		}
+		feature: {Gallery, MetaFields, PostThumbnail},
+		name,
+		version
 	};
 }
 

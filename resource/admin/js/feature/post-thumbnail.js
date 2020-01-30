@@ -129,6 +129,7 @@ export class PostThumbnail
 		const ComposedComponent = this.compose();
 
 		registerPlugin(`post-thumbnail-${this.#id}`, {
+			icon: "format-image",
 			render: () => this.render(ComposedComponent)
 		});
 	}

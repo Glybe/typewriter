@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace TypeWriter\Feature;
 
+use TypeWriter\Facade\Hooks;
 use TypeWriter\Feature\MetaFields\MetaFields;
 use TypeWriter\Feature\MetaFields\TextareaControlMetaField;
 use TypeWriter\Feature\MetaFields\TextControlMetaField;
@@ -41,12 +42,15 @@ class IntroTextMetaFields extends MetaFields
 
 	/**
 	 * {@inheritDoc}
+	 *
+	 * @hook tw.feature.intro-text.post-types (string[] $postTypes): string[]
+	 *
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
 	 */
 	protected function getSupportedPostTypes(): ?array
 	{
-		return ['page'];
+		return Hooks::applyFilters('tw.feature.intro-text.post-types', ['page']);
 	}
 
 	/**

@@ -115,40 +115,6 @@ final class TypeWriter
 	}
 
 	/**
-	 * Runs the {@see Router}. When it's used, the given onUsed callback is executed
-	 * and otherwise the given onNotUsed callback is executed.
-	 *
-	 * @param callable|null $onUsed
-	 * @param callable|null $onNotUsed
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	private function runRouter(?callable $onUsed = null, ?callable $onNotUsed = null): void
-	{
-		$_SERVER['REQUEST_URI'] ??= '/';
-		$_SERVER['REQUEST_METHOD'] ??= RequestMethod::GET;
-
-		try
-		{
-			$this->router->execute($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
-
-			if ($onUsed !== null)
-				$onUsed();
-		}
-		catch (RouterException $err)
-		{
-			if ($err->getCode() !== $err::ERR_NOT_FOUND)
-				throw $err;
-
-			$this->state['tw.is-wp-used'] = true;
-
-			if ($onNotUsed !== null)
-				$onNotUsed();
-		}
-	}
-
-	/**
 	 * Gets the Cappuccino renderer.
 	 *
 	 * @return CappuccinoRenderer
@@ -393,6 +359,40 @@ final class TypeWriter
 	public final function setDatabase(Connection $databaseConnection): void
 	{
 		$this->database = $databaseConnection;
+	}
+
+	/**
+	 * Runs the {@see Router}. When it's used, the given onUsed callback is executed
+	 * and otherwise the given onNotUsed callback is executed.
+	 *
+	 * @param callable|null $onUsed
+	 * @param callable|null $onNotUsed
+	 *
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	private function runRouter(?callable $onUsed = null, ?callable $onNotUsed = null): void
+	{
+		$_SERVER['REQUEST_URI'] ??= '/';
+		$_SERVER['REQUEST_METHOD'] ??= RequestMethod::GET;
+
+		try
+		{
+			$this->router->execute($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
+
+			if ($onUsed !== null)
+				$onUsed();
+		}
+		catch (RouterException $err)
+		{
+			if ($err->getCode() !== $err::ERR_NOT_FOUND)
+				throw $err;
+
+			$this->state['tw.is-wp-used'] = true;
+
+			if ($onNotUsed !== null)
+				$onNotUsed();
+		}
 	}
 
 }
