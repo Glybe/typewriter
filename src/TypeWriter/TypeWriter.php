@@ -16,10 +16,12 @@ use Cappuccino\Cappuccino;
 use Columba\Columba;
 use Columba\Database\Connection\Connection;
 use Columba\Foundation\Preferences\Preferences;
+use Columba\Http\RequestMethod;
 use Columba\Router\RouterException;
 use Columba\Util\Stopwatch;
 use TypeWriter\Cappuccino\CappuccinoRenderer;
 use TypeWriter\Error\ViolationException;
+use TypeWriter\Facade\Hooks;
 use TypeWriter\Feature\Feature;
 use TypeWriter\Module\Module;
 use TypeWriter\Router\Router;
@@ -93,6 +95,11 @@ final class TypeWriter
 	{
 		require_once(WP_DIR . '/wp-load.php');
 
+		Hooks::action('rest_api_init', fn() => $this->runRouter(
+			fn() => die,
+			null
+		));
+
 		wp();
 
 		$this->state['tw.is-wp-initialized'] = true;
@@ -101,18 +108,43 @@ final class TypeWriter
 		foreach ($this->modules as $module)
 			$module->onRun();
 
+		$this->runRouter(
+			fn() => die,
+			fn() => require_once WP_DIR . '/wp-includes/template-loader.php'
+		);
+	}
+
+	/**
+	 * Runs the {@see Router}. When it's used, the given onUsed callback is executed
+	 * and otherwise the given onNotUsed callback is executed.
+	 *
+	 * @param callable|null $onUsed
+	 * @param callable|null $onNotUsed
+	 *
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	private function runRouter(?callable $onUsed = null, ?callable $onNotUsed = null): void
+	{
+		$_SERVER['REQUEST_URI'] ??= '/';
+		$_SERVER['REQUEST_METHOD'] ??= RequestMethod::GET;
+
 		try
 		{
-			$this->router->execute($_SERVER['REQUEST_URI'] ?? '/', $_SERVER['REQUEST_METHOD'] ?? 'GET');
+			$this->router->execute($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
+
+			if ($onUsed !== null)
+				$onUsed();
 		}
 		catch (RouterException $err)
 		{
-			if ($err->getCode() !== RouterException::ERR_NOT_FOUND)
+			if ($err->getCode() !== $err::ERR_NOT_FOUND)
 				throw $err;
 
 			$this->state['tw.is-wp-used'] = true;
 
-			require_once(WP_DIR . '/wp-includes/template-loader.php');
+			if ($onNotUsed !== null)
+				$onNotUsed();
 		}
 	}
 
