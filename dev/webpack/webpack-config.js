@@ -1,4 +1,3 @@
-let fs = require("fs");
 let webpack = require("webpack");
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -81,18 +80,18 @@ module.exports = {
 							sourceMap: true
 						}
 					},
-					'css-loader?sourceMap',
+					"css-loader?sourceMap",
 					{
 						loader: "postcss-loader",
 						options: {
 							ident: "postcss",
+							sourceMap: true,
 							plugins: () => [
 								postcssFocusWithin()
 							]
 						}
 					},
-					'postcss-loader?sourceMap',
-					'sass-loader?sourceMap'
+					"sass-loader?sourceMap"
 				]
 			}
 		]
@@ -130,10 +129,6 @@ if (process.env.NODE_ENV === "production")
 		}),
 		new webpack.LoaderOptionsPlugin({
 			minimize: true
-		}),
-		new webpack.BannerPlugin({
-			banner: fs.readFileSync("dev/webpack/license-header.txt", "utf8").trim(),
-			test: /\.(css|js)$/
 		})
 	]);
 }

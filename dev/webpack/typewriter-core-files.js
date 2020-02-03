@@ -1,5 +1,8 @@
-const merge = require("webpack-merge");
+const fs = require("fs");
 const path = require("path");
+
+const merge = require("webpack-merge");
+const webpack = require("webpack");
 
 const base = require("./webpack-config");
 
@@ -29,5 +32,11 @@ module.exports = merge(base, {
 		libraryTarget: "this",
 		path: path.resolve(__dirname, "../../public/tw/dist"),
 		publicPath: "/public/tw/dist/"
-	}
+	},
+	plugins: [
+		new webpack.BannerPlugin({
+			banner: fs.readFileSync("dev/webpack/license-header.txt", "utf8").trim(),
+			test: /\.(css|js)$/
+		})
+	]
 });

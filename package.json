@@ -1,6 +1,7 @@
 {
 	"name": "@idee/typewriter",
 	"description": "A WordPress framework by IdeeMedia.",
+	"private": true,
 	"homepage": "https://github.com/basmilius/typewriter#readme",
 	"version": "1.0.0",
 	"license": "MIT",
@@ -33,6 +34,9 @@
 		"typewriter:build:watch": "cross-env NODE_ENV=development webpack --config dev/webpack/typewriter-core-files.js --progress --colors --hide-modules --watch",
 		"typewriter:clean": "rimraf public/tw/dist"
 	},
+	"workspaces": [
+		"public/app/themes/*"
+	],
 	"dependencies": {
 		"@wordpress/blocks": "latest",
 		"@wordpress/block-editor": "latest",
