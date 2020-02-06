@@ -21,18 +21,26 @@ use PDO;
 use PDOException;
 use TypeWriter\Facade\Hooks;
 use wpdb;
+use function __;
 use function addslashes;
 use function array_change_key_case;
 use function array_filter;
 use function defined;
+use function error_log;
 use function explode;
+use function htmlspecialchars;
 use function implode;
 use function in_array;
+use function is_multisite;
 use function is_string;
 use function preg_match;
 use function preg_replace;
+use function printf;
 use function sprintf;
 use function TypeWriter\tw;
+use function wp_die;
+use function wp_load_translations_early;
+use const ENT_QUOTES;
 
 /**
  * Class Database
@@ -73,7 +81,7 @@ final class Database extends wpdb
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
 	 */
-	public final function _real_escape($string)
+	public function _real_escape($string)
 	{
 		if (is_string($string))
 			$string = addslashes($string);
@@ -86,7 +94,7 @@ final class Database extends wpdb
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
 	 */
-	public final function db_connect($allow_bail = true): bool
+	public function db_connect($allow_bail = true): bool
 	{
 		$this->connection->connect();
 
@@ -104,9 +112,62 @@ final class Database extends wpdb
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
 	 */
-	public final function db_version(): string
+	public function db_version(): string
 	{
 		return preg_replace('/[^0-9.].*/', '', $this->connection->getPdo()->getAttribute(PDO::ATTR_SERVER_VERSION));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public function print_error($str = '')
+	{
+		global $EZSQL_ERROR;
+
+		if (empty($str))
+			$str = $this->connection->getPdo()->errorInfo()[2] ?? 'Unknown database error.';
+
+		$EZSQL_ERROR[] = [
+			'query' => $this->last_query,
+			'error_str' => $str,
+		];
+
+		if ($this->suppress_errors)
+			return false;
+
+		wp_load_translations_early();
+
+		if (($caller = $this->get_caller()))
+			$errorMessage = sprintf(__('WordPress database error %1$s for query %2$s made by %3$s'), $str, $this->last_query, $caller);
+		else
+			$errorMessage = sprintf(__('WordPress database error %1$s for query %2$s'), $str, $this->last_query);
+
+		error_log($errorMessage);
+
+		if (!$this->show_errors)
+			return false;
+
+		if (is_multisite())
+		{
+			$message = sprintf("%s [%s]\n%s\n", __('WordPress database error:'), $str, $this->last_query);
+
+			if (defined('ERRORLOGFILE'))
+				error_log($message, 3, ERRORLOGFILE);
+
+			if (defined('DIEONDBERROR') && DIEONDBERROR)
+				wp_die($message);
+		}
+		else
+		{
+			$str = htmlspecialchars($str, ENT_QUOTES);
+			$query = htmlspecialchars($this->last_query, ENT_QUOTES);
+
+			printf('<div id="error"><p class="wpdberror"><strong>%s</strong> [%s]<br /><code>%s</code></p></div>', __('WordPress database error:'), $str, $query);
+		}
+
+		return true;
 	}
 
 	/**
