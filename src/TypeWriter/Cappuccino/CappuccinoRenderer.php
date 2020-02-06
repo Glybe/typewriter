@@ -15,6 +15,7 @@ namespace TypeWriter\Cappuccino;
 use Columba\Router\Renderer\CappuccinoRenderer as ColumbaCappuccinoRenderer;
 use TypeWriter\Facade\Site;
 use TypeWriter\Facade\Template;
+use TypeWriter\Structure\Menu\Menus;
 use function array_merge;
 use function TypeWriter\tw;
 use const TypeWriter\PUBLIC_DIR;
@@ -47,6 +48,7 @@ final class CappuccinoRenderer extends ColumbaCappuccinoRenderer
 
 		parent::__construct(array_merge($defaultOptions, $options), new CappuccinoLoader());
 
+		$this->addGlobal('menus', new Menus());
 		$this->addGlobal('site', new Site());
 		$this->addGlobal('template', new Template());
 		$this->addGlobal('tw', tw());

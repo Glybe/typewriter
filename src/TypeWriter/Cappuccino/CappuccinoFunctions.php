@@ -33,10 +33,10 @@ final class CappuccinoFunctions extends AbstractExtension
 	public final function getFunctions(): array
 	{
 		return [
-			new CappuccinoFunction('dump', '\\Columba\\Util\\dump'),
-			new CappuccinoFunction('dumpDie', '\\Columba\\Util\\dumpDie'),
-			new CappuccinoFunction('pre', '\\Columba\\Util\\pre'),
-			new CappuccinoFunction('preDie', '\\Columba\\Util\\preDie'),
+			new CappuccinoFunction('dump', fn(...$args) => dump(...$args)),
+			new CappuccinoFunction('dumpDie', fn(...$args) => dumpDie(...$args)),
+			new CappuccinoFunction('pre', fn(...$args) => pre(...$args)),
+			new CappuccinoFunction('preDie', fn(...$args) => preDie(...$args)),
 
 			new CappuccinoFunction('applyFilters', [Hooks::class, 'applyFilters'], ['is_safe' => ['html']]),
 			new CappuccinoFunction('doAction', [Hooks::class, 'doAction']),
