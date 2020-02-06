@@ -9,5 +9,10 @@ public/app/uploads/
 public/tw/dist/
 public/wp/wp-content/
 
+# Temporary
+public/app/plugins
+public/app/themes/gerritkomrijcollege
+public/app/themes/studiovierentwintig
+
 .DS_Store
 config/config.json
