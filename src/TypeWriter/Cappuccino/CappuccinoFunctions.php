@@ -6,6 +6,8 @@ namespace TypeWriter\Cappuccino;
 use Cappuccino\CappuccinoFunction;
 use Cappuccino\Extension\AbstractExtension;
 use TypeWriter\Cappuccino\TokenParser\ControllerTokenParser;
+use TypeWriter\Cappuccino\TokenParser\FooterTokenParser;
+use TypeWriter\Cappuccino\TokenParser\HeaderTokenParser;
 use TypeWriter\Facade\Hooks;
 
 /**
@@ -34,8 +36,7 @@ final class CappuccinoFunctions extends AbstractExtension
 			new CappuccinoFunction('applyFilters', [Hooks::class, 'applyFilters'], ['is_safe' => ['html']]),
 			new CappuccinoFunction('doAction', [Hooks::class, 'doAction']),
 
-			new CappuccinoFunction('get_footer', 'get_footer'),
-			new CappuccinoFunction('get_header', 'get_header')
+			new CappuccinoFunction('wp', fn() => call_user_func(...func_get_args()))
 		];
 	}
 
@@ -47,7 +48,9 @@ final class CappuccinoFunctions extends AbstractExtension
 	public final function getTokenParsers(): array
 	{
 		return [
-			new ControllerTokenParser()
+			new ControllerTokenParser(),
+			new FooterTokenParser(),
+			new HeaderTokenParser()
 		];
 	}
 

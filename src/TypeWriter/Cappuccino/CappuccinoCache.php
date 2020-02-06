@@ -28,16 +28,4 @@ final class CappuccinoCache extends FilesystemCache
 		parent::__construct(ROOT . '/cache/cappuccino');
 	}
 
-	/**
-	 * {@inheritdoc}
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public function write(string $key, string $content): void
-	{
-		$content = str_replace('\\t', '', $content);
-
-		parent::write($key, $content);
-	}
-
 }

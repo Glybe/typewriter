@@ -4,10 +4,6 @@ declare(strict_types=1);
 namespace TypeWriter\Cappuccino\Controller;
 
 use TypeWriter\Facade\Post;
-use function get_the_content;
-use function get_the_ID;
-use function get_the_title;
-use function the_post;
 
 /**
  * Class PostController
@@ -27,7 +23,7 @@ final class PostController extends Controller
 	 */
 	public function __construct()
 	{
-		the_post();
+		Post::next();
 	}
 
 	/**

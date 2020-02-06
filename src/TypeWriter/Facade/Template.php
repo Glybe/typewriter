@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace TypeWriter\Facade;
 
+use Cappuccino\Markup;
 use TypeWriter\Error\TemplateException;
+use TypeWriter\Util\Sandbox;
 use function extract;
 use function get_theme_mod;
 use function get_theme_mods;
-use function ob_get_clean;
-use function ob_start;
 use function TypeWriter\tw;
 use const EXTR_OVERWRITE;
 
@@ -67,22 +67,11 @@ final class Template
 		$templateFile = locate_template($templateFile);
 
 		if (is_file($templateFile))
-		{
-			extract($context, EXTR_OVERWRITE);
-			ob_start();
-
-			require $templateFile;
-
-			return ob_get_clean();
-		}
+			return Sandbox::render($templateFile, $context);
 		else if (tw()->getCappuccino()->exists($template))
-		{
 			return tw()->getCappuccino()->render($template, $context);
-		}
 		else
-		{
 			throw new TemplateException(sprintf('Could not find template part "%s".', $template), TemplateException::ERR_TEMPLATE_FILE_NOT_FOUND);
-		}
 	}
 
 	/**
@@ -115,6 +104,44 @@ final class Template
 		{
 			throw new TemplateException(sprintf('Could not find template part "%s".', $template), TemplateException::ERR_TEMPLATE_FILE_NOT_FOUND);
 		}
+	}
+
+	/**
+	 * Renders the footer template.
+	 *
+	 * @return string
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public static function renderFooter(): string
+	{
+		$cappuccino = tw()->getCappuccino();
+
+		if ($cappuccino->exists('@theme/global/footer.cappy'))
+			return tw()->getCappuccino()->render('@theme/global/footer.cappy');
+		else if (is_file($footerPath = Dependencies::themePath('footer.php')))
+			return Sandbox::render($footerPath);
+		else
+			throw new TemplateException('The footer template was not found. Create a template/global/footer.cappy or footer.php file in your theme.', TemplateException::ERR_TEMPLATE_FILE_NOT_FOUND);
+	}
+
+	/**
+	 * Renders the header template.
+	 *
+	 * @return string
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public static function renderHeader(): string
+	{
+		$cappuccino = tw()->getCappuccino();
+
+		if ($cappuccino->exists('@theme/global/header.cappy'))
+			return tw()->getCappuccino()->render('@theme/global/header.cappy');
+		else if (is_file($headerPath = Dependencies::themePath('header.php')))
+			return Sandbox::render($headerPath);
+		else
+			throw new TemplateException('The header template was not found. Create a template/global/header.cappy or header.php file in your theme.', TemplateException::ERR_TEMPLATE_FILE_NOT_FOUND);
 	}
 
 }

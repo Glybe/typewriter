@@ -51,9 +51,6 @@ define('WP_POST_REVISIONS', false);
 define('WP_DEBUG', $prefs['developer']['debugMode']);
 define('WP_DEBUG_DISPLAY', WP_DEBUG);
 
-//define('WP_LANG_DIR', '');
-//define('WP_PLUGIN_DIR', '');
-//define('WP_PLUGIN_URL', '');
 define('WPMU_PLUGIN_DIR', PUBLIC_DIR . '/tw/must-use');
 define('WPMU_PLUGIN_URL', '/tw/must-use');
 

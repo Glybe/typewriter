@@ -142,8 +142,6 @@ final class ImproveOutputModule extends Module
 			'prerender' => [],
 		];
 
-		$hints['dns-prefetch'][] = Hooks::applyFilters('emoji_svg_url', 'https://s.w.org/images/core/emoji/11/svg/');
-
 		foreach ($hints as $relation_type => $urls)
 		{
 			$unique_urls = [];
@@ -260,6 +258,9 @@ final class ImproveOutputModule extends Module
 		return array_filter($classes, function (string $class) use ($blacklist): bool
 		{
 			if (StringUtil::endsWith($class, '-php'))
+				return false;
+
+			if (StringUtil::endsWith($class, '-c'))
 				return false;
 
 			if (StringUtil::startsWith($class, 'error'))

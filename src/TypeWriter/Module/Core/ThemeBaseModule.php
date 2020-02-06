@@ -5,7 +5,6 @@ namespace TypeWriter\Module\Core;
 
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
-use WP_Locale;
 use function add_theme_support;
 use function get_bloginfo;
 use function get_post_type_object;
@@ -31,6 +30,7 @@ use function reset;
 use function single_post_title;
 use function single_term_title;
 use function substr;
+use function TypeWriter\tw;
 use function zeroise;
 
 /**
@@ -75,6 +75,14 @@ final class ThemeBaseModule extends Module
 	 */
 	public final function onWordPressAfterSetupTheme(): void
 	{
+		$themeDir = get_template_directory();
+		$subThemeDir = get_stylesheet_directory();
+
+		tw()->getCappuccino()->addPath($themeDir . '/template', 'theme');
+
+		if ($themeDir !== $subThemeDir)
+			tw()->getCappuccino()->addPath($subThemeDir . '/template', 'theme');
+
 		add_theme_support('post-thumbnails');
 	}
 
@@ -104,7 +112,6 @@ final class ThemeBaseModule extends Module
 	 */
 	private function generateTitle(): void
 	{
-		/** @var WP_Locale $wp_locale */
 		global $wp_locale;
 
 		$description = get_bloginfo('description');

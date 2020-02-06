@@ -60,5 +60,4 @@ autoloader()->register();
 
 ExceptionHandler::register();
 
-ob_start();
 tw()->initialize();
