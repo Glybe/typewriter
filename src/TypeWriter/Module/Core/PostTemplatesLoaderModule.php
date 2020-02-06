@@ -22,6 +22,7 @@ use function array_merge;
 use function array_shift;
 use function array_unique;
 use function implode;
+use function in_array;
 use function is_dir;
 use function scandir;
 use function substr;
@@ -35,6 +36,12 @@ use function substr;
  */
 final class PostTemplatesLoaderModule extends Module
 {
+
+	private static array $ignoredTemplateFiles = [
+		'archive.cappy', 'archive.php',
+		'default.cappy', 'default.php',
+		'single.cappy', 'single.php'
+	];
 
 	/**
 	 * PostTemplatesLoaderModule constructor.
@@ -97,7 +104,7 @@ final class PostTemplatesLoaderModule extends Module
 				if (substr($file, -4) !== '.php' && substr($file, -6) !== '.cappy')
 					continue;
 
-				if ($file === 'archive.php' || $file === 'default.php' || $file === 'single.php')
+				if (in_array($file, self::$ignoredTemplateFiles))
 					continue;
 
 				$path = 'template/' . $postType . '/' . $file;
