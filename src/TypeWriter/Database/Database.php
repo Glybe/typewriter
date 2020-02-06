@@ -206,6 +206,8 @@ final class Database extends wpdb
 
 		$this->doQuery($query);
 
+		Hooks::doAction('tw.database.after-query', $query, $this->num_queries - 1);
+
 		$errorCode = $this->connection->getPdo()->errorInfo()[1] ?? 0;
 
 		if ($errorCode === 2006)
@@ -328,10 +330,10 @@ final class Database extends wpdb
 		{
 		}
 
-		$this->num_queries++;
-
 		if (defined('SAVEQUERIES') && SAVEQUERIES)
-			$this->queries[] = [$query, $this->timer_stop(), $this->get_caller()];
+			$this->queries[$this->num_queries] = [$query, $this->timer_stop(), $this->get_caller()];
+
+		$this->num_queries++;
 	}
 
 }

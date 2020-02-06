@@ -6,6 +6,9 @@ namespace TypeWriter\Module\Core;
 use TypeWriter\Facade\Dependencies;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
+use WP_Scripts;
+use function array_diff;
+use function TypeWriter\tw;
 
 /**
  * Class DisableWPFeaturesModule
@@ -36,8 +39,9 @@ final class DisableWPFeaturesModule extends Module
 	public final function onInitialize(): void
 	{
 		Hooks::action('init', [$this, 'onWordPressInit'], 0);
-		Hooks::action('wp_head', [$this, 'onWordPressHeader'], 0);
+		Hooks::action('wp_default_scripts', [$this, 'onWordPressDefaultScripts']);
 		Hooks::action('wp_footer', [$this, 'onWordPressFooter'], 0);
+		Hooks::action('wp_head', [$this, 'onWordPressHeader'], 0);
 	}
 
 	/**
@@ -64,6 +68,23 @@ final class DisableWPFeaturesModule extends Module
 	}
 
 	/**
+	 * Invoked on wp_default_scripts action hook.
+	 * Removes jQuery Migrate from the jQuery dependency when not in admin mode.
+	 *
+	 * @param WP_Scripts $scripts
+	 *
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public final function onWordPressDefaultScripts(WP_Scripts $scripts): void
+	{
+		if (tw()->isAdmin() || tw()->isLogin() || !isset($scripts->registered['jquery']))
+			return;
+
+		$scripts->registered['jquery']->deps = array_diff($scripts->registered['jquery']->deps, ['jquery-migrate']);
+	}
+
+	/**
 	 * Invoked on wp_footer action hook.
 	 * Removes obsolete dependencies.
 	 *
@@ -73,7 +94,7 @@ final class DisableWPFeaturesModule extends Module
 	 */
 	public final function onWordPressFooter(): void
 	{
-		Dependencies::deregisterScript('wp-embed');
+		Dependencies::dequeueScript('wp-embed');
 	}
 
 	/**
