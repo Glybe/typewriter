@@ -16,43 +16,40 @@ $requestPath = explode('?', $_SERVER['REQUEST_URI'])[0];
 $requestFile = realpath($_SERVER['DOCUMENT_ROOT'] . $requestPath);
 $isPhpFile = substr($requestFile ?: '', -4) === '.php';
 
+ob_start('ob_gzhandler');
+
 if ($requestFile && !$isPhpFile && is_file($requestFile))
 {
 	$extension = pathinfo($requestFile, PATHINFO_EXTENSION);
+	$mimeTypes = [
+		'css' => 'text/css',
+		'js' => 'application/javascript',
+		'json' => 'application/json',
 
-	switch ($extension)
+		'gif' => 'image/gif',
+		'jpg' => 'image/jpeg',
+		'jpeg' => 'image/jpeg',
+		'svg' => 'image/svg+xml',
+		'png' => 'image/png',
+		'webp' => 'image/webp',
+
+		'eot' => 'application/vnd.ms-fontobject',
+		'otf' => 'font/otf',
+		'ttf' => 'font/ttf',
+		'woff' => 'font/woff',
+		'woff2' => 'font/woff2'
+	];
+
+	if (isset($mimeTypes[$extension]))
 	{
-		case 'gif':
-		case 'jpg':
-		case 'jpeg':
-		case 'webp':
-		case 'png':
-			header('Cache-Control: public, max-age=31536000');
-			header('Content-Type: ' . mime_content_type($requestFile));
-			readfile($requestFile);
-			return;
-
-		case 'css':
-			header('Cache-Control: public, max-age=31536000');
-			header('Content-Type: text/css');
-			readfile($requestFile);
-			return;
-
-		case 'js':
-			header('Cache-Control: public, max-age=31536000');
-			header('Content-Type: application/javascript');
-			readfile($requestFile);
-			return;
-
-		case 'json':
-			header('Cache-Control: public, max-age=31536000');
-			header('Content-Type: application/json');
-			readfile($requestFile);
-			return;
-
-		default:
-			return false;
+		header('Cache-Control: public, max-age=5184000');
+		header('Content-Type: ' . $mimeTypes[$extension]);
+		header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', strtotime('+ 1 month')));
+		readfile($requestFile);
+		return true;
 	}
+
+	return false;
 }
 
 if ($requestFile && is_dir($requestFile) && is_file($requestFile . '/index.php'))
