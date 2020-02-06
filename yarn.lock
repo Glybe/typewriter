@@ -812,6 +812,15 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@bybas/latte-ui@^1.9.0-beta.21":
+  version "1.9.0-beta.21"
+  resolved "https://registry.yarnpkg.com/@bybas/latte-ui/-/latte-ui-1.9.0-beta.21.tgz#6d25e05e18216ed630bc226775ba55d4c146403b"
+  integrity sha512-IwgRTzgxPJmlp9FGxMd8v2w6gQxiOSsyAYPqG2S95dWqkXP6vAu4CudK8Y2wZPUEYpzmTV0FGgJdnXEm3RMx4A==
+  dependencies:
+    bootstrap "^4.4.1"
+    moment "^2.24.0"
+    vue "^2.6.11"
+
 "@emotion/cache@^10.0.17":
   version "10.0.27"
   resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-10.0.27.tgz#7895db204e2c1a991ae33d51262a3a44f6737303"
@@ -928,6 +937,11 @@
   version "4.8.95"
   resolved "https://registry.yarnpkg.com/@mdi/font/-/font-4.8.95.tgz#e026255815fbac2d5155fdf5cd3069b8dc599900"
   integrity sha512-mfEjd6kkuheZ15CBU7g/q+De9+dah/SEgVH0uZsgCJTSYa+CkXIen35aNyHoixgcEfPV4Or0NLJvyYM5CXUnbQ==
+
+"@mdi/font@^4.9.95":
+  version "4.9.95"
+  resolved "https://registry.yarnpkg.com/@mdi/font/-/font-4.9.95.tgz#00ed2ffe289c9230f146e74559c07542d3f4475a"
+  integrity sha512-m2sbAs+SMwRnWpkMriBxEulwuhmqRyh6X+hdOZlqSxYZUM2C2TaDnQ4gcilzdoAgru2XYnWViZ/xPuSDGgRXVw==
 
 "@tannin/compile@^1.0.4":
   version "1.0.4"
@@ -7437,6 +7451,11 @@ vm-browserify@^1.0.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
+
+vue@^2.6.11:
+  version "2.6.11"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
+  integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==
 
 watchpack@^1.6.0:
   version "1.6.0"
