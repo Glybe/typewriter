@@ -12,7 +12,7 @@ use TypeWriter\Facade\Post;
  * @package TypeWriter\Cappuccino\Controller
  * @since 1.0.0
  */
-final class PostController extends Controller
+class PostController extends Controller
 {
 
 	/**

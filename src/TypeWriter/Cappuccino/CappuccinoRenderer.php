@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace TypeWriter\Cappuccino;
 
 use Columba\Router\Renderer\CappuccinoRenderer as ColumbaCappuccinoRenderer;
+use TypeWriter\Facade\Attachment;
 use TypeWriter\Facade\Site;
 use TypeWriter\Facade\Template;
 use TypeWriter\Structure\Menu\Menus;
@@ -48,6 +49,7 @@ final class CappuccinoRenderer extends ColumbaCappuccinoRenderer
 
 		parent::__construct(array_merge($defaultOptions, $options), new CappuccinoLoader());
 
+		$this->addGlobal('attachment', new Attachment());
 		$this->addGlobal('menus', new Menus());
 		$this->addGlobal('site', new Site());
 		$this->addGlobal('template', new Template());

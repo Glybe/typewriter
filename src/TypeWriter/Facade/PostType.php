@@ -81,13 +81,14 @@ class PostType
 	/**
 	 * Registers the post type.
 	 *
+	 * @return $this
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
 	 */
-	public function register(): void
+	public function register(): self
 	{
 		if (isset(self::$registered[$this->id]))
-			return;
+			return self::$registered[$this->id];
 
 		$result = register_post_type($this->id, [
 			'labels' => $this->labels,
@@ -114,7 +115,7 @@ class PostType
 		if ($result instanceof WP_Error)
 			throw new WordPressException($result->get_error_message(), WordPressException::ERR_REGISTER_FAILED);
 
-		self::$registered[$this->id] = $this;
+		return self::$registered[$this->id] = $this;
 	}
 
 	/**
@@ -788,6 +789,20 @@ class PostType
 		$pt->taxonomies = array_map(fn(string $tax) => Taxonomy::get($tax), get_object_taxonomies($id, 'names'));
 
 		return $pt;
+	}
+
+	/**
+	 * Creates a new post type instance.
+	 *
+	 * @param string $id
+	 *
+	 * @return static
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public static function new(string $id): self
+	{
+		return new static($id);
 	}
 
 	/**

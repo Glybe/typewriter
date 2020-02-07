@@ -131,7 +131,7 @@ class Post
 	 */
 	public static function content(array $filters = []): ?string
 	{
-		$content = get_the_content(self::id());
+		$content = self::post()->post_content;
 
 		if (empty($content))
 			return null;
