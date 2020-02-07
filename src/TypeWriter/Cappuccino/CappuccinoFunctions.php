@@ -10,10 +10,13 @@ use TypeWriter\Cappuccino\TokenParser\FooterTokenParser;
 use TypeWriter\Cappuccino\TokenParser\HeaderTokenParser;
 use TypeWriter\Facade\Dependencies;
 use TypeWriter\Facade\Hooks;
+use function call_user_func;
 use function Columba\Util\dump;
 use function Columba\Util\dumpDie;
 use function Columba\Util\pre;
 use function Columba\Util\preDie;
+use function func_get_args;
+use function home_url;
 
 /**
  * Class CappuccinoFunctions
@@ -41,6 +44,7 @@ final class CappuccinoFunctions extends AbstractExtension
 			new CappuccinoFunction('applyFilters', [Hooks::class, 'applyFilters'], ['is_safe' => ['html']]),
 			new CappuccinoFunction('doAction', [Hooks::class, 'doAction']),
 			new CappuccinoFunction('themeUri', fn(string $path) => Dependencies::themeUri($path)),
+			new CappuccinoFunction('url', fn(string $path = '') => home_url($path)),
 
 			new CappuccinoFunction('wp', fn() => call_user_func(...func_get_args()))
 		];
