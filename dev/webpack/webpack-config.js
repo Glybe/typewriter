@@ -36,7 +36,8 @@ module.exports = {
 							removeAll: true
 						},
 						mergeIdents: true,
-						reduceIdents: true
+						reduceIdents: true,
+						zindex: false
 					}]
 				}
 			})

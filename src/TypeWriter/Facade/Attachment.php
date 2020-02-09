@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace TypeWriter\Facade;
 
+use function wp_get_attachment_image_src;
 use function wp_get_attachment_image_url;
 
 /**
@@ -35,6 +36,30 @@ class Attachment
 			return Hooks::applyFilters('tw.attachment.image-url', $imageUrl, $attachmentId, $size);
 
 		return null;
+	}
+
+	/**
+	 * Gets the data of the given attachment with the given size.
+	 *
+	 * @param int    $attachmentId
+	 * @param string $size
+	 *
+	 * @return array|null
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public static function getImageData(int $attachmentId, string $size = 'large'): ?array
+	{
+		$imageData = wp_get_attachment_image_src($attachmentId, $size);
+
+		if (!$imageData)
+			return null;
+
+		return [
+			'src' => $imageData[0],
+			'width' => $imageData[1],
+			'height' => $imageData[2]
+		];
 	}
 
 }
