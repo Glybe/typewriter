@@ -19,9 +19,8 @@ declare(strict_types=1);
 
 use TypeWriter\Facade\Plugin;
 use TypeWriter\Module\Mod\QueryMonitorSupport;
+use TypeWriter\Module\Mod\WPMigrateDbSupport;
 use function TypeWriter\tw;
 
-if (Plugin::exists('query-monitor'))
-{
-	tw()->loadModule(QueryMonitorSupport::class);
-}
+Plugin::exists('query-monitor', fn() => tw()->loadModule(QueryMonitorSupport::class));
+Plugin::exists('wp-migrate-db', fn() => tw()->loadModule(WPMigrateDbSupport::class));
