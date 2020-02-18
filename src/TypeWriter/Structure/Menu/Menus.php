@@ -107,6 +107,8 @@ class Menus
 	/**
 	 * Returns TRUE if the given {@see MenuItem} is active.
 	 *
+	 * @hook tw.menus.is-item-active (bool $isActive, MenuItem $item, int $postId): bool
+	 *
 	 * @param MenuItem $item
 	 *
 	 * @return bool
@@ -122,6 +124,8 @@ class Menus
 
 	/**
 	 * Returns TRUE if a child of the given {@see MenuItem} is active.
+	 *
+	 * @hook tw.menus.is-item-child-active (bool $isActive, MenuItem $item, int $postId): bool
 	 *
 	 * @param MenuItem $item
 	 *
@@ -147,6 +151,8 @@ class Menus
 
 	/**
 	 * Returns TRUE if the given {@see MenuItem} or a child of the given {@see MenuItem} is active.
+	 *
+	 * @hook tw.menus.is-item-or-child-active (bool $isActive, MenuItem $item, int $postId): bool
 	 *
 	 * @param MenuItem $item
 	 *

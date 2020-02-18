@@ -64,15 +64,21 @@ final class Plugin
 	/**
 	 * Returns TRUE if the given plugin exists.
 	 *
-	 * @param string $name
+	 * @param string        $name
+	 * @param callable|null $fn
 	 *
 	 * @return bool
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
 	 */
-	public static function exists(string $name): bool
+	public static function exists(string $name, ?callable $fn = null): bool
 	{
-		return self::dir($name) !== null;
+		$isInstalled = self::dir($name) !== null;
+
+		if ($isInstalled && $fn !== null)
+			$fn();
+
+		return $isInstalled;
 	}
 
 }

@@ -52,6 +52,8 @@ final class Template
 	/**
 	 * Renders and gets the given template. This method exposes the given context to that template.
 	 *
+	 * @hook tw.template.part (string $template, array $context): void
+	 *
 	 * @param string $template
 	 * @param array  $context
 	 *
@@ -76,6 +78,8 @@ final class Template
 
 	/**
 	 * Renders the given template. This method exposes the given context to that template.
+	 *
+	 * @hook tw.template.print-part (string $template, array $context): void
 	 *
 	 * @param string $template
 	 * @param array  $context

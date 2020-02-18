@@ -172,6 +172,9 @@ final class Database extends wpdb
 
 	/**
 	 * {@inheritdoc}
+	 *
+	 * @hook tw.database.after-query (string $query, int $queryId): void
+	 *
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
 	 */

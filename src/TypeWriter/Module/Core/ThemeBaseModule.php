@@ -58,12 +58,16 @@ final class ThemeBaseModule extends Module
 
 	/**
 	 * {@inheritDoc}
+	 *
+	 * @hook tw.theme-base.directories (string[] $directories): array
+	 *
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
 	 */
 	public function onInitialize(): void
 	{
 		$themeDirectories = array_unique([get_template_directory(), get_stylesheet_directory()]);
+		$themeDirectories = Hooks::applyFilters('tw.theme-base.directories', $themeDirectories);
 
 		foreach ($themeDirectories as $dir)
 		{

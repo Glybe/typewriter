@@ -57,6 +57,8 @@ final class AdminModule extends Module
 	 * Invoked on in_admin_footer action hook.
 	 * Adds the TypeWriter feature scripts.
 	 *
+	 * @hook tw.admin-scripts.body (array $scripts): array
+	 *
 	 * @author Bas Milius <bas@ideemedia.nl>
 	 * @since 1.0.0
 	 * @internal
