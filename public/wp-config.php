@@ -15,7 +15,7 @@ use const TypeWriter\PUBLIC_DIR;
 
 require_once __DIR__ . '/../src/TypeWriter/boot.php';
 
-$isHttps = $_SERVER['HTTPS'] === 'on';
+$isHttps = ($_SERVER['HTTPS'] ?? 'off') === 'on';
 $prefs = tw()->getPreferences();
 
 define('WP_CONTENT_DIR', PUBLIC_DIR . '/app');
