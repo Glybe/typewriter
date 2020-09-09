@@ -72,6 +72,10 @@ final class ThemeBaseModule extends Module
 		foreach ($themeDirectories as $dir)
 		{
 			autoloader()->addDirectory($dir);
+
+			if (!is_dir($dir . '/template'))
+				continue;
+
 			tw()->getCappuccino()->addPath($dir . '/template', 'theme');
 		}
 

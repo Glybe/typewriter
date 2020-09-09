@@ -85,14 +85,24 @@ module.exports = {
 					{
 						loader: "postcss-loader",
 						options: {
-							ident: "postcss",
 							sourceMap: true,
-							plugins: () => [
-								postcssFocusWithin()
-							]
+							postcssOptions: {
+								ident: "postcss",
+								plugins: () => [
+									postcssFocusWithin()
+								]
+							}
 						}
 					},
-					"sass-loader?sourceMap"
+					{
+						loader: "resolve-url-loader"
+					},
+					{
+						loader: "sass-loader",
+						options: {
+							sourceMap: true
+						}
+					}
 				]
 			}
 		]
