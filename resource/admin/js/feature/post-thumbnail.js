@@ -1,12 +1,12 @@
-import { MediaUpload, MediaUploadCheck } from "@wordpress/block-editor";
-import { Button, ResponsiveWrapper, Spinner } from "@wordpress/components";
+import {MediaUpload, MediaUploadCheck} from "@wordpress/block-editor";
+import {Button, ResponsiveWrapper, Spinner} from "@wordpress/components";
 import {compose} from "@wordpress/compose";
 import {withDispatch, withSelect} from "@wordpress/data";
-import { PostFeaturedImageCheck } from "@wordpress/editor";
-import { PluginDocumentSettingPanel } from "@wordpress/edit-post";
-import { applyFilters } from "@wordpress/hooks";
-import { __ } from "@wordpress/i18n";
-import { registerPlugin } from "@wordpress/plugins";
+import {PostFeaturedImageCheck} from "@wordpress/editor";
+import {PluginDocumentSettingPanel} from "@wordpress/edit-post";
+import {applyFilters} from "@wordpress/hooks";
+import {__} from "@wordpress/i18n";
+import {registerPlugin} from "@wordpress/plugins";
 
 // noinspection JSUnusedLocalSymbols
 const __mock = {
@@ -19,7 +19,7 @@ function PostThumbnailComponent(props)
 {
 	const {has} = _;
 
-	const instructions = <p>{__("To edit the featured image, you need permission to upload media.")}</p>;
+	const instructions = <p>{__("To edit the image, you need permission to upload media.", "tw")}</p>;
 
 	let mediaWidth, mediaHeight, mediaSourceUrl;
 
@@ -32,8 +32,7 @@ function PostThumbnailComponent(props)
 			mediaWidth = props.media.media_details.sizes[mediaSize].width;
 			mediaHeight = props.media.media_details.sizes[mediaSize].height;
 			mediaSourceUrl = props.media.media_details.sizes[mediaSize].source_url;
-		}
-		else
+		} else
 		{
 			const fallbackMediaSize = applyFilters("editor.PostFeaturedImage.imageSize", "thumbnail", props.media.id, props.currentPostId);
 			if (has(props.media, ["media_details", "sizes", fallbackMediaSize]))
@@ -41,8 +40,7 @@ function PostThumbnailComponent(props)
 				mediaWidth = props.media.media_details.sizes[fallbackMediaSize].width;
 				mediaHeight = props.media.media_details.sizes[fallbackMediaSize].height;
 				mediaSourceUrl = props.media.media_details.sizes[fallbackMediaSize].source_url;
-			}
-			else
+			} else
 			{
 				mediaWidth = props.media.media_details.width;
 				mediaHeight = props.media.media_details.height;
@@ -67,7 +65,7 @@ function PostThumbnailComponent(props)
 								<Button
 									className={!props.mediaId ? "editor-post-featured-image__toggle" : "editor-post-featured-image__preview"}
 									onClick={open}
-									aria-label={!props.mediaId ? null : __("Edit or update the image")}>
+									aria-label={!props.mediaId ? null : __("Edit or update the image", "tw")}>
 									{!!props.mediaId && props.media &&
 									<ResponsiveWrapper
 										naturalWidth={mediaWidth}
@@ -77,7 +75,7 @@ function PostThumbnailComponent(props)
 									</ResponsiveWrapper>
 									}
 									{!!props.mediaId && !props.media && <Spinner/>}
-									{!props.mediaId && `Update Image`}
+									{!props.mediaId && __("Update image", "tw")}
 								</Button>
 							)}
 							value={props.mediaId}/>
@@ -92,7 +90,7 @@ function PostThumbnailComponent(props)
 							modalClass="editor-post-featured-image__media-modal"
 							render={({open}) => (
 								<Button onClick={open} isButton isLarge>
-									{__("Replace Image")}
+									{__("Replace image", "tw")}
 								</Button>
 							)}/>
 					</MediaUploadCheck>
@@ -101,7 +99,7 @@ function PostThumbnailComponent(props)
 					{!!props.mediaId &&
 					<MediaUploadCheck>
 						<Button onClick={props.onRemoveImage} isLink isDestructive>
-							{__("Remove Image")}
+							{__("Remove image", "tw")}
 						</Button>
 					</MediaUploadCheck>
 					}

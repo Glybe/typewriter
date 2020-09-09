@@ -37,7 +37,7 @@ class IntroTextMetaFields extends MetaFields
 	 */
 	public function __construct()
 	{
-		parent::__construct('tw-intro-text', 'tw_intro_text', 'Intro Text', '<strong>This is usually an inviting text.</strong>');
+		parent::__construct('tw-intro-text', 'tw_intro_text', 'Intro text', '<strong>This is usually an inviting text.</strong>');
 	}
 
 	/**

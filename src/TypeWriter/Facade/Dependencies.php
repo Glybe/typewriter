@@ -81,16 +81,16 @@ final class Dependencies
 	/**
 	 * Enqueues a script dependency.
 	 *
-	 * @param string      $handle
-	 * @param string      $src
-	 * @param array       $dependencies
+	 * @param string $handle
+	 * @param string|null $src
+	 * @param array $dependencies
 	 * @param string|null $version
-	 * @param bool        $inFooter
+	 * @param bool $inFooter
 	 *
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
 	 */
-	public static function enqueueScript(string $handle, string $src, array $dependencies = [], ?string $version = null, bool $inFooter = true): void
+	public static function enqueueScript(string $handle, ?string $src = null, array $dependencies = [], ?string $version = null, bool $inFooter = true): void
 	{
 		wp_enqueue_script($handle, $src, $dependencies, $version ?? false, $inFooter);
 	}
@@ -98,16 +98,16 @@ final class Dependencies
 	/**
 	 * Enqueues a style dependency.
 	 *
-	 * @param string      $handle
-	 * @param string      $src
-	 * @param array       $dependencies
+	 * @param string $handle
+	 * @param string|null $src
+	 * @param array $dependencies
 	 * @param string|null $version
-	 * @param string      $media
+	 * @param string $media
 	 *
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
 	 */
-	public static function enqueueStyle(string $handle, string $src, array $dependencies = [], ?string $version = null, string $media = 'all'): void
+	public static function enqueueStyle(string $handle, ?string $src = null, array $dependencies = [], ?string $version = null, string $media = 'all'): void
 	{
 		wp_enqueue_style($handle, $src, $dependencies, $version ?? false, $media);
 	}
@@ -115,11 +115,11 @@ final class Dependencies
 	/**
 	 * Registers a script dependency.
 	 *
-	 * @param string      $handle
-	 * @param string      $src
-	 * @param array       $dependencies
+	 * @param string $handle
+	 * @param string $src
+	 * @param array $dependencies
 	 * @param string|null $version
-	 * @param bool        $inFooter
+	 * @param bool $inFooter
 	 *
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
@@ -132,11 +132,11 @@ final class Dependencies
 	/**
 	 * Registers a style dependency.
 	 *
-	 * @param string      $handle
-	 * @param string      $src
-	 * @param array       $dependencies
+	 * @param string $handle
+	 * @param string $src
+	 * @param array $dependencies
 	 * @param string|null $version
-	 * @param string      $media
+	 * @param string $media
 	 *
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
@@ -150,7 +150,7 @@ final class Dependencies
 	 * Generates a Bm Fonts url.
 	 *
 	 * @param string $fontName
-	 * @param array  $fontStyles
+	 * @param array $fontStyles
 	 * @param string $fontDisplay
 	 *
 	 * @return string
@@ -166,7 +166,7 @@ final class Dependencies
 	 * Generates a Google Fonts url.
 	 *
 	 * @param string $fontName
-	 * @param array  $fontStyles
+	 * @param array $fontStyles
 	 * @param string $fontDisplay
 	 *
 	 * @return string
@@ -182,7 +182,7 @@ final class Dependencies
 	 * Generates an IdeeMedia Fonts url.
 	 *
 	 * @param string $fontName
-	 * @param array  $fontStyles
+	 * @param array $fontStyles
 	 * @param string $fontDisplay
 	 *
 	 * @return string

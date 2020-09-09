@@ -1,7 +1,8 @@
-import {TextControl, TextareaControl} from "@wordpress/components";
+import {TextareaControl, TextControl} from "@wordpress/components";
 import {compose} from "@wordpress/compose";
 import {withDispatch, withSelect} from "@wordpress/data";
 import {PluginDocumentSettingPanel} from "@wordpress/edit-post";
+import {__} from "@wordpress/i18n";
 import {registerPlugin} from "@wordpress/plugins";
 
 // noinspection JSUnusedLocalSymbols
@@ -17,8 +18,8 @@ const fieldRenderers = {
 		return (
 			<TextControl
 				value={metaFields[field.meta_key]}
-				label={field.label}
-				placeholder={field.placeholder}
+				label={__(field.label, "tw")}
+				placeholder={__(field.placeholder, "tw")}
 				onChange={value => onUpdate(field.meta_key, value, metaFields)}/>
 		);
 	},
@@ -28,8 +29,8 @@ const fieldRenderers = {
 		return (
 			<TextareaControl
 				value={metaFields[field.meta_key]}
-				label={field.label}
-				placeholder={field.placeholder}
+				label={__(field.label, "tw")}
+				placeholder={__(field.placeholder, "tw")}
 				onChange={value => onUpdate(field.meta_key, value, metaFields)}/>
 		);
 	}
@@ -112,8 +113,8 @@ export class MetaFields
 	{
 		return <ComposedComponent
 			id={this.#id}
-			description={this.#description}
-			label={this.#label}
+			description={__(this.#description, "tw")}
+			label={__(this.#label, "tw")}
 			fields={this.#fields}/>;
 	}
 

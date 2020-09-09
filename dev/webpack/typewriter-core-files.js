@@ -1,7 +1,7 @@
-const fs = require("fs");
-const path = require("path");
+const {readFileSync} = require("fs");
+const {resolve} = require("path");
+const {merge} = require("webpack-merge");
 
-const merge = require("webpack-merge");
 const webpack = require("webpack");
 
 const base = require("./webpack-config");
@@ -23,6 +23,7 @@ module.exports = merge(base, {
 		"@wordpress/element": {this: ["wp", "element"]},
 		"@wordpress/hooks": {this: ["wp", "hooks"]},
 		"@wordpress/i18n": {this: ["wp", "i18n"]},
+		"@wordpress/icons": {this: ["wp", "icons"]},
 		"@wordpress/plugins": {this: ["wp", "plugins"]},
 		moment: "moment",
 		jquery: "jQuery"
@@ -30,12 +31,12 @@ module.exports = merge(base, {
 	output: {
 		filename: "[name].js",
 		libraryTarget: "this",
-		path: path.resolve(__dirname, "../../public/tw/dist"),
+		path: resolve(__dirname, "../../public/tw/dist"),
 		publicPath: "/public/tw/dist/"
 	},
 	plugins: [
 		new webpack.BannerPlugin({
-			banner: fs.readFileSync("dev/webpack/license-header.txt", "utf8").trim(),
+			banner: readFileSync("dev/webpack/license-header.txt", "utf8").trim(),
 			test: /\.(css|js)$/
 		})
 	]

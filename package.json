@@ -49,6 +49,7 @@
 		"@wordpress/element": "latest",
 		"@wordpress/hooks": "latest",
 		"@wordpress/i18n": "latest",
+		"@wordpress/icons": "latest",
 		"@wordpress/plugins": "latest"
 	},
 	"devDependencies": {

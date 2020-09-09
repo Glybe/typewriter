@@ -1,10 +1,11 @@
-import { MediaUpload, MediaUploadCheck } from "@wordpress/block-editor";
-import { Button, Fill, Notice, PanelBody, PanelRow, Slot } from "@wordpress/components";
-import { compose } from "@wordpress/compose";
-import { withDispatch, withSelect } from "@wordpress/data";
-import { PluginSidebar } from "@wordpress/edit-post";
-import { __ } from "@wordpress/i18n";
-import { registerPlugin } from "@wordpress/plugins";
+import {MediaUpload, MediaUploadCheck} from "@wordpress/block-editor";
+import {Button, Fill, Notice, PanelBody, PanelRow, Slot} from "@wordpress/components";
+import {compose} from "@wordpress/compose";
+import {withDispatch, withSelect} from "@wordpress/data";
+import {PluginSidebar, PluginSidebarMoreMenuItem} from "@wordpress/edit-post";
+import {Fragment} from "@wordpress/element";
+import {__} from "@wordpress/i18n";
+import {registerPlugin} from "@wordpress/plugins";
 
 let didInitializePlugin = false;
 let galleries = null;
@@ -24,7 +25,7 @@ export class Galleries
 	constructor()
 	{
 		registerPlugin("tw-galleries", {
-			icon: "",
+			icon: "format-gallery",
 			render: () => this.render()
 		});
 	}
@@ -32,12 +33,18 @@ export class Galleries
 	render()
 	{
 		return (
-			<PluginSidebar name="tw-gallery" icon="format-gallery" title={__("Galleries", "tw")}>
-				<PanelBody title={null} initialOpen={true}>
-					{__("Here you can change the galleries supported by the selected template.", "tw")}
-				</PanelBody>
-				<Slot name="tw-galleries"/>
-			</PluginSidebar>
+			<Fragment>
+				<PluginSidebarMoreMenuItem target="tw-gallery" icon="format-gallery">
+					{__("Galleries Manager", "tw")}
+				</PluginSidebarMoreMenuItem>
+
+				<PluginSidebar name="tw-gallery" icon="format-gallery" title={__("Galleries", "tw")}>
+					<PanelBody title={null} initialOpen={true}>
+						{__("Here you can change the galleries supported by the selected template.", "tw")}
+					</PanelBody>
+					<Slot name="tw-galleries"/>
+				</PluginSidebar>
+			</Fragment>
 		);
 	}
 
@@ -145,7 +152,7 @@ export class Gallery
 								multiple={true}
 								value={mediaIds}
 								onSelect={props.onMediaSelected}
-								render={(({open}) => this.renderAddButton(open))}/>
+								render={(({open}) => this.renderAddButton(open, medias.length === 0))}/>
 						</MediaUploadCheck>
 					</PanelRow>
 				</PanelBody>
@@ -160,10 +167,10 @@ export class Gallery
 		);
 	}
 
-	renderAddButton(open)
+	renderAddButton(open, isEmpty)
 	{
 		return (
-			<Button isLarge isSecondary onClick={open}>{__("Edit gallery", "tw")}</Button>
+			<Button isLarge isSecondary onClick={open}>{__(isEmpty ? "Add media" : "Edit media", "tw")}</Button>
 		);
 	}
 

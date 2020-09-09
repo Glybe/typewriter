@@ -1,0 +1,66 @@
+{
+	"domain": "tw",
+	"locale_data": {
+		"tw": {
+			"": {
+				"domain": "tw",
+				"lang": "nl",
+				"plural_forms": "nplurals=2; plural=(n != 1)"
+			},
+			"Galleries": [
+				"Galerijen"
+			],
+			"Galleries Manager": [
+				"Galerij beheer"
+			],
+			"Here you can change the galleries supported by the selected template.": [
+				"Hier kun je alle galerijen bewerken die worden ondersteund op de geselecteerde template."
+			],
+			"This gallery appears to be empty.": [
+				"Deze galerij lijkt leeg te zijn."
+			],
+			"To edit this gallery, you need permissions to upload media.": [
+				"Om deze galerij te bewerken heb je rechten voor uploaden nodig."
+			],
+			"Add media": [
+				"Media toevoegen"
+			],
+			"Edit media": [
+				"Media bewerken"
+			],
+			"Intro text": [
+				"Introtekst"
+			],
+			"<strong>This is usually an inviting text.</strong>": [
+				"<strong>Dit is normaal gesproken een uitnodigende tekst.</strong>"
+			],
+			"Heading": [
+				"Titel"
+			],
+			"Welcome!": [
+				"Welkom!"
+			],
+			"Leading": [
+				"Taglijn"
+			],
+			"We create websites, apps and more!": [
+				"Wij maken websites, apps en meer!"
+			],
+			"To edit the image, you need permission to upload media.": [
+				"Om deze afbeelding te bewerken heb je rechten voor uploaden nodig."
+			],
+			"Edit or update the image": [
+				"Bewerk of vervang de afbeelding"
+			],
+			"Replace image": [
+				"Vervang afbeelding"
+			],
+			"Update image": [
+				"Kies afbeelding"
+			],
+			"Remove image": [
+				"Verwijder afbeelding"
+			]
+		}
+	}
+}
