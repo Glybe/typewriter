@@ -43,7 +43,7 @@ if ($requestFile && !$isPhpFile && is_file($requestFile))
 	if (isset($mimeTypes[$extension]))
 	{
 		header('Cache-Control: public, max-age=5184000');
-		header('Content-Type: ' . $mimeTypes[$extension]);
+		header('Content-Type: ' . $mimeTypes[$extension] ?? mime_content_type($requestFile));
 		header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', strtotime('+ 1 month')));
 		readfile($requestFile);
 		return true;

@@ -83,7 +83,14 @@ export class Gallery
 
 				onMediaSelected: (medias) =>
 				{
+					console.log(medias);
+
 					editPost({meta: {...meta, [this.#metaKey]: medias.map(media => media.id)}});
+				},
+
+				onRemoveGallery: () =>
+				{
+					editPost({meta: {...meta, [this.#metaKey]: []}});
 				}
 
 			};
@@ -155,6 +162,13 @@ export class Gallery
 								render={(({open}) => this.renderAddButton(open, medias.length === 0))}/>
 						</MediaUploadCheck>
 					</PanelRow>
+					{medias.length > 0 && (
+						<PanelRow>
+							<Button onClick={props.onRemoveGallery} isLink isDestructive>
+								{__("Remove gallery", "tw")}
+							</Button>
+						</PanelRow>
+					)}
 				</PanelBody>
 			</Fill>
 		);
