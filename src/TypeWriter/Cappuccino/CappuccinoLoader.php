@@ -28,7 +28,7 @@ final class CappuccinoLoader extends FilesystemLoader
 	 */
 	protected function findTemplate(string $name, bool $throw = true): ?string
 	{
-		if (substr($name, 0, 1) !== '@' && tw()->getState()['tw.is-wp-initialized'])
+		if (substr($name, 0, 1) !== '@' && tw()->getState()->get('tw.is-wp-initialized', false))
 		{
 			$themeDirectories = array_unique([
 				get_stylesheet_directory(),

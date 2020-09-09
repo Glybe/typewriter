@@ -16,6 +16,7 @@ use Cappuccino\Cappuccino;
 use Columba\Columba;
 use Columba\Database\Connection\Connection;
 use Columba\Foundation\Preferences\Preferences;
+use Columba\Foundation\Store;
 use Columba\Http\RequestMethod;
 use Columba\Router\RouterException;
 use Columba\Util\Stopwatch;
@@ -25,7 +26,6 @@ use TypeWriter\Facade\Hooks;
 use TypeWriter\Feature\Feature;
 use TypeWriter\Module\Module;
 use TypeWriter\Router\Router;
-use TypeWriter\Storage\KeyValueStorage;
 use function defined;
 use function is_admin;
 use function phpversion;
@@ -49,7 +49,7 @@ final class TypeWriter
 	private Connection $database;
 	private Preferences $preferences;
 	private Router $router;
-	private KeyValueStorage $state;
+	private Store $state;
 
 	/** @var Feature[] */
 	private array $features = [];
@@ -68,7 +68,7 @@ final class TypeWriter
 		Stopwatch::start(self::class);
 
 		$this->preferences = Preferences::loadFromJson(ROOT . '/config/config.json');
-		$this->state = new KeyValueStorage();
+		$this->state = new Store();
 	}
 
 	/**
@@ -82,7 +82,7 @@ final class TypeWriter
 		$this->cappuccino = new CappuccinoRenderer();
 		$this->router = new Router();
 
-		$this->state['tw.is-initialized'] = true;
+		$this->state->set('tw.is-wp-initialized', true);
 	}
 
 	/**
@@ -102,8 +102,8 @@ final class TypeWriter
 
 		wp();
 
-		$this->state['tw.is-wp-initialized'] = true;
-		$this->state['tw.is-wp-used'] = false;
+		$this->state->set('tw.is-wp-initialized', true);
+		$this->state->set('tw.is-wp-used', false);
 
 		foreach ($this->modules as $module)
 			$module->onRun();
@@ -195,11 +195,11 @@ final class TypeWriter
 	/**
 	 * Gets the state storage.
 	 *
-	 * @return KeyValueStorage
+	 * @return Store
 	 * @author Bas Milius <bas@mili.us>
 	 * @since 1.0.0
 	 */
-	public final function getState(): KeyValueStorage
+	public final function getState(): Store
 	{
 		return $this->state;
 	}
@@ -290,7 +290,7 @@ final class TypeWriter
 	 * Loads a {@see Feature}.
 	 *
 	 * @param string $className
-	 * @param mixed  ...$args
+	 * @param mixed ...$args
 	 *
 	 * @return Feature
 	 * @author Bas Milius <bas@ideemedia.nl>
@@ -313,7 +313,7 @@ final class TypeWriter
 	 * Loads a {@see Module}.
 	 *
 	 * @param string $className
-	 * @param mixed  ...$args
+	 * @param mixed ...$args
 	 *
 	 * @return Module
 	 * @author Bas Milius <bas@mili.us>
@@ -327,7 +327,7 @@ final class TypeWriter
 		/** @var Module $module */
 		$module = new $className(...$args);
 
-		if ($this->state['tw.is-initialized'])
+		if ($this->state->get('tw.is-wp-initialized', false))
 			$module->onInitialize();
 
 		$this->modules[] = $module;
@@ -388,7 +388,7 @@ final class TypeWriter
 			if ($err->getCode() !== $err::ERR_NOT_FOUND)
 				throw $err;
 
-			$this->state['tw.is-wp-used'] = true;
+			$this->state->set('tw.is-wp-used', true);
 
 			if ($onNotUsed !== null)
 				$onNotUsed();
