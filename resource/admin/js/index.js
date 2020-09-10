@@ -1,12 +1,12 @@
 import "../css/index.scss";
 
 import { name, version } from "../../../package";
-import { Gallery, MetaFields, PostThumbnail } from "./feature";
+import { Gallery, Link, MetaFields, PostThumbnail } from "./feature";
 
 function init()
 {
 	window.tw = {
-		feature: {Gallery, MetaFields, PostThumbnail},
+		feature: {Gallery, Link, MetaFields, PostThumbnail},
 		name,
 		version
 	};
