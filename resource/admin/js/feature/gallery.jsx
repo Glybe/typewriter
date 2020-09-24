@@ -183,7 +183,7 @@ export class Gallery
 	renderAddButton(open, isEmpty)
 	{
 		return (
-			<Button isSecondary onClick={open}>{__(isEmpty ? "Add media" : "Edit media", "tw")}</Button>
+			<Button isSecondary isSmall onClick={open}>{__(isEmpty ? "Add media" : "Edit media", "tw")}</Button>
 		);
 	}
 

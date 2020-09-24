@@ -14,7 +14,10 @@ namespace TypeWriter\Feature;
 
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Util\AdminUtil;
+use WP_Post;
+use function array_map;
 use function get_current_screen;
+use function intval;
 use function register_meta;
 
 /**
@@ -105,6 +108,29 @@ class Relation extends Feature
 	protected function getSupportedPostTypes(): ?array
 	{
 		return [$this->postType];
+	}
+
+	/**
+	 * Gets the object id's in the given relation.
+	 *
+	 * @param WP_Post $post
+	 * @param string $id
+	 * @param string $foreignType
+	 *
+	 * @return int[]
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public static function get(WP_Post $post, string $id, string $foreignType): array
+	{
+		$metaId = "{$post->post_type}_{$id}_{$foreignType}";
+		$metaKey = "tw_{$metaId}_relation";
+
+		$objectIds = get_post_meta($post->ID, $metaKey, true);
+		$objectIds = array_map(fn($val) => intval($val), $objectIds);
+		$objectIds = array_filter($objectIds, fn(int $val) => $val > 0);
+
+		return $objectIds;
 	}
 
 }

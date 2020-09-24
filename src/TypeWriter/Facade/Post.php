@@ -8,6 +8,7 @@ use TypeWriter\Error\ViolationException;
 use TypeWriter\Feature\Gallery;
 use TypeWriter\Feature\IntroTextMetaFields;
 use TypeWriter\Feature\PostThumbnail;
+use TypeWriter\Feature\Relation;
 use WP_Post;
 use WP_Post_Type;
 use function get_permalink;
@@ -76,7 +77,7 @@ class Post
 	/**
 	 * Uses the given post for the given call.
 	 *
-	 * @param WP_Post  $post
+	 * @param WP_Post $post
 	 * @param callable $fn
 	 *
 	 * @return mixed
@@ -142,7 +143,7 @@ class Post
 	/**
 	 * Gets the content, but truncated, of the current post.
 	 *
-	 * @param int    $wordCount
+	 * @param int $wordCount
 	 * @param string $ending
 	 *
 	 * @return string|null
@@ -260,8 +261,8 @@ class Post
 	 * Gets a meta value of the current post.
 	 *
 	 * @param string $metaKey
-	 * @param null   $defaultValue
-	 * @param bool   $isSingle
+	 * @param null $defaultValue
+	 * @param bool $isSingle
 	 *
 	 * @return mixed|null
 	 * @author Bas Milius <bas@mili.us>
@@ -281,7 +282,7 @@ class Post
 	 * Gets a meta value of the current post as text.
 	 *
 	 * @param string $metaKey
-	 * @param array  $filters
+	 * @param array $filters
 	 *
 	 * @return string|null
 	 * @author Bas Milius <bas@mili.us>
@@ -336,6 +337,21 @@ class Post
 	public static function post(): WP_Post
 	{
 		return self::$post ?? get_post();
+	}
+
+	/**
+	 * Gets objects that are linked to the current post.
+	 *
+	 * @param string $relationId
+	 * @param string $foreignType
+	 *
+	 * @return int[]
+	 * @author Bas Milius <bas@mili.us>
+	 * @since 1.0.0
+	 */
+	public static function relation(string $relationId, string $foreignType): array
+	{
+		return Relation::get(self::post(), $relationId, $foreignType);
 	}
 
 	/**
