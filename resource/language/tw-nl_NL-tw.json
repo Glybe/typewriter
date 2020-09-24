@@ -4,9 +4,18 @@
 		"tw": {
 			"": {
 				"domain": "tw",
-				"lang": "nl",
-				"plural_forms": "nplurals=2; plural=(n != 1)"
+				"lang": "nl-NL",
+				"plural_forms": "nplurals=2; plural=n != 1"
 			},
+			"Choose an object...": [
+				"Kies een object…"
+			],
+			"Search for objects...": [
+				"Zoek naar objecten…"
+			],
+			"No objects were found.": [
+				"Er zijn geen objecten gevonden."
+			],
 			"Galleries": [
 				"Galerijen"
 			],
@@ -60,6 +69,24 @@
 			],
 			"Remove image": [
 				"Verwijder afbeelding"
+			],
+			"Relation Manager": [
+				"Relatiebeheer"
+			],
+			"Relations": [
+				"Relaties"
+			],
+			"Here are the relationships defined for the object. You can link other objects to this one from here.": [
+				"Hier zie je de relaties die je kunt instellen voor dit object. Je kunt vanuit hier andere objecten linken."
+			],
+			"The selected object is already added.": [
+				"Het gekozen object is al toegevoegd."
+			],
+			"There are no objects in this relationship.": [
+				"Er zijn nog geen objecten in deze relatie."
+			],
+			"Add object": [
+				"Relatie toevoegen"
 			]
 		}
 	}

@@ -8,6 +8,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-03-08T11:26:56-08:00\n"
 
+# <SelectPostDialog/>
+msgid "Choose an object..."
+msgstr ""
+
+msgid "Search for objects..."
+msgstr ""
+
+msgid "No objects were found."
+msgstr ""
+# End <SelectPostDialog/>
+
 # Galleries
 msgid "Galleries"
 msgstr ""
@@ -67,3 +78,23 @@ msgstr ""
 msgid "Remove image"
 msgstr ""
 # End Post Thumbnails
+
+# Relations
+msgid "Relation Manager"
+msgstr ""
+
+msgid "Relations"
+msgstr ""
+
+msgid "Here are the relationships defined for the object. You can link other objects to this one from here."
+msgstr ""
+
+msgid "The selected object is already added."
+msgstr ""
+
+msgid "There are no objects in this relationship."
+msgstr ""
+
+msgid "Add object"
+msgstr ""
+# End Relations

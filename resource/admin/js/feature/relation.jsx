@@ -43,7 +43,7 @@ export class Relations
 
 				<PluginSidebar name="tw-relations" icon="admin-links" title={__("Relations", "tw")}>
 					<PanelBody title={null} initialOpen={true}>
-						{__("Here are the relationships defined for the object type. You can link other objects to this one from here.", "tw")}
+						{__("Here are the relationships defined for the object. You can link other objects to this one from here.", "tw")}
 					</PanelBody>
 					<Slot name="tw-relations"/>
 				</PluginSidebar>

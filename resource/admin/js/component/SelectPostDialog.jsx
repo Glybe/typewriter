@@ -34,7 +34,7 @@ const SelectPostDialog = compose()(props =>
 				className="tw-dialog-search"
 				placeholder={__("Search for objects...", "tw")}
 				value={searchQuery}
-				onInput={evt => setSearchQuery(evt.target.value)}/>
+				onInput={evt => setSearchQuery(evt.target["value"])}/>
 
 			<SelectPostDialogResults
 				postType={props.postType || "page"}

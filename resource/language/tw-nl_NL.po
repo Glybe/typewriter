@@ -13,6 +13,16 @@ msgstr ""
 "X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+# <SelectPostDialog/>
+msgid "Choose an object..."
+msgstr "Kies een object…"
+
+msgid "Search for objects..."
+msgstr "Zoek naar objecten…"
+
+msgid "No objects were found."
+msgstr "Er zijn geen objecten gevonden."
+
 msgid "Galleries"
 msgstr "Galerijen"
 
@@ -70,3 +80,25 @@ msgstr "Kies afbeelding"
 
 msgid "Remove image"
 msgstr "Verwijder afbeelding"
+
+msgid "Relation Manager"
+msgstr "Relatiebeheer"
+
+msgid "Relations"
+msgstr "Relaties"
+
+msgid ""
+"Here are the relationships defined for the object. You can link other "
+"objects to this one from here."
+msgstr ""
+"Hier zie je de relaties die je kunt instellen voor dit object. Je kunt "
+"vanuit hier andere objecten linken."
+
+msgid "The selected object is already added."
+msgstr "Het gekozen object is al toegevoegd."
+
+msgid "There are no objects in this relationship."
+msgstr "Er zijn nog geen objecten in deze relatie."
+
+msgid "Add object"
+msgstr "Relatie toevoegen"
