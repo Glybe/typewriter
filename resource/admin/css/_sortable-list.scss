@@ -1,0 +1,88 @@
+/*!
+ * Copyright (c) 2019-2020 - Bas Milius <bas@mili.us>
+ *
+ * This file is part of TypeWriter, a base framework for WordPress.
+ *
+ * For the full copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+
+.tw-sortable-list
+{
+	position: relative;
+	display: flex;
+	margin: -5px -16px 0;
+	width: calc(100% + 32px);
+	flex-flow: column;
+
+	&-item
+	{
+		position: relative;
+		display: flex;
+		padding: 15px 16px;
+		align-items: flex-start;
+		background: white;
+		border-top: 1px solid #f0f0f0;
+		border-bottom: 1px solid #f0f0f0;
+
+		&-body
+		{
+			position: relative;
+			display: flex;
+			flex: 1 1 auto;
+			flex-flow: column;
+
+			span
+			{
+				opacity: .75;
+			}
+
+			strong + span
+			{
+				margin-top: 3px;
+			}
+		}
+
+		&-delete,
+		&-handle
+		{
+			position: relative;
+			display: flex;
+			padding: 3px;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			opacity: .75;
+
+			svg
+			{
+				height: 12px;
+			}
+
+			&:hover
+			{
+				opacity: 1;
+			}
+		}
+
+		&-delete
+		{
+			margin-left: 9px;
+			margin-right: 6px;
+			color: crimson !important;
+		}
+
+		&-handle
+		{
+			margin-left: -3px;
+			margin-right: 9px;
+			color: #404040 !important;
+			cursor: move;
+		}
+	}
+
+	&-item + &-item
+	{
+		margin-top: -1px;
+	}
+}

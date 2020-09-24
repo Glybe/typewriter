@@ -25,6 +25,7 @@ export class Galleries
 	constructor()
 	{
 		registerPlugin("tw-galleries", {
+			name: "TypeWriter: Galleries",
 			icon: "format-gallery",
 			render: () => this.render()
 		});
@@ -83,8 +84,6 @@ export class Gallery
 
 				onMediaSelected: (medias) =>
 				{
-					console.log(medias);
-
 					editPost({meta: {...meta, [this.#metaKey]: medias.map(media => media.id)}});
 				},
 
@@ -184,7 +183,7 @@ export class Gallery
 	renderAddButton(open, isEmpty)
 	{
 		return (
-			<Button isLarge isSecondary onClick={open}>{__(isEmpty ? "Add media" : "Edit media", "tw")}</Button>
+			<Button isSecondary onClick={open}>{__(isEmpty ? "Add media" : "Edit media", "tw")}</Button>
 		);
 	}
 

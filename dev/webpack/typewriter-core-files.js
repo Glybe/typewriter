@@ -22,11 +22,14 @@ module.exports = merge(base, {
 		"@wordpress/edit-post": {this: ["wp", "editPost"]},
 		"@wordpress/element": {this: ["wp", "element"]},
 		"@wordpress/hooks": {this: ["wp", "hooks"]},
+		"@wordpress/html-entities": {this: ["wp", "htmlEntities"]},
 		"@wordpress/i18n": {this: ["wp", "i18n"]},
 		"@wordpress/icons": {this: ["wp", "icons"]},
 		"@wordpress/plugins": {this: ["wp", "plugins"]},
-		moment: "moment",
-		jquery: "jQuery"
+		"moment": "moment",
+		"jquery": "jQuery",
+		"react": "React",
+		"react-dom": "ReactDOM"
 	},
 	output: {
 		filename: "[name].js",

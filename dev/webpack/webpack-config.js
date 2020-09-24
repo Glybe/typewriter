@@ -46,11 +46,11 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
+				test: /\.jsx?$/,
 				exclude: /node_modules/,
 				loader: "babel-loader",
 				options: {
-					presets: [["@babel/preset-env", {targets: "defaults"}]],
+					presets: ["@wordpress/default"],
 					plugins: [
 						["@babel/plugin-proposal-class-properties", {loose: false}],
 						["@babel/plugin-transform-react-jsx", {pragma: "wp.element.createElement"}]
@@ -58,7 +58,7 @@ module.exports = {
 				}
 			},
 			{
-				test: /\.js$/,
+				test: /\.jsx?$/,
 				exclude: /node_modules/,
 				use: [
 					"uglify-template-string-loader"

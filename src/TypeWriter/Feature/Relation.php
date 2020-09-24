@@ -14,15 +14,17 @@ namespace TypeWriter\Feature;
 
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Util\AdminUtil;
+use function get_current_screen;
+use function register_meta;
 
 /**
- * Class Link
+ * Class Relation
  *
  * @author Bas Milius <bas@mili.us>
  * @package TypeWriter\Feature
  * @since 1.0.0
  */
-class Link extends Feature
+class Relation extends Feature
 {
 
 	protected string $id;
@@ -33,7 +35,7 @@ class Link extends Feature
 	protected string $postType;
 
 	/**
-	 * Link constructor.
+	 * Relation constructor.
 	 *
 	 * @param string $postType
 	 * @param string $id
@@ -51,8 +53,21 @@ class Link extends Feature
 		$this->label = $label;
 		$this->foreignType = $foreignType;
 		$this->metaId = "{$postType}_{$id}_{$foreignType}";
-		$this->metaKey = "tw_{$this->metaId}_link";
+		$this->metaKey = "tw_{$this->metaId}_relation";
 		$this->postType = $postType;
+
+		register_meta('post', $this->metaKey, [
+			'object_subtype' => $this->postType,
+			'single' => true,
+			'show_in_rest' => [
+				'schema' => [
+					'type' => 'array',
+					'items' => ['type' => 'integer']
+				]
+			],
+			'description' => 'Defines a relationship between objects.',
+			'type' => 'array'
+		]);
 
 		Hooks::action('tw.admin-scripts.body', [$this, 'onAdminScriptsBody']);
 	}
@@ -76,7 +91,7 @@ class Link extends Feature
 			return $scripts;
 
 		$scripts[] = <<<CODE
-			new tw.feature.Link("{$this->id}", "{$this->label}", "{$this->metaKey}", "{$this->foreignType}"); 
+			new tw.feature.Relation("{$this->id}", "{$this->label}", "{$this->metaKey}", "{$this->foreignType}"); 
 		CODE;
 
 		return $scripts;

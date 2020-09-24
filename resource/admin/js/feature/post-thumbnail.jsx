@@ -127,6 +127,7 @@ export class PostThumbnail
 		const ComposedComponent = this.compose();
 
 		registerPlugin(`post-thumbnail-${this.#id}`, {
+			name: "TypeWriter: Post Thumbnails",
 			icon: "format-image",
 			render: () => this.render(ComposedComponent)
 		});

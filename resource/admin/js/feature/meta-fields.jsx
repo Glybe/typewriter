@@ -71,6 +71,7 @@ export class MetaFields
 		const ComposedComponent = this.compose();
 
 		registerPlugin(`meta-fields-${this.#id}`, {
+			name: "TypeWriter: Meta Fields",
 			icon: "editor-quote",
 			render: () => this.render(ComposedComponent)
 		});

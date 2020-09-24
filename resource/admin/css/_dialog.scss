@@ -1,0 +1,82 @@
+/*!
+ * Copyright (c) 2019-2020 - Bas Milius <bas@mili.us>
+ *
+ * This file is part of TypeWriter, a base framework for WordPress.
+ *
+ * For the full copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+
+input[type=search].tw-dialog-search
+{
+	position: relative;
+	min-width: 480px;
+	width: 100%;
+	appearance: none;
+	padding: 9px 15px;
+	background: #fafafa;
+	border: 1px solid #eaeaea;
+}
+
+.tw-dialog
+{
+	&-results
+	{
+		position: relative;
+		display: flex;
+		margin: 24px -24px 0;
+		max-width: 480px + 48px;
+		flex-flow: column;
+
+		&.is-loading
+		{
+			align-items: center;
+		}
+
+		.components-notice
+		{
+			margin: 0 24px;
+			flex: 1 1 auto;
+		}
+	}
+
+	&-result
+	{
+		position: relative;
+		display: flex;
+		padding: 15px 24px;
+		width: inherit;
+		flex-flow: column;
+		justify-content: flex-start;
+		border-bottom: 1px solid #eaeaea;
+		color: unset;
+		cursor: pointer;
+		overflow: hidden;
+
+		&:first-child
+		{
+			border-top: 1px solid #eaeaea;
+		}
+
+		&:last-child
+		{
+			margin-bottom: -15px;
+			border-bottom: 0;
+		}
+
+		&:hover
+		{
+			background: #fafafa;
+		}
+
+		span
+		{
+			margin-top: 3px;
+			width: 100%;
+			opacity: .75;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+	}
+}
