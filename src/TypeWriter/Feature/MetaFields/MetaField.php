@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace TypeWriter\Feature\MetaFields;
 
-use Columba\Facade\IJson;
+use Columba\Facade\Jsonable;
 
 /**
  * Class MetaField
@@ -22,7 +22,7 @@ use Columba\Facade\IJson;
  * @package TypeWriter\Feature\MetaFields
  * @since 1.0.0
  */
-abstract class MetaField implements IJson
+abstract class MetaField implements Jsonable
 {
 
 	protected array $attributes = [];
@@ -134,7 +134,7 @@ abstract class MetaField implements IJson
 	 * Sets an attribute.
 	 *
 	 * @param string $name
-	 * @param mixed  $value
+	 * @param mixed $value
 	 *
 	 * @return $this
 	 * @author Bas Milius <bas@ideemedia.nl>

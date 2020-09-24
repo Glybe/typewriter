@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace TypeWriter\Structure\Menu;
 
-use Columba\Facade\ICountable;
+use Columba\Facade\IsCountable;
 use Columba\Util\ArrayUtil;
 use function count;
 
@@ -14,7 +14,7 @@ use function count;
  * @package TypeWriter\Structure\Menu
  * @since 1.0.0
  */
-abstract class MenuObject implements ICountable
+abstract class MenuObject implements IsCountable
 {
 
 	protected array $items = [];
