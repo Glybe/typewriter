@@ -29,58 +29,58 @@ use function get_post_meta;
 class IntroTextMetaFields extends MetaFields
 {
 
-	/**
-	 * IntroTextMetaFields constructor.
-	 *
-	 * @author Bas Milius <bas@ideemedia.nl>
-	 * @since 1.0.0
-	 */
-	public function __construct()
-	{
-		parent::__construct('tw-intro-text', 'tw_intro_text', 'Intro text', '<strong>This is usually an inviting text.</strong>');
-	}
+    /**
+     * IntroTextMetaFields constructor.
+     *
+     * @author Bas Milius <bas@ideemedia.nl>
+     * @since 1.0.0
+     */
+    public function __construct()
+    {
+        parent::__construct('tw-intro-text', 'tw_intro_text', 'Intro text', '<strong>This is usually an inviting text.</strong>');
+    }
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @hook tw.feature.intro-text.post-types (string[] $postTypes): string[]
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	protected function getSupportedPostTypes(): ?array
-	{
-		return Hooks::applyFilters('tw.feature.intro-text.post-types', ['page']);
-	}
+    /**
+     * {@inheritDoc}
+     *
+     * @hook tw.feature.intro-text.post-types (string[] $postTypes): string[]
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    protected function getSupportedPostTypes(): ?array
+    {
+        return Hooks::applyFilters('tw.feature.intro-text.post-types', ['page']);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	protected function registerFields(): void
-	{
-		$this->register(new TextControlMetaField('heading', 'Heading', 'Welcome!'));
-		$this->register(new TextareaControlMetaField('leading', 'Leading', 'We create websites, apps and more!'));
-	}
+    /**
+     * {@inheritdoc}
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    protected function registerFields(): void
+    {
+        $this->register(new TextControlMetaField('heading', 'Heading', 'Welcome!'));
+        $this->register(new TextareaControlMetaField('leading', 'Leading', 'We create websites, apps and more!'));
+    }
 
-	/**
-	 * Gets the intro text for the given post.
-	 *
-	 * @param int $postId
-	 *
-	 * @return string[]
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public static function get(int $postId): array
-	{
-		$metaValue = get_post_meta($postId, 'tw_intro_text', true);
+    /**
+     * Gets the intro text for the given post.
+     *
+     * @param int $postId
+     *
+     * @return string[]
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public static function get(int $postId): array
+    {
+        $metaValue = get_post_meta($postId, 'tw_intro_text', true);
 
-		return [
-			'heading' => $metaValue['heading'] ?? '',
-			'leading' => $metaValue['leading'] ?? ''
-		];
-	}
+        return [
+            'heading' => $metaValue['heading'] ?? '',
+            'leading' => $metaValue['leading'] ?? ''
+        ];
+    }
 
 }

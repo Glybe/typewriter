@@ -24,7 +24,7 @@ use TypeWriter\Error\TypeWriterException;
 final class HookException extends TypeWriterException
 {
 
-	public const ERR_INVALID_CALLABLE = 0xAA0010;
-	public const ERR_REFLECTION_FAILED = 0xAA0011;
+    public const ERR_INVALID_CALLABLE = 0xAA0010;
+    public const ERR_REFLECTION_FAILED = 0xAA0011;
 
 }

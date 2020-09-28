@@ -19,8 +19,8 @@ declare(strict_types=1);
 
 use TypeWriter\Module\Core\AdminMenuModule;
 use TypeWriter\Module\Core\AdminModule;
-use TypeWriter\Module\Core\BrandingModule;
 use TypeWriter\Module\Core\APIModule;
+use TypeWriter\Module\Core\BrandingModule;
 use TypeWriter\Module\Core\DisableAdminFeaturesModule;
 use TypeWriter\Module\Core\DisableCommentsAndPingsModule;
 use TypeWriter\Module\Core\DisableWPFeaturesModule;
@@ -35,17 +35,15 @@ tw()->loadModule(BrandingModule::class);
 tw()->loadModule(DisableCommentsAndPingsModule::class);
 tw()->loadModule(ThemeBaseModule::class);
 
-if (tw()->isAdmin() || tw()->isApi())
-{
-	tw()->loadModule(AdminModule::class);
-	tw()->loadModule(AdminMenuModule::class);
-	tw()->loadModule(DisableAdminFeaturesModule::class);
-	tw()->loadModule(PostTemplatesLoaderModule::class);
+if (tw()->isAdmin() || tw()->isApi()) {
+    tw()->loadModule(AdminModule::class);
+    tw()->loadModule(AdminMenuModule::class);
+    tw()->loadModule(DisableAdminFeaturesModule::class);
+    tw()->loadModule(PostTemplatesLoaderModule::class);
 }
 
-if (tw()->isFront())
-{
-	tw()->loadModule(DisableWPFeaturesModule::class);
-	tw()->loadModule(ImproveOutputModule::class);
-	tw()->loadModule(PostTemplatesResolverModule::class);
+if (tw()->isFront()) {
+    tw()->loadModule(DisableWPFeaturesModule::class);
+    tw()->loadModule(ImproveOutputModule::class);
+    tw()->loadModule(PostTemplatesResolverModule::class);
 }

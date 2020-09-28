@@ -22,35 +22,35 @@ namespace TypeWriter\Util;
 final class DocUtil
 {
 
-	/**
-	 * Parses a template file to template properties.
-	 *
-	 * @param string $file
-	 *
-	 * @return array
-	 * @author Bas Milius <bas@ideemedia.nl>
-	 * @since 1.2.0
-	 */
-	public static function getProperties(string $file): array
-	{
-		$properties = [];
+    /**
+     * Parses a template file to template properties.
+     *
+     * @param string $file
+     *
+     * @return array
+     * @author Bas Milius <bas@ideemedia.nl>
+     * @since 1.2.0
+     */
+    public static function getProperties(string $file): array
+    {
+        $properties = [];
 
-		if (!is_file($file))
-			return $properties;
+        if (!is_file($file))
+            return $properties;
 
-		$contents = file_get_contents($file);
-		$matches = [];
-		$pattern = '#@([a-zA-Z0-9-]+) ([\w\- .,<@>\(\)]+)#';
+        $contents = file_get_contents($file);
+        $matches = [];
+        $pattern = '#@([a-zA-Z0-9-]+) ([\w\- .,<@>\(\)]+)#';
 
-		preg_match_all($pattern, $contents, $matches);
+        preg_match_all($pattern, $contents, $matches);
 
-		$keys = $matches[1];
-		$values = $matches[2];
+        $keys = $matches[1];
+        $values = $matches[2];
 
-		for ($i = 0, $length = count($keys); $i < $length; $i++)
-			$properties[$keys[$i]] = trim($values[$i]);
+        for ($i = 0, $length = count($keys); $i < $length; $i++)
+            $properties[$keys[$i]] = trim($values[$i]);
 
-		return $properties;
-	}
+        return $properties;
+    }
 
 }

@@ -22,7 +22,7 @@ namespace TypeWriter\Error;
 class WordPressException extends TypeWriterException
 {
 
-	public const ERR_REGISTER_FAILED = 1;
-	public const ERR_DOING_IT_WRONG = 2;
+    public const ERR_REGISTER_FAILED = 1;
+    public const ERR_DOING_IT_WRONG = 2;
 
 }

@@ -13,6 +13,6 @@ namespace TypeWriter\Error;
 class TemplateException extends TypeWriterException
 {
 
-	public const ERR_TEMPLATE_FILE_NOT_FOUND = 1;
+    public const ERR_TEMPLATE_FILE_NOT_FOUND = 1;
 
 }

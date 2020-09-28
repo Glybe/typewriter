@@ -37,32 +37,32 @@ use WP_Post;
 class PostWith
 {
 
-	private WP_Post $post;
+    private WP_Post $post;
 
-	/**
-	 * PostWith constructor.
-	 *
-	 * @param WP_Post $post
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public function __construct(WP_Post $post)
-	{
-		$this->post = $post;
-	}
+    /**
+     * PostWith constructor.
+     *
+     * @param WP_Post $post
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public function __construct(WP_Post $post)
+    {
+        $this->post = $post;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public function __call(string $name, array $arguments)
-	{
-		if (!method_exists(Post::class, $name))
-			throw new ViolationException(sprintf('Method "%s" does not exist in "%s".', $name, Post::class), ViolationException::ERR_BAD_METHOD_CALL);
+    /**
+     * {@inheritDoc}
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public function __call(string $name, array $arguments)
+    {
+        if (!method_exists(Post::class, $name))
+            throw new ViolationException(sprintf('Method "%s" does not exist in "%s".', $name, Post::class), ViolationException::ERR_BAD_METHOD_CALL);
 
-		return Post::useWith($this->post, fn() => Post::{$name}(...$arguments));
-	}
+        return Post::useWith($this->post, fn() => Post::{$name}(...$arguments));
+    }
 
 }

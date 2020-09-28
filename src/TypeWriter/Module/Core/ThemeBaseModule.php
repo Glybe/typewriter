@@ -45,177 +45,189 @@ use function zeroise;
 final class ThemeBaseModule extends Module
 {
 
-	/**
-	 * ThemeBaseModule constructor.
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public function __construct()
-	{
-		parent::__construct('Basic setup for themes.');
-	}
+    /**
+     * ThemeBaseModule constructor.
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public function __construct()
+    {
+        parent::__construct('Basic setup for themes.');
+    }
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @hook tw.theme-base.directories (string[] $directories): array
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public function onInitialize(): void
-	{
-		$themeDirectories = array_unique([get_template_directory(), get_stylesheet_directory()]);
-		$themeDirectories = Hooks::applyFilters('tw.theme-base.directories', $themeDirectories);
+    /**
+     * {@inheritDoc}
+     *
+     * @hook tw.theme-base.directories (string[] $directories): array
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public function onInitialize(): void
+    {
+        if (tw()->isInstalling()) {
+            return;
+        }
 
-		foreach ($themeDirectories as $dir)
-		{
-			autoloader()->addDirectory($dir);
+        $themeDirectories = array_unique([get_template_directory(), get_stylesheet_directory()]);
+        $themeDirectories = Hooks::applyFilters('tw.theme-base.directories', $themeDirectories);
 
-			if (!is_dir($dir . '/template'))
-				continue;
+        foreach ($themeDirectories as $dir) {
+            autoloader()->addPsr4('', [$dir]);
 
-			tw()->getCappuccino()->addPath($dir . '/template', 'theme');
-		}
+            if (!is_dir($dir . '/template')) {
+                continue;
+            }
 
-		Hooks::action('after_setup_theme', [$this, 'onWordPressAfterSetupTheme']);
-		Hooks::action('wp_head', [$this, 'onWordPressHead']);
-	}
+            tw()->getCappuccino()->addPath($dir . '/template', 'theme');
+        }
 
-	/**
-	 * Invoked on the after_setup_theme action hook.
-	 * Adds various theme supports values.
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 * @internal
-	 */
-	public final function onWordPressAfterSetupTheme(): void
-	{
-		add_theme_support('post-thumbnails');
-	}
+        Hooks::action('after_setup_theme', [$this, 'onWordPressAfterSetupTheme']);
+        Hooks::action('wp_head', [$this, 'onWordPressHead']);
+    }
 
-	/**
-	 * Invoked on the wp_head action hook.
-	 * Adds various theme stuff the the output html.
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 * @internal
-	 */
-	public final function onWordPressHead(): void
-	{
-		$this->generateTitle();
-	}
+    /**
+     * Invoked on the after_setup_theme action hook.
+     * Adds various theme supports values.
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     * @internal
+     */
+    public final function onWordPressAfterSetupTheme(): void
+    {
+        add_theme_support('post-thumbnails');
+    }
 
-	/**
-	 * Generates the title of all pages.
-	 *
-	 * @hook tw.theme.title.not-found (string $text): string
-	 * @hook tw.theme.title.search-results (string $text): string
-	 * @hook tw.theme.title.parts (string[] $parts): string[]
-	 * @hook tw.theme.title.separator (string $separator): string
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	private function generateTitle(): void
-	{
-		global $wp_locale;
+    /**
+     * Invoked on the wp_head action hook.
+     * Adds various theme stuff the the output html.
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     * @internal
+     */
+    public final function onWordPressHead(): void
+    {
+        $this->generateTitle();
+    }
 
-		$description = get_bloginfo('description');
-		$name = get_bloginfo('name');
-		$parts = [];
-		$separator = Hooks::applyFilters('tw.theme.title.separator', ' &ndash; ');
+    /**
+     * Generates the title of all pages.
+     *
+     * @hook tw.theme.title.not-found (string $text): string
+     * @hook tw.theme.title.search-results (string $text): string
+     * @hook tw.theme.title.parts (string[] $parts): string[]
+     * @hook tw.theme.title.separator (string $separator): string
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    private function generateTitle(): void
+    {
+        global $wp_locale;
 
-		$m = get_query_var('m');
-		$year = get_query_var('year');
-		$monthnum = get_query_var('monthnum');
-		$day = get_query_var('day');
-		$postTypeObject = null;
+        $description = get_bloginfo('description');
+        $name = get_bloginfo('name');
+        $parts = [];
+        $separator = Hooks::applyFilters('tw.theme.title.separator', ' &ndash; ');
 
-		if (is_single() || (is_home() && !is_front_page()) || (is_page() && !is_front_page()))
-			$parts[] = single_post_title('', false);
+        $m = get_query_var('m');
+        $year = get_query_var('year');
+        $monthnum = get_query_var('monthnum');
+        $day = get_query_var('day');
+        $postTypeObject = null;
 
-		if (is_post_type_archive())
-		{
-			$postType = get_query_var('post_type');
+        if (is_single() || (is_home() && !is_front_page()) || (is_page() && !is_front_page())) {
+            $parts[] = single_post_title('', false);
+        }
 
-			if (is_array($postType))
-				$postType = reset($postType);
+        if (is_post_type_archive()) {
+            $postType = get_query_var('post_type');
 
-			$postTypeObject = get_post_type_object($postType);
+            if (is_array($postType)) {
+                $postType = reset($postType);
+            }
 
-			if (!$postTypeObject->has_archive)
-				$parts[] = post_type_archive_title('', false);
-		}
+            $postTypeObject = get_post_type_object($postType);
 
-		if (is_category() || is_tag())
-			$parts[] = single_term_title('', false);
+            if (!$postTypeObject->has_archive) {
+                $parts[] = post_type_archive_title('', false);
+            }
+        }
 
-		if (is_tax())
-		{
-			$term = get_queried_object();
+        if (is_category() || is_tag()) {
+            $parts[] = single_term_title('', false);
+        }
 
-			if ($term)
-			{
-				$tax = get_taxonomy($term->taxonomy);
-				$parts[] = single_term_title($tax->labels->name, false);
-			}
-		}
+        if (is_tax()) {
+            $term = get_queried_object();
 
-		if (is_author() && !is_post_type_archive())
-		{
-			$author = get_queried_object();
+            if ($term) {
+                $tax = get_taxonomy($term->taxonomy);
+                $parts[] = single_term_title($tax->labels->name, false);
+            }
+        }
 
-			if ($author)
-				$parts[] = $author->display_name;
-		}
+        if (is_author() && !is_post_type_archive()) {
+            $author = get_queried_object();
 
-		if ($postTypeObject !== null && is_post_type_archive() && $postTypeObject->has_archive)
-			$parts[] = post_type_archive_title('', false);
+            if ($author) {
+                $parts[] = $author->display_name;
+            }
+        }
 
-		if (is_archive() && !empty($m))
-		{
-			$my_year = substr($m, 0, 4);
-			$my_month = $wp_locale->get_month(substr($m, 4, 2));
-			$my_day = intval(substr($m, 6, 2));
-			$parts[] = $my_year . ($my_month ? $my_month : '') . ($my_day ? $my_day : '');
-		}
+        if ($postTypeObject !== null && is_post_type_archive() && $postTypeObject->has_archive) {
+            $parts[] = post_type_archive_title('', false);
+        }
 
-		if (is_archive() && !empty($year))
-		{
-			$parts[] = $year;
+        if (is_archive() && !empty($m)) {
+            $my_year = substr($m, 0, 4);
+            $my_month = $wp_locale->get_month(substr($m, 4, 2));
+            $my_day = intval(substr($m, 6, 2));
+            $parts[] = $my_year . ($my_month ? $my_month : '') . ($my_day ? $my_day : '');
+        }
 
-			if (!empty($monthnum))
-				$parts[] = $wp_locale->get_month($monthnum);
+        if (is_archive() && !empty($year)) {
+            $parts[] = $year;
 
-			if (!empty($day))
-				$parts[] = zeroise($day, 2);
-		}
+            if (!empty($monthnum)) {
+                $parts[] = $wp_locale->get_month($monthnum);
+            }
 
-		if (is_search())
-			$parts[] = Hooks::applyFilters('tw.theme.title.search-results', 'Search results for "%s"');
+            if (!empty($day)) {
+                $parts[] = zeroise($day, 2);
+            }
+        }
 
-		if (is_404())
-			$parts[] = Hooks::applyFilters('tw.theme.title.not-found', 'Page not found');
+        if (is_search()) {
+            $parts[] = Hooks::applyFilters('tw.theme.title.search-results', 'Search results for "%s"');
+        }
 
-		if (!empty($name))
-			$parts[] = $name;
+        if (is_404()) {
+            $parts[] = Hooks::applyFilters('tw.theme.title.not-found', 'Page not found');
+        }
 
-		if (!empty($description))
-			$parts[] = $description;
+        if (!empty($name)) {
+            $parts[] = $name;
+        }
 
-		$parts = Hooks::applyFilters('tw.theme.title.parts', $parts);
+        if (!empty($description)) {
+            $parts[] = $description;
+        }
 
-		if (count($parts) === 0)
-			return;
+        $parts = Hooks::applyFilters('tw.theme.title.parts', $parts);
 
-		if (is_search())
-			$parts[0] = sprintf($parts[0], get_query_var('s'));
+        if (count($parts) === 0) {
+            return;
+        }
 
-		echo sprintf('<title>%s</title>', implode($separator, $parts));
-	}
+        if (is_search()) {
+            $parts[0] = sprintf($parts[0], get_query_var('s'));
+        }
+
+        echo sprintf('<title>%s</title>', implode($separator, $parts));
+    }
 
 }

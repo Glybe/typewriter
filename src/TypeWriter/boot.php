@@ -12,8 +12,8 @@ declare(strict_types=1);
 
 namespace TypeWriter;
 
-use Columba\Autoloader;
 use Columba\Error\ExceptionHandler;
+use Composer\Autoload\ClassLoader;
 
 define('TW_ROOT', realpath(__DIR__ . '/../..'));
 
@@ -23,20 +23,18 @@ const SRC_DIR = ROOT . '/src';
 const VENDOR_DIR = ROOT . '/vendor';
 const WP_DIR = PUBLIC_DIR . '/wp';
 
-require_once ROOT . '/vendor/Columba/src/Columba/Autoloader.php';
-
 /**
- * Gets the Autoloader.
+ * Gets the Autoloader instance.
  *
- * @return Autoloader
+ * @return ClassLoader
  * @author Bas Milius <bas@ideemedia.nl>
  * @since 1.0.0
  */
-function autoloader(): Autoloader
+function autoloader(): ClassLoader
 {
-	static $autoloader = null;
+    static $autoloader = null;
 
-	return $autoloader ??= new Autoloader();
+    return $autoloader ??= require_once ROOT . '/vendor/autoload.php';
 }
 
 /**
@@ -48,15 +46,12 @@ function autoloader(): Autoloader
  */
 function tw(): TypeWriter
 {
-	static $tw = null;
+    static $tw = null;
 
-	return $tw ??= new TypeWriter();
+    return $tw ??= new TypeWriter();
 }
 
-autoloader()->addDirectory(VENDOR_DIR . '/Cappuccino/src', 'Cappuccino\\');
-autoloader()->addDirectory(VENDOR_DIR . '/Columba/src', 'Columba\\');
-autoloader()->addDirectory(SRC_DIR);
-autoloader()->register();
+autoloader();
 
 ExceptionHandler::register();
 

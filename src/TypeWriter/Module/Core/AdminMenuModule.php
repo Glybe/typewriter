@@ -17,39 +17,39 @@ use TypeWriter\Module\Module;
 final class AdminMenuModule extends Module
 {
 
-	/**
-	 * AdminMenuModule constructor.
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public function __construct()
-	{
-		parent::__construct('Creates the TypeWriter admin menu and various options.');
-	}
+    /**
+     * AdminMenuModule constructor.
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public function __construct()
+    {
+        parent::__construct('Creates the TypeWriter admin menu and various options.');
+    }
 
-	/**
-	 * {@inheritdoc}
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public final function onInitialize(): void
-	{
-		Hooks::action('admin_menu', [$this, 'onAdminMenu']);
-	}
+    /**
+     * {@inheritdoc}
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public final function onInitialize(): void
+    {
+        Hooks::action('admin_menu', [$this, 'onAdminMenu']);
+    }
 
-	/**
-	 * Invoked on admin_menu action hook.
-	 * Adds the TypeWriter menu entry.
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 * @internal
-	 */
-	public final function onAdminMenu(): void
-	{
-		AdminMenu::addPage('dashicons-edit', 'TypeWriter', AdminMenu::cappuccino('@tw/admin/about'));
-		AdminMenu::addSubPage('typewriter', 'Settings', AdminMenu::cappuccino('@tw/admin/settings'));
-	}
+    /**
+     * Invoked on admin_menu action hook.
+     * Adds the TypeWriter menu entry.
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     * @internal
+     */
+    public final function onAdminMenu(): void
+    {
+        AdminMenu::addPage('dashicons-edit', 'TypeWriter', AdminMenu::cappuccino('@tw/admin/about'));
+        AdminMenu::addSubPage('typewriter', 'Settings', AdminMenu::cappuccino('@tw/admin/settings'));
+    }
 
 }

@@ -1,0 +1,27 @@
+{
+	"name": "basmilius/typewriter",
+	"description": "description",
+	"minimum-stability": "stable",
+	"license": "mit",
+	"authors": [
+		{
+			"name": "Bas Milius",
+			"email": "bas@mili.us"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"TypeWriter\\": "src/TypeWriter"
+		}
+	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/basmilius/Columba"
+		}
+	],
+	"require": {
+		"basmilius/columba": "@dev",
+		"twig/twig": "@dev"
+	}
+}

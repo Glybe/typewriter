@@ -27,24 +27,24 @@ use const EXTR_OVERWRITE;
 final class Sandbox
 {
 
-	/**
-	 * Renders the given php file and returns it's result.
-	 *
-	 * @param string $file
-	 * @param array  $context
-	 *
-	 * @return string
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public static function render(string $file, array $context = []): string
-	{
-		extract($context, EXTR_OVERWRITE);
-		ob_start();
+    /**
+     * Renders the given php file and returns it's result.
+     *
+     * @param string $file
+     * @param array $context
+     *
+     * @return string
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public static function render(string $file, array $context = []): string
+    {
+        extract($context, EXTR_OVERWRITE);
+        ob_start();
 
-		require $file;
+        require $file;
 
-		return ob_get_clean();
-	}
+        return ob_get_clean();
+    }
 
 }

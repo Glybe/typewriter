@@ -23,21 +23,21 @@ namespace TypeWriter\Feature\MetaFields;
 class TextControlMetaField extends MetaField
 {
 
-	/**
-	 * TextControlMetaField constructor.
-	 *
-	 * @param string $metaKey
-	 * @param string $label
-	 * @param string $placeholder
-	 *
-	 * @author Bas Milius <bas@ideemedia.nl>
-	 * @since 1.0.0
-	 */
-	public function __construct(string $metaKey, string $label, string $placeholder)
-	{
-		parent::__construct($metaKey, $label, 'TextControl', 'string');
+    /**
+     * TextControlMetaField constructor.
+     *
+     * @param string $metaKey
+     * @param string $label
+     * @param string $placeholder
+     *
+     * @author Bas Milius <bas@ideemedia.nl>
+     * @since 1.0.0
+     */
+    public function __construct(string $metaKey, string $label, string $placeholder)
+    {
+        parent::__construct($metaKey, $label, 'TextControl', 'string');
 
-		$this->setAttribute('placeholder', $placeholder);
-	}
+        $this->setAttribute('placeholder', $placeholder);
+    }
 
 }

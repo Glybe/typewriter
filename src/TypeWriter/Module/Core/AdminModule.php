@@ -20,85 +20,84 @@ use const TypeWriter\ROOT;
 final class AdminModule extends Module
 {
 
-	/**
-	 * AdminModule constructor.
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public function __construct()
-	{
-		parent::__construct('Adds basic TypeWriter features to the WordPress Admin.');
-	}
+    /**
+     * AdminModule constructor.
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public function __construct()
+    {
+        parent::__construct('Adds basic TypeWriter features to the WordPress Admin.');
+    }
 
-	/**
-	 * {@inheritDoc}
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public final function onInitialize(): void
-	{
-		Hooks::action('admin_enqueue_scripts', [$this, 'onAdminEnqueueScripts']);
-		Hooks::action('admin_init', [$this, 'onAdminInit']);
-		Hooks::action('in_admin_footer', [$this, 'onInAdminFooter']);
-	}
+    /**
+     * {@inheritDoc}
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public final function onInitialize(): void
+    {
+        Hooks::action('admin_enqueue_scripts', [$this, 'onAdminEnqueueScripts']);
+        Hooks::action('admin_init', [$this, 'onAdminInit']);
+        Hooks::action('in_admin_footer', [$this, 'onInAdminFooter']);
+    }
 
-	/**
-	 * Invoked on admin_enqueue_scripts action hook.
-	 * Adds the TypeWriter JS and CSS files to the WordPress Admin.
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 * @internal
-	 */
-	public final function onAdminEnqueueScripts(): void
-	{
-		Dependencies::registerStyle('tw', home_url('/tw/dist/admin.css'));
-		Dependencies::registerScript('tw', home_url('/tw/dist/admin.js'), ['wp-i18n']);
+    /**
+     * Invoked on admin_enqueue_scripts action hook.
+     * Adds the TypeWriter JS and CSS files to the WordPress Admin.
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     * @internal
+     */
+    public final function onAdminEnqueueScripts(): void
+    {
+        Dependencies::registerStyle('tw', home_url('/tw/dist/admin.css'));
+        Dependencies::registerScript('tw', home_url('/tw/dist/admin.js'), ['wp-i18n']);
 
-		wp_set_script_translations('tw', 'tw', ROOT . '/resource/language');
+        wp_set_script_translations('tw', 'tw', ROOT . '/resource/language');
 
-		Dependencies::enqueueStyle('tw');
-		Dependencies::enqueueScript('tw');
-	}
+        Dependencies::enqueueStyle('tw');
+        Dependencies::enqueueScript('tw');
+    }
 
-	/**
-	 * Invoked on admin_init action hook.
-	 * Adds our translations to WordPress.
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 * @internal
-	 */
-	public final function onAdminInit(): void
-	{
-		load_plugin_textdomain('tw', false, '../../../resource/language');
-	}
+    /**
+     * Invoked on admin_init action hook.
+     * Adds our translations to WordPress.
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     * @internal
+     */
+    public final function onAdminInit(): void
+    {
+        load_plugin_textdomain('tw', false, '../../../resource/language');
+    }
 
-	/**
-	 * Invoked on in_admin_footer action hook.
-	 * Adds the TypeWriter feature scripts.
-	 *
-	 * @hook tw.admin-scripts.body (array $scripts): array
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 * @internal
-	 */
-	public final function onInAdminFooter(): void
-	{
-		$fetchScripts = function (): string
-		{
-			return implode(PHP_EOL, Hooks::applyFilters('tw.admin-scripts.body', []));
-		};
+    /**
+     * Invoked on in_admin_footer action hook.
+     * Adds the TypeWriter feature scripts.
+     *
+     * @hook tw.admin-scripts.body (array $scripts): array
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     * @internal
+     */
+    public final function onInAdminFooter(): void
+    {
+        $fetchScripts = function (): string {
+            return implode(PHP_EOL, Hooks::applyFilters('tw.admin-scripts.body', []));
+        };
 
-		echo <<<CODE
+        echo <<<CODE
 		<script type="text/javascript">
 		window.addEventListener("load", function () { 
 		{$fetchScripts()}
 		});
 		</script>
 		CODE;
-	}
+    }
 
 }

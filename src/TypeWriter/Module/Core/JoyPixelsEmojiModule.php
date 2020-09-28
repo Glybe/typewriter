@@ -15,15 +15,15 @@ use TypeWriter\Module\Module;
 final class JoyPixelsEmojiModule extends Module
 {
 
-	/**
-	 * JoyPixelsEmojiModule constructor.
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public function __construct()
-	{
-		parent::__construct('Let WordPress use the emoji\'s of JoyPixels.');
-	}
+    /**
+     * JoyPixelsEmojiModule constructor.
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public function __construct()
+    {
+        parent::__construct('Let WordPress use the emoji\'s of JoyPixels.');
+    }
 
 }

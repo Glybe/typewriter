@@ -25,44 +25,44 @@ use TypeWriter\Module\Module;
 final class DisableAdminFeaturesModule extends Module
 {
 
-	/**
-	 * DisableAdminFeaturesModule constructor.
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public function __construct()
-	{
-		parent::__construct('Disables admin features in WordPress.');
-	}
+    /**
+     * DisableAdminFeaturesModule constructor.
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public function __construct()
+    {
+        parent::__construct('Disables admin features in WordPress.');
+    }
 
-	/**
-	 * {@inheritdoc}
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public final function onInitialize(): void
-	{
-		Hooks::action('wp_dashboard_setup', [$this, 'onWordPressDashboardSetup']);
-	}
+    /**
+     * {@inheritdoc}
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public final function onInitialize(): void
+    {
+        Hooks::action('wp_dashboard_setup', [$this, 'onWordPressDashboardSetup']);
+    }
 
-	/**
-	 * Invoked on wp_dashboard_setup action hook.
-	 * Removes all obsolete dashboard widgets.
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public final function onWordPressDashboardSetup(): void
-	{
-		global $wp_meta_boxes;
+    /**
+     * Invoked on wp_dashboard_setup action hook.
+     * Removes all obsolete dashboard widgets.
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public final function onWordPressDashboardSetup(): void
+    {
+        global $wp_meta_boxes;
 
-		Hooks::removeAction('welcome_panel', 'wp_welcome_panel');
+        Hooks::removeAction('welcome_panel', 'wp_welcome_panel');
 
-		unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_activity']);
-		unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_right_now']);
-		unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_primary']);
-		unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']);
-	}
+        unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_activity']);
+        unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_right_now']);
+        unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_primary']);
+        unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']);
+    }
 
 }

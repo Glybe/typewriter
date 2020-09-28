@@ -52,291 +52,274 @@ use const ENT_QUOTES;
 final class Database extends wpdb
 {
 
-	private Connection $connection;
-	private Connector $connector;
+    private Connection $connection;
+    private Connector $connector;
 
-	/**
-	 * Database constructor.
-	 *
-	 * @param string $user
-	 * @param string $password
-	 * @param string $database
-	 * @param string $host
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public function __construct(string $user, string $password, string $database, string $host)
-	{
-		$this->connector = new MySqlConnector($host, $database, $user, $password);
-		$this->connection = $this->dbh = Db::create(MySqlConnection::class, $this->connector, 'default', false);
+    /**
+     * Database constructor.
+     *
+     * @param string $user
+     * @param string $password
+     * @param string $database
+     * @param string $host
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public function __construct(string $user, string $password, string $database, string $host)
+    {
+        $this->connector = new MySqlConnector($host, $database, $user, $password);
+        $this->connection = $this->dbh = Db::create(MySqlConnection::class, $this->connector, 'default', false);
 
-		tw()->setDatabase($this->connection);
+        tw()->setDatabase($this->connection);
 
-		parent::__construct($user, $password, $database, $host);
-	}
+        parent::__construct($user, $password, $database, $host);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public function _real_escape($string)
-	{
-		if (is_string($string))
-			$string = addslashes($string);
+    /**
+     * {@inheritdoc}
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public function _real_escape($string)
+    {
+        if (is_string($string))
+            $string = addslashes($string);
 
-		return $this->add_placeholder_escape($string);
-	}
+        return $this->add_placeholder_escape($string);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public function db_connect($allow_bail = true): bool
-	{
-		$this->connection->connect();
+    /**
+     * {@inheritdoc}
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public function db_connect($allow_bail = true): bool
+    {
+        $this->connection->connect();
 
-		$this->init_charset();
-		$this->set_charset(null);
+        $this->init_charset();
+        $this->set_charset(null);
 
-		$this->ready = true;
-		$this->set_sql_mode();
+        $this->ready = true;
+        $this->set_sql_mode();
 
-		return true;
-	}
+        return true;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public function db_version(): string
-	{
-		return preg_replace('/[^0-9.].*/', '', $this->connection->getPdo()->getAttribute(PDO::ATTR_SERVER_VERSION));
-	}
+    /**
+     * {@inheritdoc}
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public function db_version(): string
+    {
+        return preg_replace('/[^0-9.].*/', '', $this->connection->getPdo()->getAttribute(PDO::ATTR_SERVER_VERSION));
+    }
 
-	/**
-	 * {@inheritDoc}
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public function print_error($str = '')
-	{
-		global $EZSQL_ERROR;
+    /**
+     * {@inheritDoc}
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public function print_error($str = '')
+    {
+        global $EZSQL_ERROR;
 
-		if (empty($str))
-			$str = $this->connection->getPdo()->errorInfo()[2] ?? 'Unknown database error.';
+        if (empty($str))
+            $str = $this->connection->getPdo()->errorInfo()[2] ?? 'Unknown database error.';
 
-		$EZSQL_ERROR[] = [
-			'query' => $this->last_query,
-			'error_str' => $str,
-		];
+        $EZSQL_ERROR[] = [
+            'query' => $this->last_query,
+            'error_str' => $str,
+        ];
 
-		if ($this->suppress_errors)
-			return false;
+        if ($this->suppress_errors)
+            return false;
 
-		wp_load_translations_early();
+        wp_load_translations_early();
 
-		if (($caller = $this->get_caller()))
-			$errorMessage = sprintf(__('WordPress database error %1$s for query %2$s made by %3$s'), $str, $this->last_query, $caller);
-		else
-			$errorMessage = sprintf(__('WordPress database error %1$s for query %2$s'), $str, $this->last_query);
+        if (($caller = $this->get_caller()))
+            $errorMessage = sprintf(__('WordPress database error %1$s for query %2$s made by %3$s'), $str, $this->last_query, $caller);
+        else
+            $errorMessage = sprintf(__('WordPress database error %1$s for query %2$s'), $str, $this->last_query);
 
-		error_log($errorMessage);
+        error_log($errorMessage);
 
-		if (!$this->show_errors)
-			return false;
+        if (!$this->show_errors)
+            return false;
 
-		if (is_multisite())
-		{
-			$message = sprintf("%s [%s]\n%s\n", __('WordPress database error:'), $str, $this->last_query);
+        if (is_multisite()) {
+            $message = sprintf("%s [%s]\n%s\n", __('WordPress database error:'), $str, $this->last_query);
 
-			if (defined('ERRORLOGFILE'))
-				error_log($message, 3, ERRORLOGFILE);
+            if (defined('ERRORLOGFILE'))
+                error_log($message, 3, ERRORLOGFILE);
 
-			if (defined('DIEONDBERROR') && DIEONDBERROR)
-				wp_die($message);
-		}
-		else
-		{
-			$str = htmlspecialchars($str, ENT_QUOTES);
-			$query = htmlspecialchars($this->last_query, ENT_QUOTES);
+            if (defined('DIEONDBERROR') && DIEONDBERROR)
+                wp_die($message);
+        } else {
+            $str = htmlspecialchars($str, ENT_QUOTES);
+            $query = htmlspecialchars($this->last_query, ENT_QUOTES);
 
-			printf('<div id="error"><p class="wpdberror"><strong>%s</strong> [%s]<br /><code>%s</code></p></div>', __('WordPress database error:'), $str, $query);
-		}
+            printf('<div id="error"><p class="wpdberror"><strong>%s</strong> [%s]<br /><code>%s</code></p></div>', __('WordPress database error:'), $str, $query);
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 *
-	 * @hook tw.database.after-query (string $query, int $queryId): void
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public final function query($query)
-	{
-		if (!$this->ready)
-		{
-			$this->check_current_query = true;
-			return false;
-		}
+    /**
+     * {@inheritdoc}
+     *
+     * @hook tw.database.after-query (string $query, int $queryId): void
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public final function query($query)
+    {
+        if (!$this->ready) {
+            $this->check_current_query = true;
 
-		$query = (string)Hooks::applyFilters('query', $query);
+            return false;
+        }
 
-		$this->flush();
+        $query = (string)Hooks::applyFilters('query', $query);
 
-		$this->func_call = "\$db->query(\"$query\")";
+        $this->flush();
 
-		if ($this->check_current_query && !$this->check_ascii($query))
-		{
-			$strippedQuery = $this->strip_invalid_text_from_query($query);
-			$this->flush();
+        $this->func_call = "\$db->query(\"$query\")";
 
-			if ($strippedQuery !== $query)
-			{
-				$this->insert_id = 0;
-				return false;
-			}
-		}
+        if ($this->check_current_query && !$this->check_ascii($query)) {
+            $strippedQuery = $this->strip_invalid_text_from_query($query);
+            $this->flush();
 
-		$this->check_current_query = true;
-		$this->last_query = $query;
+            if ($strippedQuery !== $query) {
+                $this->insert_id = 0;
 
-		$this->doQuery($query);
+                return false;
+            }
+        }
 
-		Hooks::doAction('tw.database.after-query', $query, $this->num_queries - 1);
+        $this->check_current_query = true;
+        $this->last_query = $query;
 
-		$errorCode = $this->connection->getPdo()->errorInfo()[1] ?? 0;
+        $this->doQuery($query);
 
-		if ($errorCode === 2006)
-		{
-			if ($this->check_connection())
-			{
-				$this->doQuery($query);
-			}
-			else
-			{
-				$this->insert_id = 0;
-				return false;
-			}
-		}
+        Hooks::doAction('tw.database.after-query', $query, $this->num_queries - 1);
 
-		$this->last_error = $this->connection->getPdo()->errorInfo()[2] ?? null;
+        $errorCode = $this->connection->getPdo()->errorInfo()[1] ?? 0;
 
-		if ($this->last_error)
-		{
-			if ($this->insert_id && preg_match('/^\s*(insert|replace)\s/i', $query))
-				$this->insert_id = 0;
+        if ($errorCode === 2006) {
+            if ($this->check_connection()) {
+                $this->doQuery($query);
+            } else {
+                $this->insert_id = 0;
 
-			$this->print_error();
-			return false;
-		}
+                return false;
+            }
+        }
 
-		if (preg_match('/^\s*(create|alter|truncate|drop)\s/i', $query))
-		{
-			return $this->result;
-		}
-		else if (preg_match('/^\s*(insert|delete|update|replace)\s/i', $query))
-		{
-			$this->rows_affected = $this->result->rowCount();
-			$this->insert_id = $this->connection->lastInsertIdInteger();
+        $this->last_error = $this->connection->getPdo()->errorInfo()[2] ?? null;
 
-			return $this->rows_affected;
-		}
-		else
-		{
-			$numRows = 0;
+        if ($this->last_error) {
+            if ($this->insert_id && preg_match('/^\s*(insert|replace)\s/i', $query))
+                $this->insert_id = 0;
 
-			while ($row = $this->result->getPdoStatement()->fetch(PDO::FETCH_OBJ))
-			{
-				$this->last_result[$numRows] = $row;
-				$numRows++;
-			}
+            $this->print_error();
 
-			$this->num_rows = $numRows;
+            return false;
+        }
 
-			return $numRows;
-		}
-	}
+        if (preg_match('/^\s*(create|alter|truncate|drop)\s/i', $query)) {
+            return $this->result;
+        } else if (preg_match('/^\s*(insert|delete|update|replace)\s/i', $query)) {
+            $this->rows_affected = $this->result->rowCount();
+            $this->insert_id = $this->connection->lastInsertIdInteger();
 
-	/**
-	 * {@inheritdoc}
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public final function set_charset($dbh, $charset = null, $collate = null): void
-	{
-		if (!isset($charset))
-			$charset = $this->charset;
+            return $this->rows_affected;
+        } else {
+            $numRows = 0;
 
-		if (!isset($collate))
-			$collate = $this->collate;
+            while ($row = $this->result->getPdoStatement()->fetch(PDO::FETCH_OBJ)) {
+                $this->last_result[$numRows] = $row;
+                $numRows++;
+            }
 
-		if (!empty($collate))
-			$this->connection->prepare(sprintf("SET NAMES '%s' COLLATE '%s'", $charset, $collate))->run();
-		else
-			$this->connection->prepare(sprintf("SET NAMES '%s'", $charset))->run();
-	}
+            $this->num_rows = $numRows;
 
-	/**
-	 * {@inheritdoc}
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public final function set_sql_mode($modes = [])
-	{
-		if (empty($modes))
-		{
-			$smt = $this->connection->prepare('SELECT @@SESSION.sql_mode');
-			$smt->run();
-			$res = $smt->getPdoStatement()->fetch(PDO::FETCH_NUM);
+            return $numRows;
+        }
+    }
 
-			$modes = array_filter(explode(',', $res[0]), fn($val) => !empty($val));
-		}
+    /**
+     * {@inheritdoc}
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public final function set_charset($dbh, $charset = null, $collate = null): void
+    {
+        if (!isset($charset))
+            $charset = $this->charset;
 
-		$modes = array_change_key_case($modes, CASE_UPPER);
-		$incompatibleModes = (array)Hooks::applyFilters('incompatible_sql_modes', $this->incompatible_modes);
+        if (!isset($collate))
+            $collate = $this->collate;
 
-		foreach ($modes as $i => $mode)
-			if (in_array($mode, $incompatibleModes))
-				unset($modes[$i]);
+        if (!empty($collate))
+            $this->connection->prepare(sprintf("SET NAMES '%s' COLLATE '%s'", $charset, $collate))->run();
+        else
+            $this->connection->prepare(sprintf("SET NAMES '%s'", $charset))->run();
+    }
 
-		$modesStr = implode(',', $modes);
+    /**
+     * {@inheritdoc}
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public final function set_sql_mode($modes = [])
+    {
+        if (empty($modes)) {
+            $smt = $this->connection->prepare('SELECT @@SESSION.sql_mode');
+            $smt->run();
+            $res = $smt->getPdoStatement()->fetch(PDO::FETCH_NUM);
 
-		$this->connection->prepare("SET SESSION sql_mode = '$modesStr'")->run();
-	}
+            $modes = array_filter(explode(',', $res[0]), fn($val) => !empty($val));
+        }
 
-	/**
-	 * Performs the actual query.
-	 *
-	 * @param string $query
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	private function doQuery(string $query): void
-	{
-		if (defined('SAVEQUERIES') && SAVEQUERIES)
-			$this->timer_start();
+        $modes = array_change_key_case($modes, CASE_UPPER);
+        $incompatibleModes = (array)Hooks::applyFilters('incompatible_sql_modes', $this->incompatible_modes);
 
-		try
-		{
-			$this->result = $this->connection->prepare($query);
-			$this->result->run();
-		}
-		catch (PDOException $err)
-		{
-		}
+        foreach ($modes as $i => $mode)
+            if (in_array($mode, $incompatibleModes))
+                unset($modes[$i]);
 
-		if (defined('SAVEQUERIES') && SAVEQUERIES)
-			$this->queries[$this->num_queries] = [$query, $this->timer_stop(), $this->get_caller()];
+        $modesStr = implode(',', $modes);
 
-		$this->num_queries++;
-	}
+        $this->connection->prepare("SET SESSION sql_mode = '$modesStr'")->run();
+    }
+
+    /**
+     * Performs the actual query.
+     *
+     * @param string $query
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    private function doQuery(string $query): void
+    {
+        if (defined('SAVEQUERIES') && SAVEQUERIES)
+            $this->timer_start();
+
+        try {
+            $this->result = $this->connection->prepare($query);
+            $this->result->run();
+        } catch (PDOException $err) {
+        }
+
+        if (defined('SAVEQUERIES') && SAVEQUERIES)
+            $this->queries[$this->num_queries] = [$query, $this->timer_stop(), $this->get_caller()];
+
+        $this->num_queries++;
+    }
 
 }

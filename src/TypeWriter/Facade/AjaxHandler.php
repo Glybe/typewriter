@@ -28,131 +28,129 @@ use function str_replace;
 final class AjaxHandler
 {
 
-	private string $action;
-	private Closure $callback;
-	private int $priority;
+    private string $action;
+    private Closure $callback;
+    private int $priority;
 
-	/**
-	 * AjaxHandler constructor.
-	 *
-	 * @param string   $action
-	 * @param callable $callback
-	 * @param int      $priority
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	protected function __construct(string $action, callable $callback, int $priority = 10)
-	{
-		$this->action = $action;
-		$this->callback = Closure::fromCallable($callback);
-		$this->priority = $priority;
-	}
+    /**
+     * AjaxHandler constructor.
+     *
+     * @param string $action
+     * @param callable $callback
+     * @param int $priority
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    protected function __construct(string $action, callable $callback, int $priority = 10)
+    {
+        $this->action = $action;
+        $this->callback = Closure::fromCallable($callback);
+        $this->priority = $priority;
+    }
 
-	/**
-	 * Invoked when the ajax action is called.
-	 *
-	 * @throws ReflectionException
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 * @internal
-	 */
-	public final function onInvoked(): void
-	{
-		$args = [];
-		$arguments = $_REQUEST;
+    /**
+     * Invoked when the ajax action is called.
+     *
+     * @throws ReflectionException
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     * @internal
+     */
+    public final function onInvoked(): void
+    {
+        $args = [];
+        $arguments = $_REQUEST;
 
-		$method = is_array($this->callback) ? new ReflectionMethod($this->callback[0], $this->callback[1]) : new ReflectionFunction($this->callback);
-		$parameters = $method->getParameters();
+        $method = is_array($this->callback) ? new ReflectionMethod($this->callback[0], $this->callback[1]) : new ReflectionFunction($this->callback);
+        $parameters = $method->getParameters();
 
-		foreach ($parameters as $parameter)
-		{
-			$value = $arguments[$parameter->getName()] ?? null;
+        foreach ($parameters as $parameter) {
+            $value = $arguments[$parameter->getName()] ?? null;
 
-			if ($value === 'NULL')
-				$value = null;
+            if ($value === 'NULL')
+                $value = null;
 
-			if ($value === 'true')
-				$value = true;
+            if ($value === 'true')
+                $value = true;
 
-			if ($value === 'false')
-				$value = false;
+            if ($value === 'false')
+                $value = false;
 
-			if (is_numeric($value))
-			{
-				$value = floatval($value);
+            if (is_numeric($value)) {
+                $value = floatval($value);
 
-				if (intval($value) == $value)
-					$value = intval($value);
-			}
+                if (intval($value) == $value)
+                    $value = intval($value);
+            }
 
-			if ($value === null && $parameter->isDefaultValueAvailable())
-				$value = $parameter->getDefaultValue();
+            if ($value === null && $parameter->isDefaultValueAvailable())
+                $value = $parameter->getDefaultValue();
 
-			if (!$parameter->allowsNull() && $value === null)
-				throw new ViolationException(sprintf('[ajax: %s] Parameter "%s" does not accept NULL.', $this->action, $parameter->getName()), ViolationException::ERR_INVALID_PARAMETER);
+            if (!$parameter->allowsNull() && $value === null)
+                throw new ViolationException(sprintf('[ajax: %s] Parameter "%s" does not accept NULL.', $this->action, $parameter->getName()), ViolationException::ERR_INVALID_PARAMETER);
 
-			/** @var ReflectionNamedType $type */
-			$type = $parameter->getType();
+            /** @var ReflectionNamedType $type */
+            $type = $parameter->getType();
 
-			$valueType = $this->normalizeType(gettype($value));
-			$parameterType = $this->normalizeType($type->getName());
+            $valueType = $this->normalizeType(gettype($value));
+            $parameterType = $this->normalizeType($type->getName());
 
-			if ($valueType !== 'NULL' && $valueType !== $parameterType)
-				throw new ViolationException(sprintf('[ajax: %s] Parameter "%s" has to be an instance of %s, %s given.', $this->action, $parameter->getName(), $parameterType, $valueType), ViolationException::ERR_INVALID_PARAMETER);
+            if ($valueType !== 'NULL' && $valueType !== $parameterType)
+                throw new ViolationException(sprintf('[ajax: %s] Parameter "%s" has to be an instance of %s, %s given.', $this->action, $parameter->getName(), $parameterType, $valueType), ViolationException::ERR_INVALID_PARAMETER);
 
-			$args[] = $value;
-		}
+            $args[] = $value;
+        }
 
-		call_user_func_array($this->callback, $args);
-	}
+        call_user_func_array($this->callback, $args);
+    }
 
-	/**
-	 * Registers the ajax handler.
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 * @internal
-	 */
-	public final function register(): void
-	{
-		Hooks::action('wp_ajax_' . $this->action, [$this, 'onInvoked'], $this->priority);
-	}
+    /**
+     * Registers the ajax handler.
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     * @internal
+     */
+    public final function register(): void
+    {
+        Hooks::action('wp_ajax_' . $this->action, [$this, 'onInvoked'], $this->priority);
+    }
 
-	/**
-	 * Normalizes the given type.
-	 *
-	 * @param string $type
-	 *
-	 * @return string
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	private function normalizeType(string $type): string
-	{
-		$type = str_replace('boolean', 'bool', $type);
-		$type = str_replace('integer', 'int', $type);
+    /**
+     * Normalizes the given type.
+     *
+     * @param string $type
+     *
+     * @return string
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    private function normalizeType(string $type): string
+    {
+        $type = str_replace('boolean', 'bool', $type);
+        $type = str_replace('integer', 'int', $type);
 
-		return $type;
-	}
+        return $type;
+    }
 
-	/**
-	 * Listens for an ajax action.
-	 *
-	 * @param string   $action
-	 * @param callable $callback
-	 * @param int      $priority
-	 *
-	 * @return static
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public static function listen(string $action, callable $callback, int $priority = 10): self
-	{
-		$handler = new self($action, $callback, $priority);
-		$handler->register();
+    /**
+     * Listens for an ajax action.
+     *
+     * @param string $action
+     * @param callable $callback
+     * @param int $priority
+     *
+     * @return static
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public static function listen(string $action, callable $callback, int $priority = 10): self
+    {
+        $handler = new self($action, $callback, $priority);
+        $handler->register();
 
-		return $handler;
-	}
+        return $handler;
+    }
 
 }

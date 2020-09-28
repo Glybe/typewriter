@@ -25,21 +25,21 @@ use Throwable;
 class TypeWriterException extends ColumbaException
 {
 
-	public const ERR_UNKNOWN = 0;
+    public const ERR_UNKNOWN = 0;
 
-	/**
-	 * TypeWriterException constructor.
-	 *
-	 * @param string         $message
-	 * @param int            $code
-	 * @param Throwable|null $previous
-	 *
-	 * @author Bas Milius <bas@ideemedia.nl>
-	 * @since 1.0.0
-	 */
-	public function __construct(string $message = '', int $code = self::ERR_UNKNOWN, ?Throwable $previous = null)
-	{
-		parent::__construct($message, $code, $previous);
-	}
+    /**
+     * TypeWriterException constructor.
+     *
+     * @param string $message
+     * @param int $code
+     * @param Throwable|null $previous
+     *
+     * @author Bas Milius <bas@ideemedia.nl>
+     * @since 1.0.0
+     */
+    public function __construct(string $message = '', int $code = self::ERR_UNKNOWN, ?Throwable $previous = null)
+    {
+        parent::__construct($message, $code, $previous);
+    }
 
 }

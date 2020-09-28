@@ -23,59 +23,59 @@ namespace TypeWriter\Feature;
 abstract class Feature
 {
 
-	private string $name;
+    private string $name;
 
-	/**
-	 * Feature constructor.
-	 *
-	 * @param string $name
-	 *
-	 * @author Bas Milius <bas@ideemedia.nl>
-	 * @since 1.0.0
-	 */
-	public function __construct(string $name)
-	{
-		$this->name = $name;
-	}
+    /**
+     * Feature constructor.
+     *
+     * @param string $name
+     *
+     * @author Bas Milius <bas@ideemedia.nl>
+     * @since 1.0.0
+     */
+    public function __construct(string $name)
+    {
+        $this->name = $name;
+    }
 
-	/**
-	 * Gets the name of the feature.
-	 *
-	 * @return string
-	 * @author Bas Milius <bas@ideemedia.nl>
-	 * @since 1.0.0
-	 */
-	public final function getName(): string
-	{
-		return $this->name;
-	}
+    /**
+     * Gets the name of the feature.
+     *
+     * @return string
+     * @author Bas Milius <bas@ideemedia.nl>
+     * @since 1.0.0
+     */
+    public final function getName(): string
+    {
+        return $this->name;
+    }
 
-	/**
-	 * Returns the supported post types or NULL when everything is supported.
-	 *
-	 * @return string[]|null
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	protected function getSupportedPostTypes(): ?array
-	{
-		return null;
-	}
+    /**
+     * Returns the supported post types or NULL when everything is supported.
+     *
+     * @return string[]|null
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    protected function getSupportedPostTypes(): ?array
+    {
+        return null;
+    }
 
-	/**
-	 * Returns TRUE when the given post type is supported.
-	 *
-	 * @param string $postType
-	 *
-	 * @return bool
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	protected function isPostTypeSupported(string $postType): bool
-	{
-		$supportedPostTypes = $this->getSupportedPostTypes();
+    /**
+     * Returns TRUE when the given post type is supported.
+     *
+     * @param string $postType
+     *
+     * @return bool
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    protected function isPostTypeSupported(string $postType): bool
+    {
+        $supportedPostTypes = $this->getSupportedPostTypes();
 
-		return $supportedPostTypes === null || in_array($postType, $supportedPostTypes);
-	}
+        return $supportedPostTypes === null || in_array($postType, $supportedPostTypes);
+    }
 
 }

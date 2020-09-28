@@ -17,22 +17,19 @@ use TypeWriter\Feature\PostThumbnail;
 use TypeWriter\Structure\Menu\Menus;
 use function TypeWriter\tw;
 
-Hooks::action('init', function (): void
-{
-	tw()->loadFeature(IntroTextMetaFields::class);
+Hooks::action('init', function (): void {
+    tw()->loadFeature(IntroTextMetaFields::class);
 
-	Menus::registerLocation('main-menu', 'Main menu');
+    Menus::registerLocation('main-menu', 'Main menu');
 
-	PostThumbnail::add('page', 'overview', 'Overview photo');
+    PostThumbnail::add('page', 'overview', 'Overview photo');
 });
 
-Hooks::action('wp_enqueue_scripts', function (): void
-{
-	Dependencies::enqueueStyle('proxima-nova', 'https://font.mili.us/css?family=proxima-nova');
-	Dependencies::enqueueStyle('latte', 'https://unpkg.com/@bybas/latte-ui@1.9.0-beta.18/dist/latte-ui.css');
+Hooks::action('wp_enqueue_scripts', function (): void {
+    Dependencies::enqueueStyle('proxima-nova', 'https://font.mili.us/css2?family=proxima-nova:ital');
+    Dependencies::enqueueStyle('latte', 'https://unpkg.com/@bybas/latte-ui@1.9.0-rc.1/dist/latte-ui.css');
 });
 
-tw()->getRouter()->get('/test', function (): string
-{
-	return tw()->getRouter()->render('test.cappy');
+tw()->getRouter()->get('/test', function (): string {
+    return tw()->getRouter()->render('test.cappy');
 });

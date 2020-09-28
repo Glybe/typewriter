@@ -28,115 +28,115 @@ use function get_current_screen;
 abstract class MetaFields extends Feature
 {
 
-	private string $id;
-	private string $description;
-	private string $label;
-	private string $metaKey;
+    private string $id;
+    private string $description;
+    private string $label;
+    private string $metaKey;
 
-	private array $fields = [];
+    private array $fields = [];
 
-	/**
-	 * MetaFields constructor.
-	 *
-	 * @param string $id
-	 * @param string $metaKey
-	 * @param string $label
-	 * @param string $description
-	 *
-	 * @author Bas Milius <bas@ideemedia.nl>
-	 * @since 1.0.0
-	 */
-	public function __construct(string $id, string $metaKey, string $label, string $description = '')
-	{
-		parent::__construct(static::class);
+    /**
+     * MetaFields constructor.
+     *
+     * @param string $id
+     * @param string $metaKey
+     * @param string $label
+     * @param string $description
+     *
+     * @author Bas Milius <bas@ideemedia.nl>
+     * @since 1.0.0
+     */
+    public function __construct(string $id, string $metaKey, string $label, string $description = '')
+    {
+        parent::__construct(static::class);
 
-		$this->id = $id;
-		$this->description = $description;
-		$this->label = $label;
-		$this->metaKey = $metaKey;
+        $this->id = $id;
+        $this->description = $description;
+        $this->label = $label;
+        $this->metaKey = $metaKey;
 
-		$this->registerFields();
-		$this->registerMeta();
+        $this->registerFields();
+        $this->registerMeta();
 
-		Hooks::action('tw.admin-scripts.body', [$this, 'onAdminScriptsBody']);
-	}
+        Hooks::action('tw.admin-scripts.body', [$this, 'onAdminScriptsBody']);
+    }
 
-	/**
-	 * Invoked on tw.admin-scripts.body filter hook.
-	 * Loads the JS part of our meta fields editor.
-	 *
-	 * @param string[] $scripts
-	 *
-	 * @return string[]
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 * @internal
-	 */
-	public final function onAdminScriptsBody(array $scripts): array
-	{
-		$screen = get_current_screen();
+    /**
+     * Invoked on tw.admin-scripts.body filter hook.
+     * Loads the JS part of our meta fields editor.
+     *
+     * @param string[] $scripts
+     *
+     * @return string[]
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     * @internal
+     */
+    public final function onAdminScriptsBody(array $scripts): array
+    {
+        $screen = get_current_screen();
 
-		if (!AdminUtil::isGutenbergView() || !$this->isPostTypeSupported($screen->post_type))
-			return $scripts;
+        if (!AdminUtil::isGutenbergView() || !$this->isPostTypeSupported($screen->post_type))
+            return $scripts;
 
-		$fieldsJson = json_encode($this->fields);
+        $fieldsJson = json_encode($this->fields);
 
-		$scripts[] = <<<CODE
+        $scripts[] = <<<CODE
 			new tw.feature.MetaFields("{$this->id}", "{$this->metaKey}", "{$this->label}", "{$this->description}", {$fieldsJson});
 		CODE;
 
-		return $scripts;
-	}
+        return $scripts;
+    }
 
-	/**
-	 * Registers the given field.
-	 *
-	 * @param MetaField $field
-	 *
-	 * @return $this
-	 * @author Bas Milius <bas@ideemedia.nl>
-	 * @since 1.0.0
-	 */
-	protected function register(MetaField $field): self
-	{
-		$this->fields[] = $field;
+    /**
+     * Registers the given field.
+     *
+     * @param MetaField $field
+     *
+     * @return $this
+     * @author Bas Milius <bas@ideemedia.nl>
+     * @since 1.0.0
+     */
+    protected function register(MetaField $field): self
+    {
+        $this->fields[] = $field;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Registers the meta field.
-	 *
-	 * @author Bas Milius <bas@ideemedia.nl>
-	 * @since 1.0.0
-	 */
-	private function registerMeta(): void
-	{
-		$properties = [];
+    /**
+     * Registers the meta field.
+     *
+     * @author Bas Milius <bas@ideemedia.nl>
+     * @since 1.0.0
+     */
+    private function registerMeta(): void
+    {
+        $properties = [];
 
-		/** @var MetaField $field */
-		foreach ($this->fields as $field)
-			$properties[$field->getMetaKey()] = ['type' => $field->getValueType()];
+        /** @var MetaField $field */
+        foreach ($this->fields as $field)
+            $properties[$field->getMetaKey()] = ['type' => $field->getValueType()];
 
-		register_meta('post', $this->metaKey, [
-			'single' => true,
-			'show_in_rest' => [
-				'schema' => [
-					'type' => 'object',
-					'properties' => $properties
-				]
-			],
-			'description' => 'TypeWriter MetaFields data.',
-			'type' => 'object'
-		]);
-	}
+        register_meta('post', $this->metaKey, [
+            'single' => true,
+            'show_in_rest' => [
+                'schema' => [
+                    'type' => 'object',
+                    'properties' => $properties
+                ]
+            ],
+            'description' => 'TypeWriter MetaFields data.',
+            'type' => 'object'
+        ]);
+    }
 
-	/**
-	 * Registers all the fields in this meta box.
-	 *
-	 * @author Bas Milius <bas@ideemedia.nl>
-	 * @since 1.0.0
-	 */
-	protected abstract function registerFields(): void;
+    /**
+     * Registers all the fields in this meta box.
+     *
+     * @author Bas Milius <bas@ideemedia.nl>
+     * @since 1.0.0
+     */
+    protected abstract function registerFields(): void;
 
 }

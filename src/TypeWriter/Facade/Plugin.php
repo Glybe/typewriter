@@ -24,61 +24,61 @@ use function in_array;
 final class Plugin
 {
 
-	private static ?array $activePlugins = null;
+    private static ?array $activePlugins = null;
 
-	/**
-	 * Returns TRUE if the given plugin is active.
-	 *
-	 * @param string $name
-	 *
-	 * @return bool
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public static function active(string $name): bool
-	{
-		self::$activePlugins ??= get_option('active_plugins', []);
+    /**
+     * Returns TRUE if the given plugin is active.
+     *
+     * @param string $name
+     *
+     * @return bool
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public static function active(string $name): bool
+    {
+        self::$activePlugins ??= get_option('active_plugins', []);
 
-		return in_array($name, self::$activePlugins);
-	}
+        return in_array($name, self::$activePlugins);
+    }
 
-	/**
-	 * Returns the path of the given plugin, or NULL if the plugin doesn't exist.
-	 *
-	 * @param string $name
-	 *
-	 * @return string|null
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public static function dir(string $name): ?string
-	{
-		$path = WP_PLUGIN_DIR . '/' . $name;
+    /**
+     * Returns the path of the given plugin, or NULL if the plugin doesn't exist.
+     *
+     * @param string $name
+     *
+     * @return string|null
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public static function dir(string $name): ?string
+    {
+        $path = WP_PLUGIN_DIR . '/' . $name;
 
-		if (!is_dir($path))
-			return null;
+        if (!is_dir($path))
+            return null;
 
-		return $path;
-	}
+        return $path;
+    }
 
-	/**
-	 * Returns TRUE if the given plugin exists.
-	 *
-	 * @param string        $name
-	 * @param callable|null $fn
-	 *
-	 * @return bool
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public static function exists(string $name, ?callable $fn = null): bool
-	{
-		$isInstalled = self::dir($name) !== null;
+    /**
+     * Returns TRUE if the given plugin exists.
+     *
+     * @param string $name
+     * @param callable|null $fn
+     *
+     * @return bool
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public static function exists(string $name, ?callable $fn = null): bool
+    {
+        $isInstalled = self::dir($name) !== null;
 
-		if ($isInstalled && $fn !== null)
-			$fn();
+        if ($isInstalled && $fn !== null)
+            $fn();
 
-		return $isInstalled;
-	}
+        return $isInstalled;
+    }
 
 }

@@ -26,15 +26,15 @@ use function TypeWriter\tw;
 class Router extends ColumbaRouter
 {
 
-	/**
-	 * Router constructor.
-	 *
-	 * @author Bas Milius <bas@ideemedia.nl>
-	 * @since 1.0.0
-	 */
-	public function __construct()
-	{
-		parent::__construct(new HtmlResponse(), tw()->getCappuccino());
-	}
+    /**
+     * Router constructor.
+     *
+     * @author Bas Milius <bas@ideemedia.nl>
+     * @since 1.0.0
+     */
+    public function __construct()
+    {
+        parent::__construct(new HtmlResponse(), tw()->getCappuccino());
+    }
 
 }

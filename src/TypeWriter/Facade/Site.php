@@ -24,19 +24,19 @@ use function get_bloginfo;
 final class Site
 {
 
-	/**
-	 * Gets information of the website.
-	 *
-	 * @param string $name
-	 *
-	 * @return string|null
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 * @see get_bloginfo()
-	 */
-	public static function info(string $name): ?string
-	{
-		return get_bloginfo($name) ?? null;
-	}
+    /**
+     * Gets information of the website.
+     *
+     * @param string $name
+     *
+     * @return string|null
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     * @see get_bloginfo()
+     */
+    public static function info(string $name): ?string
+    {
+        return get_bloginfo($name) ?? null;
+    }
 
 }

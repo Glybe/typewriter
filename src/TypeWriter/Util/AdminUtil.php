@@ -25,18 +25,18 @@ use function in_array;
 final class AdminUtil
 {
 
-	/**
-	 * Returns TRUE if the given view is a view with the Gutenberg Editor.
-	 *
-	 * @return bool
-	 * @author Bas Milius <bas@ideemedia.nl>
-	 * @since 1.0.0
-	 */
-	public static function isGutenbergView(): bool
-	{
-		global $pagenow;
+    /**
+     * Returns TRUE if the given view is a view with the Gutenberg Editor.
+     *
+     * @return bool
+     * @author Bas Milius <bas@ideemedia.nl>
+     * @since 1.0.0
+     */
+    public static function isGutenbergView(): bool
+    {
+        global $pagenow;
 
-		return in_array($pagenow, ['post-new.php', 'post.php', 'media-upload-popup']);
-	}
+        return in_array($pagenow, ['post-new.php', 'post.php', 'media-upload-popup']);
+    }
 
 }

@@ -28,44 +28,44 @@ use function strpos;
 final class WPMigrateDbSupport extends Module
 {
 
-	/**
-	 * WPMigrateDbSupport constructor.
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public function __construct()
-	{
-		parent::__construct('Adds support for the WP Migrate DB plugin.');
-	}
+    /**
+     * WPMigrateDbSupport constructor.
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public function __construct()
+    {
+        parent::__construct('Adds support for the WP Migrate DB plugin.');
+    }
 
-	/**
-	 * {@inheritDoc}
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public function onInitialize(): void
-	{
-		if (!Plugin::active('wp-migrate-db/wp-migrate-db.php'))
-			return;
+    /**
+     * {@inheritDoc}
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public function onInitialize(): void
+    {
+        if (!Plugin::active('wp-migrate-db/wp-migrate-db.php'))
+            return;
 
-		Hooks::filter('tw.theme-base.directories', [$this, 'onThemeDirectories']);
-	}
+        Hooks::filter('tw.theme-base.directories', [$this, 'onThemeDirectories']);
+    }
 
-	/**
-	 * Invoked on the tw.theme-base.directories filter hook.
-	 * Removes the potential migrate db temporary theme.
-	 *
-	 * @param string[] $directories
-	 *
-	 * @return string[]
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 * @internal
-	 */
-	public final function onThemeDirectories(array $directories): array
-	{
-		return array_filter($directories, fn(string $directory) => strpos($directory, 'temp-theme') === false);
-	}
+    /**
+     * Invoked on the tw.theme-base.directories filter hook.
+     * Removes the potential migrate db temporary theme.
+     *
+     * @param string[] $directories
+     *
+     * @return string[]
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     * @internal
+     */
+    public final function onThemeDirectories(array $directories): array
+    {
+        return array_filter($directories, fn(string $directory) => strpos($directory, 'temp-theme') === false);
+    }
 
 }

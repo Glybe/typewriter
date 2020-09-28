@@ -16,50 +16,50 @@ use function wp_get_attachment_image_url;
 class Attachment
 {
 
-	/**
-	 * Gets the url of the given attachment with the given size.
-	 *
-	 * @hook tw.attachment.image-url (string $imageUrl, int $attachmentId, string $size): ?string
-	 *
-	 * @param int    $attachmentId
-	 * @param string $size
-	 *
-	 * @return string|null
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public static function getImage(int $attachmentId, string $size = 'large'): ?string
-	{
-		$imageUrl = wp_get_attachment_image_url($attachmentId, $size);
+    /**
+     * Gets the url of the given attachment with the given size.
+     *
+     * @hook tw.attachment.image-url (string $imageUrl, int $attachmentId, string $size): ?string
+     *
+     * @param int $attachmentId
+     * @param string $size
+     *
+     * @return string|null
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public static function getImage(int $attachmentId, string $size = 'large'): ?string
+    {
+        $imageUrl = wp_get_attachment_image_url($attachmentId, $size);
 
-		if (!empty($imageUrl))
-			return Hooks::applyFilters('tw.attachment.image-url', $imageUrl, $attachmentId, $size);
+        if (!empty($imageUrl))
+            return Hooks::applyFilters('tw.attachment.image-url', $imageUrl, $attachmentId, $size);
 
-		return null;
-	}
+        return null;
+    }
 
-	/**
-	 * Gets the data of the given attachment with the given size.
-	 *
-	 * @param int    $attachmentId
-	 * @param string $size
-	 *
-	 * @return array|null
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public static function getImageData(int $attachmentId, string $size = 'large'): ?array
-	{
-		$imageData = wp_get_attachment_image_src($attachmentId, $size);
+    /**
+     * Gets the data of the given attachment with the given size.
+     *
+     * @param int $attachmentId
+     * @param string $size
+     *
+     * @return array|null
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public static function getImageData(int $attachmentId, string $size = 'large'): ?array
+    {
+        $imageData = wp_get_attachment_image_src($attachmentId, $size);
 
-		if (!$imageData)
-			return null;
+        if (!$imageData)
+            return null;
 
-		return [
-			'src' => $imageData[0],
-			'width' => $imageData[1],
-			'height' => $imageData[2]
-		];
-	}
+        return [
+            'src' => $imageData[0],
+            'width' => $imageData[1],
+            'height' => $imageData[2]
+        ];
+    }
 
 }

@@ -1,9 +1,9 @@
 {#!
  # @author Bas Milius <bas@ideemedia.nl>
- # @template Front Page (Cappuccino)
+ # @template Front Page (Twig)
  #}
 
-{% controller "\\TypeWriter\\Cappuccino\\Controller\\PostController" %}
+{% controller "\\TypeWriter\\Twig\\Controller\\PostController" %}
 
 {{ get_header() }}
 

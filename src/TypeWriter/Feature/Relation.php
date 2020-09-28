@@ -30,107 +30,107 @@ use function register_meta;
 class Relation extends Feature
 {
 
-	protected string $id;
-	protected string $label;
-	protected string $foreignType;
-	protected string $metaId;
-	protected string $metaKey;
-	protected string $postType;
+    protected string $id;
+    protected string $label;
+    protected string $foreignType;
+    protected string $metaId;
+    protected string $metaKey;
+    protected string $postType;
 
-	/**
-	 * Relation constructor.
-	 *
-	 * @param string $postType
-	 * @param string $id
-	 * @param string $label
-	 * @param string $foreignType
-	 *
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public function __construct(string $postType, string $id, string $label, string $foreignType)
-	{
-		parent::__construct(static::class);
+    /**
+     * Relation constructor.
+     *
+     * @param string $postType
+     * @param string $id
+     * @param string $label
+     * @param string $foreignType
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public function __construct(string $postType, string $id, string $label, string $foreignType)
+    {
+        parent::__construct(static::class);
 
-		$this->id = $id;
-		$this->label = $label;
-		$this->foreignType = $foreignType;
-		$this->metaId = "{$postType}_{$id}_{$foreignType}";
-		$this->metaKey = "tw_{$this->metaId}_relation";
-		$this->postType = $postType;
+        $this->id = $id;
+        $this->label = $label;
+        $this->foreignType = $foreignType;
+        $this->metaId = "{$postType}_{$id}_{$foreignType}";
+        $this->metaKey = "tw_{$this->metaId}_relation";
+        $this->postType = $postType;
 
-		register_meta('post', $this->metaKey, [
-			'object_subtype' => $this->postType,
-			'single' => true,
-			'show_in_rest' => [
-				'schema' => [
-					'type' => 'array',
-					'items' => ['type' => 'integer']
-				]
-			],
-			'description' => 'Defines a relationship between objects.',
-			'type' => 'array'
-		]);
+        register_meta('post', $this->metaKey, [
+            'object_subtype' => $this->postType,
+            'single' => true,
+            'show_in_rest' => [
+                'schema' => [
+                    'type' => 'array',
+                    'items' => ['type' => 'integer']
+                ]
+            ],
+            'description' => 'Defines a relationship between objects.',
+            'type' => 'array'
+        ]);
 
-		Hooks::action('tw.admin-scripts.body', [$this, 'onAdminScriptsBody']);
-	}
+        Hooks::action('tw.admin-scripts.body', [$this, 'onAdminScriptsBody']);
+    }
 
-	/**
-	 * Invoked on tw.admin-scripts.body filter hook.
-	 * Loads the JS part of our post thumbnail editor.
-	 *
-	 * @param string[] $scripts
-	 *
-	 * @return string[]
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 * @internal
-	 */
-	public final function onAdminScriptsBody(array $scripts): array
-	{
-		$screen = get_current_screen();
+    /**
+     * Invoked on tw.admin-scripts.body filter hook.
+     * Loads the JS part of our post thumbnail editor.
+     *
+     * @param string[] $scripts
+     *
+     * @return string[]
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     * @internal
+     */
+    public final function onAdminScriptsBody(array $scripts): array
+    {
+        $screen = get_current_screen();
 
-		if (!AdminUtil::isGutenbergView() || !$this->isPostTypeSupported($screen->post_type))
-			return $scripts;
+        if (!AdminUtil::isGutenbergView() || !$this->isPostTypeSupported($screen->post_type))
+            return $scripts;
 
-		$scripts[] = <<<CODE
+        $scripts[] = <<<CODE
 			new tw.feature.Relation("{$this->id}", "{$this->label}", "{$this->metaKey}", "{$this->foreignType}"); 
 		CODE;
 
-		return $scripts;
-	}
+        return $scripts;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	protected function getSupportedPostTypes(): ?array
-	{
-		return [$this->postType];
-	}
+    /**
+     * {@inheritDoc}
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    protected function getSupportedPostTypes(): ?array
+    {
+        return [$this->postType];
+    }
 
-	/**
-	 * Gets the object id's in the given relation.
-	 *
-	 * @param WP_Post $post
-	 * @param string $id
-	 * @param string $foreignType
-	 *
-	 * @return int[]
-	 * @author Bas Milius <bas@mili.us>
-	 * @since 1.0.0
-	 */
-	public static function get(WP_Post $post, string $id, string $foreignType): array
-	{
-		$metaId = "{$post->post_type}_{$id}_{$foreignType}";
-		$metaKey = "tw_{$metaId}_relation";
+    /**
+     * Gets the object id's in the given relation.
+     *
+     * @param WP_Post $post
+     * @param string $id
+     * @param string $foreignType
+     *
+     * @return int[]
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public static function get(WP_Post $post, string $id, string $foreignType): array
+    {
+        $metaId = "{$post->post_type}_{$id}_{$foreignType}";
+        $metaKey = "tw_{$metaId}_relation";
 
-		$objectIds = get_post_meta($post->ID, $metaKey, true);
-		$objectIds = array_map(fn($val) => intval($val), $objectIds);
-		$objectIds = array_filter($objectIds, fn(int $val) => $val > 0);
+        $objectIds = get_post_meta($post->ID, $metaKey, true);
+        $objectIds = array_map(fn($val) => intval($val), $objectIds);
+        $objectIds = array_filter($objectIds, fn(int $val) => $val > 0);
 
-		return $objectIds;
-	}
+        return $objectIds;
+    }
 
 }
