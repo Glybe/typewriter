@@ -66,7 +66,7 @@ function updateOptions(): void
 	update_option('timezone_string', 'Europe/Amsterdam');
 
 	update_option('blogdescription', '');
-	update_option('permalink_structure', '/%year%/%monthnum%/%postname%/');
+	update_option('permalink_structure', '/%year%/%monthnum%/%postname%');
 
 	update_option('default_comment_status', 'closed');
 	update_option('default_ping_status', 'closed');
