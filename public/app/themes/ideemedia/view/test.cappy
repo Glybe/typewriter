@@ -1,6 +1,0 @@
-{% extends "@tw/skel" %}
-
-{% block body %}
-	Hello from test.cappy!
-{% endblock %}
-
