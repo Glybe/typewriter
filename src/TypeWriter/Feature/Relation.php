@@ -126,7 +126,7 @@ class Relation extends Feature
         $metaId = "{$post->post_type}_{$id}_{$foreignType}";
         $metaKey = "tw_{$metaId}_relation";
 
-        $objectIds = get_post_meta($post->ID, $metaKey, true);
+        $objectIds = get_post_meta($post->ID, $metaKey, true) ?: [];
         $objectIds = array_map(fn($val) => intval($val), $objectIds);
         $objectIds = array_filter($objectIds, fn(int $val) => $val > 0);
 

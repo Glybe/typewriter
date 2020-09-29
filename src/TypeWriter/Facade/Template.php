@@ -116,12 +116,12 @@ final class Template
     {
         $cappuccino = tw()->getCappuccino();
 
-        if ($cappuccino->exists('@theme/global/footer.cappy'))
-            return tw()->getCappuccino()->render('@theme/global/footer.cappy');
+        if ($cappuccino->exists('@theme/global/footer.twig'))
+            return tw()->getCappuccino()->render('@theme/global/footer.twig');
         else if (is_file($footerPath = Dependencies::themePath('footer.php')))
             return Sandbox::render($footerPath);
         else
-            throw new TemplateException('The footer template was not found. Create a template/global/footer.cappy or footer.php file in your theme.', TemplateException::ERR_TEMPLATE_FILE_NOT_FOUND);
+            throw new TemplateException('The footer template was not found. Create a template/global/footer.twig or footer.php file in your theme.', TemplateException::ERR_TEMPLATE_FILE_NOT_FOUND);
     }
 
     /**
@@ -135,12 +135,12 @@ final class Template
     {
         $cappuccino = tw()->getCappuccino();
 
-        if ($cappuccino->exists('@theme/global/header.cappy'))
-            return tw()->getCappuccino()->render('@theme/global/header.cappy');
+        if ($cappuccino->exists('@theme/global/header.twig'))
+            return tw()->getCappuccino()->render('@theme/global/header.twig');
         else if (is_file($headerPath = Dependencies::themePath('header.php')))
             return Sandbox::render($headerPath);
         else
-            throw new TemplateException('The header template was not found. Create a template/global/header.cappy or header.php file in your theme.', TemplateException::ERR_TEMPLATE_FILE_NOT_FOUND);
+            throw new TemplateException('The header template was not found. Create a template/global/header.twig or header.php file in your theme.', TemplateException::ERR_TEMPLATE_FILE_NOT_FOUND);
     }
 
 }

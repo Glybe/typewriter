@@ -38,9 +38,9 @@ final class PostTemplatesLoaderModule extends Module
 {
 
     private static array $ignoredTemplateFiles = [
-        'archive.cappy', 'archive.php',
-        'default.cappy', 'default.php',
-        'single.cappy', 'single.php'
+        'archive.twig', 'archive.php',
+        'default.twig', 'default.php',
+        'single.twig', 'single.php'
     ];
 
     /**
@@ -99,7 +99,7 @@ final class PostTemplatesLoaderModule extends Module
             $themeTemplates = [];
 
             foreach ($files as $file) {
-                if (substr($file, -4) !== '.php' && substr($file, -6) !== '.cappy')
+                if (substr($file, -4) !== '.php' && substr($file, -5) !== '.twig')
                     continue;
 
                 if (in_array($file, self::$ignoredTemplateFiles))

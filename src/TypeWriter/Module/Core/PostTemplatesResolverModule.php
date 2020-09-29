@@ -108,7 +108,7 @@ final class PostTemplatesResolverModule extends Module
             foreach ($tryFiles as $file)
                 if (is_file(($foundTemplate = $dir . '/template/' . get_post_type() . '/' . $file . '.php')))
                     return $foundTemplate;
-                else if (is_file(($foundTemplate = $dir . '/template/' . get_post_type() . '/' . $file . '.cappy')))
+                else if (is_file(($foundTemplate = $dir . '/template/' . get_post_type() . '/' . $file . '.twig')))
                     return $foundTemplate;
 
         return $template;
@@ -177,7 +177,7 @@ final class PostTemplatesResolverModule extends Module
      */
     public final function onTemplateInclude(string $template): ?string
     {
-        if (substr($template, -6) !== '.cappy')
+        if (substr($template, -5) !== '.twig')
             return $template;
 
         tw()->getCappuccino()->addPath(dirname($template));
@@ -209,7 +209,7 @@ final class PostTemplatesResolverModule extends Module
             foreach ($tryFiles as $file)
                 if (is_file(($foundTemplate = $dir . '/template/' . $post->post_type . '/' . $file . '.php')))
                     return $foundTemplate;
-                else if (is_file(($foundTemplate = $dir . '/template/' . $post->post_type . '/' . $file . '.cappy')))
+                else if (is_file(($foundTemplate = $dir . '/template/' . $post->post_type . '/' . $file . '.twig')))
                     return $foundTemplate;
 
         return $template;
