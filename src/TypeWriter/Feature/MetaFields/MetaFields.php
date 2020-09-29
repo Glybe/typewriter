@@ -21,7 +21,7 @@ use function get_current_screen;
 /**
  * Class MetaFields
  *
- * @author Bas Milius <bas@ideemedia.nl>
+ * @author Bas Milius <bas@mili.us>
  * @package TypeWriter\Feature\MetaFields
  * @since 1.0.0
  */
@@ -43,7 +43,7 @@ abstract class MetaFields extends Feature
      * @param string $label
      * @param string $description
      *
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public function __construct(string $id, string $metaKey, string $label, string $description = '')
@@ -94,7 +94,7 @@ abstract class MetaFields extends Feature
      * @param MetaField $field
      *
      * @return $this
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     protected function register(MetaField $field): self
@@ -107,7 +107,7 @@ abstract class MetaFields extends Feature
     /**
      * Registers the meta field.
      *
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     private function registerMeta(): void
@@ -134,7 +134,7 @@ abstract class MetaFields extends Feature
     /**
      * Registers all the fields in this meta box.
      *
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     protected abstract function registerFields(): void;

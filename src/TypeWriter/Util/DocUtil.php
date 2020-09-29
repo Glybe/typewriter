@@ -28,7 +28,7 @@ final class DocUtil
      * @param string $file
      *
      * @return array
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.2.0
      */
     public static function getProperties(string $file): array

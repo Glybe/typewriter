@@ -27,7 +27,7 @@ const WP_DIR = PUBLIC_DIR . '/wp';
  * Gets the Autoloader instance.
  *
  * @return ClassLoader
- * @author Bas Milius <bas@ideemedia.nl>
+ * @author Bas Milius <bas@mili.us>
  * @since 1.0.0
  */
 function autoloader(): ClassLoader
@@ -41,7 +41,7 @@ function autoloader(): ClassLoader
  * Gets TypeWriter.
  *
  * @return TypeWriter
- * @author Bas Milius <bas@ideemedia.nl>
+ * @author Bas Milius <bas@mili.us>
  * @since 1.0.0
  */
 function tw(): TypeWriter

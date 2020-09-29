@@ -18,7 +18,7 @@ use Columba\Facade\Jsonable;
 /**
  * Class MetaField
  *
- * @author Bas Milius <bas@ideemedia.nl>
+ * @author Bas Milius <bas@mili.us>
  * @package TypeWriter\Feature\MetaFields
  * @since 1.0.0
  */
@@ -40,7 +40,7 @@ abstract class MetaField implements Jsonable
      * @param string $controlType
      * @param string $valueType
      *
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public function __construct(string $metaKey, string $label, string $controlType, string $valueType)
@@ -58,7 +58,7 @@ abstract class MetaField implements Jsonable
      * @param string $name
      *
      * @return mixed|null
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public function getAttribute(string $name)
@@ -70,7 +70,7 @@ abstract class MetaField implements Jsonable
      * Gets the control type.
      *
      * @return string
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public function getControlType(): string
@@ -82,7 +82,7 @@ abstract class MetaField implements Jsonable
      * Gets the label.
      *
      * @return string
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public function getLabel(): string
@@ -94,7 +94,7 @@ abstract class MetaField implements Jsonable
      * Gets the meta key.
      *
      * @return string
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public function getMetaKey(): string
@@ -106,7 +106,7 @@ abstract class MetaField implements Jsonable
      * Gets the value type.
      *
      * @return string
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public function getValueType(): string
@@ -120,7 +120,7 @@ abstract class MetaField implements Jsonable
      * @param string $name
      *
      * @return $this
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public function removeAttribute(string $name): self
@@ -137,7 +137,7 @@ abstract class MetaField implements Jsonable
      * @param mixed $value
      *
      * @return $this
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public function setAttribute(string $name, $value): self

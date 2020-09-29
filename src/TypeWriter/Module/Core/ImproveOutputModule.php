@@ -290,7 +290,7 @@ final class ImproveOutputModule extends Module
      * @param string $src
      *
      * @return string
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @internal
      */

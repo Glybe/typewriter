@@ -36,7 +36,7 @@ use const WP_INSTALLING;
 /**
  * Class TypeWriter
  *
- * @author Bas Milius <bas@ideemedia.nl>
+ * @author Bas Milius <bas@mili.us>
  * @package TypeWriter
  * @since 1.0.0
  */
@@ -60,7 +60,7 @@ final class TypeWriter
     /**
      * TypeWriter constructor.
      *
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public function __construct()
@@ -74,7 +74,7 @@ final class TypeWriter
     /**
      * Initializes TypeWriter.
      *
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public final function initialize(): void
@@ -88,7 +88,7 @@ final class TypeWriter
     /**
      * Runs everything. First checks if we can use router instead of WP stuff.
      *
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public final function run(): void
@@ -163,7 +163,7 @@ final class TypeWriter
      * Gets the loaded preferences.
      *
      * @return Preferences
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public final function getPreferences(): Preferences
@@ -175,7 +175,7 @@ final class TypeWriter
      * Gets the router.
      *
      * @return Router
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public final function getRouter(): Router
@@ -211,7 +211,7 @@ final class TypeWriter
      * Gets software versions of TypeWriter.
      *
      * @return array
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public final function getVersions(): array
@@ -231,7 +231,7 @@ final class TypeWriter
      * Returns TRUE if we're in wp-admin.
      *
      * @return bool
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public final function isAdmin(): bool
@@ -243,7 +243,7 @@ final class TypeWriter
      * Returns TRUE if we're on an API endpoint.
      *
      * @return bool
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public final function isApi(): bool
@@ -255,7 +255,7 @@ final class TypeWriter
      * Returns TRUE if we're on frontend.
      *
      * @return bool
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public final function isFront(): bool
@@ -267,7 +267,7 @@ final class TypeWriter
      * Returns TRUE if we're in the wordpress installer.
      *
      * @return bool
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public final function isInstalling(): bool
@@ -279,7 +279,7 @@ final class TypeWriter
      * Returns TRUE if we're on wp-login.php.
      *
      * @return bool
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public final function isLogin(): bool
@@ -296,7 +296,7 @@ final class TypeWriter
      * @param mixed ...$args
      *
      * @return Feature
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public final function loadFeature(string $className, ...$args): Feature

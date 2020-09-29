@@ -16,7 +16,7 @@ namespace TypeWriter\Feature\MetaFields;
 /**
  * Class TextareaControlMetaField
  *
- * @author Bas Milius <bas@ideemedia.nl>
+ * @author Bas Milius <bas@mili.us>
  * @package TypeWriter\Feature\MetaFields
  * @since 1.0.0
  */
@@ -30,7 +30,7 @@ class TextareaControlMetaField extends MetaField
      * @param string $label
      * @param string $placeholder
      *
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public function __construct(string $metaKey, string $label, string $placeholder)

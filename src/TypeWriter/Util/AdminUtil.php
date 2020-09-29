@@ -18,7 +18,7 @@ use function in_array;
 /**
  * Class AdminUtil
  *
- * @author Bas Milius <bas@ideemedia.nl>
+ * @author Bas Milius <bas@mili.us>
  * @package TypeWriter\Util
  * @since 1.0.0
  */
@@ -29,7 +29,7 @@ final class AdminUtil
      * Returns TRUE if the given view is a view with the Gutenberg Editor.
      *
      * @return bool
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public static function isGutenbergView(): bool

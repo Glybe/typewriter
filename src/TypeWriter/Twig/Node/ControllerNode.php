@@ -23,7 +23,7 @@ final class ControllerNode extends Node
      * @param string $controller
      * @param int $lineNumber
      *
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public function __construct(string $controller, int $lineNumber = 0)

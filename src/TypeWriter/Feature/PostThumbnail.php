@@ -140,7 +140,7 @@ class PostThumbnail extends Feature
      * @param int $postId
      *
      * @return int|null
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public static function get(string $postType, string $id, int $postId): ?int
@@ -162,7 +162,7 @@ class PostThumbnail extends Feature
      * @param string $size
      *
      * @return array|null
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public static function getData(string $postType, string $id, int $postId, string $size = 'large'): ?array
@@ -184,7 +184,7 @@ class PostThumbnail extends Feature
      * @param string $size
      *
      * @return string|null
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public static function getUrl(string $postType, string $id, int $postId, string $size = 'large'): ?string

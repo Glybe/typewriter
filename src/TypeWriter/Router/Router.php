@@ -19,7 +19,7 @@ use function TypeWriter\tw;
 /**
  * Class Router
  *
- * @author Bas Milius <bas@ideemedia.nl>
+ * @author Bas Milius <bas@mili.us>
  * @package TypeWriter\Router
  * @since 1.0.0
  */
@@ -29,7 +29,7 @@ class Router extends ColumbaRouter
     /**
      * Router constructor.
      *
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public function __construct()

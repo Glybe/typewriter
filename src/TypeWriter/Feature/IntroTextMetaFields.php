@@ -22,7 +22,7 @@ use function get_post_meta;
 /**
  * Class IntroTextMetaFields
  *
- * @author Bas Milius <bas@ideemedia.nl>
+ * @author Bas Milius <bas@mili.us>
  * @package TypeWriter\Feature
  * @since 1.0.0
  */
@@ -32,7 +32,7 @@ class IntroTextMetaFields extends MetaFields
     /**
      * IntroTextMetaFields constructor.
      *
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public function __construct()

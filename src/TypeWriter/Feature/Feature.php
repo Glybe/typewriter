@@ -16,7 +16,7 @@ namespace TypeWriter\Feature;
 /**
  * Class Feature
  *
- * @author Bas Milius <bas@ideemedia.nl>
+ * @author Bas Milius <bas@mili.us>
  * @package TypeWriter\Feature
  * @since 1.0.0
  */
@@ -30,7 +30,7 @@ abstract class Feature
      *
      * @param string $name
      *
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public function __construct(string $name)
@@ -42,7 +42,7 @@ abstract class Feature
      * Gets the name of the feature.
      *
      * @return string
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public final function getName(): string

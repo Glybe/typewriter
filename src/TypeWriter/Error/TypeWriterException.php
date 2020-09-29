@@ -18,7 +18,7 @@ use Throwable;
 /**
  * Class TypeWriterException
  *
- * @author Bas Milius <bas@ideemedia.nl>
+ * @author Bas Milius <bas@mili.us>
  * @package TypeWriter\Error
  * @since 1.0.0
  */
@@ -34,7 +34,7 @@ class TypeWriterException extends ColumbaException
      * @param int $code
      * @param Throwable|null $previous
      *
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public function __construct(string $message = '', int $code = self::ERR_UNKNOWN, ?Throwable $previous = null)

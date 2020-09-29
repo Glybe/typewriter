@@ -17,7 +17,7 @@ use TypeWriter\Error\TypeWriterException;
 /**
  * Class HookException
  *
- * @author Bas Milius <bas@ideemedia.nl>
+ * @author Bas Milius <bas@mili.us>
  * @package TypeWriter\Facade
  * @since 1.0.0
  */

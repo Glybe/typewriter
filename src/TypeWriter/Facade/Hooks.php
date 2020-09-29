@@ -27,7 +27,7 @@ use function remove_filter;
 /**
  * Class Hooks
  *
- * @author Bas Milius <bas@ideemedia.nl>
+ * @author Bas Milius <bas@mili.us>
  * @package TypeWriter\Facade
  * @since 1.0.0
  */
@@ -42,7 +42,7 @@ final class Hooks
      * @param int $priority
      *
      * @throws HookException
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public static function action(string $action, callable $fn, int $priority = 10): void
@@ -97,7 +97,7 @@ final class Hooks
      * @param int $priority
      *
      * @throws HookException
-     * @author Bas Milius <bas@ideemedia.nl>
+     * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
     public static function filter(string $filter, callable $fn, int $priority = 10): void

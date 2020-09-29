@@ -21,7 +21,7 @@ if (!defined('ABSPATH'))
 /**
  * Creates the homepage.
  *
- * @author Bas Milius <bas@ideemedia.nl>
+ * @author Bas Milius <bas@mili.us>
  * @since 1.0.0
  */
 function createHomepage(): void
@@ -44,7 +44,7 @@ function createHomepage(): void
  *
  * @param wpdb $wpdb
  *
- * @author Bas Milius <bas@ideemedia.nl>
+ * @author Bas Milius <bas@mili.us>
  * @since 1.0.0
  */
 function truncatePosts(wpdb $wpdb): void
@@ -56,7 +56,7 @@ function truncatePosts(wpdb $wpdb): void
 /**
  * Update various options.
  *
- * @author Bas Milius <bas@ideemedia.nl>
+ * @author Bas Milius <bas@mili.us>
  * @since 1.0.0
  */
 function updateOptions(): void
@@ -82,7 +82,7 @@ function updateOptions(): void
  *
  * @param int $userId
  *
- * @author Bas Milius <bas@ideemedia.nl>
+ * @author Bas Milius <bas@mili.us>
  * @since 1.0.0
  */
 function wp_install_defaults(int $userId): void

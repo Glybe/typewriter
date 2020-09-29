@@ -45,7 +45,7 @@ use const ENT_QUOTES;
 /**
  * Class Database
  *
- * @author Bas Milius <bas@ideemedia.nl>
+ * @author Bas Milius <bas@mili.us>
  * @package TypeWriter\Database
  * @since 1.0.0
  */
