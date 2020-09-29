@@ -24,7 +24,7 @@ final class TwigCache extends FilesystemCache
      */
     public function __construct()
     {
-        parent::__construct(ROOT . '/cache/cappuccino');
+        parent::__construct(ROOT . '/cache/twig');
     }
 
 }

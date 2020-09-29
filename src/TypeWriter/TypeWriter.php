@@ -45,11 +45,11 @@ final class TypeWriter
 
     public const VERSION = '1.0.0';
 
-    private TwigRenderer $cappuccino;
     private Connection $database;
     private Preferences $preferences;
     private Router $router;
     private Store $state;
+    private TwigRenderer $twig;
 
     /** @var Feature[] */
     private array $features = [];
@@ -79,7 +79,7 @@ final class TypeWriter
      */
     public final function initialize(): void
     {
-        $this->cappuccino = new TwigRenderer();
+        $this->twig = new TwigRenderer();
         $this->router = new Router();
 
         $this->state->set('tw.is-wp-initialized', true);
@@ -113,18 +113,6 @@ final class TypeWriter
             fn() => die,
             fn() => require_once WP_DIR . '/wp-includes/template-loader.php'
         );
-    }
-
-    /**
-     * Gets the Twig renderer.
-     *
-     * @return TwigRenderer
-     * @author Bas Milius <bas@mili.us>
-     * @since 1.0.0
-     */
-    public final function getCappuccino(): TwigRenderer
-    {
-        return $this->cappuccino;
     }
 
     /**
@@ -205,6 +193,18 @@ final class TypeWriter
     public final function getState(): Store
     {
         return $this->state;
+    }
+
+    /**
+     * Gets the Twig renderer.
+     *
+     * @return TwigRenderer
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public final function getTwig(): TwigRenderer
+    {
+        return $this->twig;
     }
 
     /**

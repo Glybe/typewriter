@@ -34,7 +34,7 @@ class Router extends ColumbaRouter
      */
     public function __construct()
     {
-        parent::__construct(new HtmlResponse(), tw()->getCappuccino());
+        parent::__construct(new HtmlResponse(), tw()->getTwig());
     }
 
 }

@@ -28,6 +28,10 @@ final class TwigLoader extends FilesystemLoader
      */
     protected function findTemplate(string $name, bool $throw = true): ?string
     {
+        if (substr($name, -5) !== '.twig') {
+            $name .= '.twig';
+        }
+
         if (substr($name, 0, 1) !== '@' && tw()->getState()->get('tw.is-wp-initialized', false)) {
             $themeDirectories = array_unique([
                 get_stylesheet_directory(),
@@ -35,7 +39,7 @@ final class TwigLoader extends FilesystemLoader
             ]);
 
             foreach ($themeDirectories as $directory) {
-                if (is_file($templateFile = $directory . '/view/' . $name)) {
+                if (is_file($templateFile = $directory . '/template/' . $name)) {
                     return $templateFile;
                 }
             }

@@ -42,7 +42,7 @@ final class TwigRenderer extends AbstractRenderer
     private array $options;
 
     /**
-     * CappuccinoRenderer constructor.
+     * TwigRenderer constructor.
      *
      * @param array $options
      *

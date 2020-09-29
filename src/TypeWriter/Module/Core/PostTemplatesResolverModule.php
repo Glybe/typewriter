@@ -180,8 +180,8 @@ final class PostTemplatesResolverModule extends Module
         if (substr($template, -5) !== '.twig')
             return $template;
 
-        tw()->getCappuccino()->addPath(dirname($template));
-        echo tw()->getCappuccino()->render(basename($template), []);
+        tw()->getTwig()->addPath(dirname($template));
+        echo tw()->getTwig()->render(basename($template), []);
 
         return null;
     }

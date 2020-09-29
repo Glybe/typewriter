@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace TypeWriter\Facade;
 
-use Cappuccino\Markup;
 use TypeWriter\Error\TemplateException;
 use TypeWriter\Util\Sandbox;
 use function extract;
@@ -70,8 +69,8 @@ final class Template
 
         if (is_file($templateFile))
             return Sandbox::render($templateFile, $context);
-        else if (tw()->getCappuccino()->exists($template))
-            return tw()->getCappuccino()->render($template, $context);
+        else if (tw()->getTwig()->exists($template))
+            return tw()->getTwig()->render($template, $context);
         else
             throw new TemplateException(sprintf('Could not find template part "%s".', $template), TemplateException::ERR_TEMPLATE_FILE_NOT_FOUND);
     }
@@ -98,8 +97,8 @@ final class Template
             extract($context, EXTR_OVERWRITE);
 
             require $templateFile;
-        } else if (tw()->getCappuccino()->exists($template)) {
-            echo tw()->getCappuccino()->render($template, $context);
+        } else if (tw()->getTwig()->exists($template)) {
+            echo tw()->getTwig()->render($template, $context);
         } else {
             throw new TemplateException(sprintf('Could not find template part "%s".', $template), TemplateException::ERR_TEMPLATE_FILE_NOT_FOUND);
         }
@@ -114,10 +113,10 @@ final class Template
      */
     public static function renderFooter(): string
     {
-        $cappuccino = tw()->getCappuccino();
+        $twig = tw()->getTwig();
 
-        if ($cappuccino->exists('@theme/global/footer.twig'))
-            return tw()->getCappuccino()->render('@theme/global/footer.twig');
+        if ($twig->exists('@theme/global/footer.twig'))
+            return tw()->getTwig()->render('@theme/global/footer.twig');
         else if (is_file($footerPath = Dependencies::themePath('footer.php')))
             return Sandbox::render($footerPath);
         else
@@ -133,10 +132,10 @@ final class Template
      */
     public static function renderHeader(): string
     {
-        $cappuccino = tw()->getCappuccino();
+        $twig = tw()->getTwig();
 
-        if ($cappuccino->exists('@theme/global/header.twig'))
-            return tw()->getCappuccino()->render('@theme/global/header.twig');
+        if ($twig->exists('@theme/global/header.twig'))
+            return tw()->getTwig()->render('@theme/global/header.twig');
         else if (is_file($headerPath = Dependencies::themePath('header.php')))
             return Sandbox::render($headerPath);
         else

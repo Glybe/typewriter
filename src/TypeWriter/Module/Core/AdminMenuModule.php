@@ -48,8 +48,8 @@ final class AdminMenuModule extends Module
      */
     public final function onAdminMenu(): void
     {
-        AdminMenu::addPage('dashicons-edit', 'TypeWriter', AdminMenu::cappuccino('@tw/admin/about'));
-        AdminMenu::addSubPage('typewriter', 'Settings', AdminMenu::cappuccino('@tw/admin/settings'));
+        AdminMenu::addPage('dashicons-edit', 'TypeWriter', AdminMenu::twig('@tw/admin/about'));
+        AdminMenu::addSubPage('typewriter', 'Settings', AdminMenu::twig('@tw/admin/settings'));
     }
 
 }

@@ -90,12 +90,12 @@ final class AdminMenu
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public static function cappuccino(string $template, ?callable $contextGenerator = null): callable
+    public static function twig(string $template, ?callable $contextGenerator = null): callable
     {
         return function () use ($template, $contextGenerator): void {
             $context = $contextGenerator !== null ? $contextGenerator() : [];
 
-            echo tw()->getCappuccino()->render($template, $context);
+            echo tw()->getTwig()->render($template, $context);
         };
     }
 

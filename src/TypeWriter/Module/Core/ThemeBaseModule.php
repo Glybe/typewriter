@@ -80,7 +80,7 @@ final class ThemeBaseModule extends Module
                 continue;
             }
 
-            tw()->getCappuccino()->addPath($dir . '/template', 'theme');
+            tw()->getTwig()->addPath($dir . '/template', 'theme');
         }
 
         Hooks::action('after_setup_theme', [$this, 'onWordPressAfterSetupTheme']);
