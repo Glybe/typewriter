@@ -41,6 +41,15 @@ final class AdminModule extends Module
         Hooks::action('admin_enqueue_scripts', [$this, 'onAdminEnqueueScripts']);
         Hooks::action('admin_init', [$this, 'onAdminInit']);
         Hooks::action('in_admin_footer', [$this, 'onInAdminFooter']);
+
+        Hooks::filter('user_has_cap', function (array $caps): array {
+            $caps['install_themes'] = false;
+            $caps['update_themes'] = false;
+
+            // todo(bas): check which capabilities should be disabled.
+
+            return $caps;
+        });
     }
 
     /**
