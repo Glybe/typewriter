@@ -1,0 +1,36 @@
+@use "~@latte-ui/css" with (
+    $colors: (
+        base-dark: (#191a1c, white),
+        base-light: (white, #191a1c),
+        dark: (#191a1c, white),
+        light: (white, #191a1c),
+        outline: (#dbe2ea, #191a1c),
+        primary: (#3586B4, white),
+        secondary: (#145D86, white)
+    ),
+    $dark-mode: disabled,
+    $font-family: "PT Sans",
+    $gutters: (
+	    0: 0,
+        1px: 1px,
+        1\/2: 3px,
+        1: 6px,
+        2: 9px,
+        3: 12px,
+        4: 15px,
+        5: 18px,
+        6: 24px,
+        7: 30px,
+        8: 36px,
+        9: 48px,
+        10: 60px,
+        11: 90px
+    )
+);
+
+@import "base";
+
+@import "header";
+@import "footer";
+@import "featured-image";
+

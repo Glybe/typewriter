@@ -1,0 +1,19 @@
+{
+	"name": "@bybas/russische-tolk-vertaler",
+	"version": "2020.2.0",
+	"scripts": {
+		"build": "concurrently \"yarn run clean\" \"yarn run app:build\"",
+		"clean": "concurrently \"yarn run app:clean\"",
+		"dev": "concurrently \"cd ../../../ && yarn run serve\" \"yarn run app:build:watch\"",
+		"app:build": "cross-env NODE_ENV=production webpack --config dev/webpack/build.js --progress --colors --hide-modules",
+		"app:build:watch": "cross-env NODE_ENV=development webpack --config dev/webpack/build.js --progress --colors --hide-modules --watch",
+		"app:clean": "rimraf dist"
+	},
+	"dependencies": {
+        "@latte-ui/css": "^2.0.0-dev.0"
+	},
+	"devDependencies": {
+		"glob-all": "^3.2.1",
+		"purgecss-webpack-plugin": "^2.3.0"
+	}
+}

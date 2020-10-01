@@ -1,0 +1,42 @@
+<footer id="main-footer">
+    <div class="container">
+
+        <div class="panel">
+            <div class="row no-gutter align-items-center m-7 lg:m-11">
+                <div class="col-12 lg:col">
+
+                    <span id="main-footer-tagline">Uw opdracht(en) ook door Davaj Reizen & Vertalingen laten uitvoeren?</span>
+
+                </div>
+                <div class="col-12 lg:ml-11 lg:col-auto mt-7 lg:mt-0">
+
+                    <a href="{{ url("/contact") }}" class="btn btn-contained is-secondary is-huge">
+                        <span>Contact opnemen</span>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</footer>
+
+<footer id="copyright-footer">
+    <div class="container">
+
+        <div class="panel">
+            <div class="row no-gutter align-items-center mx-7 lg:mx-11 my-6 text-center lg:text-left">
+                <div class="col-12 lg:col">
+
+                    &copy; {{ "now" | date("Y") }} {{ site.info("name") | raw }}
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</footer>
+
+{{ doAction("wp_footer") }}
+</body>
+</html>

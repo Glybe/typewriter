@@ -1,0 +1,80 @@
+@use "~@latte-ui/css/src/api" as *;
+
+#main-header
+{
+    border-top: 3px solid #{color-no-variable(primary)};
+
+    @include responsive-down(md)
+    {
+        &-menu
+        {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            padding-bottom: 24px;
+            flex-flow: column;
+            background: white;
+            transition: 540ms var(--decelerationCurve);
+
+            .is-contained
+            {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+        }
+
+        &-toggle
+        {
+            position: relative;
+            display: block;
+            height: 36px;
+            width: 36px;
+            appearance: none;
+            background: transparent no-repeat center center url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3e%3cpath fill='currentColor' d='M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z'%3e%3c/path%3e%3c/svg%3e");
+            background-size: 21px 21px;
+            border: 0;
+            outline: 0;
+            z-index: 1;
+        }
+
+        &-toggle:not(:checked) + &-menu
+        {
+            opacity: 0;
+            transform: translate3d(0, -24px, 0);
+        }
+    }
+}
+
+.nav.nav-head
+{
+    .nav-link
+    {
+        padding: 12px 18px;
+        transition: 180ms var(--swiftOut);
+
+        &:not(:hover):not(.is-contained)
+        {
+            opacity: .7;
+        }
+
+        &.is-active
+        {
+            font-weight: 700;
+            opacity: 1;
+        }
+
+        &.is-contained
+        {
+            margin-left: 1rem;
+            background: #{color-no-variable(primary)};
+            border-radius: #{$radius};
+            color: #{color-no-variable(primary-on)};
+
+            &:hover
+            {
+                opacity: .7;
+            }
+        }
+    }
+}
