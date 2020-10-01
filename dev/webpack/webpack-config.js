@@ -72,39 +72,39 @@ module.exports = {
 					publicPath: "./"
 				}
 			},
-			{
-				test: /\.(sa|sc|c)ss$/,
-				use: [
-					{
-						loader: MiniCssExtractPlugin.loader,
-						options: {
-							sourceMap: true
-						}
-					},
-					"css-loader?sourceMap",
-					{
-						loader: "postcss-loader",
-						options: {
-							sourceMap: true,
-							postcssOptions: {
-								ident: "postcss",
-								plugins: () => [
-									postcssFocusWithin()
-								]
-							}
-						}
-					},
-					{
-						loader: "resolve-url-loader"
-					},
-					{
-						loader: "sass-loader",
-						options: {
-							sourceMap: true
-						}
-					}
-				]
-			}
+            {
+                test: /\.(sa|sc|c)ss$/,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            sourceMap: true
+                        }
+                    },
+                    "css-loader?sourceMap",
+                    {
+                        loader: "postcss-loader",
+                        options: {
+                            sourceMap: true,
+                            postcssOptions: {
+                                ident: "postcss",
+                                plugins: () => [
+                                    postcssFocusWithin()
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        loader: "resolve-url-loader"
+                    },
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            sourceMap: true
+                        }
+                    }
+                ]
+            }
 		]
 	},
 	plugins: [
