@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace TypeWriter\Facade;
 
 use Columba\Util\StringUtil;
+use Generator;
 use TypeWriter\Error\ViolationException;
 use TypeWriter\Feature\Gallery;
 use TypeWriter\Feature\IntroTextMetaFields;
@@ -352,6 +353,25 @@ class Post
     public static function relation(string $relationId, string $foreignType): array
     {
         return Relation::get(self::post(), $relationId, $foreignType);
+    }
+
+    /**
+     * Gets objects that are linked to the current post as Post instances.
+     *
+     * @param string $relationId
+     * @param string $foreignType
+     *
+     * @return Generator
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public static function relationIterator(string $relationId, string $foreignType): Generator
+    {
+        $postIds = static::relation($relationId, $foreignType);
+
+        foreach ($postIds as $postId) {
+            yield Post::with(get_post($postId));
+        }
     }
 
     /**
