@@ -18,5 +18,5 @@ that are not build with the framework. To develop a custom theme, follow the ste
 - Clone the project. `git clone https://github.com/basmilius/typewriter`
 - Install composer dependencies. `composer install`
 - Install node.js dependencies. `yarn install`
-- Build a production bundle of our core files. `yarn typewriter:build`
+- Build a production bundle of our core files. `yarn build`
 - Start developing. `yarn serve`
