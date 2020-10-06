@@ -81,10 +81,11 @@ final class Database extends wpdb
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function _real_escape($string)
+    public function _real_escape($string): string
     {
-        if (is_string($string))
+        if (is_string($string)) {
             $string = addslashes($string);
+        }
 
         return $this->add_placeholder_escape($string);
     }
@@ -122,41 +123,47 @@ final class Database extends wpdb
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function print_error($str = '')
+    public function print_error($str = ''): bool
     {
         global $EZSQL_ERROR;
 
-        if (empty($str))
+        if (empty($str)) {
             $str = $this->connection->getPdo()->errorInfo()[2] ?? 'Unknown database error.';
+        }
 
         $EZSQL_ERROR[] = [
             'query' => $this->last_query,
             'error_str' => $str,
         ];
 
-        if ($this->suppress_errors)
+        if ($this->suppress_errors) {
             return false;
+        }
 
         wp_load_translations_early();
 
-        if (($caller = $this->get_caller()))
+        if (($caller = $this->get_caller())) {
             $errorMessage = sprintf(__('WordPress database error %1$s for query %2$s made by %3$s'), $str, $this->last_query, $caller);
-        else
+        } else {
             $errorMessage = sprintf(__('WordPress database error %1$s for query %2$s'), $str, $this->last_query);
+        }
 
         error_log($errorMessage);
 
-        if (!$this->show_errors)
+        if (!$this->show_errors) {
             return false;
+        }
 
         if (is_multisite()) {
             $message = sprintf("%s [%s]\n%s\n", __('WordPress database error:'), $str, $this->last_query);
 
-            if (defined('ERRORLOGFILE'))
+            if (defined('ERRORLOGFILE')) {
                 error_log($message, 3, ERRORLOGFILE);
+            }
 
-            if (defined('DIEONDBERROR') && DIEONDBERROR)
+            if (defined('DIEONDBERROR') && DIEONDBERROR) {
                 wp_die($message);
+            }
         } else {
             $str = htmlspecialchars($str, ENT_QUOTES);
             $query = htmlspecialchars($this->last_query, ENT_QUOTES);
@@ -222,8 +229,9 @@ final class Database extends wpdb
         $this->last_error = $this->connection->getPdo()->errorInfo()[2] ?? null;
 
         if ($this->last_error) {
-            if ($this->insert_id && preg_match('/^\s*(insert|replace)\s/i', $query))
+            if ($this->insert_id && preg_match('/^\s*(insert|replace)\s/i', $query)) {
                 $this->insert_id = 0;
+            }
 
             $this->print_error();
 
@@ -258,16 +266,19 @@ final class Database extends wpdb
      */
     public final function set_charset($dbh, $charset = null, $collate = null): void
     {
-        if (!isset($charset))
+        if (!isset($charset)) {
             $charset = $this->charset;
+        }
 
-        if (!isset($collate))
+        if (!isset($collate)) {
             $collate = $this->collate;
+        }
 
-        if (!empty($collate))
+        if (!empty($collate)) {
             $this->connection->prepare(sprintf("SET NAMES '%s' COLLATE '%s'", $charset, $collate))->run();
-        else
+        } else {
             $this->connection->prepare(sprintf("SET NAMES '%s'", $charset))->run();
+        }
     }
 
     /**
@@ -280,17 +291,19 @@ final class Database extends wpdb
         if (empty($modes)) {
             $smt = $this->connection->prepare('SELECT @@SESSION.sql_mode');
             $smt->run();
-            $res = $smt->getPdoStatement()->fetch(PDO::FETCH_NUM);
+            $res = $smt->fetch(false, PDO::FETCH_NUM);
 
-            $modes = array_filter(explode(',', $res[0]), fn($val) => !empty($val));
+            $modes = array_filter(explode(',', $res[0]), fn($val): bool => !empty($val));
         }
 
         $modes = array_change_key_case($modes, CASE_UPPER);
         $incompatibleModes = (array)Hooks::applyFilters('incompatible_sql_modes', $this->incompatible_modes);
 
-        foreach ($modes as $i => $mode)
-            if (in_array($mode, $incompatibleModes))
+        foreach ($modes as $i => $mode) {
+            if (in_array($mode, $incompatibleModes)) {
                 unset($modes[$i]);
+            }
+        }
 
         $modesStr = implode(',', $modes);
 
@@ -307,17 +320,20 @@ final class Database extends wpdb
      */
     private function doQuery(string $query): void
     {
-        if (defined('SAVEQUERIES') && SAVEQUERIES)
+        if (defined('SAVEQUERIES') && SAVEQUERIES) {
             $this->timer_start();
+        }
 
         try {
             $this->result = $this->connection->prepare($query);
             $this->result->run();
         } catch (PDOException $err) {
+            $this->print_error($err->__toString());
         }
 
-        if (defined('SAVEQUERIES') && SAVEQUERIES)
+        if (defined('SAVEQUERIES') && SAVEQUERIES) {
             $this->queries[$this->num_queries] = [$query, $this->timer_stop(), $this->get_caller()];
+        }
 
         $this->num_queries++;
     }

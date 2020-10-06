@@ -82,6 +82,10 @@ final class TypeWriter
         $this->twig = new TwigRenderer();
         $this->router = new Router();
 
+        if ($this->isInstalling()) {
+            require __DIR__ . '/installer.php';
+        }
+
         $this->state->set('tw.is-wp-initialized', true);
     }
 
@@ -96,8 +100,7 @@ final class TypeWriter
         require_once(WP_DIR . '/wp-load.php');
 
         Hooks::action('rest_api_init', fn() => $this->runRouter(
-            fn() => die,
-            null
+            fn() => die
         ));
 
         wp();

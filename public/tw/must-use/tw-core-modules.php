@@ -23,6 +23,7 @@ use TypeWriter\Module\Core\APIModule;
 use TypeWriter\Module\Core\BrandingModule;
 use TypeWriter\Module\Core\DisableAdminFeaturesModule;
 use TypeWriter\Module\Core\DisableCommentsAndPingsModule;
+use TypeWriter\Module\Core\DisableCoreFeaturesModule;
 use TypeWriter\Module\Core\DisableWPFeaturesModule;
 use TypeWriter\Module\Core\ImproveOutputModule;
 use TypeWriter\Module\Core\PostTemplatesLoaderModule;
@@ -32,6 +33,7 @@ use function TypeWriter\tw;
 
 tw()->loadModule(APIModule::class);
 tw()->loadModule(BrandingModule::class);
+tw()->loadModule(DisableCoreFeaturesModule::class);
 tw()->loadModule(DisableCommentsAndPingsModule::class);
 tw()->loadModule(ThemeBaseModule::class);
 

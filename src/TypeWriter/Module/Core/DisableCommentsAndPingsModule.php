@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace TypeWriter\Module\Core;
 
+use stdClass;
 use TypeWriter\Facade\AdminMenu;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
@@ -20,7 +21,8 @@ final class DisableCommentsAndPingsModule extends Module
 {
 
     /**
-     * {@inheritdoc}
+     * DisableCommentsAndPingsModule constructor.
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -41,6 +43,31 @@ final class DisableCommentsAndPingsModule extends Module
 
         Hooks::filter('comments_open', [$this, 'onCommentsOrPingsOpen']);
         Hooks::filter('pings_open', [$this, 'onCommentsOrPingsOpen']);
+
+        Hooks::filter('wp_count_comments', [$this, 'onWpCountComments']);
+    }
+
+    /**
+     * Invoked on wp_count_comments action hook.
+     * Returns zero for everything, we don't want comments.
+     *
+     * @return stdClass
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public final function onWpCountComments(): stdClass
+    {
+        $result = new stdClass;
+
+        $result->approved = 0;
+        $result->moderated = 0;
+        $result->spam = 0;
+        $result->trash = 0;
+        $result->{'post-trashed'} = 0;
+        $result->total_comments = 0;
+        $result->all = 0;
+
+        return $result;
     }
 
     /**
@@ -57,8 +84,9 @@ final class DisableCommentsAndPingsModule extends Module
 
         global $pagenow;
 
-        if ($pagenow !== 'edit-comments.php')
+        if ($pagenow !== 'edit-comments.php') {
             return;
+        }
 
         wp_redirect(admin_url());
     }
