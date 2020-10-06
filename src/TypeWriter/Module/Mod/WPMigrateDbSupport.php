@@ -46,8 +46,9 @@ final class WPMigrateDbSupport extends Module
      */
     public function onInitialize(): void
     {
-        if (!Plugin::active('wp-migrate-db/wp-migrate-db.php'))
+        if (!Plugin::active('wp-migrate-db/wp-migrate-db.php')) {
             return;
+        }
 
         Hooks::filter('tw.theme-base.directories', [$this, 'onThemeDirectories']);
     }
@@ -65,7 +66,7 @@ final class WPMigrateDbSupport extends Module
      */
     public final function onThemeDirectories(array $directories): array
     {
-        return array_filter($directories, fn(string $directory) => strpos($directory, 'temp-theme') === false);
+        return array_filter($directories, fn(string $directory): bool => strpos($directory, 'temp-theme') === false);
     }
 
 }

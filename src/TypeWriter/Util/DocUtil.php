@@ -12,6 +12,12 @@ declare(strict_types=1);
 
 namespace TypeWriter\Util;
 
+use function count;
+use function file_get_contents;
+use function is_file;
+use function preg_match_all;
+use function trim;
+
 /**
  * Class DocUtil
  *
@@ -29,14 +35,15 @@ final class DocUtil
      *
      * @return array
      * @author Bas Milius <bas@mili.us>
-     * @since 1.2.0
+     * @since 1.0.0
      */
     public static function getProperties(string $file): array
     {
         $properties = [];
 
-        if (!is_file($file))
+        if (!is_file($file)) {
             return $properties;
+        }
 
         $contents = file_get_contents($file);
         $matches = [];
@@ -47,8 +54,9 @@ final class DocUtil
         $keys = $matches[1];
         $values = $matches[2];
 
-        for ($i = 0, $length = count($keys); $i < $length; $i++)
+        for ($i = 0, $length = count($keys); $i < $length; $i++) {
             $properties[$keys[$i]] = trim($values[$i]);
+        }
 
         return $properties;
     }

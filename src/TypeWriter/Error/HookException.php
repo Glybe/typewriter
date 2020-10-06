@@ -1,6 +1,6 @@
 <?php
-/**
- * Copyright (c) 2019 - Bas Milius <bas@mili.us>
+/*
+ * Copyright (c) 2019-2020 - Bas Milius <bas@mili.us>
  *
  * This file is part of TypeWriter, a base framework for WordPress.
  *
@@ -10,15 +10,13 @@
 
 declare(strict_types=1);
 
-namespace TypeWriter\Facade;
-
-use TypeWriter\Error\TypeWriterException;
+namespace TypeWriter\Error;
 
 /**
  * Class HookException
  *
  * @author Bas Milius <bas@mili.us>
- * @package TypeWriter\Facade
+ * @package TypeWriter\Error
  * @since 1.0.0
  */
 final class HookException extends TypeWriterException

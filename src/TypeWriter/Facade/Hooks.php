@@ -15,6 +15,7 @@ namespace TypeWriter\Facade;
 use ReflectionException;
 use ReflectionFunction;
 use ReflectionMethod;
+use TypeWriter\Error\HookException;
 use function add_action;
 use function add_filter;
 use function apply_filters;
@@ -47,8 +48,9 @@ final class Hooks
      */
     public static function action(string $action, callable $fn, int $priority = 10): void
     {
-        if (!is_callable($fn))
+        if (!is_callable($fn)) {
             throw new HookException('$fn should be callable.', HookException::ERR_INVALID_CALLABLE);
+        }
 
         try {
             $reflect = is_array($fn) ? new ReflectionMethod($fn[0], $fn[1]) : new ReflectionFunction($fn);
@@ -102,8 +104,9 @@ final class Hooks
      */
     public static function filter(string $filter, callable $fn, int $priority = 10): void
     {
-        if (!is_callable($fn))
+        if (!is_callable($fn)) {
             throw new HookException('$fn should be callable.', HookException::ERR_INVALID_CALLABLE);
+        }
 
         try {
             $reflect = is_array($fn) ? new ReflectionMethod($fn[0], $fn[1]) : new ReflectionFunction($fn);

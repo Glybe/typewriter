@@ -32,8 +32,9 @@ class Attachment
     {
         $imageUrl = wp_get_attachment_image_url($attachmentId, $size);
 
-        if (!empty($imageUrl))
+        if (!empty($imageUrl)) {
             return Hooks::applyFilters('tw.attachment.image-url', $imageUrl, $attachmentId, $size);
+        }
 
         return null;
     }
@@ -52,8 +53,9 @@ class Attachment
     {
         $imageData = wp_get_attachment_image_src($attachmentId, $size);
 
-        if (!$imageData)
+        if (!$imageData) {
             return null;
+        }
 
         return [
             'src' => $imageData[0],

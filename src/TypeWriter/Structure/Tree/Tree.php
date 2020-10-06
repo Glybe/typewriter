@@ -5,7 +5,6 @@ namespace TypeWriter\Structure\Tree;
 
 use TypeWriter\Util\PostUtil;
 use WP_Post;
-use function count;
 use function get_posts;
 
 /**
@@ -54,8 +53,9 @@ class Tree
      */
     private static function build(WP_Post $post, int &$depth = 0, int $maxDepth = -1): array
     {
-        if ($maxDepth > 0 && $depth > $maxDepth)
+        if ($maxDepth > 0 && $depth > $maxDepth) {
             return [];
+        }
 
         $depth++;
 
@@ -68,8 +68,9 @@ class Tree
             'post_type' => $post->post_type
         ]);
 
-        if (count($items) === 0)
+        if (empty($items)) {
             return [];
+        }
 
         $tree = [];
 

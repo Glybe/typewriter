@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace TypeWriter\Facade;
 
 use function in_array;
+use function is_dir;
 
 /**
  * Class Plugin
@@ -55,8 +56,9 @@ final class Plugin
     {
         $path = WP_PLUGIN_DIR . '/' . $name;
 
-        if (!is_dir($path))
+        if (!is_dir($path)) {
             return null;
+        }
 
         return $path;
     }
@@ -75,8 +77,9 @@ final class Plugin
     {
         $isInstalled = self::dir($name) !== null;
 
-        if ($isInstalled && $fn !== null)
+        if ($isInstalled && $fn !== null) {
             $fn();
+        }
 
         return $isInstalled;
     }

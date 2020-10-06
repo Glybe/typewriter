@@ -81,8 +81,9 @@ class Gallery extends Feature
     {
         $screen = get_current_screen();
 
-        if (!AdminUtil::isGutenbergView() || !$this->isPostTypeSupported($screen->post_type))
+        if (!AdminUtil::isGutenbergView() || !$this->isPostTypeSupported($screen->post_type)) {
             return $scripts;
+        }
 
         $scripts[] = <<<CODE
 			new tw.feature.Gallery("{$this->id}", "{$this->label}", "{$this->metaKey}"); 
@@ -117,8 +118,9 @@ class Gallery extends Feature
         $metaKey = "tw_{$postType}_{$galleryId}_gallery";
         $metaValue = get_post_meta($postId, $metaKey, true);
 
-        if (!is_array($metaValue))
+        if (!is_array($metaValue)) {
             return [];
+        }
 
         return $metaValue;
     }

@@ -15,8 +15,10 @@ namespace TypeWriter\Feature;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Util\AdminUtil;
 use WP_Post;
+use function array_filter;
 use function array_map;
 use function get_current_screen;
+use function get_post_meta;
 use function intval;
 use function register_meta;
 
@@ -90,8 +92,9 @@ class Relation extends Feature
     {
         $screen = get_current_screen();
 
-        if (!AdminUtil::isGutenbergView() || !$this->isPostTypeSupported($screen->post_type))
+        if (!AdminUtil::isGutenbergView() || !$this->isPostTypeSupported($screen->post_type)) {
             return $scripts;
+        }
 
         $scripts[] = <<<CODE
 			new tw.feature.Relation("{$this->id}", "{$this->label}", "{$this->metaKey}", "{$this->foreignType}"); 
@@ -127,8 +130,8 @@ class Relation extends Feature
         $metaKey = "tw_{$metaId}_relation";
 
         $objectIds = get_post_meta($post->ID, $metaKey, true) ?: [];
-        $objectIds = array_map(fn($val) => intval($val), $objectIds);
-        $objectIds = array_filter($objectIds, fn(int $val) => $val > 0);
+        $objectIds = array_map(fn($val): int => intval($val), $objectIds);
+        $objectIds = array_filter($objectIds, fn(int $val): bool => $val > 0);
 
         return $objectIds;
     }

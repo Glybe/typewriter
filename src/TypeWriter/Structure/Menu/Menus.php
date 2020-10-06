@@ -68,8 +68,9 @@ class Menus
      */
     public static function registerLocation(string $locationKey, string $locationLabel): void
     {
-        if (self::hasLocation($locationKey))
+        if (self::hasLocation($locationKey)) {
             throw new ViolationException(sprintf('Cannot register the menu location "%s". Another location with key "%s" has already been registered.', $locationLabel, $locationKey), ViolationException::ERR_DUPLICATE);
+        }
 
         register_nav_menu($locationKey, $locationLabel);
     }
@@ -89,13 +90,15 @@ class Menus
     {
         $menuKey = "{$locationKey}_{$parent}_{$objectParentId}";
 
-        if (isset(self::$menuCache[$menuKey]))
+        if (isset(self::$menuCache[$menuKey])) {
             return self::$menuCache[$menuKey];
+        }
 
         $term = self::getMenuTerm($locationKey);
 
-        if ($term === null)
+        if ($term === null) {
             return null;
+        }
 
         $menu = new Menu($term);
 
@@ -138,8 +141,9 @@ class Menus
         $isActive = false;
 
         foreach ($item->getItems() as $sub) {
-            if (!self::isItemOrChildActive($sub))
+            if (!self::isItemOrChildActive($sub)) {
                 continue;
+            }
 
             $isActive = true;
             break;
@@ -179,11 +183,13 @@ class Menus
         $items = static::$getNavMenuItemsCache[$menu->getName()] ??= wp_get_nav_menu_items($menu->getName()) ?: [];
 
         foreach ($items as $item) {
-            if ($objectParentId >= 0 && intval($item->{'object_id'}) !== $objectParentId)
+            if ($objectParentId >= 0 && intval($item->object_id) !== $objectParentId) {
                 continue;
+            }
 
-            if (intval($item->{'menu_item_parent'}) !== $parentId)
+            if (intval($item->menu_item_parent) !== $parentId) {
                 continue;
+            }
 
             $menuItem = new MenuItem($menu, $item);
             $menu->addItem($menuItem);
@@ -206,8 +212,9 @@ class Menus
         $items = static::$getNavMenuItemsCache[$menu->getName()] ??= wp_get_nav_menu_items($menu->getName()) ?: [];
 
         foreach ($items as $item) {
-            if (intval($item->{'menu_item_parent'}) !== $parent->getPost()->ID)
+            if (intval($item->menu_item_parent) !== $parent->getPost()->ID) {
                 continue;
+            }
 
             $menuItem = new MenuItem($menu, $item, $parent);
             $parent->addItem($menuItem);
@@ -229,8 +236,9 @@ class Menus
     {
         $locations = get_nav_menu_locations();
 
-        if (!isset($locations[$locationKey]))
+        if (!isset($locations[$locationKey])) {
             return null;
+        }
 
         return get_term($locations[$locationKey], 'nav_menu') ?? null;
     }

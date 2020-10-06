@@ -159,7 +159,7 @@ final class TwigRenderer extends AbstractRenderer
     {
         try {
             return $this->twig->render($template, $context);
-        } catch (LoaderError|RuntimeError|SyntaxError $err) {
+        } catch (LoaderError | RuntimeError | SyntaxError $err) {
             throw $this->error($err);
         }
     }

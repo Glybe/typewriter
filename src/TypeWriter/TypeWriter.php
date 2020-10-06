@@ -31,6 +31,7 @@ use function is_admin;
 use function phpversion;
 use function strpos;
 use function wp;
+use const WP_DEBUG;
 use const WP_INSTALLING;
 
 /**
@@ -252,6 +253,18 @@ final class TypeWriter
     public final function isApi(): bool
     {
         return strpos($_SERVER['REQUEST_URI'], '/api/wp/') !== false;
+    }
+
+    /**
+     * Returns TRUE when debug mode is enabled.
+     *
+     * @return bool
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public final function isDebugMode(): bool
+    {
+        return defined('WP_DEBUG') && WP_DEBUG;
     }
 
     /**

@@ -17,6 +17,7 @@ use TypeWriter\Facade\Hooks;
 use TypeWriter\Feature\Feature;
 use TypeWriter\Util\AdminUtil;
 use function get_current_screen;
+use function json_encode;
 
 /**
  * Class MetaFields
@@ -76,8 +77,9 @@ abstract class MetaFields extends Feature
     {
         $screen = get_current_screen();
 
-        if (!AdminUtil::isGutenbergView() || !$this->isPostTypeSupported($screen->post_type))
+        if (!AdminUtil::isGutenbergView() || !$this->isPostTypeSupported($screen->post_type)) {
             return $scripts;
+        }
 
         $fieldsJson = json_encode($this->fields);
 
@@ -115,8 +117,11 @@ abstract class MetaFields extends Feature
         $properties = [];
 
         /** @var MetaField $field */
-        foreach ($this->fields as $field)
-            $properties[$field->getMetaKey()] = ['type' => $field->getValueType()];
+        foreach ($this->fields as $field) {
+            $properties[$field->getMetaKey()] = [
+                'type' => $field->getValueType()
+            ];
+        }
 
         register_meta('post', $this->metaKey, [
             'single' => true,

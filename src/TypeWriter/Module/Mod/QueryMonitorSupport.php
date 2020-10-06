@@ -24,8 +24,26 @@ use TypeWriter\Facade\Hooks;
 use TypeWriter\Facade\Plugin;
 use TypeWriter\Module\Module;
 use WP_Error;
+use function array_combine;
+use function array_keys;
+use function array_map;
+use function define;
+use function defined;
+use function error_reporting;
+use function explode;
+use function function_exists;
+use function get_loaded_extensions;
+use function implode;
 use function ini_get;
+use function method_exists;
+use function php_sapi_name;
+use function php_uname;
+use function phpversion;
+use function reset;
+use function sprintf;
 use function TypeWriter\tw;
+use function version_compare;
+use function wp_unslash;
 
 /**
  * Class QueryMonitorSupport
@@ -55,13 +73,14 @@ final class QueryMonitorSupport extends Module
      */
     public function onInitialize(): void
     {
-        if (!Plugin::active('query-monitor/query-monitor.php'))
+        if (!Plugin::active('query-monitor/query-monitor.php')) {
             return;
+        }
 
         $this->initializeQueryMonitor();
 
         Hooks::filter('qm/collectors', [$this, 'onCollectors'], 1000);
-        Hooks::filter('qm/show_extended_query_prompt', fn() => false);
+        Hooks::filter('qm/show_extended_query_prompt', fn(): bool => false);
         Hooks::filter('tw.database.after-query', [$this, 'onAfterQuery']);
     }
 
@@ -87,11 +106,13 @@ final class QueryMonitorSupport extends Module
         $trace->ignore(1);
         $wpdb->queries[$index]['trace'] = $trace;
 
-        if (!isset($wpdb->queries[$index][0]))
+        if (!isset($wpdb->queries[$index][0])) {
             $wpdb->queries[$index][0] = $query;
+        }
 
-        if (!isset($wpdb->queries[$index][3]))
+        if (!isset($wpdb->queries[$index][3])) {
             $wpdb->queries[$index][3] = $wpdb->time_start;
+        }
 
         if (!empty($wpdb->last_error)) {
             $code = tw()->getDatabase()->getPdo()->errorInfo()[0] ?? 'qmdb';
@@ -136,15 +157,17 @@ final class QueryMonitorSupport extends Module
         require_once $pluginDir . '/classes/Plugin.php';
         require_once $pluginDir . '/classes/Backtrace.php';
 
-        if (!defined('SAVEQUERIES'))
+        if (!defined('SAVEQUERIES')) {
             define('SAVEQUERIES', true);
+        }
 
         $vars = ['max_execution_time', 'memory_limit', 'upload_max_filesize', 'post_max_size', 'display_errors', 'log_errors'];
 
         $wpdb->{'qm_php_vars'} = [];
 
-        foreach ($vars as $var)
+        foreach ($vars as $var) {
             $wpdb->{'qm_php_vars'}[$var] = ini_get($var);
+        }
     }
 
     /**
@@ -169,7 +192,7 @@ final class QueryMonitorSupport extends Module
             {
                 global $wp_version;
 
-                $mysql_vars = [
+                $mysqlVariables = [
                     'key_buffer_size' => true,
                     'max_allowed_packet' => false,
                     'max_connections' => false,
@@ -183,27 +206,24 @@ final class QueryMonitorSupport extends Module
 
                 if ($dbq) {
                     foreach ($dbq->db_objects as $id => $db) {
-                        if (method_exists($db, 'db_version'))
-                            $server = $db->db_version();
-                        else
-                            $server = null;
+                        $server = method_exists($db, 'db_version') ? $db->db_version() : null;
 
                         $extension = 'Columba Database';
-                        $variables = $db->get_results("SHOW VARIABLES WHERE Variable_name IN ('" . implode("', '", array_keys($mysql_vars)) . "')");
+                        $variables = $db->get_results("SHOW VARIABLES WHERE Variable_name IN ('" . implode("', '", array_keys($mysqlVariables)) . "')");
 
                         $client = tw()->getDatabase()->getPdo()->getAttribute(PDO::ATTR_CLIENT_VERSION);
 
                         if ($client) {
-                            $client_version = implode('.', QM_Util::get_client_version($client));
-                            $client_version = sprintf('%s (%s)', $client, $client_version);
+                            $clientVersion = implode('.', QM_Util::get_client_version($client));
+                            $clientVersion = sprintf('%s (%s)', $client, $clientVersion);
                         } else {
-                            $client_version = null;
+                            $clientVersion = null;
                         }
 
                         $info = [
                             'server-version' => $server,
                             'extension' => $extension,
-                            'client-version' => $client_version,
+                            'client-version' => $clientVersion,
                             'user' => $db->dbuser,
                             'host' => $db->dbhost,
                             'database' => $db->dbname,
@@ -211,7 +231,7 @@ final class QueryMonitorSupport extends Module
 
                         $this->data['db'][$id] = [
                             'info' => $info,
-                            'vars' => $mysql_vars,
+                            'vars' => $mysqlVariables,
                             'variables' => $variables,
                         ];
                     }
@@ -222,17 +242,15 @@ final class QueryMonitorSupport extends Module
                 $this->data['php']['user'] = QM_Collector_Environment::get_current_user();
                 $this->data['php']['old'] = version_compare($this->data['php']['version'], '7.2', '<');
 
-                foreach ($this->php_vars as $setting)
+                foreach ($this->php_vars as $setting) {
                     $this->data['php']['variables'][$setting]['after'] = ini_get($setting);
+                }
 
-                if (defined('SORT_FLAG_CASE'))
-                    $sort_flags = SORT_STRING | SORT_FLAG_CASE;
-                else
-                    $sort_flags = SORT_STRING;
+                $sortFlags = defined('SORT_CLAG_CASE') ? SORT_STRING | SORT_FLAG_CASE : SORT_STRING;
 
                 if (is_callable('get_loaded_extensions')) {
                     $extensions = get_loaded_extensions();
-                    sort($extensions, $sort_flags);
+                    sort($extensions, $sortFlags);
                     $this->data['php']['extensions'] = array_combine($extensions, array_map([$this, 'get_extension_version'], $extensions));
                 } else {
                     $this->data['php']['extensions'] = [];
@@ -254,8 +272,9 @@ final class QueryMonitorSupport extends Module
                     'WP_LOCAL_DEV' => QM_Collector_Environment::format_bool_constant('WP_LOCAL_DEV'),
                 ]);
 
-                if (is_multisite())
+                if (is_multisite()) {
                     $this->data['wp']['constants']['SUNRISE'] = QM_Collector_Environment::format_bool_constant('SUNRISE');
+                }
 
                 if (isset($_SERVER['SERVER_SOFTWARE'])) {
                     $server = explode(' ', wp_unslash($_SERVER['SERVER_SOFTWARE']));
@@ -264,19 +283,12 @@ final class QueryMonitorSupport extends Module
                     $server = [''];
                 }
 
-                if (isset($server[1]))
-                    $server_version = $server[1];
-                else
-                    $server_version = null;
-
-                if (isset($_SERVER['SERVER_ADDR']))
-                    $address = wp_unslash($_SERVER['SERVER_ADDR']);
-                else
-                    $address = null;
+                $address = isset($_SERVER['SERVER_ADDR']) ? wp_unslash($_SERVER['SERVER_ADDR']) : null;
+                $serverVersion = isset($server[1]) ? $server[1] : null;
 
                 $this->data['server'] = [
                     'name' => $server[0],
-                    'version' => $server_version,
+                    'version' => $serverVersion,
                     'address' => $address,
                     'host' => null,
                     'OS' => null,

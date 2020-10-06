@@ -43,8 +43,8 @@ final class TwigFunctions extends AbstractExtension
 
             new TwigFunction('applyFilters', [Hooks::class, 'applyFilters'], ['is_safe' => ['html']]),
             new TwigFunction('doAction', [Hooks::class, 'doAction']),
-            new TwigFunction('themeUri', fn(string $path) => Dependencies::themeUri($path)),
-            new TwigFunction('url', fn(string $path = '') => home_url($path)),
+            new TwigFunction('themeUri', fn(string $path): string => Dependencies::themeUri($path)),
+            new TwigFunction('url', fn(string $path = ''): string => home_url($path)),
 
             new TwigFunction('wp', fn() => call_user_func(...func_get_args()))
         ];

@@ -149,7 +149,7 @@ final class ImproveOutputModule extends Module
         ];
 
         foreach ($hints as $relation_type => $urls) {
-            $unique_urls = [];
+            $uniqueUrls = [];
             $urls = Hooks::applyFilters('wp_resource_hints', $urls, $relation_type);
 
             foreach ($urls as $key => $url) {
@@ -166,7 +166,7 @@ final class ImproveOutputModule extends Module
 
                 $url = esc_url($url, ['http', 'https']);
 
-                if (!$url || isset($unique_urls[$url])) {
+                if (!$url || isset($uniqueUrls[$url])) {
                     continue;
                 }
 
@@ -187,10 +187,10 @@ final class ImproveOutputModule extends Module
                 $atts['rel'] = $relation_type;
                 $atts['href'] = $url;
 
-                $unique_urls[$url] = $atts;
+                $uniqueUrls[$url] = $atts;
             }
 
-            foreach ($unique_urls as $atts) {
+            foreach ($uniqueUrls as $atts) {
                 $allowedAttrs = ['as', 'crossorigin', 'href', 'pr', 'rel', 'type'];
                 $html = '';
 
@@ -318,8 +318,9 @@ final class ImproveOutputModule extends Module
      */
     public final function onScriptLoaderTag(string $tag, string $handle, string $src): string
     {
-        if (empty($tag))
+        if (empty($tag)) {
             return $tag;
+        }
 
         if (WP_DEBUG) {
             return sprintf('<script defer data-id="%s" type="text/javascript" src="%s"></script>', $handle, $src);
@@ -344,8 +345,9 @@ final class ImproveOutputModule extends Module
      */
     public final function onStyleLoaderTag(string $tag, string $handle, string $href, string $media): string
     {
-        if (empty($tag))
+        if (empty($tag)) {
             return $tag;
+        }
 
         if (WP_DEBUG) {
             return sprintf('<link rel="stylesheet" href="%s" data-id="%s" media="%s" type="text/css"/>', $href, $handle, $media);

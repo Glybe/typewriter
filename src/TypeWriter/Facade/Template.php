@@ -8,6 +8,8 @@ use TypeWriter\Util\Sandbox;
 use function extract;
 use function get_theme_mod;
 use function get_theme_mods;
+use function is_file;
+use function locate_template;
 use function TypeWriter\tw;
 use const EXTR_OVERWRITE;
 
@@ -64,15 +66,16 @@ final class Template
     {
         Hooks::doAction('tw.template.part', $template, $context);
 
-        $templateFile = 'template/part/' . $template . '.php';
+        $templateFile = "template/part/{$template}.php";
         $templateFile = locate_template($templateFile);
 
-        if (is_file($templateFile))
+        if (is_file($templateFile)) {
             return Sandbox::render($templateFile, $context);
-        else if (tw()->getTwig()->exists($template))
+        } else if (tw()->getTwig()->exists($template)) {
             return tw()->getTwig()->render($template, $context);
-        else
+        } else {
             throw new TemplateException(sprintf('Could not find template part "%s".', $template), TemplateException::ERR_TEMPLATE_FILE_NOT_FOUND);
+        }
     }
 
     /**
@@ -115,12 +118,13 @@ final class Template
     {
         $twig = tw()->getTwig();
 
-        if ($twig->exists('@theme/global/footer.twig'))
+        if ($twig->exists('@theme/global/footer.twig')) {
             return tw()->getTwig()->render('@theme/global/footer.twig');
-        else if (is_file($footerPath = Dependencies::themePath('footer.php')))
+        } else if (is_file($footerPath = Dependencies::themePath('footer.php'))) {
             return Sandbox::render($footerPath);
-        else
+        } else {
             throw new TemplateException('The footer template was not found. Create a template/global/footer.twig or footer.php file in your theme.', TemplateException::ERR_TEMPLATE_FILE_NOT_FOUND);
+        }
     }
 
     /**
@@ -134,12 +138,13 @@ final class Template
     {
         $twig = tw()->getTwig();
 
-        if ($twig->exists('@theme/global/header.twig'))
+        if ($twig->exists('@theme/global/header.twig')) {
             return tw()->getTwig()->render('@theme/global/header.twig');
-        else if (is_file($headerPath = Dependencies::themePath('header.php')))
+        } else if (is_file($headerPath = Dependencies::themePath('header.php'))) {
             return Sandbox::render($headerPath);
-        else
+        } else {
             throw new TemplateException('The header template was not found. Create a template/global/header.twig or header.php file in your theme.', TemplateException::ERR_TEMPLATE_FILE_NOT_FOUND);
+        }
     }
 
 }

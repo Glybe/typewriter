@@ -78,8 +78,9 @@ final class DisableWPFeaturesModule extends Module
      */
     public final function onWordPressDefaultScripts(WP_Scripts $scripts): void
     {
-        if (tw()->isAdmin() || tw()->isLogin() || !isset($scripts->registered['jquery']))
+        if (tw()->isAdmin() || tw()->isLogin() || !isset($scripts->registered['jquery'])) {
             return;
+        }
 
         $scripts->registered['jquery']->deps = array_diff($scripts->registered['jquery']->deps, ['jquery-migrate']);
     }

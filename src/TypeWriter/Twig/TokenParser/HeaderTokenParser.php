@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace TypeWriter\Twig\TokenParser;
 
 use TypeWriter\Facade\Template;
+use function sprintf;
 
 /**
  * Class HeaderTokenParser

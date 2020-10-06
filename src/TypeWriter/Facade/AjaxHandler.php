@@ -68,27 +68,33 @@ final class AjaxHandler
         foreach ($parameters as $parameter) {
             $value = $arguments[$parameter->getName()] ?? null;
 
-            if ($value === 'NULL')
+            if ($value === 'NULL') {
                 $value = null;
+            }
 
-            if ($value === 'true')
+            if ($value === 'true') {
                 $value = true;
+            }
 
-            if ($value === 'false')
+            if ($value === 'false') {
                 $value = false;
+            }
 
             if (is_numeric($value)) {
                 $value = floatval($value);
 
-                if (intval($value) == $value)
+                if (intval($value) == $value) {
                     $value = intval($value);
+                }
             }
 
-            if ($value === null && $parameter->isDefaultValueAvailable())
+            if ($value === null && $parameter->isDefaultValueAvailable()) {
                 $value = $parameter->getDefaultValue();
+            }
 
-            if (!$parameter->allowsNull() && $value === null)
+            if (!$parameter->allowsNull() && $value === null) {
                 throw new ViolationException(sprintf('[ajax: %s] Parameter "%s" does not accept NULL.', $this->action, $parameter->getName()), ViolationException::ERR_INVALID_PARAMETER);
+            }
 
             /** @var ReflectionNamedType $type */
             $type = $parameter->getType();
@@ -96,8 +102,9 @@ final class AjaxHandler
             $valueType = $this->normalizeType(gettype($value));
             $parameterType = $this->normalizeType($type->getName());
 
-            if ($valueType !== 'NULL' && $valueType !== $parameterType)
+            if ($valueType !== 'NULL' && $valueType !== $parameterType) {
                 throw new ViolationException(sprintf('[ajax: %s] Parameter "%s" has to be an instance of %s, %s given.', $this->action, $parameter->getName(), $parameterType, $valueType), ViolationException::ERR_INVALID_PARAMETER);
+            }
 
             $args[] = $value;
         }

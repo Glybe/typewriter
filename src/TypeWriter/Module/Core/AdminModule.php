@@ -6,7 +6,9 @@ namespace TypeWriter\Module\Core;
 use TypeWriter\Facade\Dependencies;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
+use function implode;
 use function load_plugin_textdomain;
+use function TypeWriter\tw;
 use function wp_set_script_translations;
 use const TypeWriter\ROOT;
 
@@ -43,10 +45,21 @@ final class AdminModule extends Module
         Hooks::action('in_admin_footer', [$this, 'onInAdminFooter']);
 
         Hooks::filter('user_has_cap', function (array $caps): array {
-            $caps['install_themes'] = false;
-            $caps['update_themes'] = false;
+            $isDebug = tw()->isDebugMode();
 
-            // todo(bas): check which capabilities should be disabled.
+            /*
+             * These capabilities are only available when on debug mode, this is
+             * so that our customer cannot break its site.
+             */
+            $caps['update_core'] = $caps['update_core'] && $isDebug;
+            $caps['delete_plugins'] = $caps['delete_plugins'] && $isDebug;
+            $caps['edit_plugins'] = $caps['edit_plugins'] && $isDebug;
+            $caps['install_plugins'] = $caps['install_plugins'] && $isDebug;
+            $caps['update_plugins'] = $caps['update_plugins'] && $isDebug;
+            $caps['delete_themes'] = $caps['delete_themes'] && $isDebug;
+            $caps['edit_themes'] = $caps['edit_themes'] && $isDebug;
+            $caps['install_themes'] = $caps['install_themes'] && $isDebug;
+            $caps['update_themes'] = $caps['update_themes'] && $isDebug;
 
             return $caps;
         });

@@ -56,8 +56,9 @@ class TreeItem implements IsCountable
      */
     public function addItems(array $items): void
     {
-        foreach ($items as $item)
+        foreach ($items as $item) {
             $this->items[] = $item;
+        }
     }
 
     /**
@@ -93,7 +94,7 @@ class TreeItem implements IsCountable
      */
     public function hasItems(): bool
     {
-        return $this->count() > 0;
+        return !empty($this->items);
     }
 
     /**

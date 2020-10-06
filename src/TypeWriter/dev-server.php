@@ -51,9 +51,10 @@ if ($requestFile && !$isPhpFile && is_file($requestFile)) {
     return false;
 }
 
-if ($requestFile && is_dir($requestFile) && is_file($requestFile . '/index.php'))
+if ($requestFile && is_dir($requestFile) && is_file($requestFile . '/index.php')) {
     require_once $requestFile . '/index.php';
-else if ($isPhpFile)
+} else if ($isPhpFile) {
     require_once $requestFile;
-else
+} else {
     require_once __DIR__ . '/../../public/index.php';
+}

@@ -45,11 +45,13 @@ abstract class MetaBox
         $this->id = $id;
         $this->label = $label;
 
-        if (!tw()->isAdmin())
+        if (!tw()->isAdmin()) {
             return;
+        }
 
-        if ($autoRegister)
+        if ($autoRegister) {
             Hooks::action('add_meta_boxes', [$this, 'onAddMetaBoxes']);
+        }
 
         Hooks::action('save_post', [$this, 'onPostSaveRequested']);
     }
@@ -91,8 +93,9 @@ abstract class MetaBox
      */
     public function onPostSaveRequested(int $postId): void
     {
-        if (!$this->allowsQuickEdit && defined('DOING_AJAX') && DOING_AJAX)
+        if (!$this->allowsQuickEdit && defined('DOING_AJAX') && DOING_AJAX) {
             return;
+        }
 
         $this->onPostSave($postId);
     }
@@ -136,8 +139,9 @@ abstract class MetaBox
      */
     public function setContext(string $context): self
     {
-        if ($this->created)
+        if ($this->created) {
             throw new ViolationException('It is too late to set the meta box context as it has already been created.', ViolationException::ERR_TOO_LATE);
+        }
 
         $this->context = $context;
 
@@ -155,8 +159,9 @@ abstract class MetaBox
      */
     public function setPriority(string $priority): self
     {
-        if ($this->created)
+        if ($this->created) {
             throw new ViolationException('It is too late to set the meta box priority as it has already been created.', ViolationException::ERR_TOO_LATE);
+        }
 
         $this->priority = $priority;
 
@@ -211,8 +216,9 @@ abstract class MetaBox
      */
     protected function register(): void
     {
-        if ($this->created)
+        if ($this->created) {
             return;
+        }
 
         wp_enqueue_media();
         add_meta_box(

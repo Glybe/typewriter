@@ -135,8 +135,9 @@ class Post
     {
         $content = self::post()->post_content;
 
-        if (empty($content))
+        if (empty($content)) {
             return null;
+        }
 
         return self::applyMultipleFilters($content, $filters);
     }
@@ -155,8 +156,9 @@ class Post
     {
         $content = self::content();
 
-        if ($content === null)
+        if ($content === null) {
             return null;
+        }
 
         return StringUtil::truncateText($content, $wordCount, $ending);
     }
@@ -189,8 +191,9 @@ class Post
         $excerpt = get_the_excerpt(self::id());
         $excerpt = !empty($excerpt) ? $excerpt : get_the_content(self::id());
 
-        if (empty($excerpt))
+        if (empty($excerpt)) {
             return null;
+        }
 
         return self::applyMultipleFilters($excerpt, $filters);
     }
@@ -234,8 +237,9 @@ class Post
     {
         $text = self::intro()['heading'] ?? '';
 
-        if (empty($text))
+        if (empty($text)) {
             return null;
+        }
 
         return $text;
     }
@@ -252,8 +256,9 @@ class Post
     {
         $text = self::intro()['leading'] ?? '';
 
-        if (empty($text))
+        if (empty($text)) {
             return null;
+        }
 
         return $text;
     }
@@ -273,8 +278,9 @@ class Post
     {
         $metaValue = get_post_meta(self::id(), $metaKey, $isSingle);
 
-        if (empty($metaValue))
+        if (empty($metaValue)) {
             return $defaultValue;
+        }
 
         return $metaValue;
     }
@@ -293,8 +299,9 @@ class Post
     {
         $metaValue = self::meta($metaKey, self::id());
 
-        if ($metaValue === null)
+        if ($metaValue === null) {
             return null;
+        }
 
         return self::applyMultipleFilters($metaValue, $filters);
     }
@@ -308,8 +315,9 @@ class Post
      */
     public static function next(): bool
     {
-        if (!have_posts())
+        if (!have_posts()) {
             return false;
+        }
 
         the_post();
 
@@ -497,8 +505,9 @@ class Post
      */
     protected static function applyMultipleFilters($value, array $filters)
     {
-        foreach ($filters as $filter)
+        foreach ($filters as $filter) {
             $value = Hooks::applyFilters($filter, $value);
+        }
 
         return $value;
     }

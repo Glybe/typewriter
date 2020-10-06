@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace TypeWriter\Feature;
 
+use function in_array;
+
 /**
  * Class Feature
  *

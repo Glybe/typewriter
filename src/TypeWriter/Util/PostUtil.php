@@ -29,13 +29,15 @@ class PostUtil
      */
     public static function getRootPost(WP_Post $post): WP_Post
     {
-        if (isset(self::$rootCache[$post->ID]))
+        if (isset(self::$rootCache[$post->ID])) {
             return self::$rootCache[$post->ID];
+        }
 
         $current = $post;
 
-        while ($current->post_parent > 0)
+        while ($current->post_parent > 0) {
             $current = get_post($current->post_parent);
+        }
 
         return self::$rootCache[$post->ID] = $current;
     }

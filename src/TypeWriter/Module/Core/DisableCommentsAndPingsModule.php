@@ -41,8 +41,8 @@ final class DisableCommentsAndPingsModule extends Module
         Hooks::action('admin_init', [$this, 'onAdminInit']);
         Hooks::action('admin_menu', [$this, 'onAdminMenu']);
 
-        Hooks::filter('comments_open', [$this, 'onCommentsOrPingsOpen']);
-        Hooks::filter('pings_open', [$this, 'onCommentsOrPingsOpen']);
+        Hooks::filter('comments_open', fn(): bool => false);
+        Hooks::filter('pings_open', fn(): bool => false);
 
         Hooks::filter('wp_count_comments', [$this, 'onWpCountComments']);
     }
@@ -54,6 +54,7 @@ final class DisableCommentsAndPingsModule extends Module
      * @return stdClass
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @internal
      */
     public final function onWpCountComments(): stdClass
     {
@@ -103,20 +104,6 @@ final class DisableCommentsAndPingsModule extends Module
     {
         AdminMenu::removePage('edit-comments.php');
         AdminMenu::removeSubPage('options-general.php', 'options-discussion.php');
-    }
-
-    /**
-     * Invoked on comments_open and pings_open filter hook.
-     * Disables comments and pings by returning false.
-     *
-     * @return bool
-     * @author Bas Milius <bas@mili.us>
-     * @since 1.0.0
-     * @internal
-     */
-    public final function onCommentsOrPingsOpen(): bool
-    {
-        return false;
     }
 
 }

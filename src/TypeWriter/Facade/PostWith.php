@@ -14,6 +14,7 @@ use WP_Post;
  * @method contentTruncated(int $wordCount = 20, string $ending = '...'): ?string
  * @method date(string $format): ?string
  * @method excerpt(array $filters = []): ?string
+ * @method gallery(string $id): array
  * @method intro(): array
  * @method introHeading(): ?string
  * @method introLeading(): ?string
@@ -21,6 +22,8 @@ use WP_Post;
  * @method metaText(string $metaKey, array $filters = []): ?string
  * @method permalink(): string
  * @method post(): WP_Post
+ * @method relation(string $relationId, string $foreignType): array
+ * @method relationIterator(string $relationId, string $foreignType): Generator
  * @method thumbnail(string $thumbnailId): ?int
  * @method thumbnailData(string $thumbnailId, string $size = 'large'): ?array
  * @method thumbnailUrl(string $thumbnailId, string $size = 'large'): ?string
@@ -59,8 +62,9 @@ class PostWith
      */
     public function __call(string $name, array $arguments)
     {
-        if (!method_exists(Post::class, $name))
+        if (!method_exists(Post::class, $name)) {
             throw new ViolationException(sprintf('Method "%s" does not exist in "%s".', $name, Post::class), ViolationException::ERR_BAD_METHOD_CALL);
+        }
 
         return Post::useWith($this->post, fn() => Post::{$name}(...$arguments));
     }

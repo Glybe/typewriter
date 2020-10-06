@@ -78,8 +78,9 @@ final class PostTemplatesResolverModule extends Module
      */
     public final function onArchiveTemplate(string $template): string
     {
-        if (!empty($template))
+        if (!empty($template)) {
             return $template;
+        }
 
         $tryFiles = ['archive'];
 
@@ -92,24 +93,31 @@ final class PostTemplatesResolverModule extends Module
         if (is_date()) {
             array_unshift($tryFiles, 'archive-date');
 
-            if (is_year())
+            if (is_year()) {
                 array_unshift($tryFiles, 'archive-year');
+            }
 
-            if (is_month())
+            if (is_month()) {
                 array_unshift($tryFiles, 'archive-month');
+            }
 
-            if (is_day())
+            if (is_day()) {
                 array_unshift($tryFiles, 'archive-day');
+            }
         }
 
+        $postType = get_post_type();
         $tryDirs = array_unique([get_template_directory(), get_stylesheet_directory()]);
 
-        foreach ($tryDirs as $dir)
-            foreach ($tryFiles as $file)
-                if (is_file(($foundTemplate = $dir . '/template/' . get_post_type() . '/' . $file . '.php')))
+        foreach ($tryDirs as $dir) {
+            foreach ($tryFiles as $file) {
+                if (is_file(($foundTemplate = "{$dir}/template/{$postType}/{$file}.php"))) {
                     return $foundTemplate;
-                else if (is_file(($foundTemplate = $dir . '/template/' . get_post_type() . '/' . $file . '.twig')))
+                } else if (is_file(($foundTemplate = "{$dir}/template/{$postType}/{$file}.twig"))) {
                     return $foundTemplate;
+                }
+            }
+        }
 
         return $template;
     }
@@ -129,8 +137,9 @@ final class PostTemplatesResolverModule extends Module
     {
         global $post;
 
-        if (!($post instanceof WP_Post))
+        if (!($post instanceof WP_Post)) {
             return $template;
+        }
 
         return $this->findPossibleTemplate($template, [
             'default',
@@ -154,8 +163,9 @@ final class PostTemplatesResolverModule extends Module
     {
         global $post;
 
-        if (!($post instanceof WP_Post))
+        if (!($post instanceof WP_Post)) {
             return $template;
+        }
 
         return $this->findPossibleTemplate($template, [
             'default',
@@ -177,8 +187,9 @@ final class PostTemplatesResolverModule extends Module
      */
     public final function onTemplateInclude(string $template): ?string
     {
-        if (substr($template, -5) !== '.twig')
+        if (substr($template, -5) !== '.twig') {
             return $template;
+        }
 
         tw()->getTwig()->addPath(dirname($template));
         echo tw()->getTwig()->render(basename($template), []);
@@ -205,12 +216,15 @@ final class PostTemplatesResolverModule extends Module
 
         $tryDirs = array_unique([get_template_directory(), get_stylesheet_directory()]);
 
-        foreach ($tryDirs as $dir)
-            foreach ($tryFiles as $file)
-                if (is_file(($foundTemplate = $dir . '/template/' . $post->post_type . '/' . $file . '.php')))
+        foreach ($tryDirs as $dir) {
+            foreach ($tryFiles as $file) {
+                if (is_file(($foundTemplate = "{$dir}/template/{$post->post_type}/{$file}.php"))) {
                     return $foundTemplate;
-                else if (is_file(($foundTemplate = $dir . '/template/' . $post->post_type . '/' . $file . '.twig')))
+                } else if (is_file(($foundTemplate = "{$dir}/template/{$post->post_type}/{$file}.twig"))) {
                     return $foundTemplate;
+                }
+            }
+        }
 
         return $template;
     }

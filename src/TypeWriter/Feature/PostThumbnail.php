@@ -6,6 +6,7 @@ namespace TypeWriter\Feature;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Util\AdminUtil;
 use function get_current_screen;
+use function get_post;
 use function get_post_meta;
 use function get_post_thumbnail_id;
 use function register_meta;
@@ -76,8 +77,9 @@ class PostThumbnail extends Feature
     {
         $screen = get_current_screen();
 
-        if (!AdminUtil::isGutenbergView() || !$this->isPostTypeSupported($screen->post_type))
+        if (!AdminUtil::isGutenbergView() || !$this->isPostTypeSupported($screen->post_type)) {
             return $scripts;
+        }
 
         $scripts[] = <<<CODE
 			new tw.feature.PostThumbnail("{$this->id}", "{$this->label}", "{$this->metaKey}"); 
@@ -147,8 +149,9 @@ class PostThumbnail extends Feature
     {
         $thumbnailId = intval($id === 'featured-image' ? get_post_thumbnail_id($postId) : get_post_meta($postId, "tw_{$postType}_{$id}_thumbnail_id", true));
 
-        if ($thumbnailId === 0)
+        if ($thumbnailId === 0) {
             return null;
+        }
 
         return $thumbnailId;
     }
@@ -169,8 +172,9 @@ class PostThumbnail extends Feature
     {
         $thumbnailId = self::get($postType, $id, $postId);
 
-        if ($thumbnailId > 0 && get_post($thumbnailId))
+        if ($thumbnailId > 0 && get_post($thumbnailId)) {
             return wp_get_attachment_image_src($thumbnailId, $size);
+        }
 
         return null;
     }
@@ -191,8 +195,9 @@ class PostThumbnail extends Feature
     {
         $thumbnailId = self::get($postType, $id, $postId);
 
-        if ($thumbnailId > 0 && get_post($thumbnailId))
+        if ($thumbnailId > 0 && get_post($thumbnailId)) {
             return wp_get_attachment_image_url($thumbnailId, $size);
+        }
 
         return null;
     }

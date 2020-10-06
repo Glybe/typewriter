@@ -717,11 +717,13 @@ class PostType
     public function setTaxonomies(array $taxonomies): self
     {
         if (isset(self::$registered[$this->id])) {
-            foreach ($this->taxonomies as $tax)
+            foreach ($this->taxonomies as $tax) {
                 unregister_taxonomy_for_object_type($tax->getId(), $this->id);
+            }
 
-            foreach ($taxonomies as $tax)
+            foreach ($taxonomies as $tax) {
                 register_taxonomy_for_object_type($tax->getId(), $this->id);
+            }
         }
 
         $this->taxonomies = $taxonomies;
@@ -738,8 +740,9 @@ class PostType
      */
     private function assertRegistered(): void
     {
-        if (isset(self::$registered[$this->id]))
+        if (isset(self::$registered[$this->id])) {
             throw new WordPressException(sprintf('Post type "%s" is already registered, therefore you cannot alter its settings.', $this->id), WordPressException::ERR_DOING_IT_WRONG);
+        }
     }
 
     /**
@@ -754,13 +757,15 @@ class PostType
      */
     public static function get(string $id): ?self
     {
-        if (isset(self::$registered[$id]))
+        if (isset(self::$registered[$id])) {
             return self::$registered[$id];
+        }
 
         $registered = get_post_types();
 
-        if (!isset($registered[$id]))
+        if (!isset($registered[$id])) {
             return null;
+        }
 
         $wp = get_post_type_object($id);
         self::$registered[$id] = $pt = new self($id);

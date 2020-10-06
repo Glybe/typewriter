@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace TypeWriter\Feature\MetaFields;
 
 use Columba\Facade\Jsonable;
+use function array_merge;
 
 /**
  * Class MetaField

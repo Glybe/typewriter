@@ -17,6 +17,7 @@ use function count;
 abstract class MenuObject implements IsCountable
 {
 
+    /** @var MenuObject[] */
     protected array $items = [];
 
     /**
@@ -43,7 +44,7 @@ abstract class MenuObject implements IsCountable
      */
     public function getItem(int $itemId): ?MenuItem
     {
-        return ArrayUtil::first($this->items, fn(MenuItem $item) => $item->getId() === $itemId);
+        return ArrayUtil::first($this->items, fn(MenuItem $item): bool => $item->getId() === $itemId);
     }
 
     /**
@@ -57,7 +58,7 @@ abstract class MenuObject implements IsCountable
      */
     public function getItemByPost(int $postId): ?MenuItem
     {
-        return ArrayUtil::first($this->items, fn(MenuItem $item) => $item->getPostId() === $postId);
+        return ArrayUtil::first($this->items, fn(MenuItem $item): bool => $item->getPostId() === $postId);
     }
 
     /**

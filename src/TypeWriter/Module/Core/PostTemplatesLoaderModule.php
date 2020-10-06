@@ -89,8 +89,9 @@ final class PostTemplatesLoaderModule extends Module
         foreach ($themeDirectories as $directory) {
             $templatesDirectory = implode('/', [$directory, 'template', $postType]);
 
-            if (!is_dir($templatesDirectory))
+            if (!is_dir($templatesDirectory)) {
                 continue;
+            }
 
             $files = scandir($templatesDirectory);
             array_shift($files);
@@ -99,13 +100,15 @@ final class PostTemplatesLoaderModule extends Module
             $themeTemplates = [];
 
             foreach ($files as $file) {
-                if (substr($file, -4) !== '.php' && substr($file, -5) !== '.twig')
+                if (substr($file, -4) !== '.php' && substr($file, -5) !== '.twig') {
                     continue;
+                }
 
-                if (in_array($file, self::$ignoredTemplateFiles))
+                if (in_array($file, self::$ignoredTemplateFiles)) {
                     continue;
+                }
 
-                $path = 'template/' . $postType . '/' . $file;
+                $path = "template/{$postType}/{$file}";
                 $props = DocUtil::getProperties(Dependencies::themePath($path));
 
                 $themeTemplates[$path] = $props['template'] ?? $file;

@@ -669,8 +669,9 @@ class Taxonomy
      */
     private function assertRegistered(): void
     {
-        if (isset(self::$registered[$this->id]))
+        if (isset(self::$registered[$this->id])) {
             throw new WordPressException(sprintf('Taxonomy "%s" is already registered, therefore you cannot alter its settings.', $this->id), WordPressException::ERR_DOING_IT_WRONG);
+        }
     }
 
     /**
@@ -685,13 +686,15 @@ class Taxonomy
      */
     public static function get(string $id): ?self
     {
-        if (isset(self::$registered[$id]))
+        if (isset(self::$registered[$id])) {
             return self::$registered[$id];
+        }
 
         $registered = get_taxonomies();
 
-        if (!isset($registered[$id]))
+        if (!isset($registered[$id])) {
             return null;
+        }
 
         $wp = get_taxonomy($id);
         self::$registered[$id] = $tax = new self($id);
