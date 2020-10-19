@@ -1,0 +1,40 @@
+/*!
+ * Copyright (c) 2019-2020 - Bas Milius <bas@mili.us>
+ *
+ * This file is part of TypeWriter, a base framework for WordPress.
+ *
+ * For the full copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+
+$text-color: #fff;
+$base-color: #191a1c;
+$icon-color: hsl(hue($base-color), 7%, 95%);
+$highlight-color: #0b63e9;
+$notification-color: crimson;
+
+$link: $highlight-color;
+
+@import "../../../public/wp/wp-admin/css/colors/_admin.scss";
+
+:root
+{
+    --wp-admin-theme-color: #{$highlight-color};
+    --wp-admin-theme-color-darker-10: #{darken($highlight-color, 10%)};
+    --wp-admin-theme-color-darker-20: #{darken($highlight-color, 20%)};
+}
+
+.wp-block
+{
+    max-width: 1000px;
+}
+
+.wp-block[data-align="wide"]
+{
+    max-width: 1200px;
+}
+
+.wp-block[data-align="full"]
+{
+    max-width: none;
+}
