@@ -10,21 +10,17 @@
 
 declare(strict_types=1);
 
-use Tolk\SidebarFeature;
 use TypeWriter\Facade\Dependencies;
 use TypeWriter\Facade\Hooks;
-use TypeWriter\Feature\Relation;
 use TypeWriter\Structure\Menu\Menus;
-use function TypeWriter\tw;
 
 Hooks::action('init', function (): void {
     Menus::registerLocation('main-menu', 'Hoofdmenu');
-
-    tw()->loadFeature(SidebarFeature::class);
-    tw()->loadFeature(Relation::class, 'page', 'sidebar', 'Sidebar', 'tolk-sidebar');
 });
 
 Hooks::action('wp_enqueue_scripts', function (): void {
-    Dependencies::enqueueStyle('app', Dependencies::themeUri('dist/tolk.css'));
-    Dependencies::enqueueScript('app', Dependencies::themeUri('dist/tolk.js'));
+    Dependencies::enqueueStyle('app:vendor', Dependencies::themeUri('dist/vendor.css'));
+    Dependencies::enqueueStyle('app:theme', Dependencies::themeUri('dist/theme.css'));
+    Dependencies::enqueueScript('app:vendor', Dependencies::themeUri('dist/vendor.js'));
+    Dependencies::enqueueScript('app:theme', Dependencies::themeUri('dist/theme.js'));
 });

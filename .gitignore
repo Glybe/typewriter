@@ -12,6 +12,7 @@ public/wp/wp-content/
 # Temporary
 public/app/plugins
 public/app/themes/*
+!public/app/themes/base-theme
 
 .DS_Store
 config.json

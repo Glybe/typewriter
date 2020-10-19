@@ -5,8 +5,7 @@
         dark: (#191a1c, white),
         light: (white, #191a1c),
         outline: (#dbe2ea, #191a1c),
-        primary: (#3586B4, white),
-        secondary: (#145D86, white)
+        primary: (#0b63e9, white)
     ),
     $dark-mode: disabled,
     $font-family: "PT Sans",
@@ -27,9 +26,3 @@
         11: 90px
     )
 );
-
-@import "base";
-
-@import "header";
-@import "footer";
-@import "featured-image";

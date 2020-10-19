@@ -10,7 +10,7 @@ const base = require("../../../../../../dev/webpack/webpack-config");
 
 module.exports = merge(base, {
     entry: {
-        tolk: "./resource/js/main.js",
+        theme: "./resource/js/main.js",
         vendors: "./resource/js/vendors.js"
     },
     externals: {
@@ -21,7 +21,7 @@ module.exports = merge(base, {
         filename: "[name].js",
         libraryTarget: "this",
         path: resolve(__dirname, "../../dist"),
-        publicPath: "/app/themes/tolk/dist/"
+        publicPath: "/app/themes/base-theme/dist/"
     },
     plugins: [
         new webpack.BannerPlugin({

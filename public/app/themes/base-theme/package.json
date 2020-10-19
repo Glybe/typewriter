@@ -1,0 +1,17 @@
+{
+    "name": "@bybas/typewriter-base",
+    "version": "1.0.0",
+    "scripts": {
+        "theme:build": "cross-env NODE_ENV=production webpack --config dev/webpack/build.js --progress --color",
+        "theme:build:watch": "cross-env NODE_ENV=development webpack --config dev/webpack/build.js --progress --color --watch",
+        "theme:clean": "rimraf dist",
+        "theme:serve": "concurrently \"cd ../../../ && yarn run tw:serve\" \"yarn run theme:build:watch\""
+    },
+    "dependencies": {
+        "@latte-ui/css": "^2.0.0-dev.0"
+    },
+    "devDependencies": {
+        "glob-all": "^3.2.1",
+        "purgecss-webpack-plugin": "^3.0.0"
+    }
+}
