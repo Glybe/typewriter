@@ -14,6 +14,7 @@ namespace TypeWriter\Module\Core;
 
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
+use WP_Customize_Manager;
 
 /**
  * Class DisableAdminFeaturesModule
@@ -43,7 +44,23 @@ final class DisableAdminFeaturesModule extends Module
      */
     public final function onInitialize(): void
     {
+        Hooks::action('customize_register', [$this, 'onWordPressCustomizeRegister'], 11);
         Hooks::action('wp_dashboard_setup', [$this, 'onWordPressDashboardSetup']);
+    }
+
+    /**
+     * Invoked on customize_register action hook.
+     * Removes the custom css option from the customizer.
+     *
+     * @param WP_Customize_Manager $customizer
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public final function onWordPressCustomizeRegister(WP_Customize_Manager $customizer): void
+    {
+        $customizer->remove_control('custom_css');
+        $customizer->remove_section('custom_css');
     }
 
     /**
