@@ -9,7 +9,6 @@
 
 import {decodeEntities} from "@wordpress/html-entities";
 
-export function stripTags(html)
-{
-	return decodeEntities(html.replace(/(<([^>]+)>)/gi, ""));
+export function stripTags(html) {
+    return decodeEntities(html.replace(/(<([^>]+)>)/gi, ""));
 }

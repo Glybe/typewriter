@@ -3,9 +3,12 @@ declare(strict_types=1);
 
 namespace TypeWriter\Module\Core;
 
+use Columba\Http\ResponseCode;
 use TypeWriter\Facade\Dependencies;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
+use function header;
+use function http_response_code;
 use function implode;
 use function load_plugin_textdomain;
 use function TypeWriter\tw;
@@ -40,6 +43,12 @@ final class AdminModule extends Module
      */
     public final function onInitialize(): void
     {
+        if (($_SERVER['REQUEST_URI'] ?? '/') === '/wp/wp-admin') {
+            http_response_code(ResponseCode::SEE_OTHER);
+            header('Location: /wp/wp-admin/index.php');
+            die;
+        }
+
         Hooks::action('admin_enqueue_scripts', [$this, 'onAdminEnqueueScripts']);
         Hooks::action('admin_init', [$this, 'onAdminInit']);
         Hooks::action('in_admin_footer', [$this, 'onInAdminFooter']);
@@ -52,6 +61,7 @@ final class AdminModule extends Module
              * so that our customer cannot break its site.
              */
             $caps['update_core'] = $caps['update_core'] && $isDebug;
+            $caps['install_languages'] = $caps['install_languages'] && $isDebug;
             $caps['delete_plugins'] = $caps['delete_plugins'] && $isDebug;
             $caps['edit_plugins'] = $caps['edit_plugins'] && $isDebug;
             $caps['install_plugins'] = $caps['install_plugins'] && $isDebug;
