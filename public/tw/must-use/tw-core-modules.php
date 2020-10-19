@@ -26,6 +26,7 @@ use TypeWriter\Module\Core\DisableCommentsAndPingsModule;
 use TypeWriter\Module\Core\DisableCoreFeaturesModule;
 use TypeWriter\Module\Core\DisableWPFeaturesModule;
 use TypeWriter\Module\Core\ImproveOutputModule;
+use TypeWriter\Module\Core\LoginModule;
 use TypeWriter\Module\Core\PostTemplatesLoaderModule;
 use TypeWriter\Module\Core\PostTemplatesResolverModule;
 use TypeWriter\Module\Core\ThemeBaseModule;
@@ -48,4 +49,8 @@ if (tw()->isFront()) {
     tw()->loadModule(DisableWPFeaturesModule::class);
     tw()->loadModule(ImproveOutputModule::class);
     tw()->loadModule(PostTemplatesResolverModule::class);
+}
+
+if (tw()->isLogin()) {
+    tw()->loadModule(LoginModule::class);
 }

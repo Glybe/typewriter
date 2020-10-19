@@ -56,6 +56,7 @@ final class DisableAdminFeaturesModule extends Module
      *
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @internal
      */
     public final function onWordPressCustomizeRegister(WP_Customize_Manager $customizer): void
     {
@@ -69,6 +70,7 @@ final class DisableAdminFeaturesModule extends Module
      *
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
+     * @internal
      */
     public final function onWordPressDashboardSetup(): void
     {

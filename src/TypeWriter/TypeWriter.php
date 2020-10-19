@@ -27,6 +27,7 @@ use TypeWriter\Module\Module;
 use TypeWriter\Router\Router;
 use TypeWriter\Twig\TwigRenderer;
 use function defined;
+use function in_array;
 use function is_admin;
 use function phpversion;
 use function strpos;
@@ -300,9 +301,7 @@ final class TypeWriter
      */
     public final function isLogin(): bool
     {
-        global $pagenow;
-
-        return $pagenow === 'wp-login.php';
+        return in_array($_SERVER['PHP_SELF'], ['/wp/wp-login.php', '/wp/wp-register.php']);
     }
 
     /**
