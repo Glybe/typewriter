@@ -1,5 +1,5 @@
 <a href="https://bas.dev" target="_blank" rel="noopener">
-	<img src="https://bas.dev/module/@bas/website/resource/image/logo.svg" alt="Bas Milius Logo" height="60" width="60" />
+	<img src="https://bas.dev/module/@bas/website/resource/image/logo.svg" alt="Logo" height="60" width="60" />
 </a>
 
 ---
@@ -17,6 +17,6 @@ TypeWriter is used to write custom themes for WordPress and should not be used w
 that are not build with the framework. To develop a custom theme, follow the steps below.
 - Clone the project. `git clone https://github.com/basmilius/typewriter`
 - Install composer dependencies. `composer install`
-- Install node.js dependencies. `yarn install`
+- Install node.js dependencies. `yarn`
 - Build a production bundle of our core files. `yarn build`
 - Start developing. `yarn serve`
