@@ -1,9 +1,9 @@
 {
-	"name": "@idee/typewriter",
+	"name": "@bybas/typewriter",
 	"description": "A WordPress framework by Bas Milius.",
-	"private": true,
-	"homepage": "https://github.com/basmilius/typewriter#readme",
-	"version": "1.0.0",
+    "version": "1.0.0",
+    "private": true,
+    "homepage": "https://github.com/basmilius/typewriter#readme",
 	"license": "MIT",
 	"author": {
 		"name": "Bas Milius",
@@ -13,9 +13,7 @@
 	"keywords": [
 		"WordPress",
 		"Framework",
-		"TypeWriter",
-		"Identity",
-		"IdeeMedia"
+		"TypeWriter"
 	],
 	"repository": {
 		"type": "git",
@@ -26,14 +24,15 @@
 	},
 	"main": "public/index.php",
 	"scripts": {
-        "rebuild": "concurrently \"yarn run clean\" \"yarn run build\"",
-		"build": "cross-env NODE_ENV=production webpack --config dev/webpack/typewriter-core-files.js --progress --colors --hide-modules",
-		"build:watch": "cross-env NODE_ENV=development webpack --config dev/webpack/typewriter-core-files.js --progress --colors --hide-modules --watch",
-		"clean": "rimraf public/tw/dist",
-		"dev": "concurrently \"yarn run serve\" \"yarn run build:watch\"",
-		"dev:wsl": "concurrently \"yarn run serve:wsl\" \"yarn run build:watch\"",
-		"serve": "php -S 0.0.0.0:8000 -t public/ src/TypeWriter/dev-server.php",
-		"serve:wsl": "wsl -- php -S 0.0.0.0:8000 -t public/ src/TypeWriter/dev-server.php"
+        "postinstall": "rimraf public/tw/dist && yarn build",
+        "tw:rebuild": "concurrently \"yarn run tw:clean\" \"yarn run tw:build\"",
+		"tw:build": "cross-env NODE_ENV=production webpack --config dev/webpack/typewriter-core-files.js --progress --color",
+		"tw:build:watch": "cross-env NODE_ENV=development webpack --config dev/webpack/typewriter-core-files.js --progress --color --watch",
+		"tw:clean": "rimraf public/tw/dist",
+		"tw:dev": "concurrently \"yarn run tw:serve\" \"yarn run tw:build:watch\"",
+		"tw:dev:wsl": "concurrently \"yarn run tw:serve:wsl\" \"yarn run tw:build:watch\"",
+		"tw:serve": "php -S 0.0.0.0:8000 -t public/ src/TypeWriter/dev-server.php",
+		"tw:serve:wsl": "wsl -- php -S 0.0.0.0:8000 -t public/ src/TypeWriter/dev-server.php"
 	},
 	"workspaces": [
 		"public/app/themes/*"
@@ -58,35 +57,35 @@
 		"react-sortable-hoc": "^1.11.0"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.11.6",
-		"@babel/plugin-proposal-class-properties": "^7.10.4",
-		"@babel/plugin-proposal-decorators": "^7.10.5",
-		"@babel/plugin-proposal-json-strings": "^7.10.4",
+		"@babel/core": "^7.12.3",
+		"@babel/plugin-proposal-class-properties": "^7.12.1",
+		"@babel/plugin-proposal-decorators": "^7.12.1",
+		"@babel/plugin-proposal-json-strings": "^7.12.1",
 		"@babel/plugin-syntax-dynamic-import": "^7.8.3",
 		"@babel/plugin-syntax-import-meta": "^7.10.4",
-		"@babel/plugin-transform-react-jsx": "^7.10.4",
-		"@babel/preset-env": "^7.11.5",
+		"@babel/plugin-transform-react-jsx": "^7.12.1",
+		"@babel/preset-env": "^7.12.1",
 		"babel-loader": "^8.1.0",
 		"concurrently": "^5.3.0",
-		"copy-webpack-plugin": "^6.2.0",
+		"copy-webpack-plugin": "^6.2.1",
 		"cross-env": "^7.0.2",
-		"css-loader": "^4.3.0",
+		"css-loader": "^5.0.0",
 		"cssnano": "^4.1.10",
 		"cssnano-preset-advanced": "^4.0.7",
 		"fibers": "^5.0.0",
-		"file-loader": "^6.1.0",
-		"mini-css-extract-plugin": "^0.11.3",
+		"file-loader": "^6.1.1",
+		"mini-css-extract-plugin": "^1.0.0",
 		"optimize-css-assets-webpack-plugin": "^5.0.4",
-		"postcss-loader": "^4.0.3",
+		"postcss-loader": "^4.0.4",
 		"postcss-focus-within": "^4.0.0",
 		"resolve-url-loader": "^3.1.1",
 		"rimraf": "^3.0.2",
-        "sass": "^1.26.12",
-		"sass-loader": "^10.0.2",
-		"terser-webpack-plugin": "^4.2.2",
+        "sass": "^1.27.0",
+		"sass-loader": "^10.0.3",
+		"terser-webpack-plugin": "^5.0.0",
 		"uglify-template-string-loader": "^1.1.1",
-		"webpack": "^4.44.2",
-		"webpack-cli": "^3.3.12",
-		"webpack-merge": "^5.1.4"
+		"webpack": "^5.1.3",
+		"webpack-cli": "^4.0.0",
+		"webpack-merge": "^5.2.0"
 	}
 }

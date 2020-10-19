@@ -1,15 +1,19 @@
 import "../css/index.scss";
 
-import {name, version} from "../../../package";
+// import {default as packageJson} from "../../../package";
 import {Gallery, MetaFields, PostThumbnail, Relation} from "./feature";
 
-function init()
-{
-	window.tw = {
-		feature: {Gallery, MetaFields, PostThumbnail, Relation},
-		name,
-		version
-	};
+const packageJson = {
+    name: "@bybas/typewriter",
+    version: "1.0.0"
+};
+
+function init() {
+    window.tw = {
+        feature: {Gallery, MetaFields, PostThumbnail, Relation},
+        name: packageJson.name,
+        version: packageJson.version
+    };
 }
 
 init();

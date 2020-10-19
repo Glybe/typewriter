@@ -7,13 +7,11 @@ cache/
 public/app/languages/
 public/app/upgrade/
 public/app/uploads/
-public/tw/dist/
 public/wp/wp-content/
 
 # Temporary
 public/app/plugins
-public/app/themes/gerritkomrijcollege
-public/app/themes/studiovierentwintig
+public/app/themes/*
 
 .DS_Store
 config.json

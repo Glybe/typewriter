@@ -12,25 +12,26 @@ module.exports = merge(base, {
 		front: "./resource/front/js/index.js"
 	},
 	externals: {
-		"@wordpress/blocks": {this: ["wp", "blocks"]},
-		"@wordpress/block-editor": {this: ["wp", "blockEditor"]},
-		"@wordpress/components": {this: ["wp", "components"]},
-		"@wordpress/compose": {this: ["wp", "compose"]},
-		"@wordpress/data": {this: ["wp", "data"]},
-		"@wordpress/date": {this: ["wp", "date"]},
-		"@wordpress/editor": {this: ["wp", "editor"]},
-		"@wordpress/edit-post": {this: ["wp", "editPost"]},
-		"@wordpress/element": {this: ["wp", "element"]},
-		"@wordpress/hooks": {this: ["wp", "hooks"]},
-		"@wordpress/html-entities": {this: ["wp", "htmlEntities"]},
-		"@wordpress/i18n": {this: ["wp", "i18n"]},
-		"@wordpress/icons": {this: ["wp", "icons"]},
-		"@wordpress/plugins": {this: ["wp", "plugins"]},
+		"@wordpress/blocks": ["wp", "blocks"],
+		"@wordpress/block-editor": ["wp", "blockEditor"],
+		"@wordpress/components": ["wp", "components"],
+		"@wordpress/compose": ["wp", "compose"],
+		"@wordpress/data": ["wp", "data"],
+		"@wordpress/date": ["wp", "date"],
+		"@wordpress/editor": ["wp", "editor"],
+		"@wordpress/edit-post": ["wp", "editPost"],
+		"@wordpress/element": ["wp", "element"],
+		"@wordpress/hooks": ["wp", "hooks"],
+		"@wordpress/html-entities": ["wp", "htmlEntities"],
+		"@wordpress/i18n": ["wp", "i18n"],
+		"@wordpress/icons": ["wp", "icons"],
+		"@wordpress/plugins": ["wp", "plugins"],
 		"moment": "moment",
 		"jquery": "jQuery",
 		"react": "React",
 		"react-dom": "ReactDOM"
 	},
+    externalsType: "global",
 	output: {
 		filename: "[name].js",
 		libraryTarget: "this",
@@ -38,9 +39,6 @@ module.exports = merge(base, {
 		publicPath: "/public/tw/dist/"
 	},
 	plugins: [
-		new webpack.BannerPlugin({
-			banner: readFileSync("dev/webpack/license-header.txt", "utf8").trim(),
-			test: /\.(css|js)$/
-		})
+		new webpack.BannerPlugin(readFileSync("dev/webpack/license-header.txt", "utf8").trim())
 	]
 });

@@ -1,6 +1,0 @@
-[submodule "vendor/Columba"]
-	path = vendor/Columba
-	url = https://github.com/basmilius/Columba
-[submodule "vendor/Twig"]
-	path = vendor/Twig
-	url = https://github.com/basmilius/Twig
