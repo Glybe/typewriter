@@ -6,6 +6,7 @@ namespace TypeWriter\Structure\Menu;
 use TypeWriter\Error\ViolationException;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Facade\Post;
+use WP_Error;
 use WP_Term;
 use function get_nav_menu_locations;
 use function get_registered_nav_menus;
@@ -240,7 +241,13 @@ class Menus
             return null;
         }
 
-        return get_term($locations[$locationKey], 'nav_menu') ?? null;
+        $term = get_term($locations[$locationKey], 'nav_menu');
+
+        if ($term === null || $term instanceof WP_Error) {
+            return null;
+        }
+
+        return $term;
     }
 
 }
