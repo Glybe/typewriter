@@ -123,6 +123,18 @@ class Post
     }
 
     /**
+     * Gets the name of the current post.
+     *
+     * @return string|null
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public static function name(): ?string
+    {
+        return self::post()->post_name ?? null;
+    }
+
+    /**
      * Gets the content of the current post.
      *
      * @param array $filters
@@ -339,11 +351,11 @@ class Post
     /**
      * Gets the current post.
      *
-     * @return WP_Post
+     * @return WP_Post|null
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public static function post(): WP_Post
+    public static function post(): ?WP_Post
     {
         return self::$post ?? get_post();
     }
