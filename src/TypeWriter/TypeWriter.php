@@ -330,6 +330,22 @@ final class TypeWriter
     }
 
     /**
+     * Loads a {@see Feature} from an instance.
+     *
+     * @param Feature $feature
+     *
+     * @return Feature
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public final function loadFeatureInstance(Feature $feature): Feature
+    {
+        $this->features[] = $feature;
+
+        return $feature;
+    }
+
+    /**
      * Loads a {@see Module}.
      *
      * @param string $className
