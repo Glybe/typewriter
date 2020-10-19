@@ -17,6 +17,6 @@ TypeWriter is used to write custom themes for WordPress and should not be used w
 that are not build with the framework. To develop a custom theme, follow the steps below.
 - Clone the project. `git clone https://github.com/basmilius/typewriter`
 - Install composer dependencies. `composer install`
-- Install node.js dependencies. `yarn install`
+- Install node.js dependencies. `yarn`
 - Build a production bundle of our core files. `yarn build`
 - Start developing. `yarn serve`
