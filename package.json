@@ -24,7 +24,7 @@
 	},
 	"main": "public/index.php",
 	"scripts": {
-        "postinstall": "rimraf public/tw/dist && yarn build",
+        "postinstall": "rimraf public/tw/dist && yarn tw:build",
         "tw:rebuild": "concurrently \"yarn run tw:clean\" \"yarn run tw:build\"",
 		"tw:build": "cross-env NODE_ENV=production webpack --config dev/webpack/typewriter-core-files.js --progress --color",
 		"tw:build:watch": "cross-env NODE_ENV=development webpack --config dev/webpack/typewriter-core-files.js --progress --color --watch",
