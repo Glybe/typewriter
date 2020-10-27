@@ -19,6 +19,55 @@ msgid "Settings"
 msgstr ""
 # End AdminMenu
 
+# AdminMenu: About
+msgid "An advanced WordPress framework."
+msgstr ""
+
+msgid "TypeWriter is a custom-made WordPress framework that sits before WordPress. It has support for all WordPress features and improves them when needed. The framework uses Columba for adding advanced features, such as routing and a database orm, to your project."
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "Environment"
+msgstr ""
+
+msgid "Dependencies"
+msgstr ""
+
+msgid "Active theme: %s"
+msgstr ""
+
+msgid "Plugin: %s"
+msgstr ""
+
+msgid "Activate"
+msgstr ""
+
+msgid "Inactive"
+msgstr ""
+
+msgid "More"
+msgstr ""
+
+msgid "TypeWriter is an Open Source project, if you have an idea, a bug or want to help us, let us know! You can use the project in any way you want, there are no restrictions, except for copyrights in our files, you should keep those."
+msgstr ""
+
+msgid "Contribute"
+msgstr ""
+
+msgid "Report an issue"
+msgstr ""
+
+msgid "Submit your idea"
+msgstr ""
+# End AdminMenu: About
+
+# Branding
+msgid "Copyright &copy; Bas Milius &mdash; All rights reserved."
+msgstr ""
+# End Branding
+
 # <SelectPostDialog/>
 msgid "Choose an object..."
 msgstr ""

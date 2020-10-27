@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "094944ca04ab02cca8f146467ae0ec73",
+    "content-hash": "ca87488f969c608bffd340b5ec01bfa5",
     "packages": [
         {
             "name": "basmilius/columba",
@@ -221,12 +221,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "4f16844c1c8a13389a9c1ddc5e00f07d9f43ea1f"
+                "reference": "9712c4b156aa6534e4edd83a3cf4aaf3a97056e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/4f16844c1c8a13389a9c1ddc5e00f07d9f43ea1f",
-                "reference": "4f16844c1c8a13389a9c1ddc5e00f07d9f43ea1f",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/9712c4b156aa6534e4edd83a3cf4aaf3a97056e7",
+                "reference": "9712c4b156aa6534e4edd83a3cf4aaf3a97056e7",
                 "shasum": ""
             },
             "require": {
@@ -290,7 +290,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-21T13:08:11+00:00"
+            "time": "2020-10-27T12:59:52+00:00"
         }
     ],
     "packages-dev": [],

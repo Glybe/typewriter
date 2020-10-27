@@ -23,6 +23,68 @@ msgstr "Rollen & Permissies"
 msgid "Settings"
 msgstr "Instellingen"
 
+msgid "An advanced WordPress framework."
+msgstr "Een geavanceerd WordPress basis-systeem."
+
+msgid ""
+"TypeWriter is a custom-made WordPress framework that sits before WordPress. "
+"It has support for all WordPress features and improves them when needed. The "
+"framework uses Columba for adding advanced features, such as routing and a "
+"database orm, to your project."
+msgstr ""
+"TypeWriter is een op maat gemaakt WordPress-framework dat vóór WordPress "
+"zit. Het heeft ondersteuning voor alle WordPress-functies en verbetert deze "
+"indien nodig. Het framework gebruikt Columba om geavanceerde functies, zoals "
+"routing en een database-orm, aan je project toe te voegen."
+
+msgid "About"
+msgstr "Over"
+
+msgid "Environment"
+msgstr "Omgeving"
+
+msgid "Dependencies"
+msgstr "Afhankelijkheden"
+
+msgid "Active theme: %s"
+msgstr "Actief thema: %s"
+
+msgid "Plugin: %s"
+msgstr "Uitbreiding: %s"
+
+msgid "Activate"
+msgstr "Actief"
+
+msgid "Inactive"
+msgstr "Inactief"
+
+msgid "More"
+msgstr "Meer"
+
+msgid ""
+"TypeWriter is an Open Source project, if you have an idea, a bug or want to "
+"help us, let us know! You can use the project in any way you want, there are "
+"no restrictions, except for copyrights in our files, you should keep those."
+msgstr ""
+"TypeWriter is een Open Source-project, als u een idee, een bug heeft of ons "
+"wilt helpen, laat het ons weten! Je kunt het project op elke manier "
+"gebruiken die je wilt, er zijn geen beperkingen, behalve de auteursrechten "
+"in onze bestanden, die moet je behouden."
+
+msgid "Contribute"
+msgstr "Bijdragen"
+
+msgid "Report an issue"
+msgstr "Meld een probleem"
+
+msgid "Submit your idea"
+msgstr "Verstuur je idee"
+
+# End AdminMenu: About
+# Branding
+msgid "Copyright &copy; Bas Milius &mdash; All rights reserved."
+msgstr "Copyright &copy; Bas Milius &mdash; Alle rechten voorbehouden."
+
 # <SelectPostDialog/>
 msgid "Choose an object..."
 msgstr "Kies een object…"

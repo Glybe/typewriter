@@ -1,7 +1,8 @@
 {
 	"name": "basmilius/typewriter",
 	"description": "description",
-	"minimum-stability": "stable",
+    "version": "1.0",
+    "minimum-stability": "stable",
 	"license": "mit",
 	"authors": [
 		{

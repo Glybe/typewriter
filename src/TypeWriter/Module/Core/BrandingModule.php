@@ -61,7 +61,7 @@ final class BrandingModule extends Module
      */
     public final function onAdminFooterText(): string
     {
-        return 'Copyright &copy; Bas Milius &mdash; All rights reserved.';
+        return \__('Copyright &copy; Bas Milius &mdash; All rights reserved.', 'tw');
     }
 
     /**
