@@ -10,6 +10,7 @@ use TypeWriter\Facade\Hooks;
 use TypeWriter\Twig\TokenParser\ControllerTokenParser;
 use TypeWriter\Twig\TokenParser\FooterTokenParser;
 use TypeWriter\Twig\TokenParser\HeaderTokenParser;
+use function __;
 use function call_user_func;
 use function Columba\Util\dump;
 use function Columba\Util\dumpDie;
@@ -43,6 +44,7 @@ final class TwigFunctions extends AbstractExtension
 
             new TwigFunction('applyFilters', [Hooks::class, 'applyFilters'], ['is_safe' => ['html']]),
             new TwigFunction('doAction', [Hooks::class, 'doAction']),
+            new TwigFunction('t', fn(string $text, string $domain = 'tw') => __($text, $domain)),
             new TwigFunction('themeUri', fn(string $path): string => Dependencies::themeUri($path)),
             new TwigFunction('url', fn(string $path = ''): string => home_url($path)),
 

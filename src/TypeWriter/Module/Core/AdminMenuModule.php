@@ -6,6 +6,7 @@ namespace TypeWriter\Module\Core;
 use TypeWriter\Facade\AdminMenu;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
+use function __;
 
 /**
  * Class AdminMenuModule
@@ -48,8 +49,9 @@ final class AdminMenuModule extends Module
      */
     public final function onAdminMenu(): void
     {
-        AdminMenu::addPage('dashicons-edit', 'TypeWriter', AdminMenu::twig('@tw/admin/about'));
-        AdminMenu::addSubPage('typewriter', 'Settings', AdminMenu::twig('@tw/admin/settings'));
+        AdminMenu::addPage('dashicons-edit', __('TypeWriter', 'tw'), AdminMenu::twig('@tw/admin/about'));
+        AdminMenu::addSubPage('typewriter', __('Roles &amp; Permissions', 'tw'), AdminMenu::twig('@tw/admin/roles-and-permissions'));
+        AdminMenu::addSubPage('typewriter', __('Settings', 'tw'), AdminMenu::twig('@tw/admin/settings'));
     }
 
 }

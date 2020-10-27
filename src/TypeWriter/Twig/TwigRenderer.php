@@ -25,7 +25,7 @@ use TypeWriter\Facade\Template;
 use TypeWriter\Structure\Menu\Menus;
 use function array_merge;
 use function TypeWriter\tw;
-use const TypeWriter\PUBLIC_DIR;
+use const TypeWriter\RESOURCE_DIR;
 
 /**
  * Class TwigRenderer
@@ -68,7 +68,7 @@ final class TwigRenderer extends AbstractRenderer
         $this->addGlobal('tw', tw());
 
         $this->addExtension(new TwigFunctions());
-        $this->addPath(PUBLIC_DIR . '/tw/view', 'tw');
+        $this->addPath(RESOURCE_DIR . '/view', 'tw');
     }
 
     /**

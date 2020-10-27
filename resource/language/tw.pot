@@ -8,6 +8,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-03-08T11:26:56-08:00\n"
 
+# AdminMenu
+msgid "TypeWriter"
+msgstr ""
+
+msgid "Roles &amp; Permissions"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+# End AdminMenu
+
 # <SelectPostDialog/>
 msgid "Choose an object..."
 msgstr ""
