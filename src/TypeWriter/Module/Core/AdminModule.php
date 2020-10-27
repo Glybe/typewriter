@@ -60,16 +60,16 @@ final class AdminModule extends Module
              * These capabilities are only available when on debug mode, this is
              * so that our customer cannot break its site.
              */
-            $caps['update_core'] = $caps['update_core'] && $isDebug;
-            $caps['install_languages'] = $caps['install_languages'] && $isDebug;
-            $caps['delete_plugins'] = $caps['delete_plugins'] && $isDebug;
-            $caps['edit_plugins'] = $caps['edit_plugins'] && $isDebug;
-            $caps['install_plugins'] = $caps['install_plugins'] && $isDebug;
-            $caps['update_plugins'] = $caps['update_plugins'] && $isDebug;
-            $caps['delete_themes'] = $caps['delete_themes'] && $isDebug;
-            $caps['edit_themes'] = $caps['edit_themes'] && $isDebug;
-            $caps['install_themes'] = $caps['install_themes'] && $isDebug;
-            $caps['update_themes'] = $caps['update_themes'] && $isDebug;
+            $caps['update_core'] = ($caps['update_core'] ?? false) && $isDebug;
+            $caps['install_languages'] = ($caps['install_languages'] ?? false) && $isDebug;
+            $caps['delete_plugins'] = ($caps['delete_plugins'] ?? false) && $isDebug;
+            $caps['edit_plugins'] = ($caps['edit_plugins'] ?? false) && $isDebug;
+            $caps['install_plugins'] = ($caps['install_plugins'] ?? false) && $isDebug;
+            $caps['update_plugins'] = ($caps['update_plugins'] ?? false) && $isDebug;
+            $caps['delete_themes'] = ($caps['delete_themes'] ?? false) && $isDebug;
+            $caps['edit_themes'] = ($caps['edit_themes'] ?? false) && $isDebug;
+            $caps['install_themes'] = ($caps['install_themes'] ?? false) && $isDebug;
+            $caps['update_themes'] = ($caps['update_themes'] ?? false) && $isDebug;
 
             return $caps;
         });
