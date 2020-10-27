@@ -12,7 +12,7 @@ msgstr ""
 msgid "TypeWriter"
 msgstr ""
 
-msgid "Roles &amp; Permissions"
+msgid "Roles & Permissions"
 msgstr ""
 
 msgid "Settings"
