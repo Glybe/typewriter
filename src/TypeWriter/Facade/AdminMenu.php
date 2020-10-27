@@ -29,12 +29,13 @@ final class AdminMenu
      * @param string $capability
      * @param int|null $position
      *
+     * @return string
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public static function addPage(string $icon, string $title, callable $fn, string $capability = 'administrator', ?int $position = null): void
+    public static function addPage(string $icon, string $title, callable $fn, string $capability = 'administrator', ?int $position = null): string
     {
-        add_menu_page($title, $title, $capability, StringUtil::slugify($title), $fn, $icon, $position);
+        return add_menu_page($title, $title, $capability, StringUtil::slugify($title), $fn, $icon, $position);
     }
 
     /**
@@ -45,12 +46,13 @@ final class AdminMenu
      * @param callable $fn
      * @param string $capability
      *
+     * @return string
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public static function addSubPage(string $parentSlug, string $title, callable $fn, string $capability = 'administrator'): void
+    public static function addSubPage(string $parentSlug, string $title, callable $fn, string $capability = 'administrator'): string
     {
-        add_submenu_page($parentSlug, $title, $title, $capability, $parentSlug . '-' . StringUtil::slugify($title), $fn);
+        return add_submenu_page($parentSlug, $title, $title, $capability, $parentSlug . '-' . StringUtil::slugify($title), $fn);
     }
 
     /**
