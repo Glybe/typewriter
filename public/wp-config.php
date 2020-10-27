@@ -26,7 +26,7 @@ define('DB_NAME', $prefs['db']['name']);
 define('DB_USER', $prefs['db']['user']);
 define('DB_PASSWORD', $prefs['db']['pass']);
 define('DB_CHARSET', 'utf8mb4');
-define('DB_COLLATE', '');
+define('DB_COLLATE', 'utf8mb4_unicode_ci');
 
 $table_prefix = $prefs['db']['prefix'] ?? 'wp_';
 
