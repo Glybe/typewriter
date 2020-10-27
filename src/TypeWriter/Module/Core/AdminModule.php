@@ -7,13 +7,20 @@ use Columba\Http\ResponseCode;
 use TypeWriter\Facade\Dependencies;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
+use WP_Site_Health;
+use function class_exists;
+use function Columba\Util\dumpDie;
+use function Columba\Util\preDie;
+use function file_get_contents;
 use function header;
 use function http_response_code;
 use function implode;
 use function load_plugin_textdomain;
+use function str_replace;
 use function TypeWriter\tw;
 use function wp_set_script_translations;
 use const TypeWriter\ROOT;
+use const TypeWriter\WP_DIR;
 
 /**
  * Class AdminModule
@@ -48,6 +55,8 @@ final class AdminModule extends Module
             header('Location: /wp/wp-admin/index.php');
             die;
         }
+
+        $this->patchWpSiteHealthClass();
 
         Hooks::action('admin_enqueue_scripts', [$this, 'onAdminEnqueueScripts']);
         Hooks::action('admin_init', [$this, 'onAdminInit']);
@@ -130,6 +139,29 @@ final class AdminModule extends Module
 		});
 		</script>
 		CODE;
+    }
+
+    /**
+     * Patches the {@see WP_Site_Health} class to work with our custom database.
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    private function patchWpSiteHealthClass(): void
+    {
+        if (class_exists(WP_Site_Health::class)) {
+            return;
+        }
+
+        $code = file_get_contents(WP_DIR . '/wp-admin/includes/class-wp-site-health.php');
+
+        $code = str_replace(
+            '$mysql_server_type = mysqli_get_server_info( $wpdb->dbh );',
+            '$mysql_server_type = $wpdb->dbh->attribute(PDO::ATTR_SERVER_VERSION);',
+            $code
+        );
+
+        eval(mb_substr($code, 5));
     }
 
 }

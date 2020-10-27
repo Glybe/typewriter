@@ -42,6 +42,8 @@ define('SECURE_AUTH_SALT', $prefs['salt']['auth_secure']);
 define('LOGGED_IN_SALT', $prefs['salt']['logged_in']);
 define('NONCE_SALT', $prefs['salt']['nonce']);
 
+define('WP_DEFAULT_THEME', 'base-theme');
+
 define('AUTOMATIC_UPDATER_DISABLED', true);
 define('AUTOSAVE_INTERVAL', 300);
 define('DISABLE_WP_CRON', true);
