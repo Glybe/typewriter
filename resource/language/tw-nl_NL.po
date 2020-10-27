@@ -13,6 +13,16 @@ msgstr ""
 "X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+# AdminMenu
+msgid "TypeWriter"
+msgstr "TypeWriter"
+
+msgid "Roles &amp; Permissions"
+msgstr "Rollen &amp; Permissies"
+
+msgid "Settings"
+msgstr "Instellingen"
+
 # <SelectPostDialog/>
 msgid "Choose an object..."
 msgstr "Kies een object…"

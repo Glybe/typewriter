@@ -9,8 +9,6 @@ use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
 use WP_Site_Health;
 use function class_exists;
-use function Columba\Util\dumpDie;
-use function Columba\Util\preDie;
 use function file_get_contents;
 use function header;
 use function http_response_code;
@@ -59,7 +57,7 @@ final class AdminModule extends Module
         $this->patchWpSiteHealthClass();
 
         Hooks::action('admin_enqueue_scripts', [$this, 'onAdminEnqueueScripts']);
-        Hooks::action('admin_init', [$this, 'onAdminInit']);
+        Hooks::action('init', [$this, 'onInit']);
         Hooks::action('in_admin_footer', [$this, 'onInAdminFooter']);
 
         Hooks::filter('user_has_cap', function (array $caps): array {
@@ -104,14 +102,14 @@ final class AdminModule extends Module
     }
 
     /**
-     * Invoked on admin_init action hook.
+     * Invoked on init action hook.
      * Adds our translations to WordPress.
      *
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @internal
      */
-    public final function onAdminInit(): void
+    public final function onInit(): void
     {
         load_plugin_textdomain('tw', false, '../../../resource/language');
     }
