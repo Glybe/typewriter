@@ -126,14 +126,12 @@ final class AdminModule extends Module
      */
     public final function onInAdminFooter(): void
     {
-        $fetchScripts = function (): string {
-            return implode(PHP_EOL, Hooks::applyFilters('tw.admin-scripts.body', []));
-        };
+        $scripts = implode(PHP_EOL, Hooks::applyFilters('tw.admin-scripts.body', []));
 
         echo <<<CODE
 		<script type="text/javascript">
 		window.addEventListener("load", function () { 
-		{$fetchScripts()}
+		{$scripts}
 		});
 		</script>
 		CODE;
