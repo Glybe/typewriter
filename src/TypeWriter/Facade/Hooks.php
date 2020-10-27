@@ -62,6 +62,23 @@ final class Hooks
     }
 
     /**
+     * Adds the given action hooks.
+     *
+     * @param string[] $actions
+     * @param callable $fn
+     * @param int $priority
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public static function actions(array $actions, callable $fn, int $priority = 10): void
+    {
+        foreach ($actions as $action) {
+            self::action($action, $fn, $priority);
+        }
+    }
+
+    /**
      * Applies filters to $value.
      *
      * @param string $filter
