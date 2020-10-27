@@ -93,7 +93,7 @@ final class AdminModule extends Module
     public final function onAdminEnqueueScripts(): void
     {
         Dependencies::registerStyle('tw', home_url('/tw/dist/admin.css'));
-        Dependencies::registerScript('tw', home_url('/tw/dist/admin.js'), ['wp-i18n']);
+        Dependencies::registerScript('tw', home_url('/tw/dist/admin.js'), ['wp-i18n', 'wp-mediaelement']);
 
         wp_set_script_translations('tw', 'tw', ROOT . '/resource/language');
 
