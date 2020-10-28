@@ -1,14 +1,14 @@
 <div class="health-check-body hide-if-no-js">
     <div class="site-status-all-clear">
-        <p class="icon" style="margin-top: 24px;">
-            <a href="https://bas.dev/" target="_blank">
-                <img src="https://bmcdn.nl/assets/branding/logo.svg" alt="TypeWriter Logo" height="88" width="88"/>
+        <p class="icon" style="margin-top: 24px; margin-bottom: 36px;">
+            <a href="https://glybe.nl/" target="_blank">
+                <img src="https://cdn.glybe.nl/public/brand/SVG/logo-horizontal.svg" alt="Glybe-logo" height="54"/>
             </a>
         </p>
 
         <p class="encouragement">{{ t("TypeWriter") }} {{ version }}</p>
 
-        <p>{{ t("An advanced WordPress framework.") }}</p>
+        <p>{{ t("An advanced WordPress framework by %s.") | format('<a href="https://glybe.nl/" target="_blank">Glybe</a>') | raw }}</p>
     </div>
 
     <h2>👋🏽 {{ t("About") }}</h2>
@@ -75,7 +75,7 @@
 
     <h2>🔔 {{ t("More") }}</h2>
     <p style="font-size: 1.2em">{{ t("TypeWriter is an Open Source project, if you have an idea, a bug or want to help us, let us know! You can use the project in any way you want, there are no restrictions, except for copyrights in our files, you should keep those.") }}</p>
-    <a href="https://github.com/basmilius/typewriter" target="_blank" class="button button-secondary button-large">{{ t("Contribute") }}</a>
-    <a href="https://github.com/basmilius/typewriter/issues/new" target="_blank" class="button button-secondary button-large">{{ t("Report an issue") }}</a>
-    <a href="https://github.com/basmilius/typewriter/issues/new" target="_blank" class="button button-secondary button-large">{{ t("Submit your idea") }}</a>
+    <a href="https://github.com/glybe/typewriter" target="_blank" class="button button-secondary button-large">{{ t("Contribute") }}</a>
+    <a href="https://github.com/glybe/typewriter/issues/new" target="_blank" class="button button-secondary button-large">{{ t("Report an issue") }}</a>
+    <a href="https://github.com/glybe/typewriter/issues/new" target="_blank" class="button button-secondary button-large">{{ t("Submit your idea") }}</a>
 </div>

@@ -23,8 +23,8 @@ msgstr "Rollen & Permissies"
 msgid "Settings"
 msgstr "Instellingen"
 
-msgid "An advanced WordPress framework."
-msgstr "Een geavanceerd WordPress basis-systeem."
+msgid "An advanced WordPress framework by %s."
+msgstr "Een geavanceerd WordPress basis-systeem door %s."
 
 msgid ""
 "TypeWriter is a custom-made WordPress framework that sits before WordPress. "
@@ -82,8 +82,8 @@ msgstr "Verstuur je idee"
 
 # End AdminMenu: About
 # Branding
-msgid "Copyright &copy; Bas Milius &mdash; All rights reserved."
-msgstr "Copyright &copy; Bas Milius &mdash; Alle rechten voorbehouden."
+msgid "Copyright &copy; Glybe &mdash; All rights reserved."
+msgstr "Copyright &copy; Glybe &mdash; Alle rechten voorbehouden."
 
 # <SelectPostDialog/>
 msgid "Choose an object..."

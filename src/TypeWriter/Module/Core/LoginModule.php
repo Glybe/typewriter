@@ -81,7 +81,7 @@ final class LoginModule extends Module
         echo <<<STYLE
             <style>
             body { background: #eef2f7; }
-            .login h1 a { background-image: url(https://bmcdn.nl/assets/branding/logo.svg); }
+            .login h1 a { background-image: url(https://cdn.glybe.nl/public/brand/SVG/logo-horizontal.svg); background-size: contain; height: 39px; width: 125px; }
             .login label { margin-bottom: 6px; font-weight: 700; }
             #loginform { padding: 24px; border-color: #dbe2ea; border-radius: 6px; box-shadow: none; }
             </style>
@@ -113,7 +113,7 @@ final class LoginModule extends Module
      */
     public final function onLoginHeaderUrl(): string
     {
-        return 'https://bas.dev/';
+        return 'https://glybe.nl/';
     }
 
     /**

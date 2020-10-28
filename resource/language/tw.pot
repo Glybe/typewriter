@@ -20,7 +20,7 @@ msgstr ""
 # End AdminMenu
 
 # AdminMenu: About
-msgid "An advanced WordPress framework."
+msgid "An advanced WordPress framework by %s."
 msgstr ""
 
 msgid "TypeWriter is a custom-made WordPress framework that sits before WordPress. It has support for all WordPress features and improves them when needed. The framework uses Columba for adding advanced features, such as routing and a database orm, to your project."
@@ -64,7 +64,7 @@ msgstr ""
 # End AdminMenu: About
 
 # Branding
-msgid "Copyright &copy; Bas Milius &mdash; All rights reserved."
+msgid "Copyright &copy; Glybe &mdash; All rights reserved."
 msgstr ""
 # End Branding
 
