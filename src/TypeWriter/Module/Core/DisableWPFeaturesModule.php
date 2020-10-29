@@ -41,7 +41,6 @@ final class DisableWPFeaturesModule extends Module
         Hooks::action('init', [$this, 'onWordPressInit'], 0);
         Hooks::action('wp_default_scripts', [$this, 'onWordPressDefaultScripts']);
         Hooks::action('wp_footer', [$this, 'onWordPressFooter'], 0);
-        Hooks::action('wp_head', [$this, 'onWordPressHeader'], 0);
     }
 
     /**
@@ -96,19 +95,6 @@ final class DisableWPFeaturesModule extends Module
     public final function onWordPressFooter(): void
     {
         Dependencies::dequeueScript('wp-embed');
-    }
-
-    /**
-     * Invoked on wp_head action hook.
-     * Removes obsolete dependencies.
-     *
-     * @author Bas Milius <bas@mili.us>
-     * @since 1.0.0
-     * @internal
-     */
-    public final function onWordPressHeader(): void
-    {
-        Dependencies::deregisterStyle('wp-block-library');
     }
 
 }
