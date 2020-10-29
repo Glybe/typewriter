@@ -78,6 +78,7 @@ final class DisableAdminFeaturesModule extends Module
 
         Hooks::removeAction('welcome_panel', 'wp_welcome_panel');
 
+        unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_site_health']);
         unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_activity']);
         unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_right_now']);
         unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_primary']);
