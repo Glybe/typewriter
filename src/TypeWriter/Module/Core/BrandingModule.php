@@ -14,7 +14,7 @@ namespace TypeWriter\Module\Core;
 
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
-use TypeWriter\TypeWriter;
+use function __;
 use function sprintf;
 use function TypeWriter\tw;
 
@@ -61,7 +61,7 @@ final class BrandingModule extends Module
      */
     public final function onAdminFooterText(): string
     {
-        return \sprintf(\__('Proudly running on TypeWriter by %s.', 'tw'), '<a href="https://glybe.nl/over-glybe/" target="_blank">Glybe</a>');
+        return sprintf(__('Proudly running on TypeWriter by %s.', 'tw'), '<a href="https://glybe.nl/over-glybe/" target="_blank">Glybe</a>');
     }
 
     /**
@@ -75,7 +75,9 @@ final class BrandingModule extends Module
      */
     public final function onUpdateFooter(): string
     {
-        return sprintf('TypeWriter %s | WordPress %s', TypeWriter::VERSION, tw()->getVersions()['wordpress']);
+        $versions = tw()->getVersions();
+
+        return sprintf('TypeWriter %s | Columba %s | WordPress %s', $versions['typewriter'], $versions['columba'], $versions['wordpress']);
     }
 
 }

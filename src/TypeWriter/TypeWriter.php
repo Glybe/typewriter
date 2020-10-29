@@ -12,14 +12,13 @@ declare(strict_types=1);
 
 namespace TypeWriter;
 
-use Columba\Columba;
 use Columba\Database\Connection\Connection;
 use Columba\Foundation\Preferences\Preferences;
 use Columba\Foundation\Store;
 use Columba\Http\RequestMethod;
 use Columba\Router\RouterException;
 use Columba\Util\Stopwatch;
-use Twig\Environment as Twig;
+use Composer\InstalledVersions;
 use TypeWriter\Error\ViolationException;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Feature\Feature;
@@ -44,8 +43,6 @@ use const WP_INSTALLING;
  */
 final class TypeWriter
 {
-
-    public const VERSION = '1.0.0';
 
     private Connection $database;
     private Preferences $preferences;
@@ -224,10 +221,10 @@ final class TypeWriter
         global $wp_version;
 
         return [
-            'columba' => Columba::VERSION,
+            'columba' => InstalledVersions::getPrettyVersion('basmilius/columba'),
             'php' => phpversion(),
-            'typewriter' => self::VERSION,
-            'twig' => Twig::VERSION,
+            'typewriter' => InstalledVersions::getPrettyVersion('basmilius/typewriter'),
+            'twig' => InstalledVersions::getPrettyVersion('twig/twig'),
             'wordpress' => $wp_version
         ];
     }
