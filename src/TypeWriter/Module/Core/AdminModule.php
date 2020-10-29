@@ -61,11 +61,15 @@ final class AdminModule extends Module
         Hooks::action('in_admin_footer', [$this, 'onInAdminFooter']);
 
         Hooks::filter('user_has_cap', function (array $caps): array {
+            if (!(tw()->getPreferences()['security']['lockDownMode'] ?? false)) {
+                return $caps;
+            }
+
             $isDebug = tw()->isDebugMode();
 
             /*
              * These capabilities are only available when on debug mode, this is
-             * so that our customer cannot break its site.
+             * so that our customer cannot break their site.
              */
             $caps['update_core'] = ($caps['update_core'] ?? false) && $isDebug;
             $caps['install_languages'] = ($caps['install_languages'] ?? false) && $isDebug;
