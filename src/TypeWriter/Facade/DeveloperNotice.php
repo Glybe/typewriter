@@ -34,6 +34,8 @@ final class DeveloperNotice
      */
     public static function base(string $type, string $title, callable $render): void
     {
+        ob_get_clean();
+
         echo <<<TEMPLATE
         <!DOCTYPE html>
         <html lang="nl">
@@ -71,6 +73,8 @@ final class DeveloperNotice
         </body>
         </html>
         TEMPLATE;
+
+        die;
     }
 
 }

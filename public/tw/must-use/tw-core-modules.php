@@ -27,6 +27,7 @@ use TypeWriter\Module\Core\DisableCoreFeaturesModule;
 use TypeWriter\Module\Core\DisableWPFeaturesModule;
 use TypeWriter\Module\Core\ImproveOutputModule;
 use TypeWriter\Module\Core\JoyPixelsEmojiModule;
+use TypeWriter\Module\Core\LocalAvatarModule;
 use TypeWriter\Module\Core\LoginModule;
 use TypeWriter\Module\Core\PostTemplatesLoaderModule;
 use TypeWriter\Module\Core\PostTemplatesResolverModule;
@@ -38,6 +39,7 @@ tw()->loadModule(BrandingModule::class);
 tw()->loadModule(DisableCoreFeaturesModule::class);
 tw()->loadModule(DisableCommentsAndPingsModule::class);
 tw()->loadModule(JoyPixelsEmojiModule::class);
+tw()->loadModule(LocalAvatarModule::class);
 tw()->loadModule(ThemeBaseModule::class);
 
 if (tw()->isAdmin() || tw()->isApi()) {

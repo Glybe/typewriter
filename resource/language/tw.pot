@@ -68,6 +68,26 @@ msgid "Copyright &copy; Glybe &mdash; All rights reserved."
 msgstr ""
 # End Branding
 
+# LocalAvatarModule
+msgid "Upload a profile picture"
+msgstr ""
+
+msgid "Upload a new profile picture"
+msgstr ""
+
+msgid "The upload picture is too big."
+msgstr ""
+
+msgid "The server could not write the profile picture file."
+msgstr ""
+
+msgid "Unknown error while uploading the profile picture."
+msgstr ""
+
+msgid "The uploaded file is not an image."
+msgstr ""
+# End LocalAvatarModule
+
 # <SelectPostDialog/>
 msgid "Choose an object..."
 msgstr ""

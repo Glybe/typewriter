@@ -380,6 +380,10 @@ final class TypeWriter
      */
     public final function onWordPressLoaded(): void
     {
+        if ($this->state->get('tw.is-wp-initialized', false)) {
+            return;
+        }
+
         foreach ($this->modules as $module) {
             $module->onInitialize();
         }

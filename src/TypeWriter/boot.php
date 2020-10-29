@@ -19,6 +19,7 @@ define('TW_ROOT', realpath(__DIR__ . '/../..'));
 
 const ROOT = TW_ROOT;
 const PUBLIC_DIR = ROOT . '/public';
+const UPLOADS_DIR = PUBLIC_DIR . '/app/uploads';
 const RESOURCE_DIR = ROOT . '/resource';
 const SRC_DIR = ROOT . '/src';
 const VENDOR_DIR = ROOT . '/vendor';
