@@ -85,6 +85,26 @@ msgstr "Verstuur je idee"
 msgid "Copyright &copy; Glybe &mdash; All rights reserved."
 msgstr "Copyright &copy; Glybe &mdash; Alle rechten voorbehouden."
 
+# End Branding
+# LocalAvatarModule
+msgid "Upload a profile picture"
+msgstr "Profielfoto uploaden"
+
+msgid "Upload a new profile picture"
+msgstr "Nieuwe profielfoto instellen"
+
+msgid "The upload picture is too big."
+msgstr "Het geüploade bestand is te groot."
+
+msgid "The server could not write the profile picture file."
+msgstr "De server kon je nieuwe profielfoto niet opslaan."
+
+msgid "Unknown error while uploading the profile picture."
+msgstr "Onbekende fout tijdens het uploaden van je profielfoto."
+
+msgid "The uploaded file is not an image."
+msgstr "Het geüploade bestand is geen afbeelding."
+
 # <SelectPostDialog/>
 msgid "Choose an object..."
 msgstr "Kies een object…"
