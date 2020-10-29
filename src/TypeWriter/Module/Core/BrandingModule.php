@@ -61,7 +61,7 @@ final class BrandingModule extends Module
      */
     public final function onAdminFooterText(): string
     {
-        return \__('Copyright &copy; Glybe &mdash; All rights reserved.', 'tw');
+        return \sprintf(\__('Proudly running on TypeWriter by %s.', 'tw'), '<a href="https://glybe.nl/over-glybe/" target="_blank">Glybe</a>');
     }
 
     /**

@@ -82,8 +82,8 @@ msgstr "Verstuur je idee"
 
 # End AdminMenu: About
 # Branding
-msgid "Copyright &copy; Glybe &mdash; All rights reserved."
-msgstr "Copyright &copy; Glybe &mdash; Alle rechten voorbehouden."
+msgid "Proudly running on TypeWriter by %s."
+msgstr "Met trots draaiend op TypeWriter door %s."
 
 # End Branding
 # LocalAvatarModule
@@ -194,3 +194,8 @@ msgstr "Er zijn nog geen objecten in deze relatie."
 
 msgid "Add object"
 msgstr "Relatie toevoegen"
+
+# End AdminMenu: About
+# Branding
+#~ msgid "Copyright &copy; Glybe &mdash; All rights reserved."
+#~ msgstr "Copyright &copy; Glybe &mdash; Alle rechten voorbehouden."

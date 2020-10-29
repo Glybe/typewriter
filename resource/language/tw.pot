@@ -64,7 +64,7 @@ msgstr ""
 # End AdminMenu: About
 
 # Branding
-msgid "Copyright &copy; Glybe &mdash; All rights reserved."
+msgid "Proudly running on TypeWriter by %s."
 msgstr ""
 # End Branding
 
