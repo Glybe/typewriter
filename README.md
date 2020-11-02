@@ -20,3 +20,10 @@ that are not build with the framework. To develop a custom theme, follow the ste
 - Install node.js dependencies. `yarn`
 - Build a production bundle of our core files. `yarn build`
 - Start developing. `yarn serve`
+
+### 🔧 Config
+You should create a `config.json` file in the root of your project. TypeWriter will load
+that file and injects the properties in a generated `wp-config.php` file. There is also
+a `config.sample.json` file that you can use to create your own. To generate keys and salts
+you can use [this website by Roots.io](https://roots.io/salts.html) and use them instead
+of the default ones provided by TypeWriter.
