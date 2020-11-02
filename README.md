@@ -1,11 +1,11 @@
-<a href="https://bas.dev" target="_blank" rel="noopener">
-	<img src="https://bas.dev/module/@bas/website/resource/image/logo.svg" alt="Logo" height="60" width="60" />
+<a href="https://glybe.nl/" target="_blank" rel="noopener">
+    <img src="https://cdn.glybe.nl/public/brand/SVG/logo.svg" alt="Glybe-logo" height="60" width="60"/>
 </a>
 
 ---
 
 # TypeWriter
-An advanced WordPress framework created by [Bas Milius](https://bas.dev).
+An advanced WordPress framework created by the creators of [Glybe.nl](https://glybe.nl).
 
 ### 👋🏽 About
 TypeWriter is a custom-made WordPress framework that sits before WordPress. It has support
