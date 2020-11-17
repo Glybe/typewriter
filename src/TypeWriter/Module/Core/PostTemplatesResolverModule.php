@@ -59,6 +59,7 @@ final class PostTemplatesResolverModule extends Module
      */
     public final function onInitialize(): void
     {
+        Hooks::filter('404_template_hierarchy', [$this, 'onNotFoundTemplateHierarchy']);
         Hooks::filter('archive_template', [$this, 'onArchiveTemplate']);
         Hooks::filter('page_template', [$this, 'onPageTemplate']);
         Hooks::filter('single_template', [$this, 'onSingleTemplate']);
@@ -66,7 +67,24 @@ final class PostTemplatesResolverModule extends Module
     }
 
     /**
-     * Invoked on archive_template hook.
+     * Invoked on 404_template_hierarchy filter hook.
+     * Injects the default 404.twig location to the 404 template hierarchy.
+     *
+     * @param string[] $templates
+     *
+     * @return string[]
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public final function onNotFoundTemplateHierarchy(array $templates): array
+    {
+        $templates[] = 'template/base/404.twig';
+
+        return $templates;
+    }
+
+    /**
+     * Invoked on archive_template filter hook.
      * Returns a possible archive template when an empty one is provided.
      *
      * @param string $template
@@ -123,7 +141,7 @@ final class PostTemplatesResolverModule extends Module
     }
 
     /**
-     * Invoked on page_template hook.
+     * Invoked on page_template filter hook.
      * Returns a possible page template when an empty one is provided.
      *
      * @param string $template
@@ -149,7 +167,7 @@ final class PostTemplatesResolverModule extends Module
     }
 
     /**
-     * Invoked on single_template hook.
+     * Invoked on single_template filter hook.
      * Returns a possible single template when an empty one is provided.
      *
      * @param string $template
@@ -175,7 +193,7 @@ final class PostTemplatesResolverModule extends Module
     }
 
     /**
-     * Invoked on template_include.
+     * Invoked on template_include filter hook.
      * Checks if we need to enter Twig mode and otherwise gives control back to WordPress.
      *
      * @param string $template
