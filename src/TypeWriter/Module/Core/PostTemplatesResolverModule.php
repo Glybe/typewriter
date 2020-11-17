@@ -60,6 +60,7 @@ final class PostTemplatesResolverModule extends Module
     public final function onInitialize(): void
     {
         Hooks::filter('404_template_hierarchy', [$this, 'onNotFoundTemplateHierarchy']);
+        Hooks::filter('search_template_hierarchy', [$this, 'onSearchTemplateHierarchy']);
         Hooks::filter('archive_template', [$this, 'onArchiveTemplate']);
         Hooks::filter('page_template', [$this, 'onPageTemplate']);
         Hooks::filter('single_template', [$this, 'onSingleTemplate']);
@@ -79,6 +80,23 @@ final class PostTemplatesResolverModule extends Module
     public final function onNotFoundTemplateHierarchy(array $templates): array
     {
         $templates[] = 'template/base/404.twig';
+
+        return $templates;
+    }
+
+    /**
+     * Invoked on search_template_hierarchy filter hook.
+     * Injects the default search.twig location to the search template hierarchy.
+     *
+     * @param string[] $templates
+     *
+     * @return string[]
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public final function onSearchTemplateHierarchy(array $templates): array
+    {
+        $templates[] = 'template/base/search.twig';
 
         return $templates;
     }
