@@ -19,6 +19,9 @@ use Columba\Http\RequestMethod;
 use Columba\Router\RouterException;
 use Columba\Util\Stopwatch;
 use Composer\InstalledVersions;
+use TypeWriter\Error\Reporter\ErrorReporter;
+use TypeWriter\Error\Reporter\ProductionErrorChannel;
+use TypeWriter\Error\Reporter\WhoopsErrorChannel;
 use TypeWriter\Error\ViolationException;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Feature\Feature;
@@ -46,6 +49,7 @@ final class TypeWriter
 {
 
     private Connection $database;
+    private ErrorReporter $errorReporter;
     private Preferences $preferences;
     private Router $router;
     private Store $state;
@@ -69,8 +73,16 @@ final class TypeWriter
 
         $isDevConfig = is_file(ROOT . '/dev/config.json');
 
-        $this->preferences = Preferences::loadFromJson(ROOT . ($isDevConfig ? '/deev/config.json' : '/config.json'));
+        $this->preferences = Preferences::loadFromJson(ROOT . ($isDevConfig ? '/dev/config.json' : '/config.json'));
         $this->state = new Store();
+
+        $this->errorReporter = new ErrorReporter();
+
+        if ($this->isDebugMode()) {
+            $this->errorReporter->addChannel(new WhoopsErrorChannel());
+        } else {
+            $this->errorReporter->addChannel(new ProductionErrorChannel());
+        }
     }
 
     /**
@@ -130,6 +142,18 @@ final class TypeWriter
     public final function getDatabase(): ?Connection
     {
         return $this->database;
+    }
+
+    /**
+     * Gets the error reporter.
+     *
+     * @return ErrorReporter
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public final function getErrorReporter(): ErrorReporter
+    {
+        return $this->errorReporter;
     }
 
     /**
@@ -226,6 +250,10 @@ final class TypeWriter
         return [
             'columba' => InstalledVersions::getPrettyVersion('basmilius/columba'),
             'php' => phpversion(),
+            'raxos_database' => InstalledVersions::getPrettyVersion('raxos/database'),
+            'raxos_foundation' => InstalledVersions::getPrettyVersion('raxos/foundation'),
+            'raxos_http' => InstalledVersions::getPrettyVersion('raxos/http'),
+            'raxos_router' => InstalledVersions::getPrettyVersion('raxos/router'),
             'typewriter' => InstalledVersions::getPrettyVersion('basmilius/typewriter'),
             'twig' => InstalledVersions::getPrettyVersion('twig/twig'),
             'wordpress' => $wp_version
@@ -265,7 +293,7 @@ final class TypeWriter
      */
     public final function isDebugMode(): bool
     {
-        return defined('WP_DEBUG') && WP_DEBUG;
+        return (defined('WP_DEBUG') && WP_DEBUG) || $this->preferences['developer']['debugMode'];
     }
 
     /**

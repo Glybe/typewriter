@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ca87488f969c608bffd340b5ec01bfa5",
+    "content-hash": "7b79f30b326f9c113977b140ce1554d2",
     "packages": [
         {
             "name": "basmilius/columba",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/basmilius/Columba.git",
-                "reference": "830f4c2fdf4979f68c5ad403b455e1c66b40f823"
+                "reference": "d2c7b82f8c16cccbdeb108c281435cd0c616df05"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/basmilius/Columba/zipball/830f4c2fdf4979f68c5ad403b455e1c66b40f823",
-                "reference": "830f4c2fdf4979f68c5ad403b455e1c66b40f823",
+                "url": "https://api.github.com/repos/basmilius/Columba/zipball/d2c7b82f8c16cccbdeb108c281435cd0c616df05",
+                "reference": "d2c7b82f8c16cccbdeb108c281435cd0c616df05",
                 "shasum": ""
             },
             "require": {
@@ -54,20 +54,346 @@
                 "source": "https://github.com/basmilius/Columba/tree/master",
                 "issues": "https://github.com/basmilius/Columba/issues"
             },
-            "time": "2020-10-26T20:13:08+00:00"
+            "time": "2020-12-04T07:57:41+00:00"
         },
         {
-            "name": "symfony/polyfill-ctype",
-            "version": "v1.20.0",
+            "name": "filp/whoops",
+            "version": "2.9.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "f4ba089a5b6366e453971d3aad5fe8e897b37f41"
+                "url": "https://github.com/filp/whoops.git",
+                "reference": "307fb34a5ab697461ec4c9db865b20ff2fd40771"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/f4ba089a5b6366e453971d3aad5fe8e897b37f41",
-                "reference": "f4ba089a5b6366e453971d3aad5fe8e897b37f41",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/307fb34a5ab697461ec4c9db865b20ff2fd40771",
+                "reference": "307fb34a5ab697461ec4c9db865b20ff2fd40771",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.5.9 || ^7.0 || ^8.0",
+                "psr/log": "^1.0.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9 || ^1.0",
+                "phpunit/phpunit": "^4.8.36 || ^5.7.27 || ^6.5.14 || ^7.5.20 || ^8.5.8 || ^9.3.3",
+                "symfony/var-dumper": "^2.6 || ^3.0 || ^4.0 || ^5.0"
+            },
+            "suggest": {
+                "symfony/var-dumper": "Pretty print complex values better with var-dumper available",
+                "whoops/soap": "Formats errors as SOAP responses"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Whoops\\": "src/Whoops/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Filipe Dobreira",
+                    "homepage": "https://github.com/filp",
+                    "role": "Developer"
+                }
+            ],
+            "description": "php error handling for cool kids",
+            "homepage": "https://filp.github.io/whoops/",
+            "keywords": [
+                "error",
+                "exception",
+                "handling",
+                "library",
+                "throwable",
+                "whoops"
+            ],
+            "support": {
+                "issues": "https://github.com/filp/whoops/issues",
+                "source": "https://github.com/filp/whoops/tree/2.9.1"
+            },
+            "time": "2020-11-01T12:00:00+00:00"
+        },
+        {
+            "name": "jetbrains/phpstorm-attributes",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JetBrains/phpstorm-attributes.git",
+                "reference": "a7a83ae5df4dd3c0875484483de19de8edf60a9f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JetBrains/phpstorm-attributes/zipball/a7a83ae5df4dd3c0875484483de19de8edf60a9f",
+                "reference": "a7a83ae5df4dd3c0875484483de19de8edf60a9f",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "JetBrains\\PhpStorm\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "JetBrains",
+                    "homepage": "https://www.jetbrains.com"
+                }
+            ],
+            "description": "PhpStorm specific attributes",
+            "keywords": [
+                "attributes",
+                "jetbrains",
+                "phpstorm"
+            ],
+            "support": {
+                "issues": "https://youtrack.jetbrains.com/newIssue?project=WI",
+                "source": "https://github.com/JetBrains/phpstorm-attributes/tree/1.0"
+            },
+            "time": "2020-11-17T11:09:47+00:00"
+        },
+        {
+            "name": "psr/log",
+            "version": "1.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "0f73288fd15629204f9d42b7055f72dacbe811fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/0f73288fd15629204f9d42b7055f72dacbe811fc",
+                "reference": "0f73288fd15629204f9d42b7055f72dacbe811fc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Log\\": "Psr/Log/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "homepage": "https://github.com/php-fig/log",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/log/tree/1.1.3"
+            },
+            "time": "2020-03-23T09:12:05+00:00"
+        },
+        {
+            "name": "raxos/database",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/basmilius/raxos-database.git",
+                "reference": "c57fd2f2cb10ad36fa896cb955a9e775e685205b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/basmilius/raxos-database/zipball/c57fd2f2cb10ad36fa896cb955a9e775e685205b",
+                "reference": "c57fd2f2cb10ad36fa896cb955a9e775e685205b",
+                "shasum": ""
+            },
+            "require": {
+                "jetbrains/phpstorm-attributes": "^1.0",
+                "raxos/foundation": "dev-master"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Raxos\\Database\\": "src/Raxos/Database"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "mit"
+            ],
+            "authors": [
+                {
+                    "name": "Bas Milius",
+                    "email": "bas@mili.us"
+                }
+            ],
+            "description": "Database ORM and Query Builder.",
+            "support": {
+                "issues": "https://github.com/basmilius/raxos-database/issues",
+                "source": "https://github.com/basmilius/raxos-database/tree/master"
+            },
+            "time": "2020-12-07T17:43:36+00:00"
+        },
+        {
+            "name": "raxos/foundation",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/basmilius/raxos-foundation.git",
+                "reference": "30500f989f16f6ceaa90060f85fc1fe7c8843b09"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/basmilius/raxos-foundation/zipball/30500f989f16f6ceaa90060f85fc1fe7c8843b09",
+                "reference": "30500f989f16f6ceaa90060f85fc1fe7c8843b09",
+                "shasum": ""
+            },
+            "require": {
+                "jetbrains/phpstorm-attributes": "^1.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Raxos\\Foundation\\": "src/Raxos/Foundation"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "mit"
+            ],
+            "authors": [
+                {
+                    "name": "Bas Milius",
+                    "email": "bas@mili.us"
+                }
+            ],
+            "description": "Base stuff for all Raxos libraries.",
+            "support": {
+                "issues": "https://github.com/basmilius/raxos-foundation/issues",
+                "source": "https://github.com/basmilius/raxos-foundation/tree/master"
+            },
+            "time": "2020-12-05T19:20:27+00:00"
+        },
+        {
+            "name": "raxos/http",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/basmilius/raxos-http.git",
+                "reference": "c69feaade9fe476d6aac079b108f4b53bf489a65"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/basmilius/raxos-http/zipball/c69feaade9fe476d6aac079b108f4b53bf489a65",
+                "reference": "c69feaade9fe476d6aac079b108f4b53bf489a65",
+                "shasum": ""
+            },
+            "require": {
+                "jetbrains/phpstorm-attributes": "^1.0",
+                "raxos/foundation": "dev-master"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Raxos\\Http\\": "src/Raxos/Http"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "mit"
+            ],
+            "authors": [
+                {
+                    "name": "Bas Milius",
+                    "email": "bas@mili.us"
+                }
+            ],
+            "description": "Http client and foundation.",
+            "support": {
+                "issues": "https://github.com/basmilius/raxos-http/issues",
+                "source": "https://github.com/basmilius/raxos-http/tree/master"
+            },
+            "time": "2021-01-11T16:41:28+00:00"
+        },
+        {
+            "name": "raxos/router",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/basmilius/raxos-router.git",
+                "reference": "3a3f31936b67feed9628ec41b8ae6a38bbcd2fb1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/basmilius/raxos-router/zipball/3a3f31936b67feed9628ec41b8ae6a38bbcd2fb1",
+                "reference": "3a3f31936b67feed9628ec41b8ae6a38bbcd2fb1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "jetbrains/phpstorm-attributes": "^1.0",
+                "raxos/foundation": "dev-master",
+                "raxos/http": "dev-master"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Raxos\\Router\\": "src/Raxos/Router"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "mit"
+            ],
+            "authors": [
+                {
+                    "name": "Bas Milius",
+                    "email": "bas@mili.us"
+                }
+            ],
+            "description": "A fast and simple router, built with php attributes.",
+            "support": {
+                "issues": "https://github.com/basmilius/raxos-router/issues",
+                "source": "https://github.com/basmilius/raxos-router/tree/master"
+            },
+            "time": "2021-01-11T16:41:38+00:00"
+        },
+        {
+            "name": "symfony/polyfill-ctype",
+            "version": "v1.22.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-ctype.git",
+                "reference": "c6c942b1ac76c82448322025e084cadc56048b4e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/c6c942b1ac76c82448322025e084cadc56048b4e",
+                "reference": "c6c942b1ac76c82448322025e084cadc56048b4e",
                 "shasum": ""
             },
             "require": {
@@ -79,7 +405,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.20-dev"
+                    "dev-main": "1.22-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -117,7 +443,7 @@
                 "portable"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.20.0"
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.22.0"
             },
             "funding": [
                 {
@@ -133,20 +459,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-23T14:02:19+00:00"
+            "time": "2021-01-07T16:49:33+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.20.0",
+            "version": "v1.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "39d483bdf39be819deabf04ec872eb0b2410b531"
+                "reference": "f377a3dd1fde44d37b9831d68dc8dea3ffd28e13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/39d483bdf39be819deabf04ec872eb0b2410b531",
-                "reference": "39d483bdf39be819deabf04ec872eb0b2410b531",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/f377a3dd1fde44d37b9831d68dc8dea3ffd28e13",
+                "reference": "f377a3dd1fde44d37b9831d68dc8dea3ffd28e13",
                 "shasum": ""
             },
             "require": {
@@ -158,7 +484,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.20-dev"
+                    "dev-main": "1.22-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -197,7 +523,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.20.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.22.0"
             },
             "funding": [
                 {
@@ -213,7 +539,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-23T14:02:19+00:00"
+            "time": "2021-01-07T16:49:33+00:00"
         },
         {
             "name": "twig/twig",
@@ -221,12 +547,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "9712c4b156aa6534e4edd83a3cf4aaf3a97056e7"
+                "reference": "4a47f0f5b4bf2400ed1e3abecb486655e3970cdb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/9712c4b156aa6534e4edd83a3cf4aaf3a97056e7",
-                "reference": "9712c4b156aa6534e4edd83a3cf4aaf3a97056e7",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/4a47f0f5b4bf2400ed1e3abecb486655e3970cdb",
+                "reference": "4a47f0f5b4bf2400ed1e3abecb486655e3970cdb",
                 "shasum": ""
             },
             "require": {
@@ -242,7 +568,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1-dev"
+                    "dev-master": "3.2-dev"
                 }
             },
             "autoload": {
@@ -290,7 +616,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-27T12:59:52+00:00"
+            "time": "2021-01-14T07:57:41+00:00"
         }
     ],
     "packages-dev": [],
@@ -298,6 +624,10 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "basmilius/columba": 20,
+        "raxos/database": 20,
+        "raxos/foundation": 20,
+        "raxos/http": 20,
+        "raxos/router": 20,
         "twig/twig": 20
     },
     "prefer-stable": false,

@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace TypeWriter;
 
-use Columba\Error\ExceptionHandler;
 use Composer\Autoload\ClassLoader;
 
 define('TW_ROOT', realpath(__DIR__ . '/../..'));
@@ -54,7 +53,4 @@ function tw(): TypeWriter
 }
 
 autoloader();
-
-ExceptionHandler::register();
-
 tw()->initialize();

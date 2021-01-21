@@ -113,7 +113,7 @@ final class LoginModule extends Module
      */
     public final function onLoginHeaderUrl(): string
     {
-        return 'https://glybe.nl/';
+        return 'https://glybe.nl/over-glybe/';
     }
 
     /**

@@ -77,7 +77,7 @@ final class BrandingModule extends Module
     {
         $versions = tw()->getVersions();
 
-        return sprintf('TypeWriter %s | Columba %s | WordPress %s', $versions['typewriter'], $versions['columba'], $versions['wordpress']);
+        return sprintf('TypeWriter %s | Raxos Foundation %s | WordPress %s', $versions['typewriter'], $versions['raxos_foundation'], $versions['wordpress']);
     }
 
 }

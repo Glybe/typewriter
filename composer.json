@@ -23,6 +23,11 @@
 	],
 	"require": {
 		"basmilius/columba": "@dev",
+        "filp/whoops": "^2.9",
+        "raxos/database": "dev-master",
+        "raxos/foundation": "dev-master",
+        "raxos/http": "dev-master",
+        "raxos/router": "dev-master",
 		"twig/twig": "@dev"
 	}
 }

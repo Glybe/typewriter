@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace TypeWriter\Module\Core;
 
-use Columba\Http\ResponseCode;
+use Raxos\Http\HttpCode;
 use TypeWriter\Facade\Dependencies;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
@@ -49,7 +49,7 @@ final class AdminModule extends Module
     public final function onInitialize(): void
     {
         if (($_SERVER['REQUEST_URI'] ?? '/') === '/wp/wp-admin') {
-            http_response_code(ResponseCode::SEE_OTHER);
+            http_response_code(HttpCode::SEE_OTHER);
             header('Location: /wp/wp-admin/index.php');
             die;
         }
