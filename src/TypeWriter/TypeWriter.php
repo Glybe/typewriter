@@ -28,6 +28,7 @@ use TypeWriter\Twig\TwigRenderer;
 use function defined;
 use function in_array;
 use function is_admin;
+use function is_file;
 use function phpversion;
 use function strpos;
 use function wp;
@@ -66,7 +67,9 @@ final class TypeWriter
     {
         Stopwatch::start(self::class);
 
-        $this->preferences = Preferences::loadFromJson(ROOT . '/config.json');
+        $isDevConfig = is_file(ROOT . '/dev/config.json');
+
+        $this->preferences = Preferences::loadFromJson(ROOT . ($isDevConfig ? '/deev/config.json' : '/config.json'));
         $this->state = new Store();
     }
 
