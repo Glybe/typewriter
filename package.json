@@ -29,8 +29,8 @@
 		"tw:build": "cross-env NODE_ENV=production webpack --config dev/webpack/typewriter-core-files.js --progress --color",
 		"tw:build:watch": "cross-env NODE_ENV=development webpack --config dev/webpack/typewriter-core-files.js --progress --color --watch",
 		"tw:clean": "rimraf public/tw/dist",
-		"tw:dev": "concurrently \"yarn run tw:serve\" \"yarn run tw:build:watch\"",
-		"tw:dev:wsl": "concurrently \"yarn run tw:serve:wsl\" \"yarn run tw:build:watch\"",
+		"tw:dev": "concurrently -k -c magenta,cyan -n php,webpack \"yarn run tw:serve\" \"yarn run tw:build:watch\"",
+		"tw:dev:wsl": "concurrently -k -c magenta,cyan -n php,webpack \"yarn run tw:serve:wsl\" \"yarn run tw:build:watch\"",
 		"tw:serve": "php -S 0.0.0.0:8000 -t public/ src/TypeWriter/dev-server.php",
 		"tw:serve:wsl": "wsl -- php -S 0.0.0.0:8000 -t public/ src/TypeWriter/dev-server.php"
 	},

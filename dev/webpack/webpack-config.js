@@ -137,10 +137,9 @@ module.exports = {
                             return;
                         }
 
-                        const bs = require("browser-sync").get("bs-webpack-plugin");
-
-                        console.log("inject", event, file);
-                        bs.reload(file);
+                        require("browser-sync")
+                            .get("bs-webpack-plugin")
+                            .reload(file);
                     }
                 },
 
@@ -150,24 +149,24 @@ module.exports = {
                         "**/*.php",
                         "**/*.twig"
                     ],
-                    fn: (event, file) => {
+                    fn: (event) => {
                         if (event !== "change") {
                             return;
                         }
 
-                        const bs = require("browser-sync").get("bs-webpack-plugin");
-
-                        console.log("reload", event, file);
-                       bs.reload();
+                        require("browser-sync")
+                            .get("bs-webpack-plugin")
+                            .reload();
                     }
                 }
             ],
             injectChanges: true,
             injectNotification: true,
             logPrefix: "TypeWriter",
-            open: false,
-            port: 8001,
             host: "0.0.0.0",
+            port: 8001,
+            notify: true,
+            open: false,
             proxy: "http://0.0.0.0:8000",
             reload: false,
             reloadDelay: 0,

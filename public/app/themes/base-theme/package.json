@@ -5,7 +5,8 @@
         "theme:build": "cross-env NODE_ENV=production webpack --config dev/webpack/build.js --progress --color",
         "theme:build:watch": "cross-env NODE_ENV=development webpack --config dev/webpack/build.js --progress --color --watch",
         "theme:clean": "rimraf dist",
-        "theme:serve": "concurrently \"cd ../../../ && yarn run tw:serve\" \"yarn run theme:build:watch\""
+        "theme:serve": "concurrently -k -c magenta,cyan -n php,webpack \"cd ../../../ && yarn run tw:serve\" \"yarn run theme:build:watch\"",
+        "theme:serve:wsl": "concurrently -k -c magenta,cyan -n php,webpack \"cd ../../../ && yarn run tw:serve:wsl\" \"yarn run theme:build:watch\""
     },
     "dependencies": {
         "@latte-ui/css": "^2.0.0-dev.0"
