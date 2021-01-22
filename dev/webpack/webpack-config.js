@@ -85,12 +85,7 @@ module.exports = {
             {
                 test: /\.(sa|sc|c)ss$/,
                 use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {
-                            sourceMap: true
-                        }
-                    },
+                    MiniCssExtractPlugin.loader,
                     "css-loader?sourceMap",
                     {
                         loader: "postcss-loader",
@@ -120,9 +115,7 @@ module.exports = {
     plugins: [
         new MiniCssExtractPlugin({
             filename: "[name].css",
-            canPrint: false,
-            chunkFilename: "[id].css",
-            publicPath: "./"
+            chunkFilename: "[id].css"
         })
     ],
     resolve: {

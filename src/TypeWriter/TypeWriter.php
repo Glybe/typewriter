@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace TypeWriter;
 
 use Columba\Database\Connection\Connection;
-use Columba\Foundation\Preferences\Preferences;
 use Columba\Foundation\Store;
 use Columba\Http\RequestMethod;
 use Columba\Router\RouterException;
@@ -31,11 +30,9 @@ use TypeWriter\Twig\TwigRenderer;
 use function defined;
 use function in_array;
 use function is_admin;
-use function is_file;
 use function phpversion;
 use function strpos;
 use function wp;
-use const WP_DEBUG;
 use const WP_INSTALLING;
 
 /**
@@ -49,8 +46,8 @@ final class TypeWriter
 {
 
     private Connection $database;
+    private Environment $environment;
     private ErrorReporter $errorReporter;
-    private Preferences $preferences;
     private Router $router;
     private Store $state;
     private TwigRenderer $twig;
@@ -71,12 +68,13 @@ final class TypeWriter
     {
         Stopwatch::start(self::class);
 
-        $isDevConfig = is_file(ROOT . '/dev/config.json');
-
-        $this->preferences = Preferences::loadFromJson(ROOT . ($isDevConfig ? '/dev/config.json' : '/config.json'));
-        $this->state = new Store();
+        $this->environment = new Environment();
+        $this->environment->initialize();
 
         $this->errorReporter = new ErrorReporter();
+        $this->errorReporter->initialize();
+
+        $this->state = new Store();
 
         if ($this->isDebugMode()) {
             $this->errorReporter->addChannel(new WhoopsErrorChannel());
@@ -189,18 +187,6 @@ final class TypeWriter
     }
 
     /**
-     * Gets the loaded preferences.
-     *
-     * @return Preferences
-     * @author Bas Milius <bas@mili.us>
-     * @since 1.0.0
-     */
-    public final function getPreferences(): Preferences
-    {
-        return $this->preferences;
-    }
-
-    /**
      * Gets the router.
      *
      * @return Router
@@ -293,7 +279,7 @@ final class TypeWriter
      */
     public final function isDebugMode(): bool
     {
-        return (defined('WP_DEBUG') && WP_DEBUG) || $this->preferences['developer']['debugMode'];
+        return true;
     }
 
     /**

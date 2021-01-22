@@ -11,7 +11,10 @@
 		}
 	],
 	"autoload": {
-		"psr-4": {
+        "files": [
+            "src/TypeWriter/functions.php"
+        ],
+        "psr-4": {
 			"TypeWriter\\": "src/TypeWriter"
 		}
 	},
@@ -22,12 +25,16 @@
 		}
 	],
 	"require": {
+        "ext-pdo": "*",
 		"basmilius/columba": "@dev",
-        "filp/whoops": "^2.9",
+        "filp/whoops": "^2",
+        "joypixels/emoji-toolkit": "^6",
+        "league/climate": "^3",
         "raxos/database": "dev-master",
         "raxos/foundation": "dev-master",
         "raxos/http": "dev-master",
         "raxos/router": "dev-master",
-		"twig/twig": "@dev"
+		"twig/twig": "@dev",
+        "vlucas/phpdotenv": "^5"
 	}
 }

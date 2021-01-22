@@ -22,4 +22,4 @@ declare(strict_types=1);
 
 use TypeWriter\Database\Database;
 
-$wpdb = new Database(DB_USER, DB_PASSWORD, DB_NAME, DB_HOST);
+$wpdb = new Database(DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT);

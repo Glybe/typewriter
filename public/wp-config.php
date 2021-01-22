@@ -10,37 +10,38 @@
 
 declare(strict_types=1);
 
+use function TypeWriter\env;
 use function TypeWriter\tw;
 use const TypeWriter\PUBLIC_DIR;
 
 require_once __DIR__ . '/../src/TypeWriter/boot.php';
 
 $isHttps = ($_SERVER['HTTPS'] ?? 'off') === 'on';
-$prefs = tw()->getPreferences();
 
 define('WP_CONTENT_DIR', PUBLIC_DIR . '/app');
 define('WP_CONTENT_URL', '/app');
 
-define('DB_HOST', $prefs['db']['host']);
-define('DB_NAME', $prefs['db']['name']);
-define('DB_USER', $prefs['db']['user']);
-define('DB_PASSWORD', $prefs['db']['pass']);
+define('DB_HOST', env('DB_HOST', '127.0.0.1'));
+define('DB_NAME', env('DB_NAME', 'typewriter'));
+define('DB_USER', env('DB_USER', 'root'));
+define('DB_PASSWORD', env('DB_PASSWORD', ''));
+define('DB_PORT', (int)env('DB_PORT', 3306));
 define('DB_CHARSET', 'utf8mb4');
 define('DB_COLLATE', 'utf8mb4_unicode_ci');
 
-$table_prefix = $prefs['db']['prefix'] ?? 'wp_';
+$table_prefix = env('DB_PREFIX', 'wp_');
 
 define('WP_HOME', ($isHttps ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST']);
 define('WP_SITEURL', WP_HOME . '/wp');
 
-define('AUTH_KEY', $prefs['key']['auth']);
-define('SECURE_AUTH_KEY', $prefs['key']['auth_secure']);
-define('LOGGED_IN_KEY', $prefs['key']['logged_in']);
-define('NONCE_KEY', $prefs['key']['nonce']);
-define('AUTH_SALT', $prefs['salt']['auth']);
-define('SECURE_AUTH_SALT', $prefs['salt']['auth_secure']);
-define('LOGGED_IN_SALT', $prefs['salt']['logged_in']);
-define('NONCE_SALT', $prefs['salt']['nonce']);
+define('AUTH_KEY', env('KEY_AUTH'));
+define('SECURE_AUTH_KEY', env('KEY_AUTH_SECURE'));
+define('LOGGED_IN_KEY', env('KEY_LOGGED_IN'));
+define('NONCE_KEY', env('KEY_NONCE'));
+define('AUTH_SALT', env('SAlT_AUTH'));
+define('SECURE_AUTH_SALT', env('SAlT_AUTH_SECURE'));
+define('LOGGED_IN_SALT', env('SAlT_LOGGED_IN'));
+define('NONCE_SALT', env('SAlT_NONCE'));
 
 define('WP_DEFAULT_THEME', 'base-theme');
 
@@ -50,7 +51,7 @@ define('DISABLE_WP_CRON', true);
 define('DISALLOW_FILE_EDIT', true);
 define('WP_POST_REVISIONS', false);
 
-define('WP_DEBUG', $prefs['developer']['debugMode']);
+define('WP_DEBUG', env('MODE', 'development') === 'development');
 define('WP_DEBUG_DISPLAY', WP_DEBUG);
 
 define('WPMU_PLUGIN_DIR', PUBLIC_DIR . '/tw/must-use');

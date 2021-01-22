@@ -7,9 +7,14 @@ use Columba\Foundation\System;
 use Columba\Router\RouterException;
 use Throwable;
 use TypeWriter\Error\Runtime\PhpException;
+use function error_reporting;
 use function in_array;
+use function ini_set;
 use function set_error_handler;
 use function set_exception_handler;
+use function TypeWriter\env;
+use function TypeWriter\tw;
+use const E_ALL;
 
 /**
  * Class ErrorReporter
@@ -26,13 +31,19 @@ final class ErrorReporter
     private ?array $context = null;
 
     /**
-     * ErrorReporter constructor.
+     * Registers the error reporter.
      *
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function __construct()
+    public final function initialize(): void
     {
+        if (env('MODE', 'development') === 'development') {
+            error_reporting(E_ALL);
+            ini_set('display_errors', '1');
+            ini_set('html_errors', '0');
+        }
+
         // todo(Bas): Add support for Rollbar and other error reporting tools.
         set_exception_handler([$this, 'onException']);
         set_error_handler([$this, 'onError']);
@@ -66,6 +77,12 @@ final class ErrorReporter
     public final function onError(int $code, string $message, string $fileName, int $line): bool
     {
         if (System::isCLI()) {
+            return false;
+        }
+
+        if (tw()->isInstalling()) {
+            // note: Disable error to exception promoting when installing wordpress, because
+            //  the installer may throw warnings that we don't care about.
             return false;
         }
 

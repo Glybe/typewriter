@@ -54,7 +54,7 @@ final class TwigRenderer extends AbstractRenderer
         $defaultOptions = [
             'auto_reload' => true,
             'cache' => new TwigCache(),
-            'debug' => tw()->getPreferences()['developer']['debugMode'] ?? false
+            'debug' => tw()->isDebugMode()
         ];
 
         $this->loader = new TwigLoader([]);

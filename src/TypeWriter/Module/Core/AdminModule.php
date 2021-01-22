@@ -15,6 +15,7 @@ use function http_response_code;
 use function implode;
 use function load_plugin_textdomain;
 use function str_replace;
+use function TypeWriter\env;
 use function TypeWriter\tw;
 use function wp_set_script_translations;
 use const TypeWriter\ROOT;
@@ -61,7 +62,7 @@ final class AdminModule extends Module
         Hooks::action('in_admin_footer', [$this, 'onInAdminFooter']);
 
         Hooks::filter('user_has_cap', function (array $caps): array {
-            if (!(tw()->getPreferences()['security']['lockDownMode'] ?? false)) {
+            if (!env('LOCKDOWN_MODE', false)) {
                 return $caps;
             }
 

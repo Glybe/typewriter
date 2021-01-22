@@ -62,13 +62,14 @@ final class Database extends wpdb
      * @param string $password
      * @param string $database
      * @param string $host
+     * @param int $port
      *
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function __construct(string $user, string $password, string $database, string $host)
+    public function __construct(string $user, string $password, string $database, string $host, int $port)
     {
-        $this->connector = new MySqlConnector($host, $database, $user, $password);
+        $this->connector = new MySqlConnector($host, $database, $user, $password, $port);
         $this->connection = $this->dbh = Db::create(MySqlConnection::class, $this->connector, 'default', false);
 
         tw()->setDatabase($this->connection);
