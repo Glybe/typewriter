@@ -1,5 +1,6 @@
 let webpack = require("webpack");
 
+const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
@@ -116,6 +117,69 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "[name].css",
             chunkFilename: "[id].css"
+        }),
+
+        new BrowserSyncPlugin({
+            cwd: __dirname.replace("/dev/webpack", "/public"),
+            excludedFileTypes: [],
+            files: [
+                {
+                    match: [
+                        "**/*.css",
+                        "**/*.gif",
+                        "**/*.jpg",
+                        "**/*.jpeg",
+                        "**/*.png",
+                        "**/*.webp"
+                    ],
+                    fn: (event, file) => {
+                        if (event !== "change") {
+                            return;
+                        }
+
+                        const bs = require("browser-sync").get("bs-webpack-plugin");
+
+                        console.log("inject", event, file);
+                        bs.reload(file);
+                    }
+                },
+
+                {
+                    match: [
+                        "**/*.json",
+                        "**/*.php",
+                        "**/*.twig"
+                    ],
+                    fn: (event, file) => {
+                        if (event !== "change") {
+                            return;
+                        }
+
+                        const bs = require("browser-sync").get("bs-webpack-plugin");
+
+                        console.log("reload", event, file);
+                       bs.reload();
+                    }
+                }
+            ],
+            injectChanges: true,
+            injectNotification: true,
+            logPrefix: "TypeWriter",
+            open: false,
+            port: 8001,
+            host: "0.0.0.0",
+            proxy: "http://0.0.0.0:8000",
+            reload: false,
+            reloadDelay: 0,
+            serveStatic: [
+                {
+                    route: "/app/uploads",
+                    dir: "./public/app/uploads"
+                }
+            ],
+            ui: false
+        }, {
+            reload: false
         })
     ],
     resolve: {
@@ -123,7 +187,9 @@ module.exports = {
     },
     devServer: {
         historyApiFallback: true,
-        noInfo: true
+        hot: true,
+        noInfo: true,
+        openPage: ""
     },
     performance: {
         hints: false

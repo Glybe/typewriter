@@ -21,6 +21,7 @@ use TypeWriter\Module\Core\AdminMenuModule;
 use TypeWriter\Module\Core\AdminModule;
 use TypeWriter\Module\Core\APIModule;
 use TypeWriter\Module\Core\BrandingModule;
+use TypeWriter\Module\Core\DevelopmentModule;
 use TypeWriter\Module\Core\DisableAdminFeaturesModule;
 use TypeWriter\Module\Core\DisableCommentsAndPingsModule;
 use TypeWriter\Module\Core\DisableCoreFeaturesModule;
@@ -57,4 +58,8 @@ if (tw()->isFront()) {
 
 if (tw()->isLogin()) {
     tw()->loadModule(LoginModule::class);
+}
+
+if (tw()->isDebugMode()) {
+    tw()->loadModule(DevelopmentModule::class);
 }

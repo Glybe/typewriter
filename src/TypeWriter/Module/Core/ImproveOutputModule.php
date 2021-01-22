@@ -7,6 +7,7 @@ use Columba\Util\StringUtil;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
 use function array_filter;
+use function Columba\Util\preDie;
 use function esc_attr;
 use function esc_url;
 use function get_oembed_endpoint_url;
