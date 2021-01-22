@@ -178,6 +178,7 @@ module.exports = {
             ],
             ui: false
         }, {
+            injectCss: true,
             reload: false
         })
     ],
