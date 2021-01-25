@@ -164,10 +164,10 @@ module.exports = {
             injectNotification: true,
             logPrefix: "TypeWriter",
             host: "0.0.0.0",
-            port: 8001,
+            port: 8000,
             notify: true,
             open: false,
-            proxy: "http://0.0.0.0:8000",
+            proxy: "http://0.0.0.0:8001",
             reload: false,
             reloadDelay: 0,
             serveStatic: [

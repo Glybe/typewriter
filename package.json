@@ -31,8 +31,8 @@
 		"tw:clean": "rimraf public/tw/dist",
 		"tw:dev": "concurrently -k -c magenta,cyan -n php,webpack \"yarn run tw:serve\" \"yarn run tw:build:watch\"",
 		"tw:dev:wsl": "concurrently -k -c magenta,cyan -n php,webpack \"yarn run tw:serve:wsl\" \"yarn run tw:build:watch\"",
-		"tw:serve": "php -S 0.0.0.0:8000 -t public/ src/TypeWriter/dev-server.php",
-		"tw:serve:wsl": "wsl -- php -S 0.0.0.0:8000 -t public/ src/TypeWriter/dev-server.php"
+		"tw:serve": "php -S 0.0.0.0:8001 -t public/ src/TypeWriter/dev-server.php",
+		"tw:serve:wsl": "wsl -- php -S 0.0.0.0:8001 -t public/ src/TypeWriter/dev-server.php"
 	},
 	"workspaces": [
 		"public/app/themes/*"
