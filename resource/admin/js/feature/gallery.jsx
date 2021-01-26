@@ -175,8 +175,24 @@ export class Gallery
 
     renderMedia(media)
     {
+        let url;
+
+        if (media.media_details.sizes.thumbnail) {
+            url = media.media_details.sizes.thumbnail.source_url;
+        } else if (media.media_details.sizes.medium) {
+            url = media.media_details.sizes.medium.source_url;
+        }
+
+        if (!url) {
+            console.log(media);
+
+            return (
+                    <div>¯\_(ツ)_/¯</div>
+            );
+        }
+
         return (
-                <img src={media.media_details.sizes.thumbnail.source_url} height={57} width={57} alt={media.title.rendered} style={{margin: 2}}/>
+                <img src={url} height={57} width={57} alt={media.title.rendered} style={{margin: 2, objectFit: "cover", objectPosition: "center"}}/>
         );
     }
 
