@@ -10,6 +10,7 @@ use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
 use function __;
 use function array_map;
+use function array_unique;
 use function TypeWriter\tw;
 
 /**
@@ -59,6 +60,7 @@ final class AdminMenuModule extends Module
         $hooks[] = AdminMenu::addSubPage('typewriter', __('Settings', 'tw'), AdminMenu::twig('@tw/admin/settings'));
 
         $hooks = array_map(fn(string $hook): string => 'load-' . $hook, $hooks);
+        $hooks = array_unique($hooks);
 
         Hooks::actions($hooks, function (): void {
             Dependencies::enqueueScript('site-health');

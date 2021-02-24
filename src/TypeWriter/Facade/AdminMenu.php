@@ -35,7 +35,7 @@ final class AdminMenu
      */
     public static function addPage(string $icon, string $title, callable $fn, string $capability = 'administrator', ?int $position = null): string
     {
-        return add_menu_page($title, $title, $capability, StringUtil::slugify($title), $fn, $icon, $position);
+        return add_menu_page($title, $title, $capability, StringUtil::slugify($title), $fn, $icon, $position) ?: 'noop';
     }
 
     /**
@@ -52,7 +52,7 @@ final class AdminMenu
      */
     public static function addSubPage(string $parentSlug, string $title, callable $fn, string $capability = 'administrator'): string
     {
-        return add_submenu_page($parentSlug, $title, $title, $capability, $parentSlug . '-' . StringUtil::slugify($title), $fn);
+        return add_submenu_page($parentSlug, $title, $title, $capability, $parentSlug . '-' . StringUtil::slugify($title), $fn) ?: 'noop';
     }
 
     /**
