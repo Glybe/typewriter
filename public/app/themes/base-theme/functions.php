@@ -12,10 +12,14 @@ declare(strict_types=1);
 
 use TypeWriter\Facade\Dependencies;
 use TypeWriter\Facade\Hooks;
+use TypeWriter\Feature\Gallery;
 use TypeWriter\Structure\Menu\Menus;
+use function TypeWriter\tw;
 
 Hooks::action('init', function (): void {
     Menus::registerLocation('main-menu', 'Hoofdmenu');
+
+    tw()->loadFeature(Gallery::class, 'page', 'hi', 'Hallo');
 });
 
 Hooks::action('wp_enqueue_scripts', function (): void {

@@ -15,6 +15,7 @@ use WP_Post_Type;
 use function get_permalink;
 use function get_post;
 use function get_post_meta;
+use function get_post_parent;
 use function get_post_time;
 use function get_post_type;
 use function get_post_type_object;
@@ -22,6 +23,7 @@ use function get_the_content;
 use function get_the_date;
 use function get_the_excerpt;
 use function get_the_title;
+use function has_post_parent;
 use function have_posts;
 use function human_time_diff;
 use function sprintf;
@@ -334,6 +336,35 @@ class Post
         the_post();
 
         return true;
+    }
+
+    /**
+     * Returns the parent post in a PostWith wrapper. Returns NULL if
+     * no parent post was found.
+     *
+     * @return PostWith|null
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public static function parent(): ?PostWith
+    {
+        if (!has_post_parent(self::id())) {
+            return null;
+        }
+
+        return self::with(get_post_parent(self::id()));
+    }
+
+    /**
+     * Returns TRUE if the post has a parent.
+     *
+     * @return bool
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public static function parentHas(): bool
+    {
+        return has_post_parent(self::id());
     }
 
     /**
