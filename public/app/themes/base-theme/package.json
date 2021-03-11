@@ -9,7 +9,7 @@
         "theme:serve:wsl": "concurrently -k -c magenta,cyan -n php,webpack \"cd ../../../ && yarn run tw:serve:wsl\" \"yarn run theme:build:watch\""
     },
     "dependencies": {
-        "@latte-ui/css": "^2.0.0-dev.0"
+        "@latte-ui/css": "^2.0.0-dev.1"
     },
     "devDependencies": {
         "glob-all": "^3.2.1",
