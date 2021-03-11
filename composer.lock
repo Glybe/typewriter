@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/basmilius/Columba.git",
-                "reference": "d2c7b82f8c16cccbdeb108c281435cd0c616df05"
+                "reference": "541cdd86be3efe37c4b6dced19cb4a2f6723003c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/basmilius/Columba/zipball/d2c7b82f8c16cccbdeb108c281435cd0c616df05",
-                "reference": "d2c7b82f8c16cccbdeb108c281435cd0c616df05",
+                "url": "https://api.github.com/repos/basmilius/Columba/zipball/541cdd86be3efe37c4b6dced19cb4a2f6723003c",
+                "reference": "541cdd86be3efe37c4b6dced19cb4a2f6723003c",
                 "shasum": ""
             },
             "require": {
@@ -54,20 +54,20 @@
                 "source": "https://github.com/basmilius/Columba/tree/master",
                 "issues": "https://github.com/basmilius/Columba/issues"
             },
-            "time": "2020-12-04T07:57:41+00:00"
+            "time": "2021-01-29T10:59:10+00:00"
         },
         {
             "name": "filp/whoops",
-            "version": "2.9.1",
+            "version": "2.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "307fb34a5ab697461ec4c9db865b20ff2fd40771"
+                "reference": "df7933820090489623ce0be5e85c7e693638e536"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/307fb34a5ab697461ec4c9db865b20ff2fd40771",
-                "reference": "307fb34a5ab697461ec4c9db865b20ff2fd40771",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/df7933820090489623ce0be5e85c7e693638e536",
+                "reference": "df7933820090489623ce0be5e85c7e693638e536",
                 "shasum": ""
             },
             "require": {
@@ -117,9 +117,15 @@
             ],
             "support": {
                 "issues": "https://github.com/filp/whoops/issues",
-                "source": "https://github.com/filp/whoops/tree/2.9.1"
+                "source": "https://github.com/filp/whoops/tree/2.9.2"
             },
-            "time": "2020-11-01T12:00:00+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/denis-sokolov",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-01-24T12:00:00+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -231,16 +237,16 @@
         },
         {
             "name": "joypixels/emoji-toolkit",
-            "version": "6.0.1",
+            "version": "6.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/joypixels/emoji-toolkit.git",
-                "reference": "e74cb16a435aab08f4a26e45e92583b986ce5d77"
+                "reference": "3a13f4d21e4683bdb4323f07658c333014a95876"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joypixels/emoji-toolkit/zipball/e74cb16a435aab08f4a26e45e92583b986ce5d77",
-                "reference": "e74cb16a435aab08f4a26e45e92583b986ce5d77",
+                "url": "https://api.github.com/repos/joypixels/emoji-toolkit/zipball/3a13f4d21e4683bdb4323f07658c333014a95876",
+                "reference": "3a13f4d21e4683bdb4323f07658c333014a95876",
                 "shasum": ""
             },
             "require": {
@@ -274,9 +280,9 @@
             ],
             "support": {
                 "issues": "https://github.com/joypixels/emoji-toolkit/issues",
-                "source": "https://github.com/joypixels/emoji-toolkit/tree/master"
+                "source": "https://github.com/joypixels/emoji-toolkit/tree/6.5"
             },
-            "time": "2020-08-11T20:49:03+00:00"
+            "time": "2021-02-23T00:49:39+00:00"
         },
         {
             "name": "league/climate",
@@ -468,12 +474,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/basmilius/raxos-database.git",
-                "reference": "c57fd2f2cb10ad36fa896cb955a9e775e685205b"
+                "reference": "c7830f8dc2a0465074dcbeb056d179e0ee5d0ed3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/basmilius/raxos-database/zipball/c57fd2f2cb10ad36fa896cb955a9e775e685205b",
-                "reference": "c57fd2f2cb10ad36fa896cb955a9e775e685205b",
+                "url": "https://api.github.com/repos/basmilius/raxos-database/zipball/c7830f8dc2a0465074dcbeb056d179e0ee5d0ed3",
+                "reference": "c7830f8dc2a0465074dcbeb056d179e0ee5d0ed3",
                 "shasum": ""
             },
             "require": {
@@ -483,6 +489,9 @@
             "default-branch": true,
             "type": "library",
             "autoload": {
+                "files": [
+                    "src/Raxos/Database/Query/functions.php"
+                ],
                 "psr-4": {
                     "Raxos\\Database\\": "src/Raxos/Database"
                 }
@@ -502,7 +511,7 @@
                 "issues": "https://github.com/basmilius/raxos-database/issues",
                 "source": "https://github.com/basmilius/raxos-database/tree/master"
             },
-            "time": "2020-12-07T17:43:36+00:00"
+            "time": "2021-02-03T13:51:52+00:00"
         },
         {
             "name": "raxos/foundation",
@@ -510,15 +519,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/basmilius/raxos-foundation.git",
-                "reference": "30500f989f16f6ceaa90060f85fc1fe7c8843b09"
+                "reference": "abe60bcd027d45cfb25b60ebeb8587aa2f3d6213"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/basmilius/raxos-foundation/zipball/30500f989f16f6ceaa90060f85fc1fe7c8843b09",
-                "reference": "30500f989f16f6ceaa90060f85fc1fe7c8843b09",
+                "url": "https://api.github.com/repos/basmilius/raxos-foundation/zipball/abe60bcd027d45cfb25b60ebeb8587aa2f3d6213",
+                "reference": "abe60bcd027d45cfb25b60ebeb8587aa2f3d6213",
                 "shasum": ""
             },
             "require": {
+                "ext-json": "*",
+                "ext-simplexml": "*",
                 "jetbrains/phpstorm-attributes": "^1.0"
             },
             "default-branch": true,
@@ -543,7 +554,7 @@
                 "issues": "https://github.com/basmilius/raxos-foundation/issues",
                 "source": "https://github.com/basmilius/raxos-foundation/tree/master"
             },
-            "time": "2020-12-05T19:20:27+00:00"
+            "time": "2021-02-02T17:44:02+00:00"
         },
         {
             "name": "raxos/http",
@@ -551,12 +562,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/basmilius/raxos-http.git",
-                "reference": "c69feaade9fe476d6aac079b108f4b53bf489a65"
+                "reference": "90ccae6c3790755ea0add2876e4a74844644831d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/basmilius/raxos-http/zipball/c69feaade9fe476d6aac079b108f4b53bf489a65",
-                "reference": "c69feaade9fe476d6aac079b108f4b53bf489a65",
+                "url": "https://api.github.com/repos/basmilius/raxos-http/zipball/90ccae6c3790755ea0add2876e4a74844644831d",
+                "reference": "90ccae6c3790755ea0add2876e4a74844644831d",
                 "shasum": ""
             },
             "require": {
@@ -585,7 +596,7 @@
                 "issues": "https://github.com/basmilius/raxos-http/issues",
                 "source": "https://github.com/basmilius/raxos-http/tree/master"
             },
-            "time": "2021-01-11T16:41:28+00:00"
+            "time": "2021-01-29T22:51:53+00:00"
         },
         {
             "name": "raxos/router",
@@ -593,16 +604,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/basmilius/raxos-router.git",
-                "reference": "3a3f31936b67feed9628ec41b8ae6a38bbcd2fb1"
+                "reference": "d5a1d170efbadbc273af094b928cee6d985df0d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/basmilius/raxos-router/zipball/3a3f31936b67feed9628ec41b8ae6a38bbcd2fb1",
-                "reference": "3a3f31936b67feed9628ec41b8ae6a38bbcd2fb1",
+                "url": "https://api.github.com/repos/basmilius/raxos-router/zipball/d5a1d170efbadbc273af094b928cee6d985df0d1",
+                "reference": "d5a1d170efbadbc273af094b928cee6d985df0d1",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
+                "ext-simplexml": "*",
                 "jetbrains/phpstorm-attributes": "^1.0",
                 "raxos/foundation": "dev-master",
                 "raxos/http": "dev-master"
@@ -629,7 +641,7 @@
                 "issues": "https://github.com/basmilius/raxos-router/issues",
                 "source": "https://github.com/basmilius/raxos-router/tree/master"
             },
-            "time": "2021-01-11T16:41:38+00:00"
+            "time": "2021-02-01T11:20:47+00:00"
         },
         {
             "name": "seld/cli-prompt",
@@ -688,7 +700,7 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.22.0",
+            "version": "v1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
@@ -747,7 +759,7 @@
                 "portable"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.22.0"
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.22.1"
             },
             "funding": [
                 {
@@ -767,16 +779,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.22.0",
+            "version": "v1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "f377a3dd1fde44d37b9831d68dc8dea3ffd28e13"
+                "reference": "5232de97ee3b75b0360528dae24e73db49566ab1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/f377a3dd1fde44d37b9831d68dc8dea3ffd28e13",
-                "reference": "f377a3dd1fde44d37b9831d68dc8dea3ffd28e13",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/5232de97ee3b75b0360528dae24e73db49566ab1",
+                "reference": "5232de97ee3b75b0360528dae24e73db49566ab1",
                 "shasum": ""
             },
             "require": {
@@ -827,7 +839,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.22.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.22.1"
             },
             "funding": [
                 {
@@ -843,11 +855,11 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-07T16:49:33+00:00"
+            "time": "2021-01-22T09:19:47+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
-            "version": "v1.22.0",
+            "version": "v1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
@@ -910,7 +922,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php80/tree/v1.22.0"
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.22.1"
             },
             "funding": [
                 {
@@ -934,12 +946,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "4a47f0f5b4bf2400ed1e3abecb486655e3970cdb"
+                "reference": "be5dc6a6c4efeb1560a9aa135e7a07dfeae9d298"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/4a47f0f5b4bf2400ed1e3abecb486655e3970cdb",
-                "reference": "4a47f0f5b4bf2400ed1e3abecb486655e3970cdb",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/be5dc6a6c4efeb1560a9aa135e7a07dfeae9d298",
+                "reference": "be5dc6a6c4efeb1560a9aa135e7a07dfeae9d298",
                 "shasum": ""
             },
             "require": {
@@ -955,7 +967,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.2-dev"
+                    "dev-master": "3.3-dev"
                 }
             },
             "autoload": {
@@ -1003,7 +1015,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-14T07:57:41+00:00"
+            "time": "2021-03-10T10:08:48+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
