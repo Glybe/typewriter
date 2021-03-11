@@ -31,6 +31,7 @@
         "filp/whoops": "^2",
         "joypixels/emoji-toolkit": "^6",
         "league/climate": "^3",
+        "raxos/cache": "dev-master",
         "raxos/database": "dev-master",
         "raxos/foundation": "dev-master",
         "raxos/http": "dev-master",
