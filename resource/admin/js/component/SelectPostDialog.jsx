@@ -53,7 +53,7 @@ export function useSelectPostDialog()
                 const results = getEntityRecords("postType", props.postType, {
                     order: "asc",
                     orderby: "title",
-                    per_page: 5,
+                    per_page: 10,
                     search: props.searchQuery
                 });
 

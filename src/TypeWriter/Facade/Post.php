@@ -390,7 +390,13 @@ class Post
         $postIds = static::relation($relationId, $foreignType);
 
         foreach ($postIds as $postId) {
-            yield Post::with(get_post($postId));
+            $post = get_post($postId) ?: null;
+
+            if ($post === null) {
+                continue;
+            }
+
+            yield Post::with($post);
         }
     }
 

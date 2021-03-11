@@ -25,6 +25,7 @@
 		}
 	],
 	"require": {
+        "ext-json": "*",
         "ext-pdo": "*",
 		"basmilius/columba": "@dev",
         "filp/whoops": "^2",
