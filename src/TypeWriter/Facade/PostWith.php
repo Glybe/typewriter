@@ -20,6 +20,8 @@ use WP_Post;
  * @method introLeading(): ?string
  * @method meta(string $metaKey, $defaultValue = null, bool $isSingle = true): mixed
  * @method metaText(string $metaKey, array $filters = []): ?string
+ * @method parent(): ?PostWith
+ * @method parentHas(): bool
  * @method permalink(): string
  * @method post(): WP_Post
  * @method relation(string $relationId, string $foreignType): array
