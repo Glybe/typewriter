@@ -26,8 +26,15 @@ if (!defined('ABSPATH'))
  */
 function createHomepage(): void
 {
+    $content = <<<CONTENT
+    <!-- wp:paragraph -->
+    <p>Welcome to your new website!</p>
+    <!-- /wp:paragraph -->
+    CONTENT;
+
+
 	$postId = wp_insert_post([
-		'post_content' => 'Welcome to TypeWriter!',
+		'post_content' => $content,
 		'post_status' => 'publish',
 		'post_title' => 'Home',
 		'post_type' => 'page'

@@ -5,6 +5,7 @@ namespace TypeWriter\Facade;
 
 use Columba\Util\StringUtil;
 use Generator;
+use JetBrains\PhpStorm\Pure;
 use TypeWriter\Error\ViolationException;
 use TypeWriter\Feature\Gallery;
 use TypeWriter\Feature\IntroTextMetaFields;
@@ -12,6 +13,7 @@ use TypeWriter\Feature\PostThumbnail;
 use TypeWriter\Feature\Relation;
 use WP_Post;
 use WP_Post_Type;
+use function function_exists;
 use function get_permalink;
 use function get_post;
 use function get_post_meta;
@@ -26,6 +28,8 @@ use function get_the_title;
 use function has_post_parent;
 use function have_posts;
 use function human_time_diff;
+use function pll_get_post;
+use function pll_get_post_translations;
 use function sprintf;
 use function the_post;
 
@@ -87,7 +91,7 @@ class Post
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public static function useWith(WP_Post $post, callable $fn)
+    public static function useWith(WP_Post $post, callable $fn): mixed
     {
         self::use($post);
 
@@ -107,6 +111,7 @@ class Post
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
+    #[Pure]
     public static function with(WP_Post $post): PostWith
     {
         return new PostWith($post);
@@ -284,11 +289,11 @@ class Post
      * @param null $defaultValue
      * @param bool $isSingle
      *
-     * @return mixed|null
+     * @return mixed
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public static function meta(string $metaKey, $defaultValue = null, bool $isSingle = true)
+    public static function meta(string $metaKey, $defaultValue = null, bool $isSingle = true): mixed
     {
         $metaValue = get_post_meta(self::id(), $metaKey, $isSingle);
 
@@ -543,6 +548,46 @@ class Post
     }
 
     /**
+     * Gets a translation of the current post.
+     *
+     * @param string $language
+     *
+     * @return PostWith|null
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public static function translation(string $language): ?PostWith
+    {
+        if (function_exists('pll_get_post')) {
+            $translationId = pll_get_post(self::id(), $language) ?: null;
+
+            if ($translationId === null) {
+                return null;
+            }
+
+            return self::with(get_post($translationId));
+        }
+
+        return null;
+    }
+
+    /**
+     * Gets the translations of the post.
+     *
+     * @return array|null
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public static function translations(): ?array
+    {
+        if (function_exists('pll_get_post_translations')) {
+            return pll_get_post_translations(self::id());
+        }
+
+        return null;
+    }
+
+    /**
      * Applies the given filters to the given value.
      *
      * @param mixed $value
@@ -552,7 +597,7 @@ class Post
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    protected static function applyMultipleFilters($value, array $filters)
+    protected static function applyMultipleFilters(mixed $value, array $filters): mixed
     {
         foreach ($filters as $filter) {
             $value = Hooks::applyFilters($filter, $value);
@@ -562,11 +607,13 @@ class Post
     }
 
     /**
-     * {@inheritDoc}
+     * @param string $name
+     * @param array $arguments
+     *
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public final function __call($name, $arguments)
+    public final function __call(string $name, array $arguments): void
     {
         throw new ViolationException(sprintf('The method "%s" does not exist in %s.', $name, static::class), ViolationException::ERR_BAD_METHOD_CALL);
     }

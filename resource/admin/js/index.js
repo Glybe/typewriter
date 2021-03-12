@@ -1,6 +1,5 @@
 import "../css/index.scss";
 
-// import {default as packageJson} from "../../../package";
 import {Gallery, MetaFields, PostThumbnail, Relation} from "./feature";
 
 const packageJson = {
@@ -9,8 +8,13 @@ const packageJson = {
 };
 
 function init() {
+    let features = {};
+
+    if (typeof wp.element !== "undefined")
+        features = {Gallery, MetaFields, PostThumbnail, Relation};
+
     window.tw = {
-        feature: {Gallery, MetaFields, PostThumbnail, Relation},
+        feature: features,
         name: packageJson.name,
         version: packageJson.version
     };

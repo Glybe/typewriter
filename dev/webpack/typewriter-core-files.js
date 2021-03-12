@@ -24,7 +24,6 @@ module.exports = merge(base, {
 		"@wordpress/hooks": ["wp", "hooks"],
 		"@wordpress/html-entities": ["wp", "htmlEntities"],
 		"@wordpress/i18n": ["wp", "i18n"],
-		"@wordpress/icons": ["wp", "icons"],
 		"@wordpress/plugins": ["wp", "plugins"],
 		"moment": "moment",
 		"jquery": "jQuery",

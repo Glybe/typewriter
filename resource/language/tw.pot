@@ -120,6 +120,9 @@ msgstr ""
 
 msgid "Edit media"
 msgstr ""
+
+msgid "Remove gallery"
+msgstr ""
 # End Galleries
 
 # Meta Fields

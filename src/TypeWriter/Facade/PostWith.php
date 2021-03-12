@@ -35,6 +35,9 @@ use WP_Post;
  * @method type(): ?string
  * @method typeObject(): ?WP_Post_Type
  *
+ * @method translation(string $language): static
+ * @method translations(): array
+ *
  * @author Bas Milius <bas@mili.us>
  * @package TypeWriter\Facade
  * @since 1.0.0
@@ -58,17 +61,30 @@ class PostWith
     }
 
     /**
-     * {@inheritDoc}
-     * @author Bas Milius <bas@mili.us>
+     * @param string $name
+     * @param array $arguments
+     *
+     * @return mixed
      * @since 1.0.0
+     * @author Bas Milius <bas@mili.us>
      */
-    public function __call(string $name, array $arguments)
+    public final function __call(string $name, array $arguments): mixed
     {
         if (!method_exists(Post::class, $name)) {
             throw new ViolationException(sprintf('Method "%s" does not exist in "%s".', $name, Post::class), ViolationException::ERR_BAD_METHOD_CALL);
         }
 
         return Post::useWith($this->post, fn() => Post::{$name}(...$arguments));
+    }
+
+    /**
+     * @return array
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public final function __debugInfo(): array
+    {
+        return (array)$this->post;
     }
 
 }

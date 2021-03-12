@@ -8,6 +8,7 @@ import {registerPlugin} from "@wordpress/plugins";
 import {useSelectPostDialog} from "../component/SelectPostDialog.jsx";
 import {useSortableList} from "../hoc/SortableList.jsx";
 import {stripTags} from "../util/sanitize";
+import {linkIcon} from "../icon/features.jsx";
 
 let didInitializePlugin = false;
 let relations = null;
@@ -32,7 +33,7 @@ export class Relations
     {
         registerPlugin("tw-relations", {
             name: "TypeWriter: Relations",
-            icon: "admin-links",
+            icon: linkIcon(),
             render: () => this.render()
         });
     }
@@ -41,11 +42,11 @@ export class Relations
     {
         return (
                 <Fragment>
-                    <PluginSidebarMoreMenuItem target="tw-relations" icon="admin-links">
+                    <PluginSidebarMoreMenuItem target="tw-relations" icon={linkIcon()}>
                         {__("Relation Manager", "tw")}
                     </PluginSidebarMoreMenuItem>
 
-                    <PluginSidebar name="tw-relations" icon="admin-links" title={__("Relations", "tw")}>
+                    <PluginSidebar name="tw-relations" icon={linkIcon()} title={__("Relations", "tw")}>
                         <PanelBody title={null} initialOpen={true}>
                             {__("Here are the relationships defined for the object. You can link other objects to this one from here.", "tw")}
                         </PanelBody>

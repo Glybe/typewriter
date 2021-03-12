@@ -25,6 +25,7 @@ use function __;
 use function addslashes;
 use function array_change_key_case;
 use function array_filter;
+use function Columba\Util\pre;
 use function defined;
 use function error_log;
 use function explode;
@@ -127,6 +128,10 @@ final class Database extends wpdb
     public function print_error($str = ''): bool
     {
         global $EZSQL_ERROR;
+
+        if (tw()->isInstalling()) {
+            return false;
+        }
 
         if (empty($str)) {
             $str = $this->connection->getPdo()->errorInfo()[2] ?? 'Unknown database error.';

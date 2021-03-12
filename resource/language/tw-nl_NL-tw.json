@@ -2,92 +2,167 @@
 	"domain": "tw",
 	"locale_data": {
 		"tw": {
-			"": {
-				"domain": "tw",
-				"lang": "nl-NL",
-				"plural_forms": "nplurals=2; plural=n != 1"
-			},
-			"Choose an object...": [
-				"Kies een object…"
-			],
-			"Search for objects...": [
-				"Zoek naar objecten…"
-			],
-			"No objects were found.": [
-				"Er zijn geen objecten gevonden."
-			],
-			"Galleries": [
-				"Galerijen"
-			],
-			"Galleries Manager": [
-				"Galerij beheer"
-			],
-			"Here you can change the galleries supported by the selected template.": [
-				"Hier kun je alle galerijen bewerken die worden ondersteund op de geselecteerde template."
-			],
-			"This gallery appears to be empty.": [
-				"Deze galerij lijkt leeg te zijn."
-			],
-			"To edit this gallery, you need permissions to upload media.": [
-				"Om deze galerij te bewerken heb je rechten voor uploaden nodig."
-			],
-			"Add media": [
-				"Media toevoegen"
-			],
-			"Edit media": [
-				"Media bewerken"
-			],
-			"Intro text": [
-				"Introtekst"
-			],
-			"<strong>This is usually an inviting text.</strong>": [
-				"<strong>Dit is normaal gesproken een uitnodigende tekst.</strong>"
-			],
-			"Heading": [
-				"Titel"
-			],
-			"Welcome!": [
-				"Welkom!"
-			],
-			"Leading": [
-				"Taglijn"
-			],
-			"We create websites, apps and more!": [
-				"Wij maken websites, apps en meer!"
-			],
-			"To edit the image, you need permission to upload media.": [
-				"Om deze afbeelding te bewerken heb je rechten voor uploaden nodig."
-			],
-			"Edit or update the image": [
-				"Bewerk of vervang de afbeelding"
-			],
-			"Replace image": [
-				"Vervang afbeelding"
-			],
-			"Update image": [
-				"Kies afbeelding"
-			],
-			"Remove image": [
-				"Verwijder afbeelding"
-			],
-			"Relation Manager": [
-				"Relatiebeheer"
-			],
-			"Relations": [
-				"Relaties"
-			],
-			"Here are the relationships defined for the object. You can link other objects to this one from here.": [
-				"Hier zie je de relaties die je kunt instellen voor dit object. Je kunt vanuit hier andere objecten linken."
-			],
-			"The selected object is already added.": [
-				"Het gekozen object is al toegevoegd."
-			],
-			"There are no objects in this relationship.": [
-				"Er zijn nog geen objecten in deze relatie."
-			],
-			"Add object": [
-				"Relatie toevoegen"
-			]
+            "": {
+                "domain": "tw-nl",
+                "lang": "nl",
+                "plural_forms": "nplurals=2; plural=(n != 1)"
+            },
+            "TypeWriter": [
+                "TypeWriter"
+            ],
+            "Roles & Permissions": [
+                "Rollen & Permissies"
+            ],
+            "Settings": [
+                "Instellingen"
+            ],
+            "An advanced WordPress framework by %s.": [
+                "Een geavanceerd WordPress basis-systeem door %s."
+            ],
+            "TypeWriter is a custom-made WordPress framework that sits before WordPress. It has support for all WordPress features and improves them when needed. The framework uses Columba for adding advanced features, such as routing and a database orm, to your project.": [
+                "TypeWriter is een op maat gemaakt WordPress-framework dat vóór WordPress zit. Het heeft ondersteuning voor alle WordPress-functies en verbetert deze indien nodig. Het framework gebruikt Columba om geavanceerde functies, zoals routing en een database-orm, aan je project toe te voegen."
+            ],
+            "About": [
+                "Over"
+            ],
+            "Environment": [
+                "Omgeving"
+            ],
+            "Dependencies": [
+                "Afhankelijkheden"
+            ],
+            "Active theme: %s": [
+                "Actief thema: %s"
+            ],
+            "Plugin: %s": [
+                "Uitbreiding: %s"
+            ],
+            "Activate": [
+                "Actief"
+            ],
+            "Inactive": [
+                "Inactief"
+            ],
+            "More": [
+                "Meer"
+            ],
+            "TypeWriter is an Open Source project, if you have an idea, a bug or want to help us, let us know! You can use the project in any way you want, there are no restrictions, except for copyrights in our files, you should keep those.": [
+                "TypeWriter is een Open Source-project, als u een idee, een bug heeft of ons wilt helpen, laat het ons weten! Je kunt het project op elke manier gebruiken die je wilt, er zijn geen beperkingen, behalve de auteursrechten in onze bestanden, die moet je behouden."
+            ],
+            "Contribute": [
+                "Bijdragen"
+            ],
+            "Report an issue": [
+                "Meld een probleem"
+            ],
+            "Submit your idea": [
+                "Verstuur je idee"
+            ],
+            "Proudly running on TypeWriter by %s.": [
+                "Met trots draaiend op TypeWriter door %s."
+            ],
+            "Upload a profile picture": [
+                "Profielfoto uploaden"
+            ],
+            "Upload a new profile picture": [
+                "Nieuwe profielfoto instellen"
+            ],
+            "The upload picture is too big.": [
+                "Het geüploade bestand is te groot."
+            ],
+            "The server could not write the profile picture file.": [
+                "De server kon je nieuwe profielfoto niet opslaan."
+            ],
+            "Unknown error while uploading the profile picture.": [
+                "Onbekende fout tijdens het uploaden van je profielfoto."
+            ],
+            "The uploaded file is not an image.": [
+                "Het geüploade bestand is geen afbeelding."
+            ],
+            "Choose an object...": [
+                "Kies een object…"
+            ],
+            "Search for objects...": [
+                "Zoek naar objecten…"
+            ],
+            "No objects were found.": [
+                "Er zijn geen objecten gevonden."
+            ],
+            "Galleries": [
+                "Galerijen"
+            ],
+            "Galleries Manager": [
+                "Galerij beheer"
+            ],
+            "Here you can change the galleries supported by the selected template.": [
+                "Hier kun je alle galerijen bewerken die worden ondersteund op de geselecteerde template."
+            ],
+            "This gallery appears to be empty.": [
+                "Deze galerij lijkt leeg te zijn."
+            ],
+            "To edit this gallery, you need permissions to upload media.": [
+                "Om deze galerij te bewerken heb je rechten voor uploaden nodig."
+            ],
+            "Add media": [
+                "Media toevoegen"
+            ],
+            "Edit media": [
+                "Media bewerken"
+            ],
+            "Remove gallery": [
+                "Galerij verwijderen"
+            ],
+            "Intro text": [
+                "Introtekst"
+            ],
+            "<strong>This is usually an inviting text.</strong>": [
+                "<strong>Dit is normaal gesproken een uitnodigende tekst.</strong>"
+            ],
+            "Heading": [
+                "Titel"
+            ],
+            "Welcome!": [
+                "Welkom!"
+            ],
+            "Leading": [
+                "Taglijn"
+            ],
+            "We create websites, apps and more!": [
+                "Wij maken websites, apps en meer!"
+            ],
+            "To edit the image, you need permission to upload media.": [
+                "Om deze afbeelding te bewerken heb je rechten voor uploaden nodig."
+            ],
+            "Edit or update the image": [
+                "Bewerk of vervang de afbeelding"
+            ],
+            "Replace image": [
+                "Vervang afbeelding"
+            ],
+            "Update image": [
+                "Kies afbeelding"
+            ],
+            "Remove image": [
+                "Verwijder afbeelding"
+            ],
+            "Relation Manager": [
+                "Relatiebeheer"
+            ],
+            "Relations": [
+                "Relaties"
+            ],
+            "Here are the relationships defined for the object. You can link other objects to this one from here.": [
+                "Hier zie je de relaties die je kunt instellen voor dit object. Je kunt vanuit hier andere objecten linken."
+            ],
+            "The selected object is already added.": [
+                "Het gekozen object is al toegevoegd."
+            ],
+            "There are no objects in this relationship.": [
+                "Er zijn nog geen objecten in deze relatie."
+            ],
+            "Add object": [
+                "Relatie toevoegen"
+            ]
 		}
 	}
 }

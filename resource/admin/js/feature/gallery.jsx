@@ -6,6 +6,7 @@ import {PluginSidebar, PluginSidebarMoreMenuItem} from "@wordpress/edit-post";
 import {Fragment} from "@wordpress/element";
 import {__} from "@wordpress/i18n";
 import {registerPlugin} from "@wordpress/plugins";
+import {galleryIcon} from "../icon/features.jsx";
 
 let didInitializePlugin = false;
 let galleries = null;
@@ -26,7 +27,7 @@ export class Galleries
     {
         registerPlugin("tw-galleries", {
             name: "TypeWriter: Galleries",
-            icon: "format-gallery",
+            icon: galleryIcon(),
             render: () => this.render()
         });
     }
@@ -35,16 +36,16 @@ export class Galleries
     {
         return (
                 <Fragment>
-                    <PluginSidebarMoreMenuItem target="tw-gallery" icon="format-gallery">
-                        {__("Galleries Manager", "tw")}
-                    </PluginSidebarMoreMenuItem>
-
-                    <PluginSidebar name="tw-gallery" icon="format-gallery" title={__("Galleries", "tw")}>
+                    <PluginSidebar name="tw-gallery" icon={galleryIcon()} title={__("Galleries", "tw")}>
                         <PanelBody title={null} initialOpen={true}>
                             {__("Here you can change the galleries supported by the selected template.", "tw")}
                         </PanelBody>
                         <Slot name="tw-galleries"/>
                     </PluginSidebar>
+
+                    <PluginSidebarMoreMenuItem target="tw-gallery" icon={galleryIcon()}>
+                        {__("Galleries Manager", "tw")}
+                    </PluginSidebarMoreMenuItem>
                 </Fragment>
         );
     }
@@ -177,13 +178,17 @@ export class Gallery
     {
         let url;
 
-        if (media.media_details.sizes.thumbnail) {
+        if (media.media_details.sizes.thumbnail)
+        {
             url = media.media_details.sizes.thumbnail.source_url;
-        } else if (media.media_details.sizes.medium) {
+        }
+        else if (media.media_details.sizes.medium)
+        {
             url = media.media_details.sizes.medium.source_url;
         }
 
-        if (!url) {
+        if (!url)
+        {
             console.log(media);
 
             return (
