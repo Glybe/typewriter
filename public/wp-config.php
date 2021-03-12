@@ -17,9 +17,10 @@ use const TypeWriter\PUBLIC_DIR;
 require_once __DIR__ . '/../src/TypeWriter/boot.php';
 
 $isHttps = ($_SERVER['HTTPS'] ?? 'off') === 'on';
+$baseUrl = env('BASE_URL', ($isHttps ? 'https' : 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? '127.0.0.1'));
 
 define('WP_CONTENT_DIR', PUBLIC_DIR . '/app');
-define('WP_CONTENT_URL', '/app');
+define('WP_CONTENT_URL', $baseUrl . '/app');
 
 define('DB_HOST', env('DB_HOST', '127.0.0.1'));
 define('DB_NAME', env('DB_NAME', 'typewriter'));
@@ -31,7 +32,7 @@ define('DB_COLLATE', 'utf8mb4_unicode_ci');
 
 $table_prefix = env('DB_PREFIX', 'wp_');
 
-define('WP_HOME', ($isHttps ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST']);
+define('WP_HOME', $baseUrl);
 define('WP_SITEURL', WP_HOME . '/wp');
 
 define('AUTH_KEY', env('KEY_AUTH'));
