@@ -21,3 +21,6 @@ dev/config.json
 
 # Configuration
 .env
+
+# Webpack
+*.hot-update.*

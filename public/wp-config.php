@@ -25,10 +25,6 @@ if ($httpHost === '0.0.0.0:8001') {
 $isHttps = ($_SERVER['HTTPS'] ?? 'off') === 'on';
 $baseUrl = env('BASE_URL', ($isHttps ? 'https' : 'http') . '://' . $httpHost);
 
-if (str_ends_with($baseUrl, ':8000') && str_starts_with($_SERVER['REQUEST_URI'] ?? '/', '/wp')) {
-    $baseUrl = substr($baseUrl, 0, -5) . ':8001';
-}
-
 define('WP_CONTENT_DIR', PUBLIC_DIR . '/app');
 define('WP_CONTENT_URL', $baseUrl . '/app');
 

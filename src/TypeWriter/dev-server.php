@@ -24,6 +24,7 @@ if ($requestFile && !$isPhpFile && is_file($requestFile)) {
         'css' => 'text/css',
         'js' => 'application/javascript',
         'json' => 'application/json',
+        'map' => 'application/json',
 
         'gif' => 'image/gif',
         'jpg' => 'image/jpeg',

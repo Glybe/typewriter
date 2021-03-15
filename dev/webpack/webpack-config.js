@@ -1,6 +1,5 @@
 let webpack = require("webpack");
 
-const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
@@ -8,7 +7,12 @@ const TerserJSPlugin = require('terser-webpack-plugin');
 const postcssFocusWithin = require("postcss-focus-within");
 
 module.exports = {
+    output: {
+        pathinfo: false
+    },
     optimization: {
+        runtimeChunk: "single",
+        usedExports: true,
         minimizer: [
             new TerserJSPlugin({
                 parallel: true,
@@ -118,88 +122,36 @@ module.exports = {
             filename: "[name].css",
             chunkFilename: "[id].css"
         }),
-
-        new BrowserSyncPlugin({
-            cwd: __dirname.replace("/dev/webpack", "/public"),
-            excludedFileTypes: [],
-            files: [
-                {
-                    match: [
-                        "**/*.css",
-                        "**/*.gif",
-                        "**/*.jpg",
-                        "**/*.jpeg",
-                        "**/*.png",
-                        "**/*.webp"
-                    ],
-                    fn: (event, file) => {
-                        if (event !== "change") {
-                            return;
-                        }
-
-                        require("browser-sync")
-                            .get("bs-webpack-plugin")
-                            .reload(file);
-                    }
-                },
-
-                {
-                    match: [
-                        "**/*.json",
-                        "**/*.php",
-                        "**/*.twig"
-                    ],
-                    fn: (event) => {
-                        if (event !== "change") {
-                            return;
-                        }
-
-                        require("browser-sync")
-                            .get("bs-webpack-plugin")
-                            .reload();
-                    }
-                }
-            ],
-            injectChanges: true,
-            injectNotification: true,
-            logPrefix: "TypeWriter",
-            host: "0.0.0.0",
-            port: 8000,
-            notify: true,
-            open: false,
-            proxy: "http://0.0.0.0:8001",
-            reload: false,
-            reloadDelay: 0,
-            serveStatic: [
-                {
-                    route: "/app/uploads",
-                    dir: "./public/app/uploads"
-                }
-            ],
-            ui: false
-        }, {
-            injectCss: true,
-            reload: false
-        })
+        new webpack.HotModuleReplacementPlugin()
     ],
     resolve: {
         extensions: [".ts", ".js", ".json"]
     },
     devServer: {
-        historyApiFallback: true,
         hot: true,
-        noInfo: true,
-        openPage: ""
+        host: "0.0.0.0",
+        port: 8000,
+        contentBase: "./public",
+        publicPath: "/",
+        writeToDisk: true,
+        proxy: {
+            "/": {
+                target: "http://0.0.0.0:8001",
+                secure: false,
+                changeOrigin: true,
+                autoRewrites: true
+            }
+        }
     },
     performance: {
         hints: false
     },
-    devtool: "source-map",
+    devtool: "eval-cheap-module-source-map",
     mode: process.env.NODE_ENV === "production" ? "production" : "development"
 };
 
 if (process.env.NODE_ENV === "production") {
-    module.exports.devtool = "source-map";
+    module.exports.devtool = false;
     module.exports.plugins = (module.exports.plugins || []).concat([
         new webpack.DefinePlugin({
             "process.env": {

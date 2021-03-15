@@ -7,6 +7,9 @@ const webpack = require("webpack");
 const base = require("./webpack-config");
 
 module.exports = merge(base, {
+    optimization: {
+        runtimeChunk: false
+    },
 	entry: {
 		admin: "./resource/admin/js/index.js",
 		front: "./resource/front/js/index.js"
