@@ -16,8 +16,14 @@ use const TypeWriter\PUBLIC_DIR;
 
 require_once __DIR__ . '/../src/TypeWriter/boot.php';
 
+$httpHost = $_SERVER['HTTP_HOST'] ?? '127.0.0.1:8000';
+
+if ($httpHost === '0.0.0.0:8001') {
+    $_SERVER['HTTP_HOST'] = $httpHost = '127.0.0.1:8000';
+}
+
 $isHttps = ($_SERVER['HTTPS'] ?? 'off') === 'on';
-$baseUrl = env('BASE_URL', ($isHttps ? 'https' : 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? '127.0.0.1:8000'));
+$baseUrl = env('BASE_URL', ($isHttps ? 'https' : 'http') . '://' . $httpHost);
 
 if (str_ends_with($baseUrl, ':8000') && str_starts_with($_SERVER['REQUEST_URI'] ?? '/', '/wp')) {
     $baseUrl = substr($baseUrl, 0, -5) . ':8001';
