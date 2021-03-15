@@ -64,7 +64,7 @@ msgstr ""
 # End AdminMenu: About
 
 # Branding
-msgid "Proudly running on TypeWriter by %s."
+msgid "Proudly running on TypeWriter"
 msgstr ""
 # End Branding
 

@@ -17,6 +17,7 @@ use TypeWriter\Module\Module;
 use function __;
 use function sprintf;
 use function TypeWriter\tw;
+use function vsprintf;
 
 /**
  * Class BrandingModule
@@ -61,7 +62,7 @@ final class BrandingModule extends Module
      */
     public final function onAdminFooterText(): string
     {
-        return sprintf(__('Proudly running on TypeWriter by %s.', 'tw'), '<a href="https://glybe.nl/over-glybe/" target="_blank">Glybe</a>');
+        return __('Proudly running on TypeWriter', 'tw');
     }
 
     /**
@@ -77,7 +78,11 @@ final class BrandingModule extends Module
     {
         $versions = tw()->getVersions();
 
-        return sprintf('TypeWriter %s | Raxos Foundation %s | WordPress %s', $versions['typewriter'], $versions['raxos_foundation'], $versions['wordpress']);
+        return vsprintf('%s | %s | %s', [
+            sprintf('<a style="color: #6b7280;" href="https://github.com/glybe/typewriter" rel="noopener" target="_blank">TypeWriter %s</a>', $versions['typewriter']),
+            sprintf('<a style="color: #6b7280;" href="https://github.com/basmilius/raxos" rel="noopener" target="_blank">Raxos %s</a>', $versions['raxos_foundation']),
+            sprintf('<a style="color: #6b7280;" href="https://wordpress.org/" rel="noopener" target="_blank">WordPress %s</a>', $versions['wordpress'])
+        ]);
     }
 
 }

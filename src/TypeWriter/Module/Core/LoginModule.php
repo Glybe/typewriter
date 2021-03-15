@@ -16,6 +16,7 @@ use TypeWriter\Facade\Dependencies;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Facade\Site;
 use TypeWriter\Module\Module;
+use TypeWriter\Util\BrandingUtil;
 
 // note: To display a custom message above the form, add login_message filter hook.
 
@@ -78,10 +79,14 @@ final class LoginModule extends Module
      */
     public final function onLoginHead(): void
     {
+        $logo = BrandingUtil::get('logo');
+        $logoHeight = BrandingUtil::get('logo_height');
+        $logoWidth = BrandingUtil::get('logo_width');
+
         echo <<<STYLE
             <style>
             body { background: #eef2f7; }
-            .login h1 a { background-image: url(https://cdn.glybe.nl/public/brand/SVG/logo-horizontal.svg); background-size: contain; height: 39px; width: 125px; }
+            .login h1 a { background-image: url({$logo}); background-size: contain; height: {$logoHeight}px; width: {$logoWidth}px; }
             .login label { margin-bottom: 6px; font-weight: 700; }
             #loginform { padding: 24px; border-color: #dbe2ea; border-radius: 6px; box-shadow: none; }
             </style>
@@ -113,7 +118,7 @@ final class LoginModule extends Module
      */
     public final function onLoginHeaderUrl(): string
     {
-        return 'https://glybe.nl/over-glybe/';
+        return BrandingUtil::get('logo_url');
     }
 
     /**

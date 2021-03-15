@@ -8,6 +8,7 @@ use TypeWriter\Facade\AdminMenu;
 use TypeWriter\Facade\Dependencies;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
+use TypeWriter\Util\BrandingUtil;
 use function __;
 use function array_map;
 use function array_unique;
@@ -93,6 +94,8 @@ final class AdminMenuModule extends Module
         }
 
         return [
+            'logo' => BrandingUtil::get('logo'),
+            'logo_url' => BrandingUtil::get('logo_url'),
             'version' => InstalledVersions::getPrettyVersion('basmilius/typewriter'),
             'dependencies' => $dependencies,
             'modules' => tw()->getModules(),
