@@ -7,17 +7,16 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use TypeWriter\Facade\Dependencies;
 use TypeWriter\Facade\Hooks;
+use TypeWriter\Facade\Site;
 use TypeWriter\Twig\TokenParser\ControllerTokenParser;
 use TypeWriter\Twig\TokenParser\FooterTokenParser;
 use TypeWriter\Twig\TokenParser\HeaderTokenParser;
-use function __;
 use function call_user_func;
 use function Columba\Util\dump;
 use function Columba\Util\dumpDie;
 use function Columba\Util\pre;
 use function Columba\Util\preDie;
 use function func_get_args;
-use function home_url;
 
 /**
  * Class TwigFunctions
@@ -44,9 +43,9 @@ final class TwigFunctions extends AbstractExtension
 
             new TwigFunction('applyFilters', [Hooks::class, 'applyFilters'], ['is_safe' => ['html']]),
             new TwigFunction('doAction', [Hooks::class, 'doAction']),
-            new TwigFunction('t', fn(string $text, string $domain = 'tw') => __($text, $domain)),
+            new TwigFunction('t', fn(string $text, array $params = [], ?string $language = null, string $domain = 'default') => Site::translate($text, $params, $language), ['is_safe' => ['html']]),
             new TwigFunction('themeUri', fn(string $path): string => Dependencies::themeUri($path)),
-            new TwigFunction('url', fn(string $path = ''): string => home_url($path)),
+            new TwigFunction('url', fn(string $path = ''): string => Site::url($path)),
 
             new TwigFunction('wp', fn() => call_user_func(...func_get_args()))
         ];
