@@ -62,6 +62,8 @@ final class BrandingUtil
 
         if (is_file($fileName)) {
             self::$json = json_decode(file_get_contents($fileName), true);
+        } else {
+            self::$json = [];
         }
 
         self::$json = array_merge(self::DEFAULTS, self::$json);
