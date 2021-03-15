@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/basmilius/Columba.git",
-                "reference": "541cdd86be3efe37c4b6dced19cb4a2f6723003c"
+                "reference": "94016e8a1f6d2f1143b152eb0c9de3309c4e390b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/basmilius/Columba/zipball/541cdd86be3efe37c4b6dced19cb4a2f6723003c",
-                "reference": "541cdd86be3efe37c4b6dced19cb4a2f6723003c",
+                "url": "https://api.github.com/repos/basmilius/Columba/zipball/94016e8a1f6d2f1143b152eb0c9de3309c4e390b",
+                "reference": "94016e8a1f6d2f1143b152eb0c9de3309c4e390b",
                 "shasum": ""
             },
             "require": {
@@ -54,7 +54,7 @@
                 "source": "https://github.com/basmilius/Columba/tree/master",
                 "issues": "https://github.com/basmilius/Columba/issues"
             },
-            "time": "2021-01-29T10:59:10+00:00"
+            "time": "2021-03-12T18:48:31+00:00"
         },
         {
             "name": "filp/whoops",
