@@ -42,9 +42,9 @@ if ($requestFile && !$isPhpFile && is_file($requestFile)) {
 
     if (isset($mimeTypes[$extension])) {
         header('Access-Control-Allow-Origin: *');
-        header('Cache-Control: public, max-age=5184000');
+        header('Cache-Control: public, max-age=7776000');
         header('Content-Type: ' . $mimeTypes[$extension] ?? mime_content_type($requestFile));
-        header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', strtotime('+ 1 month')));
+        header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', strtotime('+ 3 months')));
         readfile($requestFile);
 
         return true;
@@ -54,8 +54,10 @@ if ($requestFile && !$isPhpFile && is_file($requestFile)) {
 }
 
 if ($requestFile && is_dir($requestFile) && is_file($requestFile . '/index.php')) {
+    /** @noinspection PhpIncludeInspection */
     require_once $requestFile . '/index.php';
 } else if ($isPhpFile) {
+    /** @noinspection PhpIncludeInspection */
     require_once $requestFile;
 } else {
     require_once __DIR__ . '/../../public/index.php';

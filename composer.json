@@ -25,6 +25,7 @@
 		}
 	],
 	"require": {
+        "ext-fileinfo": "*",
         "ext-json": "*",
         "ext-pdo": "*",
 		"basmilius/columba": "@dev",
