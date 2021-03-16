@@ -125,6 +125,24 @@ class MenuItem extends MenuObject
     }
 
     /**
+     * Gets the target of the menu item link.
+     *
+     * @return string
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public function getTarget(): string
+    {
+        $target = $this->post->{'target'} ?? '_self';
+
+        if (empty($target)) {
+            $target = '_self';
+        }
+
+        return $target;
+    }
+
+    /**
      * Gets the url of the menu item.
      *
      * @return string
