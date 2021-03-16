@@ -6,6 +6,7 @@ namespace TypeWriter\Facade;
 use TypeWriter\Error\TemplateException;
 use TypeWriter\Util\Sandbox;
 use function extract;
+use function file_get_contents;
 use function get_theme_mod;
 use function get_theme_mods;
 use function is_file;
@@ -23,6 +24,8 @@ use const EXTR_OVERWRITE;
 final class Template
 {
 
+    private static array $icons = [];
+
     /**
      * Gets a theme modification.
      *
@@ -33,7 +36,7 @@ final class Template
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public static function modification(string $id, $defaultValue)
+    public static function modification(string $id, mixed $defaultValue): mixed
     {
         return get_theme_mod($id, $defaultValue);
     }
@@ -99,6 +102,7 @@ final class Template
         if (is_file($templateFile)) {
             extract($context, EXTR_OVERWRITE);
 
+            /** @noinspection PhpIncludeInspection */
             require $templateFile;
         } else if (tw()->getTwig()->exists($template)) {
             echo tw()->getTwig()->render($template, $context);
@@ -145,6 +149,23 @@ final class Template
         } else {
             throw new TemplateException('The header template was not found. Create a template/global/header.twig or header.php file in your theme.', TemplateException::ERR_TEMPLATE_FILE_NOT_FOUND);
         }
+    }
+
+    /**
+     * Renders the svg code of the given icon.
+     *
+     * @param string $style
+     * @param string $icon
+     *
+     * @return string
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public static function renderIcon(string $style, string $icon): string
+    {
+        $key = "{$style}_{$icon}";
+
+        return self::$icons[$key] ??= file_get_contents(Dependencies::themePath("resource/icon/{$style}/{$icon}.svg"));
     }
 
 }
