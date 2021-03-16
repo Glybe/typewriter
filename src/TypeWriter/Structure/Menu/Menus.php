@@ -8,11 +8,16 @@ use TypeWriter\Facade\Hooks;
 use TypeWriter\Facade\Post;
 use WP_Error;
 use WP_Term;
+use function delete_post_meta;
+use function esc_attr__;
 use function get_nav_menu_locations;
+use function get_post_meta;
 use function get_registered_nav_menus;
 use function get_term;
 use function intval;
 use function register_nav_menu;
+use function trim;
+use function update_post_meta;
 use function wp_get_nav_menu_items;
 
 /**
@@ -27,6 +32,44 @@ class Menus
 
     private static array $getNavMenuItemsCache = [];
     private static array $menuCache = [];
+
+    /**
+     * Adds icon support to menu items.
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public static function addIconSupport(): void
+    {
+        Hooks::action('wp_nav_menu_item_custom_fields', function (int $itemId): void {
+            $icon = get_post_meta($itemId, 'tw_menu_icon', true) ?: null;
+            $icon ??= '';
+            $icon = esc_attr__($icon);
+
+            echo <<<FIELD
+            <p class="icon icon-wide">
+                <label for="edit-menu-item-icon-{$itemId}">
+                    Icon<br/>
+                    <input type="text" id="edit-menu-item-icon-{$itemId}" class="widefat edit-menu-item-icon" name="menu-item-icon[{$itemId}]" value="{$icon}"/>
+                </label>
+            </p>
+            FIELD;
+        });
+
+        Hooks::action('wp_update_nav_menu_item', function (int $menuId, int $itemId): void {
+            $icon = $_POST['menu-item-icon'][$itemId] ?? null;
+
+            if ($icon !== null && trim($icon) === '') {
+                $icon = null;
+            }
+
+            if ($icon !== null) {
+                update_post_meta($itemId, 'tw_menu_icon', $icon);
+            } else {
+                delete_post_meta($itemId, 'tw_menu_icon');
+            }
+        });
+    }
 
     /**
      * Returns TRUE if the given location exists.
