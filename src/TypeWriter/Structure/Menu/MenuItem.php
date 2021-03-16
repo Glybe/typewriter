@@ -3,8 +3,13 @@ declare(strict_types=1);
 
 namespace TypeWriter\Structure\Menu;
 
+use TypeWriter\Facade\Template;
 use WP_Post;
+use function explode;
+use function get_post_meta;
 use function intval;
+use function str_contains;
+use function trim;
 
 /**
  * Class MenuItem
@@ -50,6 +55,26 @@ class MenuItem extends MenuObject
     public function getClasses(): array
     {
         return $this->classes;
+    }
+
+    /**
+     * Gets the icon, or NULL if there is no icon.
+     *
+     * @return string|null
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public function getIcon(): ?string
+    {
+        $icon = get_post_meta($this->post->ID, 'tw_menu_icon', true) ?: null;
+
+        if ($icon === null || trim($icon) === '' || !str_contains($icon, ' ')) {
+            return null;
+        }
+
+        [$style, $icon] = explode(' ', $icon, 2);
+
+        return Template::renderIcon($style, $icon);
     }
 
     /**
