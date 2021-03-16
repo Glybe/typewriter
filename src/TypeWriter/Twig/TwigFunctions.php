@@ -44,7 +44,7 @@ final class TwigFunctions extends AbstractExtension
 
             new TwigFunction('applyFilters', [Hooks::class, 'applyFilters'], ['is_safe' => ['html']]),
             new TwigFunction('doAction', [Hooks::class, 'doAction']),
-            new TwigFunction('icon', fn(string $style, string $icon) => Template::renderIcon($style, $icon)),
+            new TwigFunction('icon', fn(string $style, string $icon) => Template::renderIcon($style, $icon), ['is_safe' => ['html']]),
             new TwigFunction('t', fn(string $text, array $params = [], ?string $language = null, string $domain = 'default') => Site::translate($text, $params, $language), ['is_safe' => ['html']]),
             new TwigFunction('themeUri', fn(string $path): string => Dependencies::themeUri($path)),
             new TwigFunction('url', fn(string $path = ''): string => Site::url($path)),
