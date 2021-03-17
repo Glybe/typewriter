@@ -1,7 +1,7 @@
 import {MediaUpload, MediaUploadCheck} from "@wordpress/block-editor";
 import {Button, Fill, Notice, PanelBody, PanelRow, Slot} from "@wordpress/components";
 import {compose} from "@wordpress/compose";
-import {dispatch, withDispatch, withSelect} from "@wordpress/data";
+import {withDispatch, withSelect} from "@wordpress/data";
 import {PluginSidebar, PluginSidebarMoreMenuItem} from "@wordpress/edit-post";
 import {PostFeaturedImage} from "@wordpress/editor";
 import {Fragment} from "@wordpress/element";
@@ -31,9 +31,6 @@ export class Galleries
             icon: galleryIcon(),
             render: () => this.render()
         });
-
-        const {removeEditorPanel} = dispatch("core/edit-post");
-        removeEditorPanel("featured-image");
     }
 
     render()
@@ -44,11 +41,6 @@ export class Galleries
                         <PanelBody title={null} initialOpen={true}>
                             {__("Here you can change the galleries supported by the selected template.", "tw")}
                         </PanelBody>
-
-                        <PanelBody title={__("Featured image")}>
-                            <PostFeaturedImage/>
-                        </PanelBody>
-
                         <Slot name="tw-galleries"/>
                     </PluginSidebar>
 
