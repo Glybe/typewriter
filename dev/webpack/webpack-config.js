@@ -121,8 +121,7 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "[name].css",
             chunkFilename: "[id].css"
-        }),
-        new webpack.HotModuleReplacementPlugin()
+        })
     ],
     resolve: {
         extensions: [".ts", ".js", ".json"]
@@ -149,6 +148,12 @@ module.exports = {
     devtool: "eval-cheap-module-source-map",
     mode: process.env.NODE_ENV === "production" ? "production" : "development"
 };
+
+if (process.env.NODE_ENV === "development") {
+    module.exports.plugins = (module.exports.plugins || []).concat([
+        new webpack.HotModuleReplacementPlugin()
+    ]);
+}
 
 if (process.env.NODE_ENV === "production") {
     module.exports.devtool = false;
