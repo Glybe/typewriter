@@ -38,6 +38,7 @@ class Relation extends Feature
     protected string $metaId;
     protected string $metaKey;
     protected string $postType;
+    protected bool $isMultiple;
 
     /**
      * Relation constructor.
@@ -46,11 +47,12 @@ class Relation extends Feature
      * @param string $id
      * @param string $label
      * @param string $foreignType
+     * @param bool $isMultiple
      *
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function __construct(string $postType, string $id, string $label, string $foreignType)
+    public function __construct(string $postType, string $id, string $label, string $foreignType, bool $isMultiple = true)
     {
         parent::__construct(static::class);
 
@@ -60,6 +62,7 @@ class Relation extends Feature
         $this->metaId = "{$postType}_{$id}_{$foreignType}";
         $this->metaKey = "tw_{$this->metaId}_relation";
         $this->postType = $postType;
+        $this->isMultiple = $isMultiple;
 
         register_meta('post', $this->metaKey, [
             'object_subtype' => $this->postType,
@@ -96,8 +99,10 @@ class Relation extends Feature
             return $scripts;
         }
 
+        $multiple = $this->isMultiple ? 'true' : 'false';
+
         $scripts[] = <<<CODE
-			new tw.feature.Relation("{$this->id}", "{$this->label}", "{$this->metaKey}", "{$this->foreignType}"); 
+			new tw.feature.Relation("{$this->id}", "{$this->label}", "{$this->metaKey}", "{$this->foreignType}", {$multiple}); 
 		CODE;
 
         return $scripts;

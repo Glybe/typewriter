@@ -65,13 +65,15 @@ export class Relation
     #label;
     #metaKey;
     #foreignType;
+    #isMultiple;
 
-    constructor(id, label, metaKey, foreignType)
+    constructor(id, label, metaKey, foreignType, isMultiple)
     {
         this.#id = id;
         this.#label = label;
         this.#metaKey = metaKey;
         this.#foreignType = foreignType;
+        this.#isMultiple = isMultiple;
 
         initializePlugin();
 
@@ -214,14 +216,16 @@ export class Relation
                                 </div>
                         )}
 
-                        <PanelRow>
-                            <Button
-                                    isSecondary
-                                    isSmall
-                                    onClick={() => setOpen(true)}>
-                                {__("Add object", "tw")}
-                            </Button>
-                        </PanelRow>
+                        {(this.#isMultiple || props.objects !== null && props.objects.length === 0) && (
+                                <PanelRow>
+                                    <Button
+                                            isSecondary
+                                            isSmall
+                                            onClick={() => setOpen(true)}>
+                                        {__("Add object", "tw")}
+                                    </Button>
+                                </PanelRow>
+                        )}
 
                         {isOpen && (
                                 <selectPostDialog.SelectPostDialog
