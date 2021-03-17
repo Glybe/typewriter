@@ -181,3 +181,23 @@ msgstr ""
 msgid "Add object"
 msgstr ""
 # End Relations
+
+# Blocks SEO
+msgid "Structured data"
+msgstr ""
+
+msgid "Allows you to add stuctured data to pages."
+msgstr ""
+
+msgid "Add Structured data"
+msgstr ""
+
+msgid "Edit Structured data"
+msgstr ""
+
+msgid "Please do not edit this if you don't know what this does."
+msgstr ""
+
+msgid "Add Json-LD Structured data to the page. Structured data is used by Google to create rich snippiets in their search results."
+msgstr ""
+# End Blocks SEO

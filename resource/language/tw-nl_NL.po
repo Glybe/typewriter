@@ -198,6 +198,31 @@ msgstr "Er zijn nog geen objecten in deze relatie."
 msgid "Add object"
 msgstr "Relatie toevoegen"
 
+# End Relations
+# Blocks SEO
+msgid "Structured data"
+msgstr "Gestructureerde gegevens"
+
+msgid "Allows you to add stuctured data to pages."
+msgstr "Hiermee kun je gestructureerde gegevens toevoegen aan pagina’s."
+
+msgid "Add Structured data"
+msgstr "Gestructureerde gegevens toevoegen"
+
+msgid "Edit Structured data"
+msgstr "Gestructureerde gegevens bewerken"
+
+msgid "Please do not edit this if you don't know what this does."
+msgstr "Bewerk dit niet als je niet weet wat dit doet."
+
+msgid ""
+"Add Json-LD Structured data to the page. Structured data is used by Google "
+"to create rich snippiets in their search results."
+msgstr ""
+"Voeg Json-LD gestructureerde gegevens toe aan de pagina. Gestructureerde "
+"gegevens worden door bijvoorbeeld Google gebruikt om visuele voorbeelden te "
+"tonen in de zoekresultaten."
+
 # End AdminMenu: About
 # Branding
 #~ msgid "Copyright &copy; Glybe &mdash; All rights reserved."
