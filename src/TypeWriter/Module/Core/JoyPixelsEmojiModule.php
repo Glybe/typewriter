@@ -35,9 +35,9 @@ final class JoyPixelsEmojiModule extends Module
     public function onInitialize(): void
     {
         Hooks::filter('emoji_ext', fn() => '.svg');
-        Hooks::filter('emoji_url', fn() => 'https://bmcdn.nl/assets/joypixels/v6.0/svg/');
+        Hooks::filter('emoji_url', fn() => 'https://bmcdn.nl/assets/joypixels/v6.5/svg/');
         Hooks::filter('emoji_svg_ext', fn() => '.svg');
-        Hooks::filter('emoji_svg_url', fn() => 'https://bmcdn.nl/assets/joypixels/v6.0/svg/');
+        Hooks::filter('emoji_svg_url', fn() => 'https://bmcdn.nl/assets/joypixels/v6.5/svg/');
     }
 
 }
