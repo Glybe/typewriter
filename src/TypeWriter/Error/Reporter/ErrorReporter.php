@@ -3,14 +3,14 @@ declare(strict_types=1);
 
 namespace TypeWriter\Error\Reporter;
 
-use Columba\Foundation\System;
 use Columba\Router\RouterException;
+use JetBrains\PhpStorm\NoReturn;
+use Raxos\Foundation\Environment;
 use Throwable;
 use TypeWriter\Error\Runtime\PhpException;
 use function error_reporting;
 use function in_array;
 use function ini_set;
-use function set_error_handler;
 use function set_exception_handler;
 use function TypeWriter\env;
 use function TypeWriter\tw;
@@ -46,7 +46,7 @@ final class ErrorReporter
 
         // todo(Bas): Add support for Rollbar and other error reporting tools.
         set_exception_handler([$this, 'onException']);
-        set_error_handler([$this, 'onError']);
+//        set_error_handler([$this, 'onError']); // note: Disabled for now.
     }
 
     /**
@@ -76,7 +76,7 @@ final class ErrorReporter
      */
     public final function onError(int $code, string $message, string $fileName, int $line): bool
     {
-        if (System::isCLI()) {
+        if (Environment::isCommandLineInterface()) {
             return false;
         }
 
@@ -102,6 +102,7 @@ final class ErrorReporter
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
+    #[NoReturn]
     public final function onException(Throwable $err): void
     {
         $skipRouteExceptions = [

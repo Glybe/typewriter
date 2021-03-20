@@ -47,7 +47,7 @@ final class DocUtil
 
         $contents = file_get_contents($file);
         $matches = [];
-        $pattern = '#@([a-zA-Z0-9-]+) ([\w\- .,<@>\(\)]+)#';
+        $pattern = '#@([a-zA-Z0-9-]+) ([\w\- .,<@>()]+)#';
 
         preg_match_all($pattern, $contents, $matches);
 

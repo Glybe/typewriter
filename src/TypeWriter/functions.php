@@ -13,11 +13,11 @@ use function is_int;
  * @param string $key
  * @param null $default
  *
- * @return array|bool|int|mixed|string|null
+ * @return string|array|bool|int|null
  * @author Bas Milius <bas@mili.us>
  * @since 1.0.0
  */
-function env(string $key, $default = null)
+function env(string $key, $default = null): string|array|bool|int|null
 {
     $result = getenv($key) ?: $default;
 

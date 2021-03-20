@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace TypeWriter\Error;
 
-use Columba\Error\ColumbaException;
+use Raxos\Foundation\Error\RaxosException;
 use Throwable;
 
 /**
@@ -22,7 +22,7 @@ use Throwable;
  * @package TypeWriter\Error
  * @since 1.0.0
  */
-class TypeWriterException extends ColumbaException
+class TypeWriterException extends RaxosException
 {
 
     public const ERR_UNKNOWN = 0;

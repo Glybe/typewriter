@@ -1,15 +1,23 @@
 {
     "name": "@bybas/typewriter-base",
+    "description": "Basic theme for typewriter to test some things.",
+    "license": "MIT",
     "version": "1.0.0",
+    "author": {
+        "name": "Bas Milius",
+        "email": "bas@ideemedia.nl",
+        "url": "https://bas.dev"
+    },
     "scripts": {
-        "theme:build": "cross-env NODE_ENV=production webpack --config dev/webpack/build.js --progress --color",
+        "theme:build": "yarn run \"theme:clean\" && cross-env NODE_ENV=production webpack --config dev/webpack/build.js --progress --color",
+        "theme:build:hot": "cross-env NODE_ENV=development webpack serve --config dev/webpack/build.js --progress --color",
         "theme:build:watch": "cross-env NODE_ENV=development webpack --config dev/webpack/build.js --progress --color --watch",
         "theme:clean": "rimraf dist",
-        "theme:serve": "concurrently -k -c magenta,cyan -n php,webpack \"cd ../../../ && yarn run tw:serve\" \"yarn run theme:build:watch\"",
-        "theme:serve:wsl": "concurrently -k -c magenta,cyan -n php,webpack \"cd ../../../ && yarn run tw:serve:wsl\" \"yarn run theme:build:watch\""
+        "theme:dev": "yarn run \"theme:clean\" && concurrently -k -c magenta,cyan,cyan -n php,webpack \"cd ../../../ && yarn run tw:serve\" \"yarn run theme:build:hot\"",
+        "theme:dev:wsl": "yarn run \"theme:clean\" && concurrently -k -c magenta,cyan,cyan -n php,webpack \"cd ../../../ && yarn run tw:serve:dev\" \"yarn run theme:build:hot\""
     },
     "dependencies": {
-        "@latte-ui/css": "^2.0.0-dev.1"
+        "@latte-ui/css": "^2.0.0-dev.2"
     },
     "devDependencies": {
         "glob-all": "^3.2.1",

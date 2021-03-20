@@ -42,6 +42,7 @@ final class Sandbox
         extract($context, EXTR_OVERWRITE);
         ob_start();
 
+        /** @noinspection PhpIncludeInspection */
         require $file;
 
         return ob_get_clean();

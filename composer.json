@@ -1,34 +1,34 @@
 {
-	"name": "basmilius/typewriter",
-	"description": "description",
+    "name": "basmilius/typewriter",
+    "description": "description",
     "version": "1.0",
     "minimum-stability": "stable",
-	"license": "mit",
-	"authors": [
-		{
-			"name": "Bas Milius",
-			"email": "bas@mili.us"
-		}
-	],
-	"autoload": {
+    "license": "mit",
+    "authors": [
+        {
+            "name": "Bas Milius",
+            "email": "bas@mili.us"
+        }
+    ],
+    "autoload": {
         "files": [
             "src/TypeWriter/functions.php"
         ],
         "psr-4": {
-			"TypeWriter\\": "src/TypeWriter"
-		}
-	},
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/basmilius/Columba"
-		}
-	],
-	"require": {
+            "TypeWriter\\": "src/TypeWriter"
+        }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/basmilius/Columba"
+        }
+    ],
+    "require": {
         "ext-fileinfo": "*",
         "ext-json": "*",
         "ext-pdo": "*",
-		"basmilius/columba": "@dev",
+        "basmilius/columba": "@dev",
         "filp/whoops": "^2",
         "joypixels/emoji-toolkit": "^6",
         "league/climate": "^3",
@@ -37,7 +37,7 @@
         "raxos/foundation": "dev-master",
         "raxos/http": "dev-master",
         "raxos/router": "dev-master",
-		"twig/twig": "@dev",
+        "twig/twig": "@dev",
         "vlucas/phpdotenv": "^5"
-	}
+    }
 }

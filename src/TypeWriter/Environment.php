@@ -57,11 +57,11 @@ final class Environment
      * @param string $key
      * @param null $default
      *
-     * @return mixed|null
+     * @return mixed
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public final function get(string $key, $default = null)
+    public final function get(string $key, $default = null): mixed
     {
         return $this->variables[$key] ?? $default;
     }

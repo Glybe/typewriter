@@ -24,3 +24,6 @@ dev/config.json
 
 # Webpack
 *.hot-update.*
+
+# Other
+yarn-error.txt

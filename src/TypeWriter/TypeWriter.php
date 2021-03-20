@@ -13,11 +13,13 @@ declare(strict_types=1);
 namespace TypeWriter;
 
 use Columba\Database\Connection\Connection;
-use Columba\Foundation\Store;
 use Columba\Http\RequestMethod;
 use Columba\Router\RouterException;
 use Columba\Util\Stopwatch;
 use Composer\InstalledVersions;
+use JetBrains\PhpStorm\ArrayShape;
+use JetBrains\PhpStorm\Pure;
+use Raxos\Foundation\Storage\SimpleKeyValue;
 use TypeWriter\Error\Reporter\ErrorReporter;
 use TypeWriter\Error\Reporter\ProductionErrorChannel;
 use TypeWriter\Error\Reporter\WhoopsErrorChannel;
@@ -31,7 +33,7 @@ use function defined;
 use function in_array;
 use function is_admin;
 use function phpversion;
-use function strpos;
+use function str_contains;
 use function wp;
 use const WP_INSTALLING;
 
@@ -49,7 +51,7 @@ final class TypeWriter
     private Environment $environment;
     private ErrorReporter $errorReporter;
     private Router $router;
-    private Store $state;
+    private SimpleKeyValue $state;
     private TwigRenderer $twig;
 
     /** @var Feature[] */
@@ -74,7 +76,7 @@ final class TypeWriter
         $this->errorReporter = new ErrorReporter();
         $this->errorReporter->initialize();
 
-        $this->state = new Store();
+        $this->state = new SimpleKeyValue();
 
         if ($this->isDebugMode()) {
             $this->errorReporter->addChannel(new WhoopsErrorChannel());
@@ -104,6 +106,7 @@ final class TypeWriter
     /**
      * Runs everything. First checks if we can use router instead of WP stuff.
      *
+     * @throws RouterException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -140,6 +143,18 @@ final class TypeWriter
     public final function getDatabase(): ?Connection
     {
         return $this->database;
+    }
+
+    /**
+     * Gets the loaded features.
+     *
+     * @return Feature[]
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public final function getFeatures(): array
+    {
+        return $this->features;
     }
 
     /**
@@ -201,11 +216,11 @@ final class TypeWriter
     /**
      * Gets the state storage.
      *
-     * @return Store
+     * @return SimpleKeyValue
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public final function getState(): Store
+    public final function getState(): SimpleKeyValue
     {
         return $this->state;
     }
@@ -229,6 +244,17 @@ final class TypeWriter
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
+    #[ArrayShape([
+        'columba' => 'string',
+        'php' => 'string',
+        'raxos_database' => 'string',
+        'raxos_foundation' => 'string',
+        'raxos_http' => 'string',
+        'raxos_router' => 'string',
+        'typewriter' => 'string',
+        'twig' => 'string',
+        'wordpress' => 'string'
+    ])]
     public final function getVersions(): array
     {
         global $wp_version;
@@ -253,6 +279,7 @@ final class TypeWriter
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
+    #[Pure]
     public final function isAdmin(): bool
     {
         return is_admin();
@@ -267,7 +294,7 @@ final class TypeWriter
      */
     public final function isApi(): bool
     {
-        return strpos($_SERVER['REQUEST_URI'], '/api/wp/') !== false;
+        return str_contains($_SERVER['REQUEST_URI'], '/api/wp/');
     }
 
     /**
@@ -289,6 +316,7 @@ final class TypeWriter
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
+    #[Pure]
     public final function isFront(): bool
     {
         return !$this->isAdmin() && !$this->isInstalling() && !$this->isLogin();
@@ -424,6 +452,7 @@ final class TypeWriter
      * @param callable|null $onUsed
      * @param callable|null $onNotUsed
      *
+     * @throws RouterException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */

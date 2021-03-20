@@ -93,7 +93,7 @@ final class TwigRenderer extends AbstractRenderer
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public final function addGlobal(string $name, $value): void
+    public final function addGlobal(string $name, mixed $value): void
     {
         $this->twig->addGlobal($name, $value);
     }
