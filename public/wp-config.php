@@ -56,6 +56,7 @@ define('AUTOMATIC_UPDATER_DISABLED', true);
 define('AUTOSAVE_INTERVAL', 300);
 define('DISABLE_WP_CRON', true);
 define('DISALLOW_FILE_EDIT', true);
+define('FS_METHOD', 'direct');
 define('WP_POST_REVISIONS', false);
 
 define('WP_DEBUG', env('MODE', 'development') === 'development');
