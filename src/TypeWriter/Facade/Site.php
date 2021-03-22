@@ -22,7 +22,6 @@ use function pll_home_url;
 use function pll_register_string;
 use function pll_translate_string;
 use function rtrim;
-use function sprintf;
 
 /**
  * Class Site
@@ -70,7 +69,6 @@ final class Site
      * Translates the given string with the given params.
      *
      * @param string $str
-     * @param array $params
      * @param string|null $language
      * @param string $domain
      *
@@ -78,7 +76,7 @@ final class Site
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public static function translate(string $str, array $params = [], ?string $language = null, string $domain = 'domain'): string
+    public static function translate(string $str, ?string $language = null, string $domain = 'domain'): string
     {
         if (function_exists('pll_translate_string')) {
             $str = pll_translate_string($str, $language ?? pll_current_language());
@@ -86,7 +84,7 @@ final class Site
             $str = __($str, $domain);
         }
 
-        return sprintf($str, ...$params);
+        return $str;
     }
 
     /**

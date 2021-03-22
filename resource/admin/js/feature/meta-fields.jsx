@@ -1,4 +1,4 @@
-import {TextareaControl, TextControl} from "@wordpress/components";
+import {BaseControl, PanelRow, RangeControl, TextareaControl, TextControl, ToggleControl} from "@wordpress/components";
 import {compose} from "@wordpress/compose";
 import {withDispatch, withSelect} from "@wordpress/data";
 import {PluginDocumentSettingPanel} from "@wordpress/edit-post";
@@ -12,6 +12,18 @@ const __mock = {
 };
 
 const fieldRenderers = {
+
+    RangeControl: (field, onUpdate, metaFields) =>
+    {
+        return (
+                <RangeControl
+                        max={field.max || 10}
+                        min={field.min || 0}
+                        value={metaFields[field.meta_key]}
+                        label={__(field.label, "tw")}
+                        onChange={value => onUpdate(field.meta_key, value, metaFields)}/>
+        );
+    },
 
     TextControl: (field, onUpdate, metaFields) =>
     {
@@ -32,6 +44,19 @@ const fieldRenderers = {
                         label={__(field.label, "tw")}
                         placeholder={__(field.placeholder, "tw")}
                         onChange={value => onUpdate(field.meta_key, value, metaFields)}/>
+        );
+    },
+
+    ToggleControl: (field, onUpdate, metaFields) =>
+    {
+        return (
+                <BaseControl label={__(field.label, "tw")}>
+                    <div style={{height: 6}}/>
+                    <ToggleControl
+                            checked={metaFields[field.meta_key]}
+                            help={__(field.help, "tw")}
+                            onChange={value => onUpdate(field.meta_key, value, metaFields)}/>
+                </BaseControl>
         );
     }
 
