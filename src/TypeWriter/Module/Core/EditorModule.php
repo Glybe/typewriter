@@ -51,11 +51,16 @@ final class EditorModule extends Module
     public final function onBlockCategories(array $categories): array
     {
         array_unshift($categories, [
+            'slug' => 'tw-structure',
+            'title' => __('TypeWriter Structure', 'tw')
+        ]);
+
+        array_unshift($categories, [
             'slug' => 'tw-seo',
             'title' => __('TypeWriter SEO', 'tw')
         ]);
 
-        return $categories;
+        return Hooks::applyFilters('tw.editor.categories', $categories);
     }
 
 }

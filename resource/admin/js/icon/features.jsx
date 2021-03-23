@@ -12,6 +12,18 @@ export function bracketsCurlyIcon()
     );
 }
 
+export function columnsIcon()
+{
+    if (!isReactAvailable)
+        return null;
+
+    return (
+            <svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={18}>
+                <path fill="currentColor" d="M464 32H48A48 48 0 000 80v352a48 48 0 0048 48h416a48 48 0 0048-48V80a48 48 0 00-48-48zM224 416H64V160h160v256zm224 0H288V160h160v256z"/>
+            </svg>
+    );
+}
+
 export function galleryIcon()
 {
     if (!isReactAvailable)

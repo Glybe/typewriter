@@ -223,6 +223,26 @@ msgstr ""
 "gegevens worden door bijvoorbeeld Google gebruikt om visuele voorbeelden te "
 "tonen in de zoekresultaten."
 
+# End Blocks SEO
+# Blocks Structure
+msgid "Column"
+msgstr "Kolom"
+
+msgid "This block is used as a column wrapper in Grid."
+msgstr "Dit blok wordt gebruikt in de Grid-blok."
+
+msgid "Preview"
+msgstr "Voorbeeld"
+
+msgid "Column size"
+msgstr "Kolomgrootte"
+
+msgid "Grid"
+msgstr "Grid"
+
+msgid "Create responsive grids."
+msgstr "Maak een responsive grid."
+
 # End AdminMenu: About
 # Branding
 #~ msgid "Copyright &copy; Glybe &mdash; All rights reserved."

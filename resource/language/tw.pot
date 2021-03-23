@@ -201,3 +201,23 @@ msgstr ""
 msgid "Add Json-LD Structured data to the page. Structured data is used by Google to create rich snippiets in their search results."
 msgstr ""
 # End Blocks SEO
+
+# Blocks Structure
+msgid "Column"
+msgstr ""
+
+msgid "This block is used as a column wrapper in Grid."
+msgstr ""
+
+msgid "Preview"
+msgstr ""
+
+msgid "Column size"
+msgstr ""
+
+msgid "Grid"
+msgstr ""
+
+msgid "Create responsive grids."
+msgstr ""
+# End Blocks Structure

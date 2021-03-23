@@ -1,0 +1,70 @@
+.tw-block-grid
+{
+    position: relative;
+
+    > .block-editor-inner-blocks > .block-editor-block-list__layout
+    {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .block-editor-block-list__block
+    {
+        margin: 0;
+    }
+
+    .block-list-appender
+    {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        padding-left: 24px;
+        width: 48px !important;
+
+        .block-editor-button-block-appender
+        {
+            margin: 0;
+        }
+    }
+
+    .tw-block-column
+    {
+        position: relative;
+        display: block;
+        padding: 15px;
+        width: 100%;
+        outline: 2px dashed #f0f0f0;
+        outline-offset: -1px;
+
+        @for $i from 1 through 12
+        {
+            $col: 1000px / 12;
+
+            &.preview-xs.col-#{$i}
+            {
+                width: #{$i * $col};
+            }
+
+            &.preview-sm.sm\:col-#{$i}
+            {
+                width: #{$i * $col};
+            }
+
+            &.preview-md.md\:col-#{$i}
+            {
+                width: #{$i * $col};
+            }
+
+            &.preview-lg.lg\:col-#{$i}
+            {
+                width: #{$i * $col};
+            }
+
+            &.preview-xl.xl\:col-#{$i}
+            {
+                width: #{$i * $col};
+            }
+        }
+    }
+}
