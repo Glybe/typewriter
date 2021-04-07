@@ -38,7 +38,7 @@ module.exports = merge(base, {
 		filename: "[name].js",
 		libraryTarget: "this",
 		path: resolve(__dirname, "../../public/tw/dist"),
-		publicPath: "/public/tw/dist/"
+		publicPath: "/tw/dist/"
 	},
 	plugins: [
 		new webpack.BannerPlugin(readFileSync("dev/webpack/license-header.txt", "utf8").trim())

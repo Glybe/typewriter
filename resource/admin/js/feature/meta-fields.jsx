@@ -68,7 +68,7 @@ function MetaFieldsComponent(props)
 
     return (
 
-            <PluginDocumentSettingPanel title={props.label}>
+            <PluginDocumentSettingPanel name={props.id} title={props.label}>
                 {props.description !== "" && <p dangerouslySetInnerHTML={{__html: props.description}}/>}
                 {fields}
             </PluginDocumentSettingPanel>

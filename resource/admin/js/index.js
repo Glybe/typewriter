@@ -1,17 +1,17 @@
 import "../css/index.scss";
 
-import {default as registerBlocks} from "./block";
-import {Gallery, MetaFields, PostThumbnail, Relation} from "./feature";
-
 const packageJson = {
     name: "@bybas/typewriter",
     version: "1.0.0"
 };
 
-function init() {
+async function init() {
     let features = {};
 
     if (typeof wp.element !== "undefined") {
+        const {default: registerBlocks} = await import("./block");
+        const {Gallery, MetaFields, PostThumbnail, Relation} = await import("./feature");
+
         features = {Gallery, MetaFields, PostThumbnail, Relation};
         registerBlocks();
     }
@@ -23,4 +23,4 @@ function init() {
     };
 }
 
-init();
+init().then();
