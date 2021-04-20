@@ -29,7 +29,7 @@ use function is_file;
 use function is_month;
 use function is_year;
 use function substr;
-use function TypeWriter\tw;
+use function TypeWriter\twig;
 
 /**
  * Class PostTemplatesResolverModule
@@ -227,8 +227,8 @@ final class PostTemplatesResolverModule extends Module
             return $template;
         }
 
-        tw()->getTwig()->addPath(dirname($template));
-        echo tw()->getTwig()->render(basename($template), []);
+        twig()->addPath(dirname($template));
+        echo twig()->render(basename($template), []);
 
         return null;
     }

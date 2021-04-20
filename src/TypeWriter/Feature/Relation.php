@@ -17,6 +17,7 @@ use TypeWriter\Util\AdminUtil;
 use WP_Post;
 use function array_filter;
 use function array_map;
+use function array_values;
 use function get_current_screen;
 use function get_post_meta;
 use function intval;
@@ -138,7 +139,7 @@ class Relation extends Feature
         $objectIds = array_map(fn($val): int => intval($val), $objectIds);
         $objectIds = array_filter($objectIds, fn(int $val): bool => $val > 0);
 
-        return $objectIds;
+        return array_values($objectIds);
     }
 
 }

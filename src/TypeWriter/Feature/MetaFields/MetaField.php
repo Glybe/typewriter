@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace TypeWriter\Feature\MetaFields;
 
-use Columba\Facade\Jsonable;
+use JsonSerializable;
 use function array_merge;
 
 /**
@@ -23,7 +23,7 @@ use function array_merge;
  * @package TypeWriter\Feature\MetaFields
  * @since 1.0.0
  */
-abstract class MetaField implements Jsonable
+abstract class MetaField implements JsonSerializable
 {
 
     protected array $attributes = [];
@@ -58,11 +58,11 @@ abstract class MetaField implements Jsonable
      *
      * @param string $name
      *
-     * @return mixed|null
+     * @return mixed
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function getAttribute(string $name)
+    public function getAttribute(string $name): mixed
     {
         return $this->attributes[$name] ?? null;
     }
@@ -141,7 +141,7 @@ abstract class MetaField implements Jsonable
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setAttribute(string $name, $value): self
+    public function setAttribute(string $name, mixed $value): self
     {
         $this->attributes[$name] = $value;
 

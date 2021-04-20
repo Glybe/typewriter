@@ -774,23 +774,23 @@ class PostType
         $pt->builtIn = $wp->_builtin;
         $pt->canExport = $wp->can_export;
         $pt->capabilityType = $wp->capability_type;
-        $pt->excludeFromSearch = $wp->exclude_from_search;
+        $pt->excludeFromSearch = $wp->exclude_from_search ?? false;
         $pt->hasArchive = $wp->has_archive;
         $pt->hierarchical = $wp->hierarchical;
         $pt->mapMetaCap = $wp->map_meta_cap;
         $pt->menuIcon = $wp->menu_icon;
         $pt->menuPosition = $wp->menu_position;
         $pt->public = $wp->public;
-        $pt->publiclyQueryable = $wp->publicly_queryable;
+        $pt->publiclyQueryable = $wp->publicly_queryable ?? true;
         $pt->queryVar = $wp->query_var ?: $pt->id;
         $pt->rewrite = $wp->rewrite ?: null;
-        $pt->showInAdminBar = $wp->show_in_admin_bar;
-        $pt->showInMenu = $wp->show_in_menu;
-        $pt->showInMenus = $wp->show_in_nav_menus;
+        $pt->showInAdminBar = $wp->show_in_admin_bar ?? true;
+        $pt->showInMenu = $wp->show_in_menu ?? true;
+        $pt->showInMenus = $wp->show_in_nav_menus ?? true;
         $pt->showInRest = $wp->show_in_rest;
-        $pt->showUi = $wp->show_ui;
+        $pt->showUi = $wp->show_ui ?? true;
         $pt->supports = $wp->supports ?? [];
-        $pt->taxonomies = array_map(fn(string $tax) => Taxonomy::get($tax), get_object_taxonomies($id, 'names'));
+        $pt->taxonomies = array_map(fn(string $tax) => Taxonomy::get($tax), get_object_taxonomies($id));
 
         return $pt;
     }

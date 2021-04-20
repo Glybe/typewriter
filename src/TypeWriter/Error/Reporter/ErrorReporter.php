@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace TypeWriter\Error\Reporter;
 
-use Columba\Router\RouterException;
 use JetBrains\PhpStorm\NoReturn;
 use Raxos\Foundation\Environment;
+use Raxos\Router\Error\RuntimeException;
 use Throwable;
 use TypeWriter\Error\Runtime\PhpException;
 use function error_reporting;
@@ -106,12 +106,11 @@ final class ErrorReporter
     public final function onException(Throwable $err): void
     {
         $skipRouteExceptions = [
-            RouterException::ERR_MIDDLEWARE_THREW_EXCEPTION,
-            RouterException::ERR_RENDERER_THREW_EXCEPTION,
-            RouterException::ERR_ROUTE_THREW_EXCEPTION
+            RuntimeException::ERR_EXCEPTION_IN_MIDDLEWARE,
+            RuntimeException::ERR_EXCEPTION_IN_HANDLER
         ];
 
-        if ($err instanceof RouterException && in_array($err->getCode(), $skipRouteExceptions)) {
+        if ($err instanceof RuntimeException && in_array($err->getCode(), $skipRouteExceptions)) {
             $err = $err->getPrevious();
         }
 

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace TypeWriter\Feature;
 
+use Raxos\Database\Error\DatabaseException;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Util\AdminUtil;
 use function get_current_screen;
@@ -94,6 +95,7 @@ class PostThumbnail extends Feature
      *
      * @param int $postId
      *
+     * @throws DatabaseException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @internal
@@ -105,7 +107,8 @@ class PostThumbnail extends Feature
         tw()->getDatabase()->query()
             ->deleteFrom($wpdb->postmeta)
             ->where('meta_key', $this->metaKey)
-            ->and('meta_value', $postId);
+            ->and('meta_value', $postId)
+            ->run();
     }
 
     /**

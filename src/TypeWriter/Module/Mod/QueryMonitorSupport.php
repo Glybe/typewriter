@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace TypeWriter\Module\Mod;
 
-use Columba\Database\Query\Statement;
 use PDO;
 use QM_Backtrace;
 use QM_Collector;
@@ -20,6 +19,7 @@ use QM_Collector_DB_Queries;
 use QM_Collector_Environment;
 use QM_Collectors;
 use QM_Util;
+use Raxos\Database\Query\Statement;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Facade\Plugin;
 use TypeWriter\Module\Module;
@@ -159,7 +159,10 @@ final class QueryMonitorSupport extends Module
             return;
         }
 
+        /** @noinspection PhpIncludeInspection */
         require_once $pluginDir . '/classes/Plugin.php';
+
+        /** @noinspection PhpIncludeInspection */
         require_once $pluginDir . '/classes/Backtrace.php';
 
         if (!defined('SAVEQUERIES')) {
@@ -289,7 +292,7 @@ final class QueryMonitorSupport extends Module
                 }
 
                 $address = isset($_SERVER['SERVER_ADDR']) ? wp_unslash($_SERVER['SERVER_ADDR']) : null;
-                $serverVersion = isset($server[1]) ? $server[1] : null;
+                $serverVersion = $server[1] ?? null;
 
                 $this->data['server'] = [
                     'name' => $server[0],

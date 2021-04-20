@@ -12,14 +12,13 @@ declare(strict_types=1);
 
 namespace TypeWriter;
 
-use Columba\Database\Connection\Connection;
-use Columba\Http\RequestMethod;
-use Columba\Router\RouterException;
-use Columba\Util\Stopwatch;
 use Composer\InstalledVersions;
 use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Pure;
+use Raxos\Database\Connection\Connection;
 use Raxos\Foundation\Storage\SimpleKeyValue;
+use Raxos\Foundation\Util\Stopwatch;
+use Raxos\Http\HttpMethods;
 use TypeWriter\Error\Reporter\ErrorReporter;
 use TypeWriter\Error\Reporter\ProductionErrorChannel;
 use TypeWriter\Error\Reporter\WhoopsErrorChannel;
@@ -28,7 +27,6 @@ use TypeWriter\Facade\Hooks;
 use TypeWriter\Feature\Feature;
 use TypeWriter\Module\Module;
 use TypeWriter\Router\Router;
-use TypeWriter\Twig\TwigRenderer;
 use function defined;
 use function in_array;
 use function is_admin;
@@ -52,7 +50,6 @@ final class TypeWriter
     private ErrorReporter $errorReporter;
     private Router $router;
     private SimpleKeyValue $state;
-    private TwigRenderer $twig;
 
     /** @var Feature[] */
     private array $features = [];
@@ -93,7 +90,6 @@ final class TypeWriter
      */
     public final function initialize(): void
     {
-        $this->twig = new TwigRenderer();
         $this->router = new Router();
 
         if ($this->isInstalling()) {
@@ -106,7 +102,6 @@ final class TypeWriter
     /**
      * Runs everything. First checks if we can use router instead of WP stuff.
      *
-     * @throws RouterException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -223,18 +218,6 @@ final class TypeWriter
     public final function getState(): SimpleKeyValue
     {
         return $this->state;
-    }
-
-    /**
-     * Gets the Twig renderer.
-     *
-     * @return TwigRenderer
-     * @author Bas Milius <bas@mili.us>
-     * @since 1.0.0
-     */
-    public final function getTwig(): TwigRenderer
-    {
-        return $this->twig;
     }
 
     /**
@@ -450,32 +433,25 @@ final class TypeWriter
      * and otherwise the given onNotUsed callback is executed.
      *
      * @param callable|null $onUsed
-     * @param callable|null $onNotUsed
+     * @param callable|null $onUnused
      *
-     * @throws RouterException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    private function runRouter(?callable $onUsed = null, ?callable $onNotUsed = null): void
+    private function runRouter(?callable $onUsed = null, ?callable $onUnused = null): void
     {
         $_SERVER['REQUEST_URI'] ??= '/';
-        $_SERVER['REQUEST_METHOD'] ??= RequestMethod::GET;
+        $_SERVER['REQUEST_METHOD'] ??= HttpMethods::GET;
 
-        try {
-            $this->router->execute($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
+        $didUseRouter = $this->router->resolveAndRespond();
 
-            if ($onUsed !== null) {
-                $onUsed();
-            }
-        } catch (RouterException $err) {
-            if ($err->getCode() !== $err::ERR_NOT_FOUND) {
-                throw $err;
-            }
-
+        if ($didUseRouter && $onUsed !== null) {
+            $onUsed();
+        } else {
             $this->state->set('tw.is-wp-used', true);
 
-            if ($onNotUsed !== null) {
-                $onNotUsed();
+            if ($onUnused !== null) {
+                $onUnused();
             }
         }
     }

@@ -173,7 +173,7 @@ final class LocalAvatarModule extends Module
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public final function onPreGetAvatarData(array $args, $idOrEmail): array
+    public final function onPreGetAvatarData(array $args, mixed $idOrEmail): array
     {
         $userId = 0;
 

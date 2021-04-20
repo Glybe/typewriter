@@ -3,9 +3,10 @@ declare(strict_types=1);
 
 namespace TypeWriter\Facade;
 
-use Columba\Util\StringUtil;
 use Generator;
+use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Pure;
+use Raxos\Foundation\Util\StringUtil;
 use TypeWriter\Error\ViolationException;
 use TypeWriter\Feature\Gallery;
 use TypeWriter\Feature\IntroTextMetaFields;
@@ -239,6 +240,10 @@ class Post
      * @since 1.0.0
      * @see IntroTextMetaFields
      */
+    #[ArrayShape([
+        'heading' => 'string',
+        'leading' => 'string'
+    ])]
     public static function intro(): array
     {
         return IntroTextMetaFields::get(self::id());

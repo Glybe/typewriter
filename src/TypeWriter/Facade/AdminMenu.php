@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace TypeWriter\Facade;
 
-use Columba\Util\StringUtil;
+use Raxos\Foundation\Util\StringUtil;
 use function add_menu_page;
 use function add_submenu_page;
 use function remove_menu_page;
 use function remove_submenu_page;
-use function TypeWriter\tw;
+use function TypeWriter\twig;
 
 /**
  * Class AdminMenu
@@ -97,7 +97,7 @@ final class AdminMenu
         return function () use ($template, $contextGenerator): void {
             $context = $contextGenerator !== null ? $contextGenerator() : [];
 
-            echo tw()->getTwig()->render($template, $context);
+            echo twig()->render($template, $context);
         };
     }
 

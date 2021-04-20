@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace TypeWriter\Twig\Controller;
 
+use JetBrains\PhpStorm\ArrayShape;
 use TypeWriter\Facade\Post;
 
 /**
@@ -31,6 +32,9 @@ class PostController extends Controller
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
+    #[ArrayShape([
+        'post' => Post::class
+    ])]
     public function getContext(): array
     {
         return [

@@ -16,7 +16,7 @@ use TypeWriter\Facade\Hooks;
 use TypeWriter\Facade\Plugin;
 use TypeWriter\Module\Module;
 use function array_filter;
-use function strpos;
+use function str_contains;
 
 /**
  * Class WPMigrateDbSupport
@@ -66,7 +66,7 @@ final class WPMigrateDbSupport extends Module
      */
     public final function onThemeDirectories(array $directories): array
     {
-        return array_filter($directories, fn(string $directory): bool => strpos($directory, 'temp-theme') === false);
+        return array_filter($directories, fn(string $directory): bool => !str_contains($directory, 'temp-theme'));
     }
 
 }

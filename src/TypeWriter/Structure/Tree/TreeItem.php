@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace TypeWriter\Structure\Tree;
 
-use Columba\Facade\IsCountable;
+use Countable;
 use TypeWriter\Facade\PostWith;
 use WP_Post;
 use function count;
@@ -15,7 +15,7 @@ use function count;
  * @package TypeWriter\Structure\Tree
  * @since 1.0.0
  */
-class TreeItem extends PostWith implements IsCountable
+class TreeItem extends PostWith implements Countable
 {
 
     protected array $items = [];

@@ -53,11 +53,11 @@ final class Transient
      * @param string $key
      * @param int $mode
      *
-     * @return mixed|null
+     * @return mixed
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public static function get(string $key, int $mode = self::DEFAULT)
+    public static function get(string $key, int $mode = self::DEFAULT): mixed
     {
         $value = $mode === self::SITE ? get_site_transient($key) : get_transient($key);
 
@@ -80,7 +80,7 @@ final class Transient
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public static function set(string $key, $value, int $expiresIn = 3600, int $mode = self::DEFAULT): bool
+    public static function set(string $key, mixed $value, int $expiresIn = 3600, int $mode = self::DEFAULT): bool
     {
         $value = json_encode($value);
 
@@ -103,7 +103,7 @@ final class Transient
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public static function remember(string $key, int $expiresIn, callable $fn, int $mode = self::DEFAULT)
+    public static function remember(string $key, int $expiresIn, callable $fn, int $mode = self::DEFAULT): mixed
     {
         $known = self::get($key, $mode);
 

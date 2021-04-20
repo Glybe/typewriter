@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace TypeWriter\Module\Core;
 
 use Composer\InstalledVersions;
+use JetBrains\PhpStorm\ArrayShape;
 use TypeWriter\Facade\AdminMenu;
 use TypeWriter\Facade\Dependencies;
 use TypeWriter\Facade\Hooks;
@@ -79,6 +80,14 @@ final class AdminMenuModule extends Module
      * @since 1.0.0
      * @internal
      */
+    #[ArrayShape([
+        'logo' => 'mixed',
+        'logo_url' => 'mixed',
+        'version' => 'mixed',
+        'dependencies' => 'array',
+        'modules' => '\TypeWriter\Module\Module[]',
+        'plugins' => 'array[]'
+    ])]
     public final function generateAboutContext(): array
     {
         $dependencies = [];

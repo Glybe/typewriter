@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace TypeWriter\Feature;
 
+use JetBrains\PhpStorm\ArrayShape;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Feature\MetaFields\MetaFields;
 use TypeWriter\Feature\MetaFields\TextareaControlMetaField;
@@ -73,6 +74,10 @@ class IntroTextMetaFields extends MetaFields
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
+    #[ArrayShape([
+        'heading' => 'string',
+        'leading' => 'string'
+    ])]
     public static function get(int $postId): array
     {
         $metaValue = get_post_meta($postId, 'tw_intro_text', true);

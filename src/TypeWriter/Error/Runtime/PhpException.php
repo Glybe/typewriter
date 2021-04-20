@@ -36,37 +36,18 @@ abstract class PhpException extends RuntimeException
      */
     public static function createFromCode(int $code, string $message): RuntimeException
     {
-        switch ($code) {
-            case E_DEPRECATED:
-                return new PhpDeprecatedException($message);
-
-            case E_NOTICE:
-                return new PhpNoticeException($message);
-
-            case E_RECOVERABLE_ERROR:
-                return new PhpRecoverableErrorException($message);
-
-            case E_STRICT:
-                return new PhpStrictException($message);
-
-            case E_USER_DEPRECATED:
-                return new PhpUserDeprecatedException($message);
-
-            case E_USER_ERROR:
-                return new PhpUserErrorException($message);
-
-            case E_USER_NOTICE:
-                return new PhpUserNoticeException($message);
-
-            case E_USER_WARNING:
-                return new PhpUserWarningException($message);
-
-            case E_WARNING:
-                return new PhpWarningException($message);
-
-            default:
-                return new RuntimeException($message, $code);
-        }
+        return match ($code) {
+            E_DEPRECATED => new PhpDeprecatedException($message),
+            E_NOTICE => new PhpNoticeException($message),
+            E_RECOVERABLE_ERROR => new PhpRecoverableErrorException($message),
+            E_STRICT => new PhpStrictException($message),
+            E_USER_DEPRECATED => new PhpUserDeprecatedException($message),
+            E_USER_ERROR => new PhpUserErrorException($message),
+            E_USER_NOTICE => new PhpUserNoticeException($message),
+            E_USER_WARNING => new PhpUserWarningException($message),
+            E_WARNING => new PhpWarningException($message),
+            default => new RuntimeException($message, $code),
+        };
     }
 
 }

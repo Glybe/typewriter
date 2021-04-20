@@ -17,6 +17,7 @@ use function is_array;
 use function is_numeric;
 use function sprintf;
 use function str_replace;
+use function trim;
 
 /**
  * Class AjaxHandler
@@ -138,7 +139,7 @@ final class AjaxHandler
         $type = str_replace('boolean', 'bool', $type);
         $type = str_replace('integer', 'int', $type);
 
-        return $type;
+        return trim($type);
     }
 
     /**

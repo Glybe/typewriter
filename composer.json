@@ -32,6 +32,7 @@
         "ext-pdo": "*",
         "basmilius/columba": "@dev",
         "filp/whoops": "^2",
+        "jetbrains/phpstorm-attributes": "^1.0",
         "joypixels/emoji-toolkit": "^6",
         "league/climate": "^3",
         "raxos/cache": "dev-master",

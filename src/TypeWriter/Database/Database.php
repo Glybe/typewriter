@@ -12,20 +12,20 @@ declare(strict_types=1);
 
 namespace TypeWriter\Database;
 
-use Columba\Database\Connection\Connection;
-use Columba\Database\Connection\MySqlConnection;
-use Columba\Database\Connector\Connector;
-use Columba\Database\Connector\MySqlConnector;
-use Columba\Database\Db;
 use PDO;
 use PDOException;
+use Raxos\Database\Connection\Connection;
+use Raxos\Database\Connection\MySqlConnection;
+use Raxos\Database\Connector\Connector;
+use Raxos\Database\Connector\MySqlConnector;
+use Raxos\Database\Db;
+use Raxos\Database\Error\DatabaseException;
 use TypeWriter\Facade\Hooks;
 use wpdb;
 use function __;
 use function addslashes;
 use function array_change_key_case;
 use function array_filter;
-use function Columba\Util\pre;
 use function defined;
 use function error_log;
 use function explode;
@@ -65,6 +65,7 @@ final class Database extends wpdb
      * @param string $host
      * @param int $port
      *
+     * @throws DatabaseException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -94,6 +95,7 @@ final class Database extends wpdb
 
     /**
      * {@inheritdoc}
+     * @throws DatabaseException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -185,6 +187,7 @@ final class Database extends wpdb
      *
      * @hook tw.database.after-query (string $query, int $queryId): void
      *
+     * @throws DatabaseException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -267,6 +270,7 @@ final class Database extends wpdb
 
     /**
      * {@inheritdoc}
+     * @throws DatabaseException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -289,6 +293,7 @@ final class Database extends wpdb
 
     /**
      * {@inheritdoc}
+     * @throws DatabaseException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
@@ -297,7 +302,7 @@ final class Database extends wpdb
         if (empty($modes)) {
             $smt = $this->connection->prepare('SELECT @@SESSION.sql_mode');
             $smt->run();
-            $res = $smt->fetch(false, PDO::FETCH_NUM);
+            $res = $smt->fetch(PDO::FETCH_NUM);
 
             $modes = array_filter(explode(',', $res[0]), fn($val): bool => !empty($val));
         }
@@ -321,6 +326,7 @@ final class Database extends wpdb
      *
      * @param string $query
      *
+     * @throws DatabaseException
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */

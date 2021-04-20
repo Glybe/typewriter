@@ -132,6 +132,8 @@ final class LoginModule extends Module
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @internal
+     *
+     * @noinspection PhpUnusedParameterInspection
      */
     public final function onLoginTitle(string $_, string $title): string
     {

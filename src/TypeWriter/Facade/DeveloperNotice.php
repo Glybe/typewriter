@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace TypeWriter\Facade;
 
+use JetBrains\PhpStorm\NoReturn;
+
 /**
  * Class DeveloperNotice
  *
@@ -32,6 +34,7 @@ final class DeveloperNotice
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
+    #[NoReturn]
     public static function base(string $type, string $title, callable $render): void
     {
         ob_get_clean();

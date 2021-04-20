@@ -3,11 +3,10 @@ declare(strict_types=1);
 
 namespace TypeWriter\Module\Core;
 
-use Columba\Util\StringUtil;
+use Raxos\Foundation\Util\StringUtil;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
 use function array_filter;
-use function Columba\Util\preDie;
 use function esc_attr;
 use function esc_url;
 use function get_oembed_endpoint_url;
@@ -23,6 +22,8 @@ use function is_singular;
 use function is_string;
 use function remove_query_arg;
 use function sprintf;
+use function str_ends_with;
+use function str_starts_with;
 use function strpos;
 use function substr;
 use function trim;
@@ -149,11 +150,11 @@ final class ImproveOutputModule extends Module
             'prerender' => [],
         ];
 
-        foreach ($hints as $relation_type => $urls) {
+        foreach ($hints as $relationType => $urls) {
             $uniqueUrls = [];
-            $urls = Hooks::applyFilters('wp_resource_hints', $urls, $relation_type);
+            $urls = Hooks::applyFilters('wp_resource_hints', $urls, $relationType);
 
-            foreach ($urls as $key => $url) {
+            foreach ($urls as $url) {
                 $atts = [];
 
                 if (is_array($url)) {
@@ -171,21 +172,21 @@ final class ImproveOutputModule extends Module
                     continue;
                 }
 
-                if (in_array($relation_type, ['preconnect', 'dns-prefetch'])) {
+                if (in_array($relationType, ['preconnect', 'dns-prefetch'])) {
                     $parsed = wp_parse_url($url);
 
                     if (empty($parsed['host'])) {
                         continue;
                     }
 
-                    if ($relation_type === 'preconnect' && !empty($parsed['scheme'])) {
+                    if ($relationType === 'preconnect' && !empty($parsed['scheme'])) {
                         $url = $parsed['scheme'] . '://' . $parsed['host'];
                     } else {
                         $url = '//' . $parsed['host'];
                     }
                 }
 
-                $atts['rel'] = $relation_type;
+                $atts['rel'] = $relationType;
                 $atts['href'] = $url;
 
                 $uniqueUrls[$url] = $atts;
@@ -262,13 +263,13 @@ final class ImproveOutputModule extends Module
         }
 
         return array_filter($classes, function (string $class) use ($blacklist): bool {
-            if (StringUtil::endsWith($class, '-php'))
+            if (str_ends_with($class, '-php'))
                 return false;
 
-            if (StringUtil::endsWith($class, '-c'))
+            if (str_ends_with($class, '-c'))
                 return false;
 
-            if (StringUtil::startsWith($class, 'error'))
+            if (str_starts_with($class, 'error'))
                 return false;
 
             if (strpos($class, '-id-'))

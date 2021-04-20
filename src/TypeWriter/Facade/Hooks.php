@@ -89,7 +89,7 @@ final class Hooks
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public static function applyFilters(string $filter, $value, ...$more)
+    public static function applyFilters(string $filter, mixed $value, ...$more): mixed
     {
         return apply_filters($filter, $value, ...$more);
     }

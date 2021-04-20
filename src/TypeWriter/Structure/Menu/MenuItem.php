@@ -86,7 +86,7 @@ class MenuItem extends MenuObject
      */
     public function getId(): int
     {
-        return intval($this->post->ID);
+        return $this->post->ID;
     }
 
     /**

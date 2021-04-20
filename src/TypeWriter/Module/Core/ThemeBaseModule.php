@@ -33,6 +33,7 @@ use function single_term_title;
 use function substr;
 use function TypeWriter\autoloader;
 use function TypeWriter\tw;
+use function TypeWriter\twig;
 use function zeroise;
 
 /**
@@ -80,7 +81,7 @@ final class ThemeBaseModule extends Module
                 continue;
             }
 
-            tw()->getTwig()->addPath($dir . '/template', 'theme');
+            twig()->addPath($dir . '/template', 'theme');
         }
 
         Hooks::action('after_setup_theme', [$this, 'onWordPressAfterSetupTheme']);
@@ -183,10 +184,10 @@ final class ThemeBaseModule extends Module
         }
 
         if (is_archive() && !empty($m)) {
-            $my_year = substr($m, 0, 4);
-            $my_month = $wp_locale->get_month(substr($m, 4, 2));
-            $my_day = intval(substr($m, 6, 2));
-            $parts[] = $my_year . ($my_month ? $my_month : '') . ($my_day ? $my_day : '');
+            $year = substr($m, 0, 4);
+            $month = $wp_locale->get_month(substr($m, 4, 2));
+            $day = intval(substr($m, 6, 2));
+            $parts[] = $year . ($month ?: '') . ($day ?: '');
         }
 
         if (is_archive() && !empty($year)) {
