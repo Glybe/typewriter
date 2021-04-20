@@ -162,6 +162,31 @@ Happy Organizing! 😍
 
 == Changelog ==
 
+Apr 07, 2021 - Version 4.7.2
+- Improved: Tooltip
+- Improved: UI
+- Optimized: FileBird zip size
+- Fixed: Can't set folder Uncategorized as default in folder load
+- Fixed: Update database make folders duplicated when "Each user folder mode" enabled
+
+Apr 01, 2021 - Version 4.7.1
+- Added: Upload multiple images in multiple folders when upload processing
+- Fixed: Append wrong folders in right side
+
+Mar 30, 2021 - Version 4.7
+- Added: New Resize bar
+- Improved: Performance
+- Improved: Optimize code
+- Improved: UI
+- Improved: Text
+- Supported: PHP 8 and greater
+- Supported: Tatsu Builder
+- Fixed: Counter in WPML
+- Fixed: Tooltip bugs
+- Fixed: Can't set "Uncategorized" default folder load
+- Fixed: Reorder on Edit gallery
+- Fixed: Small bugs
+
 = Feb 5, 2021 - Version 4.5 =
 - New feature: Download folder (Pro)
 - Added: Unlimited folders

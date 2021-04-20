@@ -35,6 +35,7 @@ use function function_exists;
 use function get_loaded_extensions;
 use function implode;
 use function ini_get;
+use function is_readable;
 use function method_exists;
 use function php_sapi_name;
 use function php_uname;
@@ -98,7 +99,7 @@ final class QueryMonitorSupport extends Module
     {
         global $wpdb;
 
-        if (!SAVEQUERIES)
+        if (!defined('SAVEQUERIES') || !SAVEQUERIES)
             return;
 
         $trace = new QM_Backtrace();
@@ -153,6 +154,10 @@ final class QueryMonitorSupport extends Module
         global $wpdb;
 
         $pluginDir = Plugin::dir('query-monitor');
+
+        if (!is_readable($pluginDir . '/classes/Plugin.php') || !is_readable($pluginDir . '/classes/Backtrace.php')) {
+            return;
+        }
 
         require_once $pluginDir . '/classes/Plugin.php';
         require_once $pluginDir . '/classes/Backtrace.php';
