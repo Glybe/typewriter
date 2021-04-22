@@ -21,6 +21,6 @@
     },
     "devDependencies": {
         "glob-all": "^3.2.1",
-        "purgecss-webpack-plugin": "^4.0.2"
+        "purgecss-webpack-plugin": "^4.0.3"
     }
 }

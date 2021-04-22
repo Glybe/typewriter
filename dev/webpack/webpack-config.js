@@ -1,8 +1,8 @@
 let webpack = require("webpack");
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const TerserJSPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CSSMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserJSPlugin = require("terser-webpack-plugin");
 
 const postcssFocusWithin = require("postcss-focus-within");
 
@@ -27,10 +27,9 @@ module.exports = {
                     }
                 }
             }),
-            new OptimizeCSSAssetsPlugin({
-                canPrint: false,
-                cssProcessor: require("cssnano"),
-                cssProcessorPluginOptions: {
+            new CSSMinimizerPlugin({
+                parallel: true,
+                minimizerOptions: {
                     preset: ["advanced", {
                         autoprefixer: {
                             add: true
