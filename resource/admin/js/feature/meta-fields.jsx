@@ -64,7 +64,7 @@ const fieldRenderers = {
 
 function MetaFieldsComponent(props)
 {
-    const fields = props.fields.map(field => fieldRenderers[field.control_type](field, props.onUpdate, props.metaFields));
+    const fields = props.fields.map(field => fieldRenderers[field.control_type](field, props.onUpdate, props.metaFields || {}));
 
     return (
 
