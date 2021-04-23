@@ -1,4 +1,4 @@
-import {BaseControl, PanelRow, RangeControl, TextareaControl, TextControl, ToggleControl} from "@wordpress/components";
+import {BaseControl, RangeControl, TextareaControl, TextControl, ToggleControl} from "@wordpress/components";
 import {compose} from "@wordpress/compose";
 import {withDispatch, withSelect} from "@wordpress/data";
 import {PluginDocumentSettingPanel} from "@wordpress/edit-post";
