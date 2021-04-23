@@ -19,7 +19,7 @@ const fieldRenderers = {
                 <RangeControl
                         max={field.max || 10}
                         min={field.min || 0}
-                        value={metaFields[field.meta_key]}
+                        value={metaFields[field.meta_key] || field.min || 0}
                         label={__(field.label, "tw")}
                         onChange={value => onUpdate(field.meta_key, value, metaFields)}/>
         );
@@ -29,7 +29,7 @@ const fieldRenderers = {
     {
         return (
                 <TextControl
-                        value={metaFields[field.meta_key]}
+                        value={metaFields[field.meta_key] || ""}
                         label={__(field.label, "tw")}
                         placeholder={__(field.placeholder, "tw")}
                         onChange={value => onUpdate(field.meta_key, value, metaFields)}/>
@@ -40,7 +40,7 @@ const fieldRenderers = {
     {
         return (
                 <TextareaControl
-                        value={metaFields[field.meta_key]}
+                        value={metaFields[field.meta_key] || ""}
                         label={__(field.label, "tw")}
                         placeholder={__(field.placeholder, "tw")}
                         onChange={value => onUpdate(field.meta_key, value, metaFields)}/>
@@ -53,7 +53,7 @@ const fieldRenderers = {
                 <BaseControl label={__(field.label, "tw")}>
                     <div style={{height: 6}}/>
                     <ToggleControl
-                            checked={metaFields[field.meta_key]}
+                            checked={metaFields[field.meta_key] || false}
                             help={__(field.help, "tw")}
                             onChange={value => onUpdate(field.meta_key, value, metaFields)}/>
                 </BaseControl>
