@@ -22,6 +22,7 @@ use function pll_home_url;
 use function pll_register_string;
 use function pll_translate_string;
 use function rtrim;
+use function TypeWriter\tw;
 
 /**
  * Class Site
@@ -78,7 +79,7 @@ final class Site
      */
     public static function translate(string $str, ?string $language = null, string $domain = 'domain'): string
     {
-        if (function_exists('pll_translate_string')) {
+        if (tw()->isFront() && function_exists('pll_translate_string')) {
             $str = pll_translate_string($str, $language ?? pll_current_language());
         } else {
             $str = __($str, $domain);
