@@ -6,6 +6,7 @@ import {BaseControl, Button, ButtonGroup, PanelBody, RangeControl} from "@wordpr
 import {Fragment, useEffect, useState} from "@wordpress/element";
 import {__} from "@wordpress/i18n";
 import {columnsIcon} from "../../icon/features.jsx";
+import {useSelect} from "@wordpress/data";
 
 export default function register()
 {
@@ -159,12 +160,13 @@ export default function register()
         },
         attributes: {},
 
-        edit({attributes, setAttributes})
+        edit({clientId})
         {
             const blockProps = useBlockProps({className: "tw-block-grid"});
+            const columnCount = useSelect(select => select("core/block-editor").getBlock(clientId).innerBlocks, []);
 
             return (
-                    <div {...blockProps}>
+                    <div {...blockProps} style={{"--grid-columns": columnCount.length}}>
                         <BlockControls/>
                         <InnerBlocks
                                 allowedBlocks={["tw/structure-column"]}
@@ -174,7 +176,7 @@ export default function register()
             );
         },
 
-        save({attributes})
+        save()
         {
             const blockProps = useBlockProps.save({className: "row"});
 

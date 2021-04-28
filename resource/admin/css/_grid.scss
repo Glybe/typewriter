@@ -9,6 +9,7 @@
 .tw-block-grid
 {
     position: relative;
+    counter-reset: grid-columns;
 
     > .block-editor-inner-blocks > .block-editor-block-list__layout
     {
@@ -16,7 +17,9 @@
         display: flex;
         margin-left: -15px;
         margin-right: -15px;
-        flex-flow: row wrap;
+        flex-flow: row nowrap;
+        gap: 15px;
+        overflow: hidden;
 
         > [data-type="tw/structure-column"]
         {
@@ -46,6 +49,7 @@
         padding: 15px;
         width: 100%;
         border-collapse: collapse;
+        counter-increment: grid-columns;
 
         > .block-editor-inner-blocks
         {
@@ -56,27 +60,27 @@
         {
             &.preview-xs.col-#{$i}
             {
-                width: calc((var(--grid-width) + 30px) / 12 * #{$i});
+                width: calc((var(--grid-width) + 30px - ((var(--grid-columns) - 1) * 15px)) / 12 * #{$i});
             }
 
             &.preview-sm.sm\:col-#{$i}
             {
-                width: calc((var(--grid-width) + 30px) / 12 * #{$i});
+                width: calc((var(--grid-width) + 30px - ((var(--grid-columns) - 1) * 15px)) / 12 * #{$i});
             }
 
             &.preview-md.md\:col-#{$i}
             {
-                width: calc((var(--grid-width) + 30px) / 12 * #{$i});
+                width: calc((var(--grid-width) + 30px - ((var(--grid-columns) - 1) * 15px)) / 12 * #{$i});
             }
 
             &.preview-lg.lg\:col-#{$i}
             {
-                width: calc((var(--grid-width) + 30px) / 12 * #{$i});
+                width: calc((var(--grid-width) + 30px - ((var(--grid-columns) - 1) * 15px)) / 12 * #{$i});
             }
 
             &.preview-xl.xl\:col-#{$i}
             {
-                width: calc((var(--grid-width) + 30px) / 12 * #{$i});
+                width: calc((var(--grid-width) + 30px - ((var(--grid-columns) - 1) * 15px)) / 12 * #{$i});
             }
         }
     }
