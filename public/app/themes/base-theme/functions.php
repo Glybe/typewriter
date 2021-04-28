@@ -24,3 +24,8 @@ Hooks::action('wp_enqueue_scripts', function (): void {
     Dependencies::enqueueScript('app:vendor', Dependencies::themeUri('dist/vendor.js'));
     Dependencies::enqueueScript('app:theme', Dependencies::themeUri('dist/theme.js'));
 });
+
+register_block_style('tw/structure-column', [
+    'name' => 'test',
+    'label' => 'Test style'
+]);

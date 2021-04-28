@@ -64,12 +64,8 @@ export default function register()
         edit({attributes, setAttributes})
         {
             const [, setRerenderState] = useState();
-            const blockProps = useBlockProps();
             const cols = getColumnValues(attributes);
-
-            blockProps.className = [blockProps.classes, "tw-block-column", `preview-${preview}`, ...getColumnClasses(cols, true)]
-                    .filter(c => !!c)
-                    .join(" ");
+            const blockProps = useBlockProps({className: [attributes.className || null, "tw-block-column", `preview-${preview}`, ...getColumnClasses(cols, true)].filter(c => !!c).join(" ")});
 
             useEffect(() =>
             {
