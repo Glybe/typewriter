@@ -164,7 +164,7 @@ export default function register()
             const blockProps = useBlockProps({className: "tw-block-grid"});
 
             return (
-                    <div {...blockProps} style={{marginBottom: 15}}>
+                    <div {...blockProps}>
                         <BlockControls/>
                         <InnerBlocks
                                 allowedBlocks={["tw/structure-column"]}
