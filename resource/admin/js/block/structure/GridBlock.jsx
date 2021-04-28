@@ -162,11 +162,12 @@ export default function register()
 
         edit({clientId})
         {
+            const select = useSelect(select => select("core/block-editor"), [clientId]);
+            const block = select.getBlock(clientId);
             const blockProps = useBlockProps({className: "tw-block-grid"});
-            const columnCount = useSelect(select => select("core/block-editor").getBlock(clientId).innerBlocks, []);
 
             return (
-                    <div {...blockProps} style={{"--grid-columns": columnCount.length}}>
+                    <div {...blockProps} style={{"--grid-columns": block.innerBlocks.length}}>
                         <BlockControls/>
                         <InnerBlocks
                                 allowedBlocks={["tw/structure-column"]}
