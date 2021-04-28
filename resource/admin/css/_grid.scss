@@ -13,7 +13,11 @@
 
     .block-editor-block-list__block
     {
-        margin: 0;
+        &[data-type="tw/structure-column"],
+        .tw-block-column
+        {
+            margin: 0;
+        }
     }
 
     .block-list-appender
@@ -36,6 +40,11 @@
         display: block;
         padding: 15px;
         width: 100%;
+
+        > .block-editor-inner-blocks
+        {
+            margin: -15px 0;
+        }
 
         @for $i from 1 through 12
         {
