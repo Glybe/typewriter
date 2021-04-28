@@ -9,7 +9,6 @@
 .tw-block-grid
 {
     position: relative;
-    counter-reset: grid-columns;
 
     > .block-editor-inner-blocks > .block-editor-block-list__layout
     {
@@ -49,7 +48,9 @@
         padding: 15px;
         width: 100%;
         border-collapse: collapse;
-        counter-increment: grid-columns;
+        outline: 2px dashed transparent;
+        outline-offset: -2px;
+        transition: outline-color 180ms ease-out;
 
         > .block-editor-inner-blocks
         {
@@ -85,10 +86,8 @@
         }
     }
 
-    /*&.has-child-selected*/
-    .tw-block-column
+    &.has-child-selected .tw-block-column
     {
-        outline: 2px dashed #f0f0f0;
-        outline-offset: -1px;
+        outline-color: #6b7280;
     }
 }
