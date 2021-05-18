@@ -12,8 +12,11 @@ declare(strict_types=1);
 
 namespace TypeWriter\Facade;
 
+use function array_diff;
 use function in_array;
+use function is_admin;
 use function is_dir;
+use function str_starts_with;
 
 /**
  * Class Plugin
@@ -61,6 +64,25 @@ final class Plugin
         }
 
         return $path;
+    }
+
+    /**
+     * Disables the given plugin when not in admin or rest api.
+     *
+     * @param string[] $pluginSlugs
+     *
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public static function disableOnFrontend(array $pluginSlugs): void
+    {
+        Hooks::filter('option_active_plugins', function (array $plugins) use ($pluginSlugs): array {
+            if (is_admin() || str_starts_with($_SERVER['REQUEST_URI'] ?? '/', '/api')) {
+                return $plugins;
+            }
+
+            return array_diff($plugins, $pluginSlugs);
+        });
     }
 
     /**
