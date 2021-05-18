@@ -289,7 +289,7 @@ final class TypeWriter
      */
     public final function isDebugMode(): bool
     {
-        return true;
+        return env('MODE') === 'development';
     }
 
     /**

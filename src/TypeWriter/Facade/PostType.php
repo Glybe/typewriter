@@ -85,7 +85,7 @@ class PostType
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function register(): self
+    public function register(): static
     {
         if (isset(self::$registered[$this->id]))
             return self::$registered[$this->id];
@@ -391,7 +391,7 @@ class PostType
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setLabels(array $labels): self
+    public function setLabels(array $labels): static
     {
         $this->assertRegistered();
         $this->labels = $labels;
@@ -408,7 +408,7 @@ class PostType
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setCanExport(bool $canExport = true): self
+    public function setCanExport(bool $canExport = true): static
     {
         $this->assertRegistered();
         $this->canExport = $canExport;
@@ -425,7 +425,7 @@ class PostType
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setCapabilityType(?string $capabilityType = null): self
+    public function setCapabilityType(?string $capabilityType = null): static
     {
         $this->assertRegistered();
         $this->capabilityType = $capabilityType ?? $this->id;
@@ -442,7 +442,7 @@ class PostType
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setExcludeFromSearch(bool $excludeFromSearch = true): self
+    public function setExcludeFromSearch(bool $excludeFromSearch = true): static
     {
         $this->assertRegistered();
         $this->excludeFromSearch = $excludeFromSearch;
@@ -459,7 +459,7 @@ class PostType
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setHasArchive(bool $hasArchive = true): self
+    public function setHasArchive(bool $hasArchive = true): static
     {
         $this->assertRegistered();
         $this->hasArchive = $hasArchive;
@@ -476,7 +476,7 @@ class PostType
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setHierarchical(bool $hierarchical = true): self
+    public function setHierarchical(bool $hierarchical = true): static
     {
         $this->assertRegistered();
         $this->hierarchical = $hierarchical;
@@ -493,7 +493,7 @@ class PostType
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setMapMetaCap(bool $mapMetaCap = true): self
+    public function setMapMetaCap(bool $mapMetaCap = true): static
     {
         $this->assertRegistered();
         $this->mapMetaCap = $mapMetaCap;
@@ -510,7 +510,7 @@ class PostType
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setMenuIcon(string $menuIcon): self
+    public function setMenuIcon(string $menuIcon): static
     {
         $this->assertRegistered();
         $this->menuIcon = $menuIcon;
@@ -527,7 +527,7 @@ class PostType
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setMenuLocation(int $menuPosition): self
+    public function setMenuLocation(int $menuPosition): static
     {
         $this->assertRegistered();
         $this->menuPosition = $menuPosition;
@@ -544,7 +544,7 @@ class PostType
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setPublic(bool $public = true): self
+    public function setPublic(bool $public = true): static
     {
         $this->assertRegistered();
         $this->public = $public;
@@ -561,7 +561,7 @@ class PostType
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setPubliclyQueryable(bool $publiclyQueryable = true): self
+    public function setPubliclyQueryable(bool $publiclyQueryable = true): static
     {
         $this->assertRegistered();
         $this->publiclyQueryable = $publiclyQueryable;
@@ -578,7 +578,7 @@ class PostType
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setQueryVar(?string $queryVar = null): self
+    public function setQueryVar(?string $queryVar = null): static
     {
         $this->assertRegistered();
         $this->queryVar = $queryVar ?? $this->id;
@@ -595,7 +595,7 @@ class PostType
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setRewrite(?array $rewrite = null): self
+    public function setRewrite(?array $rewrite = null): static
     {
         $this->assertRegistered();
         $this->rewrite = $rewrite;
@@ -612,7 +612,7 @@ class PostType
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setShowInAdminBar(bool $showInAdminBar = true): self
+    public function setShowInAdminBar(bool $showInAdminBar = true): static
     {
         $this->assertRegistered();
         $this->showInAdminBar = $showInAdminBar;
@@ -629,7 +629,7 @@ class PostType
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setShowInMenu(bool $showInMenu = true): self
+    public function setShowInMenu(bool $showInMenu = true): static
     {
         $this->assertRegistered();
         $this->showInMenu = $showInMenu;
@@ -646,7 +646,7 @@ class PostType
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setShowInMenus(bool $showInMenus = true): self
+    public function setShowInMenus(bool $showInMenus = true): static
     {
         $this->assertRegistered();
         $this->showInMenus = $showInMenus;
@@ -663,7 +663,7 @@ class PostType
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setShowInRest(bool $showInRest = true): self
+    public function setShowInRest(bool $showInRest = true): static
     {
         $this->assertRegistered();
         $this->showInRest = $showInRest;
@@ -680,7 +680,7 @@ class PostType
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setShowUi(bool $showUi = true): self
+    public function setShowUi(bool $showUi = true): static
     {
         $this->assertRegistered();
         $this->showUi = $showUi;
@@ -697,7 +697,7 @@ class PostType
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setSupports(array $supports): self
+    public function setSupports(array $supports): static
     {
         $this->assertRegistered();
         $this->supports = $supports;
@@ -714,7 +714,7 @@ class PostType
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setTaxonomies(array $taxonomies): self
+    public function setTaxonomies(array $taxonomies): static
     {
         if (isset(self::$registered[$this->id])) {
             foreach ($this->taxonomies as $tax) {
@@ -755,7 +755,7 @@ class PostType
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public static function get(string $id): ?self
+    public static function get(string $id): ?static
     {
         if (isset(self::$registered[$id])) {
             return self::$registered[$id];
@@ -804,7 +804,7 @@ class PostType
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public static function new(string $id): self
+    public static function new(string $id): static
     {
         return new static($id);
     }

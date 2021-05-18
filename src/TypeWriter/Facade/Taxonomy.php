@@ -62,7 +62,7 @@ class Taxonomy
      * Taxonomy constructor.
      *
      * @param string $id
-     * @param PostType[] $postTypes
+     * @param PostType[]|string[] $postTypes
      *
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
@@ -72,7 +72,7 @@ class Taxonomy
         $this->id = $id;
         $this->queryVar = $id;
         $this->restBase = $id;
-        $this->postTypes = array_map(fn(string $postType) => PostType::get($postType), $postTypes);
+        $this->postTypes = array_map(fn(PostType|string $postType) => $postType instanceof PostType ? $postType : PostType::get($postType), $postTypes);
     }
 
     /**
@@ -719,6 +719,21 @@ class Taxonomy
         $tax->showUi = $wp->show_ui;
 
         return $tax;
+    }
+
+    /**
+     * Creates a new taxonomy instance.
+     *
+     * @param string $id
+     * @param PostType[]|string[] $postTypes
+     *
+     * @return static
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public static function new(string $id, array $postTypes = []): static
+    {
+        return new static($id, $postTypes);
     }
 
     /**
