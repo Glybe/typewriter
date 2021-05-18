@@ -368,7 +368,7 @@ class Taxonomy
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setLabels(array $labels): self
+    public function setLabels(array $labels): static
     {
         $this->assertRegistered();
         $this->labels = $labels;
@@ -390,7 +390,7 @@ class Taxonomy
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setCapabilities(array $capabilities): self
+    public function setCapabilities(array $capabilities): static
     {
         $this->assertRegistered();
         $this->capabilities = $capabilities;
@@ -407,7 +407,7 @@ class Taxonomy
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setDescription(string $description): self
+    public function setDescription(string $description): static
     {
         $this->assertRegistered();
         $this->description = $description;
@@ -424,7 +424,7 @@ class Taxonomy
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setHierarchical(bool $hierarchical = true): self
+    public function setHierarchical(bool $hierarchical = true): static
     {
         $this->assertRegistered();
         $this->hierarchical = $hierarchical;
@@ -441,7 +441,7 @@ class Taxonomy
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setPostTypes(array $postTypes): self
+    public function setPostTypes(array $postTypes): static
     {
         if (isset(self::$registered[$this->id])) {
             foreach ($this->postTypes as $postType)
@@ -465,7 +465,7 @@ class Taxonomy
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setPublic(bool $public): self
+    public function setPublic(bool $public): static
     {
         $this->assertRegistered();
         $this->public = $public;
@@ -482,7 +482,7 @@ class Taxonomy
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setPubliclyQueryable(bool $publiclyQueryable): self
+    public function setPubliclyQueryable(bool $publiclyQueryable): static
     {
         $this->assertRegistered();
         $this->publiclyQueryable = $publiclyQueryable;
@@ -499,7 +499,7 @@ class Taxonomy
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setQueryVar(?string $queryVar = null): self
+    public function setQueryVar(?string $queryVar = null): static
     {
         $this->assertRegistered();
         $this->queryVar = $queryVar ?? $this->id;
@@ -516,7 +516,7 @@ class Taxonomy
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setRestBase(?string $restBase = null): self
+    public function setRestBase(?string $restBase = null): static
     {
         $this->assertRegistered();
         $this->restBase = $restBase ?? $this->id;
@@ -533,7 +533,7 @@ class Taxonomy
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setRestController(string $restController): self
+    public function setRestController(string $restController): static
     {
         $this->assertRegistered();
         $this->restController = $restController;
@@ -550,7 +550,7 @@ class Taxonomy
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setRewrite(array $rewrite): self
+    public function setRewrite(array $rewrite): static
     {
         $this->assertRegistered();
         $this->rewrite = $rewrite;
@@ -567,7 +567,7 @@ class Taxonomy
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setShowAdminColumn(bool $showAdminColumn = true): self
+    public function setShowAdminColumn(bool $showAdminColumn = true): static
     {
         $this->assertRegistered();
         $this->showAdminColumn = $showAdminColumn;
@@ -584,7 +584,7 @@ class Taxonomy
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setShowInMenu(bool $showInMenu = true): self
+    public function setShowInMenu(bool $showInMenu = true): static
     {
         $this->assertRegistered();
         $this->showInMenu = $showInMenu;
@@ -601,7 +601,7 @@ class Taxonomy
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setShowInMenus(bool $showInMenus = true): self
+    public function setShowInMenus(bool $showInMenus = true): static
     {
         $this->assertRegistered();
         $this->showInMenus = $showInMenus;
@@ -618,7 +618,7 @@ class Taxonomy
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setShowInRest(bool $showInRest = true): self
+    public function setShowInRest(bool $showInRest = true): static
     {
         $this->assertRegistered();
         $this->showInRest = $showInRest;
@@ -635,7 +635,7 @@ class Taxonomy
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setShowTagCloud(bool $showTagCloud = true): self
+    public function setShowTagCloud(bool $showTagCloud = true): static
     {
         $this->assertRegistered();
         $this->showTagCloud = $showTagCloud;
@@ -652,7 +652,7 @@ class Taxonomy
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function setShowUi(bool $showUi = true): self
+    public function setShowUi(bool $showUi = true): static
     {
         $this->assertRegistered();
         $this->showUi = $showUi;
@@ -684,7 +684,7 @@ class Taxonomy
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public static function get(string $id): ?self
+    public static function get(string $id): ?static
     {
         if (isset(self::$registered[$id])) {
             return self::$registered[$id];
@@ -697,7 +697,7 @@ class Taxonomy
         }
 
         $wp = get_taxonomy($id);
-        self::$registered[$id] = $tax = new self($id);
+        self::$registered[$id] = $tax = new static($id);
 
         $tax->labels = (array)$wp->labels;
         $tax->builtIn = $wp->_builtin;

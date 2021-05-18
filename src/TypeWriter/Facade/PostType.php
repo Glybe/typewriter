@@ -768,7 +768,7 @@ class PostType
         }
 
         $wp = get_post_type_object($id);
-        self::$registered[$id] = $pt = new self($id);
+        self::$registered[$id] = $pt = new static($id);
 
         $pt->labels = (array)$wp->labels;
         $pt->builtIn = $wp->_builtin;
