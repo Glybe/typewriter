@@ -6,6 +6,7 @@ namespace TypeWriter\Facade;
 use Generator;
 use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Pure;
+use Raxos\Foundation\Util\ArrayUtil;
 use Raxos\Foundation\Util\StringUtil;
 use TypeWriter\Error\ViolationException;
 use TypeWriter\Feature\Gallery;
@@ -13,7 +14,6 @@ use TypeWriter\Feature\IntroTextMetaFields;
 use TypeWriter\Feature\PostThumbnail;
 use TypeWriter\Feature\Relation;
 use WP_Post;
-use WP_Post_Type;
 use WP_Term;
 use function array_map;
 use function function_exists;
@@ -23,7 +23,6 @@ use function get_post_meta;
 use function get_post_parent;
 use function get_post_time;
 use function get_post_type;
-use function get_post_type_object;
 use function get_the_content;
 use function get_the_date;
 use function get_the_excerpt;
@@ -461,6 +460,23 @@ class Post
     }
 
     /**
+     * Returns TRUE if the current post has the given term by slug or id.
+     *
+     * @param string $taxonomy
+     * @param string|int $slugOrId
+     *
+     * @return bool
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public static function termHas(string $taxonomy, string|int $slugOrId): bool
+    {
+        $terms = get_the_terms(self::id(), $taxonomy);
+
+        return ArrayUtil::first($terms, fn(WP_Term $term) => is_int($slugOrId) ? $term->term_id === $slugOrId : $term->slug === $slugOrId) !== null;
+    }
+
+    /**
      * Gets the term ids with the given taxonomy for the current post.
      *
      * @param string $taxonomy
@@ -578,13 +594,13 @@ class Post
     /**
      * Gets the post type object instance.
      *
-     * @return WP_Post_Type|null
+     * @return PostType|null
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public static function typeObject(): ?WP_Post_Type
+    public static function typeObject(): ?PostType
     {
-        return get_post_type_object(self::type()) ?: null;
+        return PostType::get(self::type());
     }
 
     /**

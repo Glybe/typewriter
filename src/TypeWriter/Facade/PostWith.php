@@ -9,34 +9,38 @@ use WP_Post;
 /**
  * Class PostWith
  *
- * @method id(): ?int
- * @method content(array $filters = []): ?string
- * @method contentTruncated(int $wordCount = 20, string $ending = '...'): ?string
- * @method date(string $format): ?string
- * @method excerpt(array $filters = []): ?string
- * @method gallery(string $id): array
- * @method intro(): array
- * @method introHeading(): ?string
- * @method introLeading(): ?string
- * @method meta(string $metaKey, $defaultValue = null, bool $isSingle = true): mixed
- * @method metaText(string $metaKey, array $filters = []): ?string
- * @method parent(): ?PostWith
- * @method parentHas(): bool
- * @method permalink(): string
- * @method post(): WP_Post
- * @method relation(string $relationId, string $foreignType): array
- * @method relationIterator(string $relationId, string $foreignType): Generator
- * @method thumbnail(string $thumbnailId): ?int
- * @method thumbnailData(string $thumbnailId, string $size = 'large'): ?array
- * @method thumbnailUrl(string $thumbnailId, string $size = 'large'): ?string
- * @method time(): ?int
- * @method timeAgo(string $format = '%s ago'): string
- * @method title(): ?string
- * @method type(): ?string
- * @method typeObject(): ?WP_Post_Type
+ * @method int|null id()
+ * @method string|null content(array $filters = [])
+ * @method string|null contentTruncated(int $wordCount = 20, string $ending = '...')
+ * @method string|null date(string $format)
+ * @method string|null excerpt(array $filters = [])
+ * @method int[] gallery(string $id)
+ * @method string[] intro()
+ * @method string|null introHeading()
+ * @method string|null introLeading()
+ * @method mixed meta(string $metaKey, $defaultValue = null, bool $isSingle = true)
+ * @method string|null metaText(string $metaKey, array $filters = [])
+ * @method string name()
+ * @method PostWith|null parent()
+ * @method bool parentHas()
+ * @method string permalink()
+ * @method WP_Post post()
+ * @method int[] relation(string $relationId, string $foreignType)
+ * @method Generator<PostWith> relationIterator(string $relationId, string $foreignType)
+ * @method Term[] terms(string $taxonomy)
+ * @method bool termHas(string $taxonomy, string|int $slugOrId)
+ * @method int[] termIds(string $taxonomy)
+ * @method int|null thumbnail(string $thumbnailId)
+ * @method array|null thumbnailData(string $thumbnailId, string $size = 'large')
+ * @method string|null thumbnailUrl(string $thumbnailId, string $size = 'large')
+ * @method int|null time()
+ * @method string timeAgo(string $format = '%s ago')
+ * @method string|null title()
+ * @method string|null type()
+ * @method PostType typeObject()
  *
- * @method translation(string $language): static
- * @method translations(): array
+ * @method PostWith translation(string $language)
+ * @method int[] translations()
  *
  * @author Bas Milius <bas@mili.us>
  * @package TypeWriter\Facade
