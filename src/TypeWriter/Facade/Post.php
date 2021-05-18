@@ -454,7 +454,7 @@ class Post
      */
     public static function terms(string $taxonomy): array
     {
-        $terms = get_the_terms(self::id(), $taxonomy);
+        $terms = get_the_terms(self::id(), $taxonomy) ?: [];
 
         return array_map(fn(WP_Term $term) => new Term($term), $terms);
     }
@@ -471,7 +471,7 @@ class Post
      */
     public static function termHas(string $taxonomy, string|int $slugOrId): bool
     {
-        $terms = get_the_terms(self::id(), $taxonomy);
+        $terms = get_the_terms(self::id(), $taxonomy) ?: [];
 
         return ArrayUtil::first($terms, fn(WP_Term $term) => is_int($slugOrId) ? $term->term_id === $slugOrId : $term->slug === $slugOrId) !== null;
     }
@@ -487,7 +487,7 @@ class Post
      */
     public static function termIds(string $taxonomy): array
     {
-        $terms = get_the_terms(self::id(), $taxonomy);
+        $terms = get_the_terms(self::id(), $taxonomy) ?: [];
 
         return array_map(fn(WP_Term $term) => $term->term_id, $terms);
     }
