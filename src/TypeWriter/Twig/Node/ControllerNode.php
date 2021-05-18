@@ -43,7 +43,7 @@ final class ControllerNode extends Node
     {
         $compiler->addDebugInfo($this);
 
-        $compiler->write('$controller = ' . Singleton::class . '::get(' . $this->getAttribute('controller') . ');' . PHP_EOL);
+        $compiler->write('$controller = ' . Singleton::class . '::get(' . $this->getAttribute('controller') . '::class);' . PHP_EOL);
         $compiler->write('$context = array_merge($context, $controller->getContext());');
     }
 
