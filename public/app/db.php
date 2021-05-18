@@ -22,4 +22,9 @@ declare(strict_types=1);
 
 use TypeWriter\Database\Database;
 
+if (is_file(__DIR__ . '/hooks.php')) {
+    /** @noinspection PhpIncludeInspection */
+    require_once __DIR__ . '/hooks.php';
+}
+
 $wpdb = new Database(DB_USER, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT);
