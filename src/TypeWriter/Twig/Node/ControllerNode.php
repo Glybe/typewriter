@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace TypeWriter\Twig\Node;
 
+use Raxos\Foundation\Util\Singleton;
 use Twig\Compiler;
 use Twig\Node\Node;
 use const PHP_EOL;
@@ -42,7 +43,7 @@ final class ControllerNode extends Node
     {
         $compiler->addDebugInfo($this);
 
-        $compiler->write('$controller = new ' . $this->getAttribute('controller') . '();' . PHP_EOL);
+        $compiler->write('$controller = new ' . Singleton::class . '::get(' . $this->getAttribute('controller') . ');' . PHP_EOL);
         $compiler->write('$context = array_merge($context, $controller->getContext());');
     }
 
