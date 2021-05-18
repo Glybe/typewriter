@@ -15,9 +15,12 @@ namespace TypeWriter\Facade;
 use TypeWriter\Error\WordPressException;
 use WP_Error;
 use WP_REST_Terms_Controller;
+use WP_Term;
 use function array_map;
+use function array_merge;
 use function get_taxonomies;
 use function get_taxonomy;
+use function get_terms;
 use function register_taxonomy;
 use function register_taxonomy_for_object_type;
 use function taxonomy_exists;
@@ -658,6 +661,24 @@ class Taxonomy
         $this->showUi = $showUi;
 
         return $this;
+    }
+
+    /**
+     * Gets terms for the taxonomy.
+     *
+     * @param array $options
+     *
+     * @return array
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public function getTerms(array $options = []): array
+    {
+        $terms = get_terms(array_merge($options, [
+            'taxonomy' => $this->id
+        ]));
+
+        return array_map(fn(WP_Term $term) => new Term($term), $terms);
     }
 
     /**

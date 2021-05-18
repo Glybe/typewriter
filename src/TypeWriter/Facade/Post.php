@@ -14,6 +14,8 @@ use TypeWriter\Feature\PostThumbnail;
 use TypeWriter\Feature\Relation;
 use WP_Post;
 use WP_Post_Type;
+use WP_Term;
+use function array_map;
 use function function_exists;
 use function get_permalink;
 use function get_post;
@@ -25,6 +27,7 @@ use function get_post_type_object;
 use function get_the_content;
 use function get_the_date;
 use function get_the_excerpt;
+use function get_the_terms;
 use function get_the_title;
 use function has_post_parent;
 use function have_posts;
@@ -439,6 +442,38 @@ class Post
 
             yield Post::with($post);
         }
+    }
+
+    /**
+     * Gets the terms with the given taxonomy for the current post.
+     *
+     * @param string $taxonomy
+     *
+     * @return Term[]
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public static function terms(string $taxonomy): array
+    {
+        $terms = get_the_terms(self::id(), $taxonomy);
+
+        return array_map(fn(WP_Term $term) => new Term($term), $terms);
+    }
+
+    /**
+     * Gets the term ids with the given taxonomy for the current post.
+     *
+     * @param string $taxonomy
+     *
+     * @return array
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     */
+    public static function termIds(string $taxonomy): array
+    {
+        $terms = get_the_terms(self::id(), $taxonomy);
+
+        return array_map(fn(WP_Term $term) => $term->term_id, $terms);
     }
 
     /**
