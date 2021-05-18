@@ -22,6 +22,10 @@ declare(strict_types=1);
 
 use TypeWriter\Database\Database;
 
+/*
+ * Adds support for hooks before WordPress is connected to
+ * the database. This makes it possible to override more.
+ */
 if (is_file(__DIR__ . '/hooks.php')) {
     /** @noinspection PhpIncludeInspection */
     require_once __DIR__ . '/hooks.php';
