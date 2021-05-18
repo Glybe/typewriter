@@ -8,6 +8,7 @@ use TypeWriter\Util\Sandbox;
 use function extract;
 use function file_get_contents;
 use function get_body_class;
+use function get_page_template_slug;
 use function get_theme_mod;
 use function get_theme_mods;
 use function is_file;
@@ -182,6 +183,19 @@ final class Template
         $key = "{$style}_{$icon}";
 
         return self::$icons[$key] ??= file_get_contents(Dependencies::themePath("resource/icon/{$style}/{$icon}.svg"));
+    }
+
+    /**
+     * Gets the template slug.
+     *
+     * @return string|null
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     * @see get_page_template_slug()
+     */
+    public static function slug(): ?string
+    {
+        return get_page_template_slug() ?: null;
     }
 
 }
