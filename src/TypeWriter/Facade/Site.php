@@ -17,6 +17,7 @@ use function function_exists;
 use function get_bloginfo;
 use function hash;
 use function home_url;
+use function is_front_page;
 use function pll_current_language;
 use function pll_home_url;
 use function pll_register_string;
@@ -47,6 +48,19 @@ final class Site
     public static function info(string $name): ?string
     {
         return get_bloginfo($name) ?? null;
+    }
+
+    /**
+     * Returns TRUE if the current page is the front page.
+     *
+     * @return bool
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     * @see is_front_page()
+     */
+    public static function isFrontPage(): bool
+    {
+        return is_front_page();
     }
 
     /**

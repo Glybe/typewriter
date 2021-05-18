@@ -7,6 +7,7 @@ use TypeWriter\Error\TemplateException;
 use TypeWriter\Util\Sandbox;
 use function extract;
 use function file_get_contents;
+use function get_body_class;
 use function get_theme_mod;
 use function get_theme_mods;
 use function is_file;
@@ -25,6 +26,21 @@ final class Template
 {
 
     private static array $icons = [];
+
+    /**
+     * Gets the body classes. If extraClasses is specified, they're added.
+     *
+     * @param string[] $extraClasses
+     *
+     * @return string[]
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
+     * @see get_body_class()
+     */
+    public static function bodyClasses(array $extraClasses = []): array
+    {
+        return get_body_class($extraClasses);
+    }
 
     /**
      * Gets a theme modification.
