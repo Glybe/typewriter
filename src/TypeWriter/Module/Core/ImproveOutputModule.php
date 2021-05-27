@@ -7,6 +7,7 @@ use Raxos\Foundation\Util\StringUtil;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
 use function array_filter;
+use function base_convert;
 use function esc_attr;
 use function esc_url;
 use function filemtime;
@@ -29,6 +30,7 @@ use function str_ends_with;
 use function str_starts_with;
 use function strpos;
 use function strstr;
+use function strtolower;
 use function substr;
 use function trim;
 use function urldecode;
@@ -317,7 +319,7 @@ final class ImproveOutputModule extends Module
             return $src;
         }
 
-        return $src . $join . 'b=' . filemtime($file);
+        return $src . $join . 'b=' . strtolower(base_convert((string)(filemtime($file) ?: 0), 10, 16));
     }
 
     /**
