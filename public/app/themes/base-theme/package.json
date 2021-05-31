@@ -17,7 +17,7 @@
         "theme:dev:wsl": "yarn run \"theme:clean\" && concurrently -k -c magenta,cyan,cyan -n php,webpack \"cd ../../../ && yarn run tw:serve:dev\" \"yarn run theme:build:hot\""
     },
     "dependencies": {
-        "@latte-ui/css": "^2.0.0-dev.3"
+        "@latte-ui/css": "^2.0.0-dev.5"
     },
     "devDependencies": {
         "glob-all": "^3.2.1",

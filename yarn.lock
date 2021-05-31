@@ -2204,10 +2204,10 @@
   resolved "https://registry.yarnpkg.com/@itsjonq/is/-/is-0.0.2.tgz#eaa8e1ba341181c9de051887bbcfbda1c9692451"
   integrity sha512-P0Ug+chfjCV1JV8MUxAGPz0BM76yDlR76AIfPwRZ6mAJW56k6b9j0s2cIcEsEAu0gNj/RJD1STw777AQyBN3CQ==
 
-"@latte-ui/css@^2.0.0-dev.3":
-  version "2.0.0-dev.3"
-  resolved "https://registry.yarnpkg.com/@latte-ui/css/-/css-2.0.0-dev.3.tgz#65359596ed94a00a4ed1d33f4fa493f6cdde8fc5"
-  integrity sha512-O/r2B83U0AH0smfi60H6aG+7PcwGCtpdnXKWXwJ03i9tCUNYF1+EA3H9Ofl5bJB4uNxU7Bw5i3cOuzCcL+vWQQ==
+"@latte-ui/css@^2.0.0-dev.5":
+  version "2.0.0-dev.5"
+  resolved "https://registry.yarnpkg.com/@latte-ui/css/-/css-2.0.0-dev.5.tgz#4c2b2f524f1a01a6752529d5b3d0f1b699a4501b"
+  integrity sha512-zbSDNqNz3g7lg30vSu9OfDiDeBAv2Y0bf7B1aFdAtYvVeUR3h1FiopZxHzkLF2YSdqbGES/eIvsDeMQ7GZy1uA==
 
 "@nodelib/fs.scandir@2.1.3":
   version "2.1.3"
