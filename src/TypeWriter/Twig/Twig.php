@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace TypeWriter\Twig;
 
 use Twig\Environment as TwigEnvironment;
+use Twig\Loader\FilesystemLoader;
 use TypeWriter\Facade\Attachment;
 use TypeWriter\Facade\Site;
 use TypeWriter\Facade\Template;
@@ -60,7 +61,7 @@ final class Twig extends TwigEnvironment
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public final function addPath(string $path, string $namespace = TwigLoader::MAIN_NAMESPACE): void
+    public final function addPath(string $path, string $namespace = FilesystemLoader::MAIN_NAMESPACE): void
     {
         $this->loader->addPath($path, $namespace);
     }

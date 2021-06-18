@@ -6,22 +6,22 @@
             </a>
         </p>
 
-        <p class="encouragement">{{ t("TypeWriter") }} {{ version }}</p>
+        <p class="encouragement">{{ td("tw", "TypeWriter") }} {{ version }}</p>
 
-        <p>{{ t("An advanced WordPress framework by %s.") | format('<a href="https://glybe.nl/over-glybe/" target="_blank">Glybe</a>') | raw }}</p>
+        <p>{{ td("tw", "An advanced WordPress framework by %s.") | format('<a href="https://glybe.nl/over-glybe/" target="_blank">Glybe</a>') | raw }}</p>
     </div>
 
-    <h2>👋🏽 {{ t("About") }}</h2>
-    <p style="font-size: 1.2em">{{ t("TypeWriter is a custom-made WordPress framework that sits before WordPress. It has support for all WordPress features and improves them when needed. The framework uses Columba for adding advanced features, such as routing and a database orm, to your project.") }}</p>
+    <h2>👋🏽 {{ td("tw", "About") }}</h2>
+    <p style="font-size: 1.2em">{{ td("tw", "TypeWriter is a custom-made WordPress framework that sits before WordPress. It has support for all WordPress features and improves them when needed. The framework uses Columba for adding advanced features, such as routing and a database orm, to your project.") }}</p>
 
     <div class="site-health-issues-wrapper">
-        <h3 class="site-health-issue-count-title">{{ t("Environment") }}</h3>
+        <h3 class="site-health-issue-count-title">{{ td("tw", "Environment") }}</h3>
 
         <div class="health-check-accordion">
             {% set theme = wp("wp_get_theme") %}
             <h4 class="health-check-accordion-heading">
                 <button class="health-check-accordion-trigger" type="button" aria-expanded="false" aria-controls="environment-info-current-theme">
-                    <span class="title">{{ t("Active theme: %s") | format(theme.Name) }}</span>
+                    <span class="title">{{ td("tw", "Active theme: %s") | format(theme.Name) }}</span>
                     <span class="badge blue">{{ theme.Version }}</span>
                     <span class="icon"></span>
                 </button>
@@ -29,17 +29,17 @@
             <div class="health-check-accordion-panel" id="environment-info-current-theme" hidden="hidden">
                 <p>{{ theme.Description }}</p>
                 <ul>
-                    <li><strong>{{ t("Author") }}</strong>: <a href="{{ theme.get("AuthorURI") }}" target="_blank">{{ theme.get("Author") }}</a></li>
-                    <li><strong>{{ t("Name") }}</strong>: {{ theme.Name }}</li>
-                    <li><strong>{{ t("Version") }}</strong>: {{ theme.Version }}</li>
-                    <li><strong>{{ t("Tags") }}</strong>: {{ theme.Tags | join(", ") }}</li>
+                    <li><strong>{{ td("tw", "Author") }}</strong>: <a href="{{ theme.get("AuthorURI") }}" target="_blank">{{ theme.get("Author") }}</a></li>
+                    <li><strong>{{ td("tw", "Name") }}</strong>: {{ theme.Name }}</li>
+                    <li><strong>{{ td("tw", "Version") }}</strong>: {{ theme.Version }}</li>
+                    <li><strong>{{ td("tw", "Tags") }}</strong>: {{ theme.Tags | join(", ") }}</li>
                 </ul>
             </div>
             {% for pluginId, plugin in plugins %}
 
                 <h4 class="health-check-accordion-heading">
                     <button class="health-check-accordion-trigger" type="button" aria-expanded="false" aria-controls="environment-info-plugin-{{ loop.index0 }}">
-                        <span class="title">{{ t("Plugin: %s") | format(plugin.Name) }}</span>
+                        <span class="title">{{ td("tw", "Plugin: %s") | format(plugin.Name) }}</span>
                         <span>{{ t(wp("is_plugin_active", pluginId) ? "Active" : "Inactive") }}</span>
                         <span class="badge blue">{{ plugin.Version }}</span>
                         <span class="icon"></span>
@@ -48,9 +48,9 @@
                 <div class="health-check-accordion-panel" id="environment-info-plugin-{{ loop.index0 }}" hidden="hidden">
                     <p>{{ plugin.Description }}</p>
                     <ul>
-                        <li><strong>{{ t("Author") }}</strong>: <a href="{{ plugin.AuthorURI }}" target="_blank">{{ plugin.Author }}</a></li>
-                        <li><strong>{{ t("Name") }}</strong>: {{ plugin.Name }}</li>
-                        <li><strong>{{ t("Version") }}</strong>: {{ plugin.Version }}</li>
+                        <li><strong>{{ td("tw", "Author") }}</strong>: <a href="{{ plugin.AuthorURI }}" target="_blank">{{ plugin.Author }}</a></li>
+                        <li><strong>{{ td("tw", "Name") }}</strong>: {{ plugin.Name }}</li>
+                        <li><strong>{{ td("tw", "Version") }}</strong>: {{ plugin.Version }}</li>
                     </ul>
                 </div>
 
@@ -59,23 +59,23 @@
     </div>
 
     <div class="site-health-issues-wrapper">
-        <h3 class="site-health-issue-count-title">{{ t("Dependencies") }}</h3>
+        <h3 class="site-health-issue-count-title">{{ td("tw", "Dependencies") }}</h3>
 
         <div class="health-check-accordion">
             {% for dependency in dependencies %}
                 <h4 class="health-check-accordion-heading">
                     <button class="health-check-accordion-trigger" type="button">
                         <span class="title">{{ dependency.name }}</span>
-                        <span class="badge blue">{{ dependency.pretty_version }}</span>
+                        <span class="badge blue">{{ dependency.pretty_version ?? td("tw", "Unknown") }}</span>
                     </button>
                 </h4>
             {% endfor %}
         </div>
     </div>
 
-    <h2>🔔 {{ t("More") }}</h2>
-    <p style="font-size: 1.2em">{{ t("TypeWriter is an Open Source project, if you have an idea, a bug or want to help us, let us know! You can use the project in any way you want, there are no restrictions, except for copyrights in our files, you should keep those.") }}</p>
-    <a href="https://github.com/glybe/typewriter" target="_blank" class="button button-secondary button-large">{{ t("Contribute") }}</a>
-    <a href="https://github.com/glybe/typewriter/issues/new" target="_blank" class="button button-secondary button-large">{{ t("Report an issue") }}</a>
-    <a href="https://github.com/glybe/typewriter/issues/new" target="_blank" class="button button-secondary button-large">{{ t("Submit your idea") }}</a>
+    <h2>🔔 {{ td("tw", "More") }}</h2>
+    <p style="font-size: 1.2em">{{ td("tw", "TypeWriter is an Open Source project, if you have an idea, a bug or want to help us, let us know! You can use the project in any way you want, there are no restrictions, except for copyrights in our files, you should keep those.") }}</p>
+    <a href="https://github.com/glybe/typewriter" target="_blank" class="button button-secondary button-large">{{ td("tw", "Contribute") }}</a>
+    <a href="https://github.com/glybe/typewriter/issues/new" target="_blank" class="button button-secondary button-large">{{ td("tw", "Report an issue") }}</a>
+    <a href="https://github.com/glybe/typewriter/issues/new" target="_blank" class="button button-secondary button-large">{{ td("tw", "Submit your idea") }}</a>
 </div>

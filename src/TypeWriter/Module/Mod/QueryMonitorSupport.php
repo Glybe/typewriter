@@ -216,7 +216,7 @@ final class QueryMonitorSupport extends Module
                     foreach ($dbq->db_objects as $id => $db) {
                         $server = method_exists($db, 'db_version') ? $db->db_version() : null;
 
-                        $extension = 'Columba Database';
+                        $extension = 'Raxos Database';
                         $variables = $db->get_results("SHOW VARIABLES WHERE Variable_name IN ('" . implode("', '", array_keys($mysqlVariables)) . "')");
 
                         $client = tw()->getDatabase()->getPdo()->getAttribute(PDO::ATTR_CLIENT_VERSION);

@@ -39,6 +39,7 @@
         "raxos/database": "dev-master",
         "raxos/foundation": "dev-master",
         "raxos/http": "dev-master",
+        "raxos/rate-limit": "dev-master",
         "raxos/router": "dev-master",
         "twig/twig": "@dev",
         "vlucas/phpdotenv": "^5"

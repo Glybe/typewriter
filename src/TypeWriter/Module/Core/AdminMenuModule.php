@@ -91,7 +91,7 @@ final class AdminMenuModule extends Module
     public final function generateAboutContext(): array
     {
         $dependencies = [];
-        $installed = InstalledVersions::getRawData()['versions'];
+        $installed = InstalledVersions::getAllRawData()[0]['versions'];
 
         foreach ($installed as $id => $dependency) {
             if ($id === 'basmilius/typewriter') {

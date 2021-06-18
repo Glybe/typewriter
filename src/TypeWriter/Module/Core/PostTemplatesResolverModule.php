@@ -28,7 +28,7 @@ use function is_day;
 use function is_file;
 use function is_month;
 use function is_year;
-use function substr;
+use function str_ends_with;
 use function TypeWriter\twig;
 
 /**
@@ -223,7 +223,7 @@ final class PostTemplatesResolverModule extends Module
      */
     public final function onTemplateInclude(string $template): ?string
     {
-        if (substr($template, -5) !== '.twig') {
+        if (!str_ends_with($template, '.twig')) {
             return $template;
         }
 

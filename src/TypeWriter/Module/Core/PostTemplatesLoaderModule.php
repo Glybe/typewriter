@@ -25,7 +25,7 @@ use function implode;
 use function in_array;
 use function is_dir;
 use function scandir;
-use function substr;
+use function str_ends_with;
 
 /**
  * Class PostTemplatesLoaderModule
@@ -77,6 +77,8 @@ final class PostTemplatesLoaderModule extends Module
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      * @internal
+     *
+     * @noinspection PhpFeatureEnvyLocalInspection
      * @noinspection PhpUnusedParameterInspection
      */
     public final function onThemeTemplates(array $templates, WP_Theme $theme, ?WP_Post $post, string $postType): array
@@ -100,7 +102,7 @@ final class PostTemplatesLoaderModule extends Module
             $themeTemplates = [];
 
             foreach ($files as $file) {
-                if (substr($file, -4) !== '.php' && substr($file, -5) !== '.twig') {
+                if (!str_ends_with($file, '.php') && !str_ends_with($file, '.twig')) {
                     continue;
                 }
 

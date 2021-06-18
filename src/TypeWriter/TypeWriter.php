@@ -228,7 +228,6 @@ final class TypeWriter
      * @since 1.0.0
      */
     #[ArrayShape([
-        'columba' => 'string',
         'php' => 'string',
         'raxos_database' => 'string',
         'raxos_foundation' => 'string',
@@ -243,7 +242,6 @@ final class TypeWriter
         global $wp_version;
 
         return [
-            'columba' => InstalledVersions::getPrettyVersion('basmilius/columba'),
             'php' => phpversion(),
             'raxos_database' => InstalledVersions::getPrettyVersion('raxos/database'),
             'raxos_foundation' => InstalledVersions::getPrettyVersion('raxos/foundation'),
@@ -306,7 +304,7 @@ final class TypeWriter
     }
 
     /**
-     * Returns TRUE if we're in the wordpress installer.
+     * Returns TRUE if we're in the WordPress installer.
      *
      * @return bool
      * @author Bas Milius <bas@mili.us>

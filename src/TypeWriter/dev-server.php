@@ -14,7 +14,7 @@ $_SERVER['REQUEST_SCHEME'] = $_SERVER['REQUEST_SCHEME'] ?? 'http';
 
 $requestPath = explode('?', $_SERVER['REQUEST_URI'])[0];
 $requestFile = realpath($_SERVER['DOCUMENT_ROOT'] . $requestPath);
-$isPhpFile = substr($requestFile ?: '', -4) === '.php';
+$isPhpFile = str_ends_with($requestFile ?: '', '.php');
 
 ob_start('ob_gzhandler');
 

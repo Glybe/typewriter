@@ -45,8 +45,8 @@ final class EditorModule extends Module
      * @param array $categories
      *
      * @return array
-     * @author Bas Milius <bas@glybe.nl>
-     * @since 2.0.0
+     * @author Bas Milius <bas@mili.us>
+     * @since 1.0.0
      */
     public final function onBlockCategories(array $categories): array
     {

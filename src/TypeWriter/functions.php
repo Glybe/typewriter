@@ -3,12 +3,25 @@ declare(strict_types=1);
 
 namespace TypeWriter;
 
+use Raxos\Database\Connection\Connection;
 use Raxos\Foundation\Util\Singleton;
 use Raxos\Http\HttpRequest;
 use TypeWriter\Twig\Twig;
 use function getenv;
 use function is_bool;
 use function is_int;
+
+/**
+ * Gets the database instance.
+ *
+ * @return Connection
+ * @author Bas Milius <bas@mili.us>
+ * @since 1.0.0
+ */
+function db(): Connection
+{
+    return tw()->getDatabase();
+}
 
 /**
  * Gets an environment variable.

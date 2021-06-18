@@ -8,7 +8,8 @@ use function array_unique;
 use function get_stylesheet_directory;
 use function get_template_directory;
 use function is_file;
-use function substr;
+use function str_ends_with;
+use function str_starts_with;
 use function TypeWriter\tw;
 
 /**
@@ -28,11 +29,11 @@ final class TwigLoader extends FilesystemLoader
      */
     protected function findTemplate(string $name, bool $throw = true): ?string
     {
-        if (substr($name, -5) !== '.twig') {
+        if (!str_ends_with($name, '.twig')) {
             $name .= '.twig';
         }
 
-        if (substr($name, 0, 1) !== '@' && tw()->getState()->get('tw.is-wp-initialized', false)) {
+        if (!str_starts_with($name, '@') && tw()->getState()->get('tw.is-wp-initialized', false)) {
             $themeDirectories = array_unique([
                 get_stylesheet_directory(),
                 get_template_directory()

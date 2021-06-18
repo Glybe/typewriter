@@ -119,7 +119,6 @@ final class Template
         if (is_file($templateFile)) {
             extract($context, EXTR_OVERWRITE);
 
-            /** @noinspection PhpIncludeInspection */
             require $templateFile;
         } else if (twig()->exists($template)) {
             echo twig()->render($template, $context);

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "70bda8e39cdfcc3f90b6cc28f0f31f7f",
+    "content-hash": "4cc2b292e7e70f7075aae5dcfa31ed3e",
     "packages": [
         {
             "name": "basmilius/columba",
@@ -59,16 +59,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.12.1",
+            "version": "2.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "c13c0be93cff50f88bbd70827d993026821914dd"
+                "reference": "2edbc73a4687d9085c8f20f398eebade844e8424"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/c13c0be93cff50f88bbd70827d993026821914dd",
-                "reference": "c13c0be93cff50f88bbd70827d993026821914dd",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/2edbc73a4687d9085c8f20f398eebade844e8424",
+                "reference": "2edbc73a4687d9085c8f20f398eebade844e8424",
                 "shasum": ""
             },
             "require": {
@@ -118,7 +118,7 @@
             ],
             "support": {
                 "issues": "https://github.com/filp/whoops/issues",
-                "source": "https://github.com/filp/whoops/tree/2.12.1"
+                "source": "https://github.com/filp/whoops/tree/2.13.0"
             },
             "funding": [
                 {
@@ -126,7 +126,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-04-25T12:00:00+00:00"
+            "time": "2021-06-04T12:00:00+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -857,12 +857,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/basmilius/raxos-cache.git",
-                "reference": "40410a375ca4787f195a79be7151cad732fe4841"
+                "reference": "b48dcfce8ef0493d52653c106b9f895212e695f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/basmilius/raxos-cache/zipball/40410a375ca4787f195a79be7151cad732fe4841",
-                "reference": "40410a375ca4787f195a79be7151cad732fe4841",
+                "url": "https://api.github.com/repos/basmilius/raxos-cache/zipball/b48dcfce8ef0493d52653c106b9f895212e695f4",
+                "reference": "b48dcfce8ef0493d52653c106b9f895212e695f4",
                 "shasum": ""
             },
             "require": {
@@ -891,7 +891,7 @@
                 "issues": "https://github.com/basmilius/raxos-cache/issues",
                 "source": "https://github.com/basmilius/raxos-cache/tree/master"
             },
-            "time": "2021-02-01T09:54:37+00:00"
+            "time": "2021-06-04T21:46:15+00:00"
         },
         {
             "name": "raxos/database",
@@ -899,12 +899,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/basmilius/raxos-database.git",
-                "reference": "b2a652dcd98cecd413f8cea1b86f50f0ed046744"
+                "reference": "629a006d41681eb1a8286ce6c72538cfff49fd72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/basmilius/raxos-database/zipball/b2a652dcd98cecd413f8cea1b86f50f0ed046744",
-                "reference": "b2a652dcd98cecd413f8cea1b86f50f0ed046744",
+                "url": "https://api.github.com/repos/basmilius/raxos-database/zipball/629a006d41681eb1a8286ce6c72538cfff49fd72",
+                "reference": "629a006d41681eb1a8286ce6c72538cfff49fd72",
                 "shasum": ""
             },
             "require": {
@@ -936,7 +936,7 @@
                 "issues": "https://github.com/basmilius/raxos-database/issues",
                 "source": "https://github.com/basmilius/raxos-database/tree/master"
             },
-            "time": "2021-04-17T15:05:15+00:00"
+            "time": "2021-06-17T09:29:42+00:00"
         },
         {
             "name": "raxos/foundation",
@@ -944,12 +944,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/basmilius/raxos-foundation.git",
-                "reference": "c5ae53131c55d84bb7e041255d196059cb2c713f"
+                "reference": "2629833b853ee1beae9249ab5d147bcd3dde6fca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/basmilius/raxos-foundation/zipball/c5ae53131c55d84bb7e041255d196059cb2c713f",
-                "reference": "c5ae53131c55d84bb7e041255d196059cb2c713f",
+                "url": "https://api.github.com/repos/basmilius/raxos-foundation/zipball/2629833b853ee1beae9249ab5d147bcd3dde6fca",
+                "reference": "2629833b853ee1beae9249ab5d147bcd3dde6fca",
                 "shasum": ""
             },
             "require": {
@@ -979,7 +979,7 @@
                 "issues": "https://github.com/basmilius/raxos-foundation/issues",
                 "source": "https://github.com/basmilius/raxos-foundation/tree/master"
             },
-            "time": "2021-04-26T19:06:06+00:00"
+            "time": "2021-06-11T07:44:08+00:00"
         },
         {
             "name": "raxos/http",
@@ -987,12 +987,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/basmilius/raxos-http.git",
-                "reference": "272dc368a8e02193d143a79a7e0ef7f9ebeb4e92"
+                "reference": "c28f1044413ea1d0cae9865a4cfd07d5326ccdc8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/basmilius/raxos-http/zipball/272dc368a8e02193d143a79a7e0ef7f9ebeb4e92",
-                "reference": "272dc368a8e02193d143a79a7e0ef7f9ebeb4e92",
+                "url": "https://api.github.com/repos/basmilius/raxos-http/zipball/c28f1044413ea1d0cae9865a4cfd07d5326ccdc8",
+                "reference": "c28f1044413ea1d0cae9865a4cfd07d5326ccdc8",
                 "shasum": ""
             },
             "require": {
@@ -1022,7 +1022,52 @@
                 "issues": "https://github.com/basmilius/raxos-http/issues",
                 "source": "https://github.com/basmilius/raxos-http/tree/master"
             },
-            "time": "2021-04-07T23:57:16+00:00"
+            "time": "2021-06-04T21:49:02+00:00"
+        },
+        {
+            "name": "raxos/rate-limit",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/basmilius/raxos-rate-limit.git",
+                "reference": "77745875e38ac13115122de7ac7fc03d497e3809"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/basmilius/raxos-rate-limit/zipball/77745875e38ac13115122de7ac7fc03d497e3809",
+                "reference": "77745875e38ac13115122de7ac7fc03d497e3809",
+                "shasum": ""
+            },
+            "require": {
+                "jetbrains/phpstorm-attributes": "^1.0",
+                "raxos/cache": "dev-master",
+                "raxos/foundation": "dev-master",
+                "raxos/http": "dev-master",
+                "raxos/router": "dev-master"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Raxos\\RateLimit\\": "src/Raxos/RateLimit"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "mit"
+            ],
+            "authors": [
+                {
+                    "name": "Bas Milius",
+                    "email": "bas@mili.us"
+                }
+            ],
+            "description": "Rate Limit for raxos/router.",
+            "support": {
+                "issues": "https://github.com/basmilius/raxos-rate-limit/issues",
+                "source": "https://github.com/basmilius/raxos-rate-limit/tree/master"
+            },
+            "time": "2021-06-04T21:49:12+00:00"
         },
         {
             "name": "raxos/router",
@@ -1030,12 +1075,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/basmilius/raxos-router.git",
-                "reference": "693813dec70070e0b5f4e9380d7035aa866adda0"
+                "reference": "888581be679f630974076367adf33eec29caf2b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/basmilius/raxos-router/zipball/693813dec70070e0b5f4e9380d7035aa866adda0",
-                "reference": "693813dec70070e0b5f4e9380d7035aa866adda0",
+                "url": "https://api.github.com/repos/basmilius/raxos-router/zipball/888581be679f630974076367adf33eec29caf2b4",
+                "reference": "888581be679f630974076367adf33eec29caf2b4",
                 "shasum": ""
             },
             "require": {
@@ -1067,7 +1112,7 @@
                 "issues": "https://github.com/basmilius/raxos-router/issues",
                 "source": "https://github.com/basmilius/raxos-router/tree/master"
             },
-            "time": "2021-05-17T22:32:31+00:00"
+            "time": "2021-06-04T21:49:16+00:00"
         },
         {
             "name": "seld/cli-prompt",
@@ -1372,12 +1417,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "1e53d27a37565092fd70bb35c4b96d700307e91e"
+                "reference": "ed29f0010f93df22a96409f5ea442e91728213da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/1e53d27a37565092fd70bb35c4b96d700307e91e",
-                "reference": "1e53d27a37565092fd70bb35c4b96d700307e91e",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ed29f0010f93df22a96409f5ea442e91728213da",
+                "reference": "ed29f0010f93df22a96409f5ea442e91728213da",
                 "shasum": ""
             },
             "require": {
@@ -1441,7 +1486,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-20T14:28:34+00:00"
+            "time": "2021-06-06T16:31:44+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -1533,6 +1578,7 @@
         "raxos/database": 20,
         "raxos/foundation": 20,
         "raxos/http": 20,
+        "raxos/rate-limit": 20,
         "raxos/router": 20,
         "twig/twig": 20
     },
@@ -1546,5 +1592,5 @@
         "ext-pdo": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
