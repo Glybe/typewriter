@@ -899,12 +899,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/basmilius/raxos-database.git",
-                "reference": "629a006d41681eb1a8286ce6c72538cfff49fd72"
+                "reference": "3220438aa731040b5be7b0010ffd0eb93cb5ffd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/basmilius/raxos-database/zipball/629a006d41681eb1a8286ce6c72538cfff49fd72",
-                "reference": "629a006d41681eb1a8286ce6c72538cfff49fd72",
+                "url": "https://api.github.com/repos/basmilius/raxos-database/zipball/3220438aa731040b5be7b0010ffd0eb93cb5ffd5",
+                "reference": "3220438aa731040b5be7b0010ffd0eb93cb5ffd5",
                 "shasum": ""
             },
             "require": {
@@ -936,7 +936,7 @@
                 "issues": "https://github.com/basmilius/raxos-database/issues",
                 "source": "https://github.com/basmilius/raxos-database/tree/master"
             },
-            "time": "2021-06-17T09:29:42+00:00"
+            "time": "2021-06-22T09:14:38+00:00"
         },
         {
             "name": "raxos/foundation",
@@ -944,12 +944,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/basmilius/raxos-foundation.git",
-                "reference": "2629833b853ee1beae9249ab5d147bcd3dde6fca"
+                "reference": "840d60e29df49eb7488373be122844a402eec59e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/basmilius/raxos-foundation/zipball/2629833b853ee1beae9249ab5d147bcd3dde6fca",
-                "reference": "2629833b853ee1beae9249ab5d147bcd3dde6fca",
+                "url": "https://api.github.com/repos/basmilius/raxos-foundation/zipball/840d60e29df49eb7488373be122844a402eec59e",
+                "reference": "840d60e29df49eb7488373be122844a402eec59e",
                 "shasum": ""
             },
             "require": {
@@ -979,7 +979,7 @@
                 "issues": "https://github.com/basmilius/raxos-foundation/issues",
                 "source": "https://github.com/basmilius/raxos-foundation/tree/master"
             },
-            "time": "2021-06-11T07:44:08+00:00"
+            "time": "2021-06-22T09:14:46+00:00"
         },
         {
             "name": "raxos/http",

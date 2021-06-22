@@ -13,6 +13,8 @@ use TypeWriter\Facade\Template;
 use TypeWriter\Twig\TokenParser\ControllerTokenParser;
 use TypeWriter\Twig\TokenParser\FooterTokenParser;
 use TypeWriter\Twig\TokenParser\HeaderTokenParser;
+use TypeWriter\Twig\TokenParser\ScriptTokenParser;
+use TypeWriter\Twig\TokenParser\StyleTokenParser;
 use function call_user_func;
 use function func_get_args;
 
@@ -61,7 +63,9 @@ final class TwigFunctions extends AbstractExtension
         return [
             new ControllerTokenParser(),
             new FooterTokenParser(),
-            new HeaderTokenParser()
+            new HeaderTokenParser(),
+            new ScriptTokenParser(),
+            new StyleTokenParser()
         ];
     }
 

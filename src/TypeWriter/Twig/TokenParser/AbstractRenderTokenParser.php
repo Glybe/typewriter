@@ -27,8 +27,6 @@ use Twig\TokenParser\AbstractTokenParser;
 abstract class AbstractRenderTokenParser extends AbstractTokenParser
 {
 
-    protected string $tagName;
-
     /**
      * AbstractRenderTokenParser constructor.
      *
@@ -37,9 +35,8 @@ abstract class AbstractRenderTokenParser extends AbstractTokenParser
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public function __construct(string $tagName)
+    public function __construct(protected string $tagName)
     {
-        $this->tagName = $tagName;
     }
 
     /**
