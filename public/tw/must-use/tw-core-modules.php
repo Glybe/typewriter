@@ -32,6 +32,7 @@ use TypeWriter\Module\Core\LocalAvatarModule;
 use TypeWriter\Module\Core\LoginModule;
 use TypeWriter\Module\Core\PostTemplatesLoaderModule;
 use TypeWriter\Module\Core\PostTemplatesResolverModule;
+use TypeWriter\Module\Core\SitemapsModule;
 use TypeWriter\Module\Core\ThemeBaseModule;
 use function TypeWriter\tw;
 
@@ -42,6 +43,7 @@ tw()->loadModule(DisableCommentsAndPingsModule::class);
 tw()->loadModule(EditorModule::class);
 tw()->loadModule(JoyPixelsEmojiModule::class);
 tw()->loadModule(LocalAvatarModule::class);
+tw()->loadModule(SitemapsModule::class);
 tw()->loadModule(ThemeBaseModule::class);
 
 if (tw()->isAdmin() || tw()->isApi()) {
