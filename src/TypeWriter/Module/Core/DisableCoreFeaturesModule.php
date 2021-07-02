@@ -34,6 +34,8 @@ final class DisableCoreFeaturesModule extends Module
      */
     public final function onInitialize(): void
     {
+        Hooks::filter('do_redirect_guess_404_permalink', fn() => false);
+
         Hooks::removeAction('init', 'wp_widgets_init', 1);
     }
 
