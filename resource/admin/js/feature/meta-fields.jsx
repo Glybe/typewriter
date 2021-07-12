@@ -1,4 +1,4 @@
-import {BaseControl, RangeControl, TextareaControl, TextControl, ToggleControl} from "@wordpress/components";
+import {BaseControl, RangeControl, SelectControl, TextareaControl, TextControl, ToggleControl} from "@wordpress/components";
 import {compose} from "@wordpress/compose";
 import {withDispatch, withSelect} from "@wordpress/data";
 import {PluginDocumentSettingPanel} from "@wordpress/edit-post";
@@ -20,6 +20,17 @@ const fieldRenderers = {
                         max={field.max || 10}
                         min={field.min || 0}
                         value={metaFields[field.meta_key] || field.min || 0}
+                        label={__(field.label, "tw")}
+                        onChange={value => onUpdate(field.meta_key, value, metaFields)}/>
+        );
+    },
+
+    SelectControl: (field, onUpdate, metaFields) =>
+    {
+        return (
+                <SelectControl
+                        options={Object.keys(field.options).map(key => ({value: key, label: field.options[key]}))}
+                        value={metaFields[field.meta_key] || ""}
                         label={__(field.label, "tw")}
                         onChange={value => onUpdate(field.meta_key, value, metaFields)}/>
         );
