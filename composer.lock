@@ -476,16 +476,16 @@
         },
         {
             "name": "joypixels/emoji-toolkit",
-            "version": "6.5",
+            "version": "6.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/joypixels/emoji-toolkit.git",
-                "reference": "3a13f4d21e4683bdb4323f07658c333014a95876"
+                "reference": "99f960c37eef1bdd0a3e30a676f8839c88e48ce3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joypixels/emoji-toolkit/zipball/3a13f4d21e4683bdb4323f07658c333014a95876",
-                "reference": "3a13f4d21e4683bdb4323f07658c333014a95876",
+                "url": "https://api.github.com/repos/joypixels/emoji-toolkit/zipball/99f960c37eef1bdd0a3e30a676f8839c88e48ce3",
+                "reference": "99f960c37eef1bdd0a3e30a676f8839c88e48ce3",
                 "shasum": ""
             },
             "require": {
@@ -519,9 +519,9 @@
             ],
             "support": {
                 "issues": "https://github.com/joypixels/emoji-toolkit/issues",
-                "source": "https://github.com/joypixels/emoji-toolkit/tree/6.5"
+                "source": "https://github.com/joypixels/emoji-toolkit/tree/6.6.0"
             },
-            "time": "2021-02-23T00:49:39+00:00"
+            "time": "2021-07-08T22:11:29+00:00"
         },
         {
             "name": "league/climate",
@@ -959,12 +959,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/basmilius/raxos-database.git",
-                "reference": "87832daf45c18cd949e90a92cbef4b7bc4db055e"
+                "reference": "240b517af435b33889454a6e019050ea836c8d7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/basmilius/raxos-database/zipball/87832daf45c18cd949e90a92cbef4b7bc4db055e",
-                "reference": "87832daf45c18cd949e90a92cbef4b7bc4db055e",
+                "url": "https://api.github.com/repos/basmilius/raxos-database/zipball/240b517af435b33889454a6e019050ea836c8d7d",
+                "reference": "240b517af435b33889454a6e019050ea836c8d7d",
                 "shasum": ""
             },
             "require": {
@@ -996,7 +996,7 @@
                 "issues": "https://github.com/basmilius/raxos-database/issues",
                 "source": "https://github.com/basmilius/raxos-database/tree/master"
             },
-            "time": "2021-07-07T23:27:38+00:00"
+            "time": "2021-07-09T08:28:28+00:00"
         },
         {
             "name": "raxos/foundation",
@@ -1477,12 +1477,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "6ae5ae5c7dcf178b31af063596757b2838fc78c5"
+                "reference": "5f20d4a362078e8a066f7dcc146e8005186d9663"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/6ae5ae5c7dcf178b31af063596757b2838fc78c5",
-                "reference": "6ae5ae5c7dcf178b31af063596757b2838fc78c5",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/5f20d4a362078e8a066f7dcc146e8005186d9663",
+                "reference": "5f20d4a362078e8a066f7dcc146e8005186d9663",
                 "shasum": ""
             },
             "require": {
@@ -1546,7 +1546,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-07-07T07:08:18+00:00"
+            "time": "2021-07-08T11:01:29+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
