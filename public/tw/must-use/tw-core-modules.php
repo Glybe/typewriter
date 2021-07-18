@@ -21,6 +21,7 @@ use TypeWriter\Module\Core\AdminMenuModule;
 use TypeWriter\Module\Core\AdminModule;
 use TypeWriter\Module\Core\APIModule;
 use TypeWriter\Module\Core\BrandingModule;
+use TypeWriter\Module\Core\DependenciesModule;
 use TypeWriter\Module\Core\DisableAdminFeaturesModule;
 use TypeWriter\Module\Core\DisableCommentsAndPingsModule;
 use TypeWriter\Module\Core\DisableCoreFeaturesModule;
@@ -38,6 +39,7 @@ use function TypeWriter\tw;
 
 tw()->loadModule(APIModule::class);
 tw()->loadModule(BrandingModule::class);
+tw()->loadModule(DependenciesModule::class);
 tw()->loadModule(DisableCoreFeaturesModule::class);
 tw()->loadModule(DisableCommentsAndPingsModule::class);
 tw()->loadModule(EditorModule::class);

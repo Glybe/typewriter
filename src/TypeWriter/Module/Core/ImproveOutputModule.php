@@ -3,44 +3,35 @@ declare(strict_types=1);
 
 namespace TypeWriter\Module\Core;
 
+use JetBrains\PhpStorm\Pure;
 use Raxos\Foundation\Util\StringUtil;
 use TypeWriter\Facade\Hooks;
 use TypeWriter\Module\Module;
 use function array_filter;
-use function base_convert;
 use function esc_attr;
 use function esc_url;
-use function filemtime;
 use function get_oembed_endpoint_url;
 use function get_page_template_slug;
 use function get_permalink;
 use function get_queried_object_id;
 use function in_array;
 use function is_array;
-use function is_file;
 use function is_numeric;
 use function is_page_template;
 use function is_scalar;
 use function is_singular;
 use function is_string;
-use function parse_url;
-use function remove_query_arg;
 use function sprintf;
 use function str_ends_with;
 use function str_starts_with;
 use function strpos;
-use function strstr;
-use function strtolower;
 use function substr;
 use function trim;
-use function urldecode;
 use function wp_dependencies_unique_hosts;
 use function wp_get_canonical_url;
 use function wp_get_shortlink;
 use function wp_parse_url;
 use const PHP_EOL;
-use const PHP_URL_PATH;
-use const TypeWriter\ROOT;
 use const WP_DEBUG;
 
 /**
@@ -59,6 +50,7 @@ final class ImproveOutputModule extends Module
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
+    #[Pure]
     public function __construct()
     {
         parent::__construct('Improves output html.');
@@ -80,8 +72,6 @@ final class ImproveOutputModule extends Module
         Hooks::action('wp_head', [$this, 'addShortlink']);
 
         Hooks::filter('body_class', [$this, 'onBodyClass']);
-        Hooks::filter('script_loader_src', [$this, 'onResourceSrc']);
-        Hooks::filter('style_loader_src', [$this, 'onResourceSrc']);
         Hooks::filter('script_loader_tag', [$this, 'onScriptLoaderTag']);
         Hooks::filter('style_loader_tag', [$this, 'onStyleLoaderTag']);
 
@@ -291,35 +281,6 @@ final class ImproveOutputModule extends Module
 
             return true;
         });
-    }
-
-    /**
-     * Invoked on script_loader_src and style_loader_src filter hooks.
-     * Removes the version query param from the resource url. If we want versions, we'll use our own.
-     *
-     * @param string $src
-     *
-     * @return string
-     * @author Bas Milius <bas@mili.us>
-     * @since 1.0.0
-     * @internal
-     */
-    public final function onResourceSrc(string $src): string
-    {
-        if (strpos($src, 'ver=')) {
-            $src = remove_query_arg('ver', $src);
-        }
-
-        $src = urldecode($src);
-
-        $file = ROOT . '/public' . parse_url($src . '?ver=13', PHP_URL_PATH);
-        $join = strstr($src, '?') !== false ? '&' : '?';
-
-        if (!is_file($file)) {
-            return $src;
-        }
-
-        return $src . $join . 'b=' . strtolower(base_convert((string)(filemtime($file) ?: 0), 10, 16));
     }
 
     /**
