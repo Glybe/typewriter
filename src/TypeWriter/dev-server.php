@@ -22,6 +22,7 @@ if ($requestFile && !$isPhpFile && is_file($requestFile)) {
     $extension = pathinfo($requestFile, PATHINFO_EXTENSION);
     $mimeTypes = [
         'css' => 'text/css',
+        'html' => 'text/html',
         'js' => 'application/javascript',
         'json' => 'application/json',
         'map' => 'application/json',
