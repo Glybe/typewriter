@@ -21,14 +21,18 @@ class Attachment
      * Gets the focal point of the given attachment id. This will default
      * to 50% x 50% when a content editor did not set a focal point.
      *
-     * @param int $attachmentId
+     * @param int|null $attachmentId
      *
      * @return int[]
      * @author Bas Milius <bas@mili.us>
      * @since 1.0.0
      */
-    public static function getFocalPoint(int $attachmentId): array
+    public static function getFocalPoint(?int $attachmentId): array
     {
+        if ($attachmentId === 0) {
+            return [50, 50];
+        }
+
         $focalPointMeta = get_post_meta($attachmentId, 'tw_focal_point', true);
 
         if (empty($focalPointMeta) || !array_key_exists('x', $focalPointMeta) || !array_key_exists('y', $focalPointMeta) || !is_numeric($focalPointMeta['x']) || !is_numeric($focalPointMeta['y'])) {
