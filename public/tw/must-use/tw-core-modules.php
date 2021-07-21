@@ -20,6 +20,7 @@ declare(strict_types=1);
 use TypeWriter\Module\Core\AdminMenuModule;
 use TypeWriter\Module\Core\AdminModule;
 use TypeWriter\Module\Core\APIModule;
+use TypeWriter\Module\Core\AttachmentFocalPointModule;
 use TypeWriter\Module\Core\BrandingModule;
 use TypeWriter\Module\Core\DependenciesModule;
 use TypeWriter\Module\Core\DisableAdminFeaturesModule;
@@ -38,6 +39,7 @@ use TypeWriter\Module\Core\ThemeBaseModule;
 use function TypeWriter\tw;
 
 tw()->loadModule(APIModule::class);
+tw()->loadModule(AttachmentFocalPointModule::class);
 tw()->loadModule(BrandingModule::class);
 tw()->loadModule(DependenciesModule::class);
 tw()->loadModule(DisableCoreFeaturesModule::class);

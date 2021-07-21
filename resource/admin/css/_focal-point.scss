@@ -1,0 +1,38 @@
+.tw-focal-point
+{
+    position: relative;
+    max-width: 300px;
+    background: black;
+    border-radius: 3px;
+    z-index: 0;
+
+    img
+    {
+        position: relative;
+        display: block;
+        height: auto;
+        width: 100%;
+        border-radius: inherit;
+        opacity: .6;
+        z-index: 0;
+    }
+
+    &-selector
+    {
+        position: absolute;
+        display: block;
+        top: 50%;
+        left: 50%;
+        height: 42px;
+        width: 42px;
+        margin: 0;
+        padding: 0;
+        background: rgba(white, .7);
+        border: 0;
+        border-radius: 9999px;
+        box-shadow: 0 0 3px rgba(black, .4);
+        cursor: move;
+        transform: translate3d(-50%, -50%, 0);
+        z-index: 1;
+    }
+}

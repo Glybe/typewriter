@@ -1,6 +1,7 @@
 import "../css/index.scss";
 
 import { default as registerBlocks } from "./block";
+import {initializeFocalPointSelector} from "./focalPoint";
 
 const packageJson = {
     name: "@bybas/typewriter",
@@ -18,6 +19,7 @@ async function init() {
 
     window.tw = {
         feature: features,
+        focalPoint: initializeFocalPointSelector,
         name: packageJson.name,
         version: packageJson.version
     };
