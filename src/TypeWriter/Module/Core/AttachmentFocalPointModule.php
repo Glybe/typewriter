@@ -60,7 +60,7 @@ final class AttachmentFocalPointModule extends Module
      */
     public final function onAttachmentFieldsToEdit(array $fields, WP_Post $post): array
     {
-        if (!wp_attachment_is_image($post)) {
+        if (!wp_attachment_is_image($post) || !Hooks::applyFilters('tw.focal-point.enabled', true)) {
             return $fields;
         }
 
