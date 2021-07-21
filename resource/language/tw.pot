@@ -221,3 +221,11 @@ msgstr ""
 msgid "Create responsive grids."
 msgstr ""
 # End Blocks Structure
+
+# Focal Point
+msgid "Focal Point"
+msgstr ""
+
+msgid "By default the Focal Point is set to the center of the image. Move the circle to change it."
+msgstr ""
+# End Focal Point

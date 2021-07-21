@@ -198,6 +198,12 @@
             ],
             "Create responsive grids.": [
                 "Maak een responsive grid."
+            ],
+            "Focal Point": [
+                "Focuspunt"
+            ],
+            "By default the Focal Point is set to the center of the image. Move the circle to change it.": [
+                "Standaard is het focuspunt van de afbeelding ingesteld in het midden. Verplaats de cirkel om het aan te passen."
             ]
 		}
 	}

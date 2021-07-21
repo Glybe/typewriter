@@ -76,7 +76,7 @@ final class AttachmentFocalPointModule extends Module
         }
 
         $fields['focal_point'] = [
-            'label' => Site::translate('Focal Point'),
+            'label' => Site::translate('Focal Point', domain: 'tw'),
             'input' => 'html',
             'html' => <<<HTML
                 <div class="tw-focal-point">
@@ -89,7 +89,7 @@ final class AttachmentFocalPointModule extends Module
 
                 <script type="text/javascript">tw.focalPoint();</script>
                 HTML,
-            'helps' => Site::translate('By default the Focal Point is set to the center of the image. Move the circle to change it.')
+            'helps' => Site::translate('By default the Focal Point is set to the center of the image. Move the circle to change it.', domain: 'tw')
         ];
 
         return $fields;
